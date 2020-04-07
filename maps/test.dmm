@@ -1,0 +1,52 @@
+"a" = (/turf/underground/dirtwall,/area/darkness/underground)
+"b" = (/turf/Misc/Void_Wall,/area/darkness/underground)
+"c" = (/turf/grass,/area/darkness/darkness2)
+"d" = (/item/weapon/torch,/turf/grass,/area/darkness/darkness2)
+"e" = (/turf/Misc/Void_Wall,/area)
+"f" = (/map_object{kingdom = /character_handling/container/bovinia; map_layer = -1; name = "Bovinia- 'Underground'"},/turf/Misc/Void_Wall,/area/darkness/underground)
+"g" = (/obj/spawn_point/peasant,/turf/grass,/area/darkness/darkness2)
+"h" = (/turf/Misc/Void_Wall,/area/darkness/darkness2)
+"i" = (/map_object{kingdom = /character_handling/container/bovinia; map_layer = 0; name = "Bovinia- 'Ground Level'"},/turf/Misc/Void_Wall,/area/darkness/darkness2)
+"j" = (/turf,/area)
+"k" = (/map_object{kingdom = /character_handling/container/bovinia; map_layer = 1; name = "Bovinia- 'First Floor'"},/turf/Misc/Void_Wall,/area)
+"l" = (/turf/path,/area/darkness/underground)
+"m" = (/obj/fire,/turf/path,/area/darkness/underground)
+
+(1,1,1) = {"
+bbbbbbbbbb
+baaaaaaaab
+balllmllab
+ballllllab
+ballllllab
+baaaaaaaab
+baaaaaaaab
+baaaaaaaab
+baaaaaaaab
+fbbbbbbbbb
+"}
+
+(1,1,2) = {"
+hhhhhhhhhh
+hcccccccch
+hcccccccch
+hcccccccch
+hcccdcccch
+hcccgcccch
+hcccccccch
+hcccccccch
+hcccccccch
+ihhhhhhhhh
+"}
+
+(1,1,3) = {"
+eeeeeeeeee
+ejjjjjjjje
+ejjjjjjjje
+ejjjjjjjje
+ejjjjjjjje
+ejjjjjjjje
+ejjjjjjjje
+ejjjjjjjje
+ejjjjjjjje
+keeeeeeeee
+"}

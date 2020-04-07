@@ -1,0 +1,11 @@
+body {
+	background-color: rgb(222, 213,182);
+	font-family: papyrus, verdana;
+	font-size: 15px;
+}
+a {
+	color: rgb(109, 64, 18);
+}
+a:hover {
+	color: rgb(169, 100, 54);
+}

@@ -1,0 +1,2543 @@
+macro "macro"
+	elem 
+		name = "CTRL+West"
+		command = "left"
+	elem 
+		name = "West+REP"
+		command = ".west"
+	elem 
+		name = "SHIFT+West+REP"
+		command = ".westr"
+	elem 
+		name = "CTRL+North"
+		command = "up"
+	elem 
+		name = "North+REP"
+		command = ".north"
+	elem 
+		name = "SHIFT+North+REP"
+		command = ".northr"
+	elem 
+		name = "CTRL+East"
+		command = "right"
+	elem 
+		name = "East+REP"
+		command = ".east"
+	elem 
+		name = "SHIFT+East+REP"
+		command = ".eastr"
+	elem 
+		name = "CTRL+South"
+		command = "down"
+	elem 
+		name = "South+REP"
+		command = ".south"
+	elem 
+		name = "SHIFT+South+REP"
+		command = ".southr"
+	elem 
+		name = "CTRL+1"
+		command = "MB"
+	elem 
+		name = "CTRL+2"
+		command = "MC"
+	elem 
+		name = "CTRL+3"
+		command = "MD"
+	elem 
+		name = "CTRL+4"
+		command = "ME"
+	elem 
+		name = "CTRL+5"
+		command = "MF"
+	elem 
+		name = "CTRL+6"
+		command = "MG"
+	elem 
+		name = "CTRL+7"
+		command = "MH"
+	elem 
+		name = "CTRL+8"
+		command = "MI"
+	elem 
+		name = "CTRL+9"
+		command = "MJ"
+	elem 
+		name = "CTRL+="
+		command = "MM"
+	elem 
+		name = "CTRL+-"
+		command = "ML"
+	elem 
+		name = "CTRL+`"
+		command = "MA"
+
+macro "sign"
+	elem 
+		name = "RETURN"
+		command = ".winset \"sign.is-visible=false\""
+
+macro "tardis_popup"
+	elem 
+		name = "WEST+REP"
+		command = "tardis-move-left"
+	elem 
+		name = "NORTH+REP"
+		command = "tardis-move-up"
+	elem 
+		name = "EAST+REP"
+		command = "tardis-move-right"
+	elem 
+		name = "SOUTH+REP"
+		command = "tardis-move-down"
+
+
+menu "menu"
+	elem 
+		name = "File"
+		command = ""
+		saved-params = "is-checked"
+	elem 
+		name = "&Options and Messages..."
+		command = ".options"
+		category = "File"
+		saved-params = "is-checked"
+	elem 
+		name = "Quit"
+		command = ".quit"
+		category = "File"
+		saved-params = "is-checked"
+	elem 
+		name = "Options"
+		command = ""
+		saved-params = "is-checked"
+	elem 
+		name = "&Stretch to fit"
+		command = ".winset \"map.icon-size=0\""
+		category = "Options"
+		saved-params = "is-checked"
+	elem 
+		name = "&32x32"
+		command = ".winset \"map.icon-size=32\""
+		category = "Options"
+		saved-params = "is-checked"
+	elem 
+		name = "&16x16"
+		command = ".winset \"map.icon-size=16\""
+		category = "Options"
+		saved-params = "is-checked"
+	elem 
+		name = "Game"
+		command = ""
+		is-disabled = true
+		saved-params = "is-checked"
+	elem 
+		name = "Family Panel"
+		command = ".familypanel"
+		category = "Game"
+		is-disabled = true
+		saved-params = "is-checked"
+
+
+window "admin"
+	elem "admin"
+		type = MAIN
+		pos = 619,75
+		size = 498x303
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Admin Panel"
+		statusbar = false
+	elem "tab"
+		type = TAB
+		pos = 0,0
+		size = 498x303
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		tabs = "admin/game,admin/online,admin/record"
+		current-tab = "admin/game"
+
+window "admin/classban"
+	elem "admin/classban"
+		type = MAIN
+		pos = 281,0
+		size = 352x199
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Admin :: Class Ban"
+		can-minimize = false
+	elem "grdClasses"
+		type = GRID
+		pos = 96,159
+		size = 244x36
+		anchor1 = 0,0
+		anchor2 = 100,0
+		border = sunken
+		right-click = true
+		saved-params = ""
+		cells = 1x0
+		current-cell = 1,1
+		show-names = false
+		is-list = true
+	elem "grdBranches"
+		type = GRID
+		pos = 96,111
+		size = 244x36
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Papyrus"
+		font-size = 10
+		border = sunken
+		right-click = true
+		saved-params = ""
+		cells = 1x0
+		current-cell = 1,1
+		show-names = false
+		is-list = true
+	elem "grdKingdoms"
+		type = GRID
+		pos = 96,63
+		size = 244x36
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Papyrus"
+		font-size = 10
+		border = sunken
+		right-click = true
+		saved-params = ""
+		cells = 1x0
+		current-cell = 1,1
+		show-lines = vertical
+		show-names = false
+		is-list = true
+	elem "lblClass"
+		type = LABEL
+		pos = 8,168
+		size = 76x20
+		anchor1 = 0,0
+		anchor2 = 0,0
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Class:"
+		align = right
+	elem "lblBranch"
+		type = LABEL
+		pos = 8,120
+		size = 76x20
+		anchor1 = 0,0
+		anchor2 = 0,0
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Branch:"
+		align = right
+	elem "label14"
+		type = LABEL
+		pos = 8,72
+		size = 76x20
+		anchor1 = 0,0
+		anchor2 = 0,0
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Kingdom:"
+		align = right
+	elem "label16"
+		type = LABEL
+		pos = 8,8
+		size = 344x36
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Browse freely through the list. Right-click to toggle ban status."
+		align = top-left
+		text-wrap = true
+
+window "admin/game"
+	elem "admin/game"
+		type = MAIN
+		pos = 281,0
+		size = 490x264
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Game"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		can-scroll = vertical
+	elem "btnViewLog"
+		type = BUTTON
+		pos = 8,240
+		size = 188x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #9f9479
+		saved-params = "is-checked"
+		text = "View Game Log"
+		command = ""
+	elem "btnDownloadLog"
+		type = BUTTON
+		pos = 8,216
+		size = 188x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #9f9479
+		saved-params = "is-checked"
+		text = "Download Game Log"
+		command = ""
+	elem "btnRebootVote"
+		type = BUTTON
+		pos = 8,192
+		size = 188x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #9f9479
+		saved-params = "is-checked"
+		text = "Initiate Reboot Vote"
+		command = ""
+	elem "btnVote"
+		type = BUTTON
+		pos = 8,168
+		size = 188x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #9f9479
+		saved-params = "is-checked"
+		text = "Make Custom Vote"
+		command = ""
+	elem "btnMOTD"
+		type = BUTTON
+		pos = 8,144
+		size = 188x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #9f9479
+		saved-params = "is-checked"
+		text = "Change Login Message"
+		command = ""
+	elem "label10"
+		type = LABEL
+		pos = 167,8
+		size = 266x128
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #804000
+		background-color = #ab9f7c
+		border = line
+		saved-params = ""
+		text = "Game Time:"
+		align = top-left
+	elem "lbl1"
+		type = LABEL
+		pos = 180,87
+		size = 240x40
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #9f9479
+		border = line
+		saved-params = ""
+		text = "Click on any of the values to increase its value by one."
+		align = top-left
+		text-wrap = true
+	elem "btnMonth"
+		type = BUTTON
+		pos = 358,60
+		size = 60x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #dddbb9
+		background-color = #9f9479
+		saved-params = "is-checked"
+		text = "1-12"
+		command = ""
+	elem "btnDay"
+		type = BUTTON
+		pos = 271,60
+		size = 60x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #dddbb9
+		background-color = #9f9479
+		saved-params = "is-checked"
+		text = "1-31"
+		command = ""
+	elem "btnHour"
+		type = BUTTON
+		pos = 188,60
+		size = 60x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #dddbb9
+		background-color = #9f9479
+		saved-params = "is-checked"
+		text = "0-13"
+		command = ""
+	elem "lblMonth"
+		type = LABEL
+		pos = 360,32
+		size = 60x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #9f9479
+		border = line
+		saved-params = ""
+		text = "Month"
+	elem "lblDay"
+		type = LABEL
+		pos = 272,32
+		size = 60x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #9f9479
+		border = line
+		saved-params = ""
+		text = "Day"
+	elem "lblHour"
+		type = LABEL
+		pos = 184,32
+		size = 60x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #9f9479
+		border = line
+		saved-params = ""
+		text = "Hour"
+	elem "chkFrozen"
+		type = BUTTON
+		pos = 12,100
+		size = 121x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "Freeze Players"
+		command = ""
+		button-type = checkbox
+	elem "chkHelp"
+		type = BUTTON
+		pos = 12,76
+		size = 107x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "Admin Help"
+		command = ""
+		button-type = checkbox
+	elem "chkOOC"
+		type = BUTTON
+		pos = 12,52
+		size = 130x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "OOC Channel"
+		command = ""
+		button-type = checkbox
+	elem "chkReboot"
+		type = BUTTON
+		pos = 12,28
+		size = 113x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "Reboot Vote"
+		command = ""
+		button-type = checkbox
+	elem "label9"
+		type = LABEL
+		pos = 4,4
+		size = 52x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Flags:"
+		align = left
+
+window "admin/edit"
+	elem "admin/edit"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+	elem "lstVars"
+		type = GRID
+		pos = 0,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = ""
+		cells = 1x0
+		current-cell = 1,1
+		show-lines = horizontal
+		show-names = false
+		is-list = true
+
+window "admin/mapeditor"
+	elem "admin/mapeditor"
+		type = MAIN
+		pos = 572,-8
+		size = 192x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Admin :: Map Editor"
+		can-minimize = false
+		can-resize = false
+	elem "grdTurfs"
+		type = GRID
+		pos = 0,0
+		size = 192x459
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		cells = 4x10
+		show-names = false
+		link-color = #804000
+		visited-color = #aa631c
+		line-color = #9f9479
+	elem "btnToggle"
+		type = BUTTON
+		pos = 0,460
+		size = 192x20
+		anchor1 = 0,100
+		anchor2 = 100,100
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #ded5b6
+		border = line
+		saved-params = "is-checked"
+		text = "Turfs"
+		command = ".winset \"grdTurfs.is-visible=true ? grdTurfs.is-visible=false grdObjects.is-visible=true btnToggle.text=\"Objects\" : grdTurfs.is-visible=true grdObjects.is-visible=false btnToggle.text=\"Turfs\"\""
+		is-flat = true
+	elem "grdObjects"
+		type = GRID
+		pos = 0,0
+		size = 192x459
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #ded5b6
+		is-visible = false
+		saved-params = ""
+		cells = 5x10
+		show-names = false
+		link-color = #804000
+		visited-color = #aa631c
+		line-color = #9f9479
+
+window "admin/motd"
+	elem "admin/motd"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "MOTD"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "browser"
+		type = BROWSER
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #ded5b6
+		saved-params = ""
+
+window "admin/pm"
+	elem "admin/pm"
+		type = MAIN
+		pos = 281,0
+		size = 540x326
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "PM :: <target name>"
+		statusbar = false
+		can-minimize = false
+	elem "pminput"
+		type = INPUT
+		pos = 0,311
+		size = 541x16
+		anchor1 = 0,100
+		anchor2 = 100,100
+		text-color = #6d4012
+		background-color = #ab9f7c
+		border = line
+		saved-params = "command"
+	elem "output"
+		type = OUTPUT
+		pos = 0,0
+		size = 541x312
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #ded5b6
+		border = line
+		saved-params = "max-lines"
+		link-color = #6d4012
+		visited-color = #a96436
+		enable-http-images = true
+		max-lines = 0
+
+window "admin/viewscreen"
+	elem "admin/viewscreen"
+		type = MAIN
+		pos = 738,130
+		size = 329x219
+		anchor1 = none
+		anchor2 = none
+		background-color = #aa631c
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Viewscreen Console"
+		can-minimize = false
+		can-resize = false
+		macro = "macro"
+	elem "btnRefresh"
+		type = BUTTON
+		pos = 230,131
+		size = 100x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #804000
+		saved-params = "is-checked"
+		text = "Refresh Players"
+		command = ""
+		is-flat = true
+	elem "lblLoc"
+		type = LABEL
+		pos = 264,52
+		size = 60x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = ""
+		text = ""
+	elem "label8"
+		type = LABEL
+		pos = 236,52
+		size = 28x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = ""
+		text = "L:"
+	elem "label7"
+		type = LABEL
+		pos = 0,151
+		size = 329x68
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = ""
+		text = "Select a viewport (0 = private, anything else is shared).\nSwitch z level or select player. Use arrow keys to move.\nClose window to stop watching."
+		align = top-left
+		text-wrap = true
+	elem "label6"
+		type = LABEL
+		pos = 236,28
+		size = 28x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = ""
+		text = "Z:"
+	elem "label5"
+		type = LABEL
+		pos = 236,4
+		size = 28x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = ""
+		text = "V:"
+	elem "btnVR"
+		type = BUTTON
+		pos = 304,4
+		size = 20x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #804000
+		saved-params = "is-checked"
+		text = ">"
+		command = ""
+		is-flat = true
+	elem "btnVL"
+		type = BUTTON
+		pos = 264,4
+		size = 20x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #804000
+		saved-params = "is-checked"
+		text = "<"
+		command = ""
+		is-flat = true
+	elem "lblViewPort"
+		type = LABEL
+		pos = 284,4
+		size = 20x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = ""
+		text = ""
+	elem "btnZR"
+		type = BUTTON
+		pos = 304,28
+		size = 20x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #804000
+		saved-params = "is-checked"
+		text = ">"
+		command = ""
+		is-flat = true
+	elem "btnZL"
+		type = BUTTON
+		pos = 264,28
+		size = 20x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #804000
+		saved-params = "is-checked"
+		text = "<"
+		command = ""
+		is-flat = true
+	elem "lblZ"
+		type = LABEL
+		pos = 284,28
+		size = 20x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = ""
+		text = ""
+	elem "lstPlayers"
+		type = GRID
+		pos = 0,0
+		size = 230x150
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		border = sunken
+		saved-params = ""
+		cells = 1x0
+		current-cell = 1,1
+		show-lines = horizontal
+		show-names = false
+		line-color = #ab9f7c
+		is-list = true
+
+window "browser_win"
+	elem "browser_win"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		is-visible = false
+		saved-params = "pos;size;is-maximized"
+		title = "Browser"
+	elem "browser"
+		type = BROWSER
+		pos = 0,0
+		size = 640x472
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = none
+		saved-params = ""
+		show-history = true
+
+window "character_handling"
+	elem "character_handling"
+		type = MAIN
+		pos = 281,0
+		size = 339x632
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		can-scroll = both
+	elem "grdNames"
+		type = GRID
+		pos = 160,224
+		size = 172x124
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		border = sunken
+		saved-params = ""
+		cells = 1x1
+		current-cell = 1,1
+		show-lines = horizontal
+		show-names = false
+		link-color = #804000
+		visited-color = #804000
+	elem "label15"
+		type = LABEL
+		pos = 8,224
+		size = 148x20
+		anchor1 = 0,0
+		anchor2 = 0,0
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Recently used names:"
+		align = right
+	elem "btnSpectate"
+		type = BUTTON
+		pos = 176,604
+		size = 128x24
+		anchor1 = 50,0
+		anchor2 = 50,0
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "Spectate as ghost"
+		command = ""
+	elem "btnCreate"
+		type = BUTTON
+		pos = 40,604
+		size = 128x24
+		anchor1 = 50,0
+		anchor2 = 50,0
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "Join Game"
+		command = ""
+	elem "lblClass1"
+		type = LABEL
+		pos = 8,560
+		size = 329x40
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Papyrus"
+		font-size = 9
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Select the class you'd like to join as. Each class starts out with a slightly different set of skills and abilities."
+		align = top-left
+		text-wrap = true
+	elem "lblBranch1"
+		type = LABEL
+		pos = 8,488
+		size = 329x24
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Papyrus"
+		font-size = 9
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Select a branch within the chosen kingdom to join."
+		align = top-left
+		text-wrap = true
+	elem "label20"
+		type = LABEL
+		pos = 8,400
+		size = 329x40
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Papyrus"
+		font-size = 9
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Choose a kingdom for your character to start in. Each kingdom has slightly different laws and religion."
+		align = top-left
+		text-wrap = true
+	elem "label19"
+		type = LABEL
+		pos = 8,312
+		size = 152x40
+		anchor1 = 0,0
+		anchor2 = 0,0
+		font-family = "Papyrus"
+		font-size = 9
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Certain jobs are only available to specific genres."
+		align = top-left
+		text-wrap = true
+	elem "label18"
+		type = LABEL
+		pos = 8,168
+		size = 327x56
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Papyrus"
+		font-size = 9
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Specify a name to use in the game. This must be a valid role-playing name: first and last name required; no numbers or weird characters."
+		align = top-left
+		text-wrap = true
+	elem "label17"
+		type = LABEL
+		pos = 8,8
+		size = 328x128
+		anchor1 = 50,0
+		anchor2 = 50,0
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Welcome to Cowed, a fantasy medieval role-playing game!\nPlease fill in the appropriate details below to create a character.\nIf you do not yet know what Cowed is all about, please click here for a manual."
+		align = top-left
+		text-wrap = true
+	elem "grdClasses"
+		type = GRID
+		pos = 96,519
+		size = 233x36
+		anchor1 = 0,0
+		anchor2 = 100,0
+		border = sunken
+		saved-params = ""
+		cells = 1x0
+		current-cell = 1,1
+		show-names = false
+		is-list = true
+	elem "btnManual"
+		type = BUTTON
+		pos = 34,113
+		size = 29x20
+		anchor1 = 50,0
+		anchor2 = 50,0
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #0080ff
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "here"
+		command = "http://www.cowed.org/manual"
+		is-flat = true
+	elem "grdBranches"
+		type = GRID
+		pos = 96,447
+		size = 233x36
+		anchor1 = 0,0
+		anchor2 = 100,0
+		font-family = "Papyrus"
+		font-size = 10
+		border = sunken
+		saved-params = ""
+		cells = 1x0
+		current-cell = 1,1
+		show-names = false
+		is-list = true
+	elem "grdKingdoms"
+		type = GRID
+		pos = 96,359
+		size = 36x36
+		anchor1 = 0,0
+		anchor2 = 0,0
+		font-family = "Papyrus"
+		font-size = 10
+		border = sunken
+		saved-params = ""
+		cells = 1x0
+		current-cell = 1,1
+		show-lines = vertical
+		show-names = false
+		is-list = true
+	elem "lblClass"
+		type = LABEL
+		pos = 8,528
+		size = 76x20
+		anchor1 = 0,0
+		anchor2 = 0,0
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Class:"
+		align = right
+	elem "lblBranch"
+		type = LABEL
+		pos = 8,456
+		size = 76x20
+		anchor1 = 0,0
+		anchor2 = 0,0
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Branch:"
+		align = right
+	elem "label14"
+		type = LABEL
+		pos = 8,368
+		size = 76x20
+		anchor1 = 0,0
+		anchor2 = 0,0
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Kingdom:"
+		align = right
+	elem "label13"
+		type = LABEL
+		pos = 8,264
+		size = 76x20
+		anchor1 = 0,0
+		anchor2 = 0,0
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Gender:"
+		align = right
+	elem "label12"
+		type = LABEL
+		pos = 8,144
+		size = 76x20
+		anchor1 = 0,0
+		anchor2 = 0,0
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Name:"
+		align = right
+	elem "radGenderF"
+		type = BUTTON
+		pos = 96,288
+		size = 60x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "Female"
+		command = ""
+		group = "gender"
+		button-type = radio
+	elem "radGenderM"
+		type = BUTTON
+		pos = 96,264
+		size = 60x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "Male"
+		command = ""
+		is-checked = true
+		group = "gender"
+		button-type = radio
+	elem "txtName"
+		type = INPUT
+		pos = 96,142
+		size = 232x24
+		anchor1 = 0,0
+		anchor2 = 0,0
+		font-family = "Papyrus"
+		font-size = 10
+		border = sunken
+		saved-params = ""
+		no-command = true
+
+window "chat"
+	elem "chat"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "input1"
+		type = INPUT
+		pos = 0,460
+		size = 640x20
+		anchor1 = 0,100
+		anchor2 = 100,100
+		saved-params = ""
+		command = "!say \""
+	elem "tab"
+		type = TAB
+		pos = 0,0
+		size = 640x460
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Papyrus"
+		text-color = #ded5b6
+		background-color = #9f9479
+		saved-params = ""
+		tabs = "outputwindow/both,outputwindow/ic,outputwindow/ooc"
+		current-tab = "outputwindow/both"
+
+window "default"
+	elem "default"
+		type = MAIN
+		pos = 281,0
+		size = 800x600
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		is-default = true
+		saved-params = "pos;size;is-minimized;is-maximized"
+		icon = 'interface\\icon.png'
+		macro = "macro"
+		menu = "menu"
+	elem "child"
+		type = CHILD
+		pos = 0,0
+		size = 800x600
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = none
+		saved-params = "splitter"
+		left = "default/game"
+		is-vert = false
+
+window "default/child"
+	elem "default/child"
+		type = MAIN
+		pos = 281,0
+		size = 1000x547
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "child"
+		type = CHILD
+		pos = 0,0
+		size = 1000x547
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = none
+		saved-params = "splitter"
+		left = "info"
+		right = "chat"
+		is-vert = false
+		splitter = 40
+
+window "default/game"
+	elem "default/game"
+		type = MAIN
+		pos = 281,0
+		size = 1000x562
+		anchor1 = none
+		anchor2 = none
+		background-color = #000000
+		is-default = true
+		saved-params = "pos;size;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		macro = "macro"
+	elem "child"
+		type = CHILD
+		pos = 0,0
+		size = 1000x546
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = none
+		saved-params = "splitter"
+		left = "default/map"
+		right = "default/child"
+		is-vert = true
+	elem "input"
+		type = INPUT
+		pos = 0,546
+		size = 952x16
+		anchor1 = 0,100
+		anchor2 = 100,100
+		text-color = #6d4012
+		background-color = #ab9f7c
+		is-default = true
+		border = line
+		saved-params = "command"
+		command = "!say \""
+	elem "toggleOOC"
+		type = BUTTON
+		pos = 951,546
+		size = 49x16
+		anchor1 = 100,100
+		anchor2 = 100,100
+		font-family = "Papyrus"
+		text-color = #804000
+		background-color = #dddbb9
+		border = line
+		saved-params = "is-checked;text"
+		text = "Say"
+		command = "toggle-chat"
+		is-flat = true
+
+window "default/map"
+	elem "default/map"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "map"
+		type = MAP
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		text-color = #000000
+		is-default = true
+		saved-params = ""
+		icon-size = 32
+
+window "family"
+	elem "family"
+		type = MAIN
+		pos = 316,49
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #6d4012
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Family"
+		statusbar = false
+	elem "btnShop"
+		type = BUTTON
+		pos = 360,8
+		size = 76x28
+		anchor1 = none
+		anchor2 = none
+		saved-params = "is-checked"
+		text = "Shop"
+		command = ""
+	elem "btnForum"
+		type = BUTTON
+		pos = 272,8
+		size = 76x28
+		anchor1 = none
+		anchor2 = none
+		saved-params = "is-checked"
+		text = "Private Forum"
+		command = ""
+	elem "btnRanks"
+		type = BUTTON
+		pos = 184,8
+		size = 76x28
+		anchor1 = none
+		anchor2 = none
+		saved-params = "is-checked"
+		text = "Ranks"
+		command = ""
+	elem "btnMembers"
+		type = BUTTON
+		pos = 96,8
+		size = 76x28
+		anchor1 = none
+		anchor2 = none
+		saved-params = "is-checked"
+		text = "Members"
+		command = ""
+	elem "btnGeneral"
+		type = BUTTON
+		pos = 8,8
+		size = 76x28
+		anchor1 = none
+		anchor2 = none
+		saved-params = "is-checked"
+		text = "General"
+		command = ""
+	elem "browser"
+		type = BROWSER
+		pos = 8,48
+		size = 624x424
+		anchor1 = 0,0
+		anchor2 = 100,100
+		saved-params = ""
+
+window "info"
+	elem "info"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "info"
+		type = INFO
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #6d4012
+		background-color = #ded5b6
+		is-default = true
+		saved-params = ""
+		highlight-color = #a96436
+		tab-background-color = #9f9479
+		tab-font-family = "Papyrus"
+		tab-font-size = 10
+
+window "boat_control"
+	elem "boat_control"
+		type = MAIN
+		pos = 281,0
+		size = 192x159
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		is-visible = false
+		saved-params = "pos;size;is-maximized"
+		can-minimize = false
+		can-resize = false
+	elem "btnNorth"
+		type = BUTTON
+		pos = 80,16
+		size = 32x32
+		anchor1 = none
+		anchor2 = none
+		saved-params = "is-checked"
+		text = ""
+		command = ""
+		is-flat = true
+	elem "btnWest"
+		type = BUTTON
+		pos = 32,64
+		size = 32x32
+		anchor1 = none
+		anchor2 = none
+		saved-params = "is-checked"
+		text = ""
+		command = ""
+		is-flat = true
+	elem "btnSouth"
+		type = BUTTON
+		pos = 80,112
+		size = 32x32
+		anchor1 = none
+		anchor2 = none
+		saved-params = "is-checked"
+		text = ""
+		command = ""
+		is-flat = true
+	elem "btnEast"
+		type = BUTTON
+		pos = 128,64
+		size = 32x32
+		anchor1 = none
+		anchor2 = none
+		saved-params = "is-checked"
+		text = ""
+		command = ""
+		is-flat = true
+	elem "btnCenter"
+		type = BUTTON
+		pos = 80,64
+		size = 32x32
+		anchor1 = none
+		anchor2 = none
+		background-color = #9f9479
+		saved-params = "is-checked"
+		text = ""
+		command = ""
+		is-flat = true
+
+window "outputwindow/both"
+	elem "outputwindow/both"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Both"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "output"
+		type = OUTPUT
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Papyrus,Minion Pro"
+		font-size = 10
+		background-color = #ded5b6
+		is-default = true
+		border = line
+		saved-params = "max-lines"
+		link-color = #6d4012
+		visited-color = #a96436
+		style = "tt, .medal { font-family: \"Minion Pro\"; }\n.medal { color: #00CC00; }\n.medaltitle { font-style: bold; }"
+		enable-http-images = true
+		max-lines = 0
+
+window "outputwindow/ic"
+	elem "outputwindow/ic"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "IC"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "output"
+		type = OUTPUT
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Papyrus,Minion Pro"
+		font-size = 10
+		background-color = #ded5b6
+		border = line
+		saved-params = "max-lines"
+		link-color = #6d4012
+		visited-color = #a96436
+		style = "tt, .medal { font-family: \"Minion Pro\"; }\n.medal { color: #00CC00; }\n.medaltitle { font-style: bold; }"
+		enable-http-images = true
+		max-lines = 0
+
+window "outputwindow/ooc"
+	elem "outputwindow/ooc"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "OOC"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "output"
+		type = OUTPUT
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Papyrus,Minion Pro"
+		font-size = 10
+		background-color = #ded5b6
+		is-default = true
+		border = line
+		saved-params = "max-lines"
+		link-color = #6d4012
+		visited-color = #a96436
+		style = "tt, .medal { font-family: \"Minion Pro\"; }\n.medal { color: #00CC00; }\n.medaltitle { font-style: bold; }"
+		enable-http-images = true
+		max-lines = 0
+
+window "paint_window"
+	elem "paint_window"
+		type = MAIN
+		pos = 281,0
+		size = 486x406
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Paint Brush"
+		statusbar = false
+		can-minimize = false
+		can-resize = false
+	elem "btnLoad"
+		type = BUTTON
+		pos = 1,348
+		size = 61x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "LOAD"
+		command = ""
+	elem "btnSaveF"
+		type = BUTTON
+		pos = 1,324
+		size = 61x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "SAVE"
+		command = ""
+	elem "btnColorYellow"
+		type = BUTTON
+		pos = 451,164
+		size = 32x32
+		anchor1 = none
+		anchor2 = none
+		background-color = #ffff00
+		saved-params = "is-checked"
+		text = ""
+		command = ""
+		group = "color"
+		button-type = pushbox
+	elem "btnColorWhite"
+		type = BUTTON
+		pos = 451,124
+		size = 32x32
+		anchor1 = none
+		anchor2 = none
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = ""
+		command = ""
+		group = "color"
+		button-type = pushbox
+	elem "lblYellowBerries"
+		type = LABEL
+		pos = 384,386
+		size = 52x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ffff00
+		background-color = #ded5b6
+		saved-params = ""
+		text = "0"
+	elem "lblWhiteBerries"
+		type = LABEL
+		pos = 336,386
+		size = 52x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ffffff
+		background-color = #ded5b6
+		saved-params = ""
+		text = "0"
+	elem "btnSave"
+		type = BUTTON
+		pos = 1,244
+		size = 61x40
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "DRAW"
+		command = ""
+	elem "btnClear"
+		type = BUTTON
+		pos = 1,196
+		size = 61x40
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "CLEAR"
+		command = ""
+	elem "btnColorBlue"
+		type = BUTTON
+		pos = 451,84
+		size = 32x32
+		anchor1 = none
+		anchor2 = none
+		background-color = #0000ff
+		saved-params = "is-checked"
+		text = ""
+		command = ""
+		group = "color"
+		button-type = pushbox
+	elem "btnColorRed"
+		type = BUTTON
+		pos = 451,44
+		size = 32x32
+		anchor1 = none
+		anchor2 = none
+		background-color = #ff0000
+		saved-params = "is-checked"
+		text = ""
+		command = ""
+		group = "color"
+		button-type = pushbox
+	elem "btnColorBlack"
+		type = BUTTON
+		pos = 451,4
+		size = 32x32
+		anchor1 = none
+		anchor2 = none
+		background-color = #000000
+		saved-params = "is-checked"
+		text = ""
+		command = ""
+		is-checked = true
+		group = "color"
+		button-type = pushbox
+	elem "btnFRect"
+		type = BUTTON
+		pos = 1,148
+		size = 61x40
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "FILLED RECT"
+		command = ""
+		group = "tool"
+		button-type = pushbox
+	elem "btnRect"
+		type = BUTTON
+		pos = 1,100
+		size = 61x40
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "RECT"
+		command = ""
+		group = "tool"
+		button-type = pushbox
+	elem "btnLine"
+		type = BUTTON
+		pos = 1,52
+		size = 61x40
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "LINE"
+		command = ""
+		group = "tool"
+		button-type = pushbox
+	elem "btnPen"
+		type = BUTTON
+		pos = 1,4
+		size = 61x40
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "PEN"
+		command = ""
+		is-checked = true
+		group = "tool"
+		button-type = pushbox
+	elem "lblBlueBerries"
+		type = LABEL
+		pos = 280,386
+		size = 52x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #0000ff
+		background-color = #ded5b6
+		saved-params = ""
+		text = "0"
+	elem "lblRedBerries"
+		type = LABEL
+		pos = 224,386
+		size = 52x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ff0000
+		background-color = #ded5b6
+		saved-params = ""
+		text = "0"
+	elem "lblBlackBerries"
+		type = LABEL
+		pos = 168,386
+		size = 52x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		background-color = #ded5b6
+		saved-params = ""
+		text = "0"
+	elem "label11"
+		type = LABEL
+		pos = 64,386
+		size = 97x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Your berries:"
+		align = left
+	elem "paintmap"
+		type = MAP
+		pos = 64,0
+		size = 384x384
+		anchor1 = none
+		anchor2 = none
+		text-color = #000000
+		border = sunken
+		right-click = true
+		saved-params = "icon-size"
+
+window "sign"
+	elem "sign"
+		type = MAIN
+		pos = 335,77
+		size = 512x256
+		anchor1 = none
+		anchor2 = none
+		background-color = #6d4012
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Sign"
+		statusbar = false
+		can-minimize = false
+		can-resize = false
+		macro = "sign"
+	elem "output"
+		type = OUTPUT
+		pos = 8,8
+		size = 497x237
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #804000
+		background-color = #ded5b6
+		border = line
+		saved-params = "max-lines"
+		link-color = #804000
+		visited-color = #804000
+
+window "tardis"
+	elem "tardis"
+		type = MAIN
+		pos = 281,0
+		size = 233x339
+		anchor1 = none
+		anchor2 = none
+		background-color = #aa631c
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "TARDIS Controls"
+		statusbar = false
+		can-minimize = false
+		can-resize = false
+	elem "btnHADS"
+		type = BUTTON
+		pos = 102,80
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "H"
+		command = ""
+	elem "btnLock4"
+		type = BUTTON
+		pos = 6,272
+		size = 8x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "!"
+		command = ""
+		button-type = pushbox
+	elem "btnLock512"
+		type = BUTTON
+		pos = 190,80
+		size = 8x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "!"
+		command = ""
+		button-type = pushbox
+	elem "btnLock2"
+		type = BUTTON
+		pos = 158,80
+		size = 8x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "!"
+		command = ""
+		button-type = pushbox
+	elem "btnLock16"
+		type = BUTTON
+		pos = 38,80
+		size = 8x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "!"
+		command = ""
+		button-type = pushbox
+	elem "btnLock8"
+		type = BUTTON
+		pos = 6,80
+		size = 8x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "!"
+		command = ""
+		button-type = pushbox
+	elem "btnLock128"
+		type = BUTTON
+		pos = 6,304
+		size = 8x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "!"
+		command = ""
+		button-type = pushbox
+	elem "btnLock64"
+		type = BUTTON
+		pos = 6,240
+		size = 8x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "!"
+		command = ""
+		button-type = pushbox
+	elem "btnLock256"
+		type = BUTTON
+		pos = 6,208
+		size = 8x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "!"
+		command = ""
+		button-type = pushbox
+	elem "btnLock32"
+		type = BUTTON
+		pos = 6,176
+		size = 8x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "!"
+		command = ""
+		button-type = pushbox
+	elem "btnLock1"
+		type = BUTTON
+		pos = 6,144
+		size = 8x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "!"
+		command = ""
+		button-type = pushbox
+	elem "btnChameleon"
+		type = BUTTON
+		pos = 14,304
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "0"
+		command = ""
+	elem "btnViewCancel"
+		type = BUTTON
+		pos = 134,80
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "VX"
+		command = ""
+	elem "btnViewTarget"
+		type = BUTTON
+		pos = 166,80
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "VT"
+		command = ""
+	elem "btnViewExterior"
+		type = BUTTON
+		pos = 198,80
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "VE"
+		command = ""
+	elem "btnKey"
+		type = BUTTON
+		pos = 14,272
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "K"
+		command = ""
+	elem "btnCloak"
+		type = BUTTON
+		pos = 14,240
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "C"
+		command = ""
+	elem "btnIntercom"
+		type = BUTTON
+		pos = 14,208
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "I"
+		command = ""
+	elem "btnDoorDeadlock"
+		type = BUTTON
+		pos = 14,176
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "DL"
+		command = ""
+	elem "label4"
+		type = LABEL
+		pos = 6,116
+		size = 44x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		border = sunken
+		saved-params = ""
+		text = "Status:"
+	elem "lblStatus"
+		type = LABEL
+		pos = 56,116
+		size = 174x220
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		border = sunken
+		saved-params = ""
+		text = "defenses up; door unlocked; coordinates fused"
+		align = top-left
+		text-wrap = true
+	elem "btnFuse"
+		type = BUTTON
+		pos = 78,80
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "L"
+		command = ""
+	elem "btnDematerialize"
+		type = BUTTON
+		pos = 46,80
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "D"
+		command = ""
+	elem "label3"
+		type = LABEL
+		pos = 6,52
+		size = 26x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		border = sunken
+		saved-params = ""
+		text = "L:"
+	elem "label2"
+		type = LABEL
+		pos = 6,28
+		size = 26x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		border = sunken
+		saved-params = ""
+		text = "D:"
+	elem "label1"
+		type = LABEL
+		pos = 6,4
+		size = 26x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		border = sunken
+		saved-params = ""
+		text = "S:"
+	elem "lblLastDest"
+		type = LABEL
+		pos = 30,52
+		size = 192x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		border = sunken
+		saved-params = ""
+		text = "nowhere"
+	elem "lblDestination"
+		type = LABEL
+		pos = 30,28
+		size = 192x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		border = sunken
+		saved-params = ""
+		text = "nowhere"
+	elem "lblSource"
+		type = LABEL
+		pos = 30,4
+		size = 192x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		border = sunken
+		saved-params = ""
+		text = "the void"
+	elem "btnDoor"
+		type = BUTTON
+		pos = 14,144
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "D"
+		command = ""
+	elem "btnCoordinates"
+		type = BUTTON
+		pos = 14,80
+		size = 24x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = "is-checked"
+		text = "C"
+		command = ""
+
+window "tardis/popup"
+	elem "tardis/popup"
+		type = MAIN
+		pos = 281,0
+		size = 320x230
+		anchor1 = none
+		anchor2 = none
+		background-color = #804000
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "TARDIS Controls :: Set Destination Coordinates"
+		can-minimize = false
+		can-resize = false
+		macro = "macro"
+	elem "btnRefresh"
+		type = BUTTON
+		pos = 6,179
+		size = 100x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #804000
+		saved-params = "is-checked"
+		text = "Refresh Players"
+		command = ""
+		is-flat = true
+	elem "lblLoc"
+		type = LABEL
+		pos = 256,204
+		size = 60x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = ""
+		text = ""
+	elem "label8"
+		type = LABEL
+		pos = 228,204
+		size = 28x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = ""
+		text = "L:"
+	elem "label6"
+		type = LABEL
+		pos = 228,180
+		size = 28x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = ""
+		text = "Z:"
+	elem "btnZR"
+		type = BUTTON
+		pos = 296,180
+		size = 20x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #804000
+		saved-params = "is-checked"
+		text = ">"
+		command = ""
+		is-flat = true
+	elem "btnZL"
+		type = BUTTON
+		pos = 256,180
+		size = 20x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #804000
+		saved-params = "is-checked"
+		text = "<"
+		command = ""
+		is-flat = true
+	elem "lblZ"
+		type = LABEL
+		pos = 276,180
+		size = 20x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		saved-params = ""
+		text = ""
+	elem "txtCoordinates"
+		type = INPUT
+		pos = 0,152
+		size = 320x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		border = sunken
+		saved-params = ""
+		command = "tardis-input-coordinates \""
+	elem "lstLandmarks"
+		type = GRID
+		pos = 160,0
+		size = 160x152
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		border = sunken
+		saved-params = ""
+		cells = 1x0
+		current-cell = 1,1
+		show-lines = horizontal
+		show-names = false
+		line-color = #ab9f7c
+		is-list = true
+	elem "lstPlayers"
+		type = GRID
+		pos = 0,0
+		size = 160x152
+		anchor1 = none
+		anchor2 = none
+		font-family = "Bodoni MT"
+		font-size = 10
+		text-color = #ded5b6
+		background-color = #6d4012
+		border = sunken
+		saved-params = ""
+		cells = 1x0
+		current-cell = 1,1
+		show-lines = horizontal
+		show-names = false
+		line-color = #ab9f7c
+		is-list = true
+

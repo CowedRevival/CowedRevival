@@ -1,0 +1,26 @@
+// DM Environment file for Test.dme.
+// All manual changes should be made outside the BEGIN_ and END_ blocks.
+// New source code should be placed in .dm files: choose File/New --> Code File.
+
+// BEGIN_INTERNALS
+/*
+FILE: 
+*/
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+#define FILE_DIR "demo"
+// END_FILE_DIR
+
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+
+// BEGIN_INCLUDE
+#include "Test.dm"
+#ifdef __MAIN__ // BEGIN_DEMO
+#include "demo\Game.dm"
+#include "demo\Tests.dm"
+#include "demo\map.dmp"
+#endif          // END_DEMO
+// END_INCLUDE
+

@@ -1,0 +1,17 @@
+// DM Environment file for TextHandling.dme.
+// All manual changes should be made outside the BEGIN_ and END_ blocks.
+// New source code should be placed in .dm files: choose File/New --> Code File.
+
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+
+// BEGIN_INCLUDE
+#include "TextHandling.dm"
+// END_INCLUDE
+
+// BEGIN_INTERNALS
+// END_INTERNALS

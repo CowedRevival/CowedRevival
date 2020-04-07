@@ -1,0 +1,6 @@
+mob/proc/browser(txt)
+	if(client)
+		client.browser(txt)
+client/proc/browser(txt)
+	winset(src, "browser_win", "is-visible=true")
+	src << output(txt, "browser_win.browser")

@@ -1,0 +1,1 @@
+/* this is teh place for a animal spawn*/
