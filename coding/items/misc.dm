@@ -1537,6 +1537,16 @@ item/misc
 					hud_main.UpdateHUD(M)
 					usr.contents += new/item/misc/wood_bucket
 					Move(null, forced = 1)
+	bones
+		skull
+			icon='icons/Supplies.dmi'
+			icon_state = "skull"
+			stacked = -1
+		bone
+			icon='icons/Supplies.dmi'
+			icon_state = "bone"
+			stacked = 1
+
 	food
 		var
 			HungerAdd
@@ -1641,6 +1651,10 @@ item/misc
 			icon_state="meat"
 			HungerAdd=10
 			FoodType="Meat"
+		Strange_Meat
+			icon_state="strange_meat"
+			HungerAdd=25
+			FoodType="Meat"
 		Frog_Meat
 			icon_state="frog meat"
 			HungerAdd=15
@@ -1648,6 +1662,10 @@ item/misc
 		Cooked_Meat
 			icon_state="cooked meat"
 			HungerAdd=25
+			FoodType="none"
+		Cooked_Strange_Meat
+			icon_state="cooked strange_meat"
+			HungerAdd=100
 			FoodType="none"
 		Goldfish
 			icon_state="goldfish"

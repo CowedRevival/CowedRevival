@@ -28,10 +28,10 @@ animal
 		const
 			TYPE_CARNIVORE = 1
 			TYPE_HERBIVORE = 2 //does not attack humans; eats good berries and all food
+			TYPE_OMNIVORE = 3
 		animal_type = TYPE_HERBIVORE
 		runAI = TRUE
 		mob/master
-		mountable = 0
 		age
 		tmp
 			there_can_be_only_one = 0
@@ -40,6 +40,7 @@ animal
 			max_pop = 25
 	New(loc, disperse = 0)
 		. = ..()
+		verbs -= /mob/verb/loot
 		if(map_loaded) there_can_be_only_one = TRUE
 		spawn(25)
 			//if(!worldz || (undergroundz != src.z && worldz != src.z && skyz != src.z)) return
@@ -99,8 +100,6 @@ animal
 				if(!(attacker in enemies)) enemies += attacker
 				if(!enemy || target == src) enemy = attacker
 
-				if(HP < MHP * 0.1) mood = MOOD_SCARED
-				else mood = MOOD_ANGRY
 		SeeDeath(mob/target)
 			if(target == enemy)
 				enemy = null
@@ -113,116 +112,50 @@ animal
 				if(!(M in friends)) friends += M //yay!
 			if(mood == natural_mood && SLEEP <= 50 && prob(25)) mood = MOOD_CURIOUS //hmm... what is that?
 		AI()
-			spawn while(HP > 0 && !corpse)
-				if(!ActionLock("Age", rand(3000, 6000))) Age()
-				if(!runAI || (stunned + weakened > 0) || !isturf(loc))
-					sleep(100)
-					continue
-				if(issleeping)
-					if(++SLEEP >= 5 && prob(5))
-						issleeping = 0
-					sleep(50)
-					continue
-
-				switch(mood)
-					if(MOOD_ANGRY)
-						//attack enemy
-						while(!issleeping && (stunned + weakened <= 0) && !corpse && enemy && (enemy in range(src)))
-							if(HP < (MHP * 0.1))
-								mood = MOOD_SCARED
-								break
+			if(HP > 0 && !corpse)
+				spawn((110 - speed))
+					AI()
+			switch(mood)
+				if(MOOD_ANGRY)
+					if(HP <= 0) return
+					if(!enemy)
+						var/smallest_dist = 999
+						for(var/mob/I in view())
+							var/dist = get_dist(src, I)
+							if(dist < smallest_dist && !istype(I, src) && !istype(I, /mob/observer) && I.HP > 0)
+								smallest_dist = dist
+								enemy = I
+					if(!issleeping && (stunned + weakened <= 0) && !corpse && enemy && (enemy in range(src)))
+						spawn(step_to(src, enemy, 1, 1))
 							if(src in oview(1, enemy))
 								src.attack(enemy)
-								sleep(5)
-							else sleep(Step(enemy))
-						enemy = null
-						if(mood == MOOD_ANGRY)
-							mood = natural_mood
-							if(mood == MOOD_ANGRY) mood = MOOD_CURIOUS
-					if(MOOD_SCARED)
-						//flee from enemy
-						while(!issleeping && (stunned + weakened <= 0) && !corpse && enemy && (enemy in range(src)))
-							sleep(Step_Away(enemy))
-						enemy = null
-						mood = natural_mood
-						if(mood == MOOD_SCARED)
-							mood = natural_mood
-							if(mood == MOOD_SCARED) mood = MOOD_CURIOUS
-					if(MOOD_BLOODTHIRSTY)
-						//find a new target to attack
-						var/list/L = range(src)
-						//proritize on known enemies
-						for(var/mob/M in L)
-							if(M in enemies)
-								enemy = M
-								break
-						if(!enemy)
-							for(var/mob/M in L)
-								if(!(M in friends))
-									enemy = M
-									break
-
-						if(enemy) mood = MOOD_ANGRY
-						sleep(10)
-					if(MOOD_CURIOUS, MOOD_PEACEFUL)
-						//wander around
-						if(master && order) //I have been ordered to do something!
-							if(prob(10)) //10% chance I'll ignore it
-								order = null
-							else
-								switch(order)
-									if(ORDER_FOLLOW) //yay let's follow him/her around
-										mood = MOOD_PEACEFUL
-										while(!issleeping && (stunned + weakened <= 0) &&!corpse && order == ORDER_FOLLOW && mood == MOOD_PEACEFUL)
-											while(!(src in range(3, master)))
-												sleep(Step(master))
-											sleep(Step(pick(NORTH, SOUTH, EAST, WEST)))
-											if(speed > 30) sleep(rand(25, 75)) //rate limit for curious movement
-									if(ORDER_ATTACK) //grrr...
-										mood = MOOD_ANGRY
-										order = null
-										continue
-
-						var/need_food = SLEEP / (MSLEEP / 100)
-						if(!prob(need_food))
-							var/item/misc/food/I
-							for(I in view(src))
-								if(animal_type == TYPE_CARNIVORE || I.herbivore_friendly)
-									break
-							while(!issleeping && (stunned + weakened <= 0) &&!corpse && I)
-								if(src.loc == I.loc)
-									I.consume(src)
-									need_food = SLEEP / (MSLEEP / 100)
-									if(prob(need_food))
-										break
-								sleep(Step(I))
-							if(I) continue
-						if(friends && friends.len && prob(25))
-							var/mob/M
-							for(M in friends)
-								if(M in range(src)) break
-							while(!issleeping && (stunned + weakened <= 0) &&!corpse && !(M in range(3, src)))
-								sleep(Step(M))
-						/*if(prob(2) && gender == MALE && age >= 14 && age <= 20)
-							var/animal/A
-							for(A in oview(src))
-								if(A.type == src.type && A.gender == FEMALE && A.age >= 14 && A.age <= 20 && !A.pregnant) break
-							if(A)
-								while(!corpse && (A in range(src)) && get_dist(A, src) > 1)
-									sleep(Step(A))
-								if(get_dist(A, src) <= 1)
-									A.ActionLock("pregnant", rand(3000, 6000))
-									A.pregnant = prob(25) ? 1 : 0
-						else if(gender == FEMALE && pregnant && !ActionLock("pregnant"))
-							var/animal/A = new src.type(src.loc)
-							A.age = 0
-							if(!friends) friends = new/list()
-							friends += A //watch over your children
-							*/
-						sleep(Step(pick(NORTH, SOUTH, EAST, WEST)))
-						if(speed > 30) sleep(rand(25, 75)) //rate limit for curious movement
-						if(mood == MOOD_CURIOUS) mood = natural_mood
-					else sleep(100)
+								HUNGER += 30
+								if(HUNGER > MHUNGER)
+									HUNGER = MHUNGER
+					else
+						Step(pick(NORTH, SOUTH, EAST, WEST))
+				if(MOOD_CURIOUS, MOOD_PEACEFUL)
+					if(HP <= 0) return
+					if(HUNGER < 90)
+						var/item/misc/food/food_desire
+						var/lowest_dist = 999
+						for(var/item/misc/food/I in view(6))
+							var/dist = get_dist(src, I)
+							if(dist < lowest_dist)
+								if(!(I.FoodType != "Vege" && animal_type == TYPE_HERBIVORE))
+									food_desire = I
+									lowest_dist = get_dist(src, I)
+						if(food_desire)
+							spawn(step_to(src, food_desire, 1, 1))
+							if(get_dist(src,food_desire) <= 1)
+								food_desire.consume(src)
+								HUNGER *= 2
+								if(HUNGER > MHUNGER)
+									HUNGER = MHUNGER
+						else
+							Step(pick(NORTH, SOUTH, EAST, WEST))
+					else
+						Step(pick(NORTH, SOUTH, EAST, WEST))
 		Step(dir)
 			if(HP <= 0 || corpse) return 100
 			if(_c_speed != speed)
@@ -383,17 +316,11 @@ animal
 
 		if(!(life_time % 240))
 			HUNGER -= 1
-			THIRST -= 1
 			if(HUNGER <= 1)
 				src.HUNGER += 10
-				src.HP -= 10
+				src.HP -= 1
 				src.last_hurt = "hunger"
 				checkdead(src)
-			if(THIRST <= 1)
-				src.HP -= 5
-				src.last_hurt = "thirst"
-				checkdead(src)
-
 
 		if(src.poisoned >= 1)
 			if(prob(poisoned))
@@ -420,23 +347,6 @@ animal
 			if(luminosity != 12) src.sd_SetLuminosity(12)
 		else
 			if(luminosity != 0) src.sd_SetLuminosity(0)
-	Click()
-		if(src.master == usr && !(src in oview(1, usr)))
-			var/list/L = list("Follow", "Wander", "Attack")
-			if(animal_type != TYPE_CARNIVORE) L -= "Attack"
-
-			var/choice = input(usr, "What would you like this animal to do?", "[src]") as null|anything in L
-			if(!choice) return
-			switch(choice)
-				if("Follow") order = ORDER_FOLLOW
-				if("Attack")
-					var/mob/M = input(usr, "Specify a target for the animal.", "[src] :: Attack") as null|mob in view(src) - src - usr
-					if(M && (M in view(src)))
-						enemy = M
-						order = ORDER_ATTACK
-				else order = ORDER_NONE
-			if(choice != "Attack" && enemy) enemy = null
-		else return ..()
 	/*verb
 		Mount()
 			set src in oview(1, usr)
@@ -498,12 +408,9 @@ animal
 		smell = 60
 		strength = 2
 		defence = 2
-		contents = newlist(/item/misc/food/Meat, /item/misc/food/Meat, /item/misc/food/Meat, /item/misc/food/Meat)
 		natural_mood = MOOD_CURIOUS
 		mood = MOOD_CURIOUS
-		add_contents()
-			. = ..()
-			contents += new/item/misc/food/Meat
+		animal_type = TYPE_OMNIVORE
 	bear
 		icon = 'icons/Bear.dmi'
 		smell = 90
@@ -512,11 +419,17 @@ animal
 		HP = 160
 		MHP = 160
 		animal_type = TYPE_CARNIVORE
-		mountable = TRUE
 		speed = 67
 		there_can_be_only_one = 1
-		add_contents()
-			. = ..()
-			contents += new/item/misc/food/Meat
-			contents += new/item/misc/food/Meat
-			contents += new/item/misc/food/Meat
+
+	wolf
+		icon = 'icons/Wolf.dmi'
+		smell = 90
+		strength = 2
+		defence = 1
+		HP = 60
+		MHP = 60
+		animal_type = TYPE_CARNIVORE
+		speed = 100
+		natural_mood = MOOD_ANGRY
+		mood = MOOD_ANGRY

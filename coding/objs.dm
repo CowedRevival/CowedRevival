@@ -379,6 +379,36 @@ obj
 				if(M.whopull && get_dist(M, M.whopull) <= 1 && !M.whopull.anchored)
 					M.whopull.Move(T, forced = 1)
 				M.Move(T, forced = 1)
+		verb/Climb_Up()
+			set src in view(0)
+			var/mob/M = usr
+			if(istype(M))
+				M.lastHole = src
+				spawn(100) if(M && M.lastHole == src) M.lastHole = null
+			var/map_object/O = MapObject(M.z)
+			if(O.map_layer < 0) //going up!
+				O = O.NextLayer()
+				var/turf/T = locate(x, y, O.z)
+
+				if(istype(T, /turf/path) || istype(T, /turf/grass) || istype(T, /turf/sand))
+					if(istype(T, /turf/sand))
+						new/turf/hole{icon_state = "hole_s"}(T)
+					else new/turf/hole(T)
+				else if(istype(T, /turf/trapdoor))
+					var/turf/trapdoor/P = T
+					if(P.icon_state == "trapdoor closed")
+						if(P.locked)
+							M << "<tt>A trap door seems to be blocking the way. You knock...</tt>"
+							if(!ActionLock("knock", 5))
+								hearers(P) << "\icon[src] *knock* *knock*"
+								hearers(src) << "\icon[src] *knock* *knock*"
+						else
+							P.icon_state = "trapdoor open"
+							M.Move(T, forced = 1)
+					else M.Move(T, forced = 1)
+				else if(istype(T, /turf/hole) || locate(/obj/family/edison/grandfather_clock, T)) M.Move(T, forced = 1)
+				else
+					M << "<tt>This area is too hard to get through.</tt>"
 		royal_stairs
 			icon_state="royal stairs1"
 		DblClick()
@@ -687,6 +717,7 @@ obj
 			return ..()
 		proc
 			ActionLoop(mob/M)
+				world << "OHNOOO"
 				if(M.inHand(/item/weapon/axe))
 					while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/axe))
 						icon_state = "[current_season_state]cut [icon_state_base]"
@@ -775,6 +806,20 @@ obj
 			icon_state = "apple_tree_1"
 			icon_state_base = "apple_tree_1"
 			name = "apple tree"
+			New()
+				if(prob(20)) DropApples()
+				return
+
+			proc/DropApples()
+				var/number = rand(1,3)
+				if(icon_state != "[current_season_state]apple_tree_2") return
+				for(var/i = 0 to number)
+					var/apple_x = loc.x + (1 + rand(-2,0))
+					var/apple_y = loc.y + (1 + rand(-2,0))
+					var/turf/J = locate(apple_x, apple_y, loc.z)
+					if(J.density == 0)
+						new/item/misc/food/Apple(locate(apple_x, apple_y, loc.z))
+
 			attack_hand(mob/M)
 				if(!M.current_action && M.inHand(/item/weapon/axe))
 					M.SetAction(src)
@@ -798,6 +843,7 @@ obj
 								J.suffix = "x[J.stacked]"
 							spawn(1500)
 								if(!src) return
+								icon_state_base = "apple_tree_2"
 								icon_state = "[current_season_state][icon_state_base]"
 			ActionLoop(mob/M)
 				if(M.inHand(/item/weapon/axe))

@@ -621,7 +621,41 @@ mob
 					//stat(O)
 			//T=new
 			*/
-	attack_hand(mob/M) return M.attack(src)
+	attack_hand(mob/M)
+		if(M.inHand(/item/weapon/knife) && HP <= 0)
+			Butcher(M)
+			return
+		else return M.attack(src)
+	proc/Butcher(var/mob/M)
+		if(HP > 0) return
+		if(tag == "Skeleton")
+			usr << "You can't butcher a skeleton. Better bury it."
+		for(var/mob/N in hearers(src))
+			N.show_message("<b>[M.name]</b> begins to butcher [name]!", 1)
+		usr.movable=1
+		sleep(40)
+		usr.movable=0
+		if(key)
+			var/item/misc/food/Strange_Meat/MT = new(loc)
+			MT.stacked = rand(1,3)
+			var/item/misc/bones/bone/B = new(loc)
+			B.stacked = rand(1,3)
+			var/item/misc/bones/skull/S = new(loc)
+			S.name = "[M.name]'s Skull"
+		else if(istype(src, /mob/Frogman))
+			var/item/misc/food/Frog_Meat/meat = new(loc)
+			meat.stacked = rand(1,3)
+			var/item/misc/bones/bone/bone = new(loc)
+			bone.stacked = rand(1,3)
+		else
+			var/item/misc/food/Meat/meat = new(loc)
+			meat.stacked = rand(1,3)
+			var/item/misc/bones/bone/bone = new(loc)
+			bone.stacked = rand(1,3)
+		for(var/item/I in src)
+			I.loc = loc
+		del(src)
+
 	proc
 		toggle_sleep(state = -1) //-1 = toggle, 1 = force on, 0 = force off
 			if(icon_state == "ghost") return //can't sleep as a ghost
@@ -1073,6 +1107,7 @@ mob
 
 					var/restdmg = (state == "ghost" || state == "ghost-i") ? 0 : ((src.strength - M.defence) * 3)
 					if(state == "skeleton") restdmg /= 1.5
+					if(restdmg <= 0) restdmg = 1
 					if(restdmg > 0)
 						M.AbortAction()
 						if(M.spell_shield && (get_dir(M, src) & M.dir))
@@ -1116,6 +1151,7 @@ mob
 
 					var/restdmg = (state == "ghost" || state == "ghost-i") ? 0 : (src.strength - M.defence) * 3
 					if(state == "skeleton") restdmg /= 1.5
+					if(restdmg <= 0) restdmg = 1
 					if(restdmg > 0)
 						if(M.spell_shield && (get_dir(M, src) & M.dir))
 							M.spell_shield.SLEEP -= (restdmg / 2)
@@ -1168,7 +1204,7 @@ mob
 			if(istype(M, /mob/Shroom))
 				if(prob(30)) M.contents += new/item/armour/body/mushroom_suit
 				if(prob(40)) M.contents += new/item/armour/hat/mushroom_cap
-				spawn(300) del M
+				//spawn(300) del M
 
 			if(istype(M, /mob/Frogman))
 				M.contents += new/item/misc/food/Frog_Meat
@@ -1176,9 +1212,9 @@ mob
 				if(prob(30)) M.contents += new/item/misc/seeds/Red_Seedlette
 				if(prob(30)) M.contents += new/item/misc/seeds/Yellow_Seedlette
 				if(prob(30)) M.contents += new/item/misc/seeds/Blue_Seedlette
-				spawn(300) del M
+				//spawn(300) del M
 
-			if(istype(M, /mob/Zombie)) spawn del M
+			//if(istype(M, /mob/Zombie)) spawn del M
 
 			chat_log << "\<<font color = orange><b>[time2text(world.realtime, "DD.MM.YY hh:mm:ss")]\]</b>\> [src] has died!</font><br />"
 			M.show_message("<tt>You fall down dead. [abandon_mob ? "You may respawn in [round((global.admin.respawn_time / 10) / 60)] minute\s." : "You may now observe the game and see what other players are up to."]</tt>")
@@ -1191,6 +1227,11 @@ mob
 				corpse.speed = 1
 				corpse.base_speed = 1
 				initial_net_worth = src.initial_net_worth
+				spawn(rand(4000,5000))
+					if(M)
+						M.icon = 'Skeleton.dmi'
+						tag = "Skeleton"
+						return
 
 			src.name = "[src.name]'s corpse"
 			src.HP = 0

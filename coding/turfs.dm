@@ -113,7 +113,7 @@ turf
 	underground
 		dirtwall
 			icon = 'icons/Turfs.dmi'
-			icon_state = "dirtwall"
+			icon_state = "dirt wall"
 			density = 1
 			opacity = 1
 			attack_hand(mob/M)
@@ -175,6 +175,38 @@ turf
 				else if(istype(T, /turf/hole) || locate(/obj/family/edison/grandfather_clock, T)) A.Move(T, forced = 1)
 				else
 					A << "<tt>This area is too hard to get through.</tt>"
+		verb/Climb_Up()
+			set src in view(0)
+			var/mob/M = usr
+			if(istype(M))
+				M.lastHole = src
+				spawn(100) if(M && M.lastHole == src) M.lastHole = null
+			var/map_object/O = MapObject(M.z)
+			if(O.map_layer < 0) //going up!
+				O = O.NextLayer()
+				var/turf/T = locate(x, y, O.z)
+
+				if(istype(T, /turf/path) || istype(T, /turf/grass) || istype(T, /turf/sand))
+					if(istype(T, /turf/sand))
+						new/turf/hole{icon_state = "hole_s"}(T)
+					else new/turf/hole(T)
+				else if(istype(T, /turf/trapdoor))
+					var/turf/trapdoor/P = T
+					if(P.icon_state == "trapdoor closed")
+						if(P.locked)
+							M << "<tt>A trap door seems to be blocking the way. You knock...</tt>"
+							if(!ActionLock("knock", 5))
+								hearers(P) << "\icon[src] *knock* *knock*"
+								hearers(src) << "\icon[src] *knock* *knock*"
+						else
+							P.icon_state = "trapdoor open"
+							M.Move(T, forced = 1)
+					else M.Move(T, forced = 1)
+				else if(istype(T, /turf/hole) || locate(/obj/family/edison/grandfather_clock, T)) M.Move(T, forced = 1)
+				else
+					M << "<tt>This area is too hard to get through.</tt>"
+
+
 		royal_stairs
 			icon_state="royal stairs1"
 	hole
@@ -187,11 +219,14 @@ turf
 				var/map_object/B = O.PrevLayer()
 				if(B) //already exists; just build stairs
 					var/turf/T = locate(x, y, B.z)
-					if(istype(T, /turf/underground/dirtwall)) new/turf/stairs(T)
+					if(istype(T, /turf/underground/dirtwall))
+						new/turf/path(T)
+						new/obj/stairs(T)
 					return
 				var/new_z = add_layer(O.kingdom, up = 0) //create a new underground layer
 				var/turf/T = locate(x, y, new_z)
-				new/turf/stairs(T)
+				new/turf/path(T)
+				new/obj/stairs(T)
 		Entered(atom/movable/A)
 			var/map_object/O = MapObject(A.z)
 			if(!O) return
@@ -215,6 +250,22 @@ turf
 			usr.movable = 0
 			hearers(src) << "<small>[M.name] fills up the hole.</small>"
 			new/turf/path(src)
+		verb/Climb_Down()
+			set src in view(0)
+			var/mob/M = usr
+			var/map_object/O = MapObject(M.z)
+			if(!O) return
+			O = O.PrevLayer()
+			if(!O || O.z == 1) return
+
+			var/turf/T = locate(x, y, O.z)
+			if(!istype(T, /turf/stairs) && !istype(T, /turf/path) && !istype(T, /turf/underground/dirtwall) && !(locate(/obj/stairs, T)))
+				M << "<tt>This area is too hard to get through.</tt>"
+				return
+			if(istype(M))
+				M.lastHole = src
+				spawn(100) if(M && M.lastHole == src) M.lastHole = null
+			M.Move(T, forced = 1)
 	path
 		icon_state = "path"
 		attack_hand(mob/M)
@@ -343,9 +394,10 @@ turf
 				else if(prob(5))
 					var/obj/crop/watermelon/I = new(src)
 					I.icon_state = "wm_growth_3"
-				else if(prob(2))
+				else if(prob(5))
 					var/obj/tree/apple_tree/I = new(src)
 					I.icon_state = "[current_season_state]apple_tree_2"
+					I.icon_state_base = "[current_season_state]apple_tree_2"
 			else if(prob(2))
 				switch(rand(1,3))
 					if(1) new/obj/Flower/Red_Flower(src)

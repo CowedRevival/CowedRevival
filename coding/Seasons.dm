@@ -21,48 +21,49 @@ game
 			season_change = 1
 
 		if(season_change == 1) //Season Change Code
-			var/list/spawners_list = new()
-			var/list/grass_turfs = new()
-			var/list/tree_list = new()
-			var/list/bush_list = new()
-			var/list/palm_list = new()
-			var/list/crop_list = new()
-
 			for(var/obj/spawner/I in world)
-				spawners_list += I
+				I.Respawn()
 
 			for(var/obj/tree/I in world)
-				tree_list += I
+				I.icon_state = current_season_state + I.icon_state_base
 
 			for(var/turf/grass/I in world)
-				grass_turfs += I
-
-			for(var/obj/bush/I in world)
-				bush_list += I
-
-			for(var/obj/Palm_tree/I in world)
-				palm_list += I
-
-			for(var/obj/crop/I in world)
-				crop_list += I
-
-
-			for(var/obj/spawner/I in spawners_list)
-				I.Respawn()
-			for(var/turf/I in grass_turfs)
 				if(istype(I,/turf/grass))
 					I.icon_state = current_season_state + "grass"
-			for(var/obj/tree/I in tree_list)
+
+			for(var/obj/bush/I in world)
 				I.icon_state = current_season_state + I.icon_state_base
-			for(var/obj/bush/I in bush_list)
-				I.icon_state = current_season_state + I.icon_state_base
-			for(var/obj/Palm_tree/I in palm_list)
+
+			for(var/obj/Palm_tree/I in world)
 				I.icon_state = current_season_state + "palm tree"
-			for(var/obj/crop/I in crop_list)
+
+			for(var/obj/crop/I in world)
 				if(Month == 4)
 					if(I.player_planted == 1) del(I)
 					else I.invisibility = 101
 				else I.invisibility = 0
+
+			if(prob(10))
+				world << "<b>An unholy glow shines from the moon tonight...</b>"
+				for(var/mob/M in world)
+					if(M.tag == "Skeleton")
+						M.MHP = 250
+						M.HP = 250
+						M.MHUNGER = 99999
+						M.MTHIRST = 99999
+						M.MSLEEP = 99999
+						M.HUNGER = M.MHUNGER
+						M.THIRST = M.MTHIRST
+						M.SLEEP = M.MSLEEP
+						M.corpse = null
+						M.icon_state = "alive"
+						M.UpdateClothing()
+						M.Zombie()
+
+
+		if(Hour == 0)
+			for(var/obj/tree/apple_tree/I in world)
+				if(prob(20)) I.DropApples()
 
 obj
 	tree
@@ -78,7 +79,8 @@ obj
 				icon_state_base = icon_state
 			..()
 
-/*mob/verb/next_month()
+admin/verb/next_month()
+	set category="Admin"
 	Month = 2
 	Day = 10
-	Hour = 23*/
+	Hour = 23

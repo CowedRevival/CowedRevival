@@ -1,12 +1,12 @@
 // BEGIN_INTERNALS
 /*
 MAP_ZOOM: 1.000
-LAST_COMPILE_TIME: 1586293047
+LAST_COMPILE_TIME: 1586470003
 DIR: code coding coding\admin coding\admin\modules coding\animals coding\items coding\mobs coding\mobs\AI coding\new_admin coding\new_admin\panel coding\objs coding\objs\families coding\snippets coding\spells coding\tardis icons lib lib\Test lib\Test\demo lib\TextHandling maps 
 AUTO_FILE_DIR: ON
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 512.1488
-WINDOW: coding\hud.dm;coding\spawn_point.dm;icons\Classes.dmi;code\layers.dm;coding\turfs.dm;coding\spells\teleport.dm;lib\TextHandling\TextHandling.dm;code\Admin.dm;coding\admin.dm;coding\snippets\duplicate.dm;coding\world.dm;coding\map_editor.dm;spawner.dm;coding\animals\animals.dm;maps\cowmalot.dmm;icons\Zombie.dmi;coding\classes.dm;Cowed.dme;coding\Seasons.dm
-FILE: coding\Seasons.dm
+WINDOW: coding\mobs.dm;code\Monsters.dm;coding\items\misc.dm;coding\objs.dm;coding\items\weapons.dm;icons\Supplies.dmi;coding\animals\animals.dm;coding\game.dm;coding\Seasons.dm;coding\new_admin\global.dm;coding\admin.dm;coding\mobs\revive.dm
+FILE: coding\mobs.dm
 */
 // END_INTERNALS

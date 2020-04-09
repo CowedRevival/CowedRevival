@@ -23,7 +23,9 @@ mob/Frogman
 
 mob/proc/Zombie()
 	usr=src
-	spawn(30) Zombie()
+	if(icon_state != "dead")
+		spawn(30)
+			Zombie()
 	var/mob/m
 	for(var/mob/M in oview(10))
 		if(!istype(M,/mob/observer) && M.name!="Zombie"&&M.isMonster==0)
@@ -58,7 +60,9 @@ mob/proc/Zombie()
 				break
 mob/proc/Frog()
 	usr=src
-	spawn(20) Frog()
+	if(icon_state != "dead")
+		spawn(20)
+			Frog()
 	if (HP <= 0) return
 	var/mob/m
 	for(var/mob/M in oview(10))
@@ -84,7 +88,9 @@ mob/proc/Frog()
 		hearers(src)<<"<font color=green>Frogman says: [A]"
 mob/proc/msntr()
 	usr=src
-	spawn(10) msntr()
+	if(icon_state != "dead")
+		spawn(30)
+			msntr()
 	var/mob/m
 	for(var/mob/M in oview(5))
 		if(!istype(M,/mob/observer) && M.name!="[src.name]"&&M.isMonster==0)
@@ -126,7 +132,9 @@ mob/Demon
 
 mob/proc/Demon()
 	if(HP <= 0) return
-	spawn(5) Demon()
+	if(icon_state != "dead")
+		spawn(30)
+			Demon()
 	var/mob/m
 	for(var/mob/M in oview(10))
 		if(!istype(M,/mob/observer) && M.name!="Hell Spawn"&&M.isMonster==0)

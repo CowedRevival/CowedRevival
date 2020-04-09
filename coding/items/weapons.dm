@@ -375,27 +375,30 @@ item/weapon
 		icon_state = "shovel"
 		verb
 			dig_hole()
-				if(MapLayer(usr.z) < -4) return
-				if(istype(usr.loc, /turf/sand))
-					new/turf/digging(usr.loc)
-					usr.movable=1
-					sleep(40)
-					usr.movable=0
-					return
-				if(istype(usr.loc, /turf/path))
-					new/turf/digging(usr.loc)
-					usr.movable=1
-					sleep(40)
-					usr.movable=0
-					return
-				if(istype(usr.loc, /turf/grass))
-					new/turf/digging(usr.loc)
-					usr.movable=1
-					sleep(40)
-					usr.movable=0
-					return
+				if(usr.inHand(/item/weapon/shovel))
+					if(MapLayer(usr.z) < -4) return
+					if(istype(usr.loc, /turf/sand))
+						new/turf/digging(usr.loc)
+						usr.movable=1
+						sleep(40)
+						usr.movable=0
+						return
+					if(istype(usr.loc, /turf/path))
+						new/turf/digging(usr.loc)
+						usr.movable=1
+						sleep(40)
+						usr.movable=0
+						return
+					if(istype(usr.loc, /turf/grass))
+						new/turf/digging(usr.loc)
+						usr.movable=1
+						sleep(40)
+						usr.movable=0
+						return
+					else
+						return
 				else
-					return
+					usr.show_message("You need to be holding a shovel to do that!")
 	spear
 		icon_state = "spear"
 		attackpow=4

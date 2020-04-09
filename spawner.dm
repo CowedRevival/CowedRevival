@@ -32,12 +32,20 @@ obj/spawner
 			max_no_of_spawns = 3
 
 		Sheep_Spawner
+			icon = 'icons/Sheep.dmi'
 			animal_type = /animal/sheep
 			range = 3
 			max_no_of_spawns = 3
 
 		Pig_Spawner
+			icon = 'icons/Pig.dmi'
 			animal_type = /animal/pig
+			range = 3
+			max_no_of_spawns = 3
+
+		Wolf_Spawner
+			icon = 'icons/Wolf.dmi'
+			animal_type = /animal/wolf
 			range = 3
 			max_no_of_spawns = 3
 
