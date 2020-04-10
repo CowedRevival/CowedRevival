@@ -6,7 +6,7 @@ DIR: code coding coding\admin coding\admin\modules coding\animals coding\items c
 AUTO_FILE_DIR: ON
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 512.1488
-WINDOW: coding\mobs.dm;code\Monsters.dm;coding\items\misc.dm;coding\objs.dm;coding\items\weapons.dm;icons\Supplies.dmi;coding\animals\animals.dm;coding\game.dm;coding\Seasons.dm;coding\new_admin\global.dm;coding\admin.dm;coding\mobs\revive.dm;Cowed.dme
-FILE: Cowed.dme
+WINDOW: coding\mobs.dm;code\Monsters.dm;coding\items\misc.dm;coding\objs.dm;coding\items\weapons.dm;icons\Supplies.dmi;coding\animals\animals.dm;coding\game.dm;coding\Seasons.dm;coding\new_admin\global.dm;coding\admin.dm;coding\mobs\revive.dm;Cowed.dme;coding\world.dm
+FILE: coding\world.dm
 */
 // END_INTERNALS

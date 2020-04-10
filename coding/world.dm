@@ -3,7 +3,7 @@ world
 	name = "Cowed Revival"
 	view = "15x17"
 	hub = "CowedRevival.CowedRevival"
-	hub_password = "Me0iJYoCAn66Sx1H"
+	hub_password = "aeKOdHqB7pFsOH9n"
 	cache_lifespan = 0
 	mob = /mob/character_handling
 	turf = /turf/underground/dirtwall
