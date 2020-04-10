@@ -61,6 +61,7 @@
 #include "code\chests.dm"
 #include "code\Cowed.dm"
 #include "code\Crafting.dm"
+#include "code\Crafting_Buttons.dm"
 #include "code\dead stuff.dm"
 #include "code\dta_ckey2key.dm"
 #include "code\eating.sleeping and health.dm"

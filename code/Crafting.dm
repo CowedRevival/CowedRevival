@@ -1,28 +1,42 @@
-obj
-	var
-		Craftitem=1
+mob/startingverb/verb
+	Construct()
+		create_crafting()
+		winset(src,"crafting_window","is-visible=true")
 
 
-/*mob/startingverb/verb
-	Craft()
-		var/list/L = new/list()
-		for(var/item/I in usr.contents)
-			if(cequipped == I || bequipped == I || hequipped == I || fequipped == I || lhand == I || rhand == I) continue
-			L += I
-		var/item
-			craftA
-			craftB
-		craftA = input("Which item would you like to combine?", "Craft") as null|anything in L
-		if(craftA == null) return
+mob/proc/create_crafting()
 
-		if(craftA.stacked <= 1) L -= craftA
+	carpentry_button_list = new()
+	carpentry_button_list += new/button/carpentry/wood_armor()
+	carpentry_button_list += new/button/carpentry/wood_helmet()
+	carpentry_button_list += new/button/carpentry/wood_sword()
+	carpentry_button_list += new/button/carpentry/wood_shield()
+	carpentry_button_list += new/button/carpentry/wood_club()
+	carpentry_button_list += new/button/carpentry/hunting_spear()
+	carpentry_button_list += new/button/carpentry/primitive_halberd()
 
-		craftB = input("Which item would you like to combine with \the [craftA]", "Craft") as null|anything in L
-		if(craftB == null) return
+	var/grid_size = round(carpentry_button_list.len / 2) + 1
+	winset(src, "carpentry_pane.carpentry_grid", "cells=0x0")
+	winset(src, "carpentry_pane.carpentry_grid", "cells=2x[grid_size]")
 
-		CheckCraft(craftA, craftB)
+	var/grid_x = 1
+	var/grid_y = 1
+	for(var/button/I in carpentry_button_list)
+		src << output(I,"carpentry_pane.carpentry_grid:[grid_x], [grid_y]")
+		grid_x++
+		if(grid_x > 2)
+			grid_x = 1
+			grid_y++
 
-mob/proc/CheckCraft(item/A, item/B, reversed = 0)
+	/*src << output(new/button/carpentry/wood_armor,"carpentry_grid:1,1")
+	src << output(new/button/carpentry/wood_armor,"carpentry_grid:2,1")
+	src << output(new/button/carpentry/wood_armor,"carpentry_grid:1,2")
+	src << output(new/button/carpentry/wood_armor,"carpentry_grid:2,2")
+	src << output(new/button/carpentry/wood_armor,"carpentry_grid:1,3")*/
+
+mob/var/list/carpentry_button_list
+
+/*mob/proc/CheckCraft(item/A, item/B, reversed = 0)
 	if((!A || !B) || (A == B && A.stacked <= 1)) return
 	var/dont_check = 0
 	if(src.skills && src.skills.carpenting >= 35)

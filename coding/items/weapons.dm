@@ -405,8 +405,9 @@ item/weapon
 		two_handed = TRUE
 	halberd
 		icon_state = "halberd"
-		attackpow=6
+		attackpow=5
 		two_handed = TRUE
+		name = "primitive halberd"
 	whip
 		icon_state = "whip"
 		attackpow = 3

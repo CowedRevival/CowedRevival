@@ -891,6 +891,40 @@ window "admin/viewscreen"
 		highlight-color = #000000
 		is-list = true
 
+window "carpentry_pane"
+	elem "carpentry_pane"
+		type = MAIN
+		pos = 281,0
+		size = 320x288
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		border = sunken
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Carpentry"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "carpentry_grid"
+		type = GRID
+		pos = 0,0
+		size = 320x288
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		text-color = #6d4012
+		background-color = #ded5b6
+		border = sunken
+		drop-zone = false
+		saved-params = ""
+		cells = 1x1
+		current-cell = 1,1
+		show-lines = none
+		highlight-color = #000000
+
 window "character_creation"
 	elem "character_creation"
 		type = MAIN
@@ -1324,7 +1358,6 @@ window "character_handling"
 		size = 424x192
 		anchor1 = 50,0
 		anchor2 = 50,0
-		background-color = none
 		border = line
 		saved-params = "splitter"
 		left = "character_creation"
@@ -1474,7 +1507,6 @@ window "chat"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1494,6 +1526,56 @@ window "chat"
 		saved-params = ""
 		tabs = "outputwindow/both,outputwindow/ic,outputwindow/ooc"
 		current-tab = "outputwindow/both"
+
+window "crafting_window"
+	elem "crafting_window"
+		type = MAIN
+		pos = 281,0
+		size = 320x340
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Crafting"
+		can-resize = false
+	elem "lbl_requirement"
+		type = LABEL
+		pos = 0,320
+		size = 320x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		border = line
+		saved-params = ""
+		text = "Need:"
+	elem "label20"
+		type = LABEL
+		pos = 0,0
+		size = 320x32
+		anchor1 = none
+		anchor2 = none
+		font-size = 14
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = ""
+		text = "Crafting"
+	elem "crafting_tabs"
+		type = TAB
+		pos = 0,32
+		size = 320x288
+		anchor1 = none
+		anchor2 = none
+		text-color = #6d4012
+		background-color = #cdbf8f
+		saved-params = ""
+		tabs = "carpentry_pane, jewelsmithing_window, cooking_window, masonary_window"
+		current-tab = "carpentry_pane"
 
 window "default"
 	elem "default"

@@ -113,7 +113,7 @@ turf
 	underground
 		dirtwall
 			icon = 'icons/Turfs.dmi'
-			icon_state = "dirt wall"
+			icon_state = "dirtwall"
 			density = 1
 			opacity = 1
 			attack_hand(mob/M)
