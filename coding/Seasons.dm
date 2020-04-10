@@ -43,7 +43,7 @@ game
 					else I.invisibility = 101
 				else I.invisibility = 0
 
-			if(prob(20))
+			if(prob(50))
 				world << "<b>The moon has a strange glint tonight...</b>"
 				for(var/mob/M in world)
 					if(M.tag == "Skeleton")
@@ -82,5 +82,5 @@ obj
 admin/verb/next_month()
 	set category="Admin"
 	Month = 2
-	Day = 10
+	Day = 3
 	Hour = 23

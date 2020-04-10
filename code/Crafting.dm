@@ -1,7 +1,9 @@
 obj
 	var
 		Craftitem=1
-mob/startingverb/verb
+
+
+/*mob/startingverb/verb
 	Craft()
 		var/list/L = new/list()
 		for(var/item/I in usr.contents)
@@ -268,4 +270,4 @@ mob/proc/CheckCraft(item/A, item/B, reversed = 0)
 			src.show_message("<em><small>You smash your wheat with a sledgehammer to get <b>Flour</b>!</small></em>")
 
 	if(!reversed && !dont_check) //if not reversed yet, reverse it so the order doesn't matter
-		CheckCraft(B, A, 1)
+		CheckCraft(B, A, 1)*/

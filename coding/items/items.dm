@@ -52,8 +52,6 @@ item
 			if(get_dist(src,over_location)<=1&&get_dist(usr,src)<=1&&get_dist(usr,over_location)<=1)
 				Move(over_location)
 				src.dropped(usr)
-		else if(istype(over_object, /item) && get_dist(usr, over_object) <= 1)
-			usr.CheckCraft(src, over_object)
 		suffix = "x[stacked]"
 	proc
 		getting()

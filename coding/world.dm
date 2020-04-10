@@ -3,7 +3,7 @@ world
 	name = "Cowed Revival"
 	view = "15x17"
 	hub = "CowedRevival.CowedRevival"
-	hub_password = "aeKOdHqB7pFsOH9n"
+	hub_password = "CijzH7cDKwBr9Kio"
 	cache_lifespan = 0
 	mob = /mob/character_handling
 	turf = /turf/underground/dirtwall
@@ -17,15 +17,15 @@ world
 		. = ..()
 		LoadCowed()
 
-		Month = rand(2, 3)
-		Day = rand(1, 10)
+		Month = 2
+		Day = rand(1, 3)
 		Hour = rand(8, 14)
 		if(1 || !world.port)
 			gametype = "normal" //testing
 			game.Start()
 		else
 		//	gametype = "normal" //event
-		//	game.Start()
+		//	game.Start()h
 		//	return
 
 			//game hasn't started yet; let's wait for players

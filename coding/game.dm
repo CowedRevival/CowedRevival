@@ -5,7 +5,7 @@ game
 			kingdoms
 			reboot_votes
 		started = 0
-		reboot_timer = 100000
+		reboot_timer = 42000
 		reboot_timer_critical
 		reboot_timer_old
 	proc
@@ -62,7 +62,7 @@ game
 				if(!(life_time % 3000))
 					for(var/ban_record/B in bans) B.check_ban()
 
-				if(!(life_time % 200) && Hour != -1)
+				if(!(life_time % 500) && Hour != -1)
 					Hour++
 					TimeCheck()
 					//sleep(200)
@@ -72,7 +72,7 @@ game
 				Hour = 0
 				world << "<b>The wolves howel at midnight.</b>"
 			if(!Hour) Day++
-			if(Day > 10)
+			if(Day > 3)
 				Month++
 				world << "<b>Another month passes...</b>"
 				Day = 1
