@@ -717,7 +717,6 @@ obj
 			return ..()
 		proc
 			ActionLoop(mob/M)
-				world << "OHNOOO"
 				if(M.inHand(/item/weapon/axe))
 					while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/axe))
 						icon_state = "[current_season_state]cut [icon_state_base]"

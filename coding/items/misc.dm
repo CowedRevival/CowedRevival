@@ -1540,7 +1540,7 @@ item/misc
 	bones
 		skull
 			icon='icons/Supplies.dmi'
-			icon_state = "skull"
+			icon_state = "cow_skull"
 			stacked = -1
 		bone
 			icon='icons/Supplies.dmi'

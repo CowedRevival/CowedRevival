@@ -43,8 +43,8 @@ game
 					else I.invisibility = 101
 				else I.invisibility = 0
 
-			if(prob(10))
-				world << "<b>An unholy glow shines from the moon tonight...</b>"
+			if(prob(20))
+				world << "<b>The moon has a strange glint tonight...</b>"
 				for(var/mob/M in world)
 					if(M.tag == "Skeleton")
 						M.MHP = 250
