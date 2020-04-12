@@ -1,12 +1,12 @@
 // BEGIN_INTERNALS
 /*
 MAP_ZOOM: 1.000
-LAST_COMPILE_TIME: 1586550424
-DIR: code coding coding\admin coding\admin\modules coding\animals coding\items coding\mobs coding\mobs\AI coding\new_admin coding\new_admin\panel coding\objs coding\objs\families coding\snippets coding\spells coding\tardis icons lib lib\Test lib\Test\demo maps 
+LAST_COMPILE_TIME: 1586720456
+DIR: code coding coding\admin coding\admin\modules coding\animals coding\items coding\mobs coding\mobs\AI coding\new_admin coding\new_admin\panel coding\objs coding\objs\families coding\snippets coding\spells coding\tardis icons lib lib\Test lib\Test\demo 
 AUTO_FILE_DIR: ON
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 512.1488
-WINDOW: coding\mobs.dm;code\Monsters.dm;coding\items\misc.dm;coding\objs.dm;coding\items\weapons.dm;icons\Supplies.dmi;coding\animals\animals.dm;coding\game.dm;coding\Seasons.dm;coding\new_admin\global.dm;coding\admin.dm;coding\mobs\revive.dm;Cowed.dme;coding\world.dm;code\Crafting.dm;code\Crafting_Buttons.dm;maps\cowmalot.dmm;skin.dmf;icons\mob.dmi;icons\items.dmi;coding\turfs.dm;code\BuiltThings.dm;icons\Turfs.dmi;icons\wood.dmi;code\chests.dm
-FILE: coding\items\misc.dm
+WINDOW: icons\recolor_1.dmi;icons\r_items.dmi;coding\mobs.dm;coding\classes.dm;coding\items\armour.dm;coding\items\misc.dm;coding\berry_effects.dm;coding\objs\vein.dm
+FILE: coding\classes.dm
 */
 // END_INTERNALS

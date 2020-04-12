@@ -23,14 +23,25 @@ obj
 					else if(icon_state == "corn_growth_3")
 						if(usr.CheckGhost() || usr.corpse) return
 						icon_state = "corn_growth_2"
+						var/farmer_yield = 0
+						var/farmer_range = 3
+						if(usr.skills.farming == 100)
+							farmer_yield += 1
+							farmer_range += 1
+						if(usr.skills.farming >= 75)
+							farmer_range += 1
+						if(usr.skills.farming >= 50)
+							farmer_yield += 1
+						if(usr.skills.farming >= 25)
+							farmer_range += 1
 						var/item/misc/food/Corn/I = locate() in usr
 						if(I)
-							I.stacked += rand(1,3)
+							I.stacked += rand(1,farmer_range) + farmer_yield
 							I.suffix = "x[I.stacked]"
 						else
 							usr.contents += new/item/misc/food/Corn
 							var/item/misc/food/Corn/J = locate() in usr
-							J.stacked += rand(0,2)
+							J.stacked += rand(0,(farmer_range - 1)) + farmer_yield
 							J.suffix = "x[J.stacked]"
 						spawn(length)
 							if(!src) return
@@ -56,14 +67,25 @@ obj
 					else if(icon_state == "wm_growth_3")
 						if(usr.CheckGhost() || usr.corpse) return
 						icon_state = "wm_growth_2"
+						var/farmer_yield = 0
+						var/farmer_range = 3
+						if(usr.skills.farming == 100)
+							farmer_yield += 1
+							farmer_range += 1
+						if(usr.skills.farming >= 75)
+							farmer_range += 1
+						if(usr.skills.farming >= 50)
+							farmer_yield += 1
+						if(usr.skills.farming >= 25)
+							farmer_range += 1
 						var/item/misc/food/Watermelon/I = locate() in usr
 						if(I)
-							I.stacked += rand(1,3)
+							I.stacked += rand(1,farmer_range) + farmer_yield
 							I.suffix = "x[I.stacked]"
 						else
 							usr.contents += new/item/misc/food/Watermelon
 							var/item/misc/food/Watermelon/J = locate() in usr
-							J.stacked += rand(0,2)
+							J.stacked += rand(0,(farmer_range - 1)) + farmer_yield
 							J.suffix = "x[J.stacked]"
 						spawn(length)
 							if(!src) return
@@ -88,14 +110,25 @@ obj
 							del src
 					else if(icon_state == "carrot_growth_3")
 						if(usr.CheckGhost() || usr.corpse) return
+						var/farmer_yield = 0
+						var/farmer_range = 3
+						if(usr.skills.farming == 100)
+							farmer_yield += 1
+							farmer_range += 1
+						if(usr.skills.farming >= 75)
+							farmer_range += 1
+						if(usr.skills.farming >= 50)
+							farmer_yield += 1
+						if(usr.skills.farming >= 25)
+							farmer_range += 1
 						var/item/misc/food/Carrot/I = locate() in usr
 						if(I)
-							I.stacked += rand(1,3)
+							I.stacked += rand(1,farmer_range) + farmer_yield
 							I.suffix = "x[I.stacked]"
 						else
 							usr.contents += new/item/misc/food/Carrot
 							var/item/misc/food/Carrot/J = locate() in usr
-							J.stacked += rand(0,2)
+							J.stacked += rand(0,(farmer_range - 1)) + farmer_yield
 							J.suffix = "x[J.stacked]"
 						del src
 					..()
@@ -148,14 +181,25 @@ obj
 							del src
 					else if(icon_state == "potato_growth_3")
 						if(usr.CheckGhost() || usr.corpse) return
+						var/farmer_yield = 0
+						var/farmer_range = 3
+						if(usr.skills.farming == 100)
+							farmer_yield += 1
+							farmer_range += 1
+						if(usr.skills.farming >= 75)
+							farmer_range += 1
+						if(usr.skills.farming >= 50)
+							farmer_yield += 1
+						if(usr.skills.farming >= 25)
+							farmer_range += 1
 						var/item/misc/food/Potato/I = locate() in usr
 						if(I)
-							I.stacked += rand(1,3)
+							I.stacked += rand(1,farmer_range) + farmer_yield
 							I.suffix = "x[I.stacked]"
 						else
 							usr.contents += new/item/misc/food/Potato
 							var/item/misc/food/Potato/J = locate() in usr
-							J.stacked += rand(0,2)
+							J.stacked += rand(0,(farmer_range - 1)) + farmer_yield
 							J.suffix = "x[J.stacked]"
 						del src
 					..()
@@ -179,14 +223,25 @@ obj
 					else if(icon_state == "tomato_growth_3")
 						if(usr.CheckGhost() || usr.corpse) return
 						icon_state = "tomato_growth_2"
+						var/farmer_yield = 0
+						var/farmer_range = 3
+						if(usr.skills.farming == 100)
+							farmer_yield += 1
+							farmer_range += 1
+						if(usr.skills.farming >= 75)
+							farmer_range += 1
+						if(usr.skills.farming >= 50)
+							farmer_yield += 1
+						if(usr.skills.farming >= 25)
+							farmer_range += 1
 						var/item/misc/food/Tomato/I = locate() in usr
 						if(I)
-							I.stacked += rand(1,3)
+							I.stacked += rand(1,farmer_range) + farmer_yield
 							I.suffix = "x[I.stacked]"
 						else
 							usr.contents += new/item/misc/food/Tomato
 							var/item/misc/food/Tomato/J = locate() in usr
-							J.stacked += rand(0,2)
+							J.stacked += rand(0,(farmer_range - 1)) + farmer_yield
 							J.suffix = "x[J.stacked]"
 						spawn(length)
 							if(!src) return
@@ -212,14 +267,25 @@ obj
 					else if(icon_state == "wheat_growth_3")
 						if(usr.CheckGhost() || usr.corpse) return
 						icon_state = "wheat_growth_2"
+						var/farmer_yield = 0
+						var/farmer_range = 3
+						if(usr.skills.farming == 100)
+							farmer_yield += 1
+							farmer_range += 1
+						if(usr.skills.farming >= 75)
+							farmer_range += 1
+						if(usr.skills.farming >= 50)
+							farmer_yield += 1
+						if(usr.skills.farming >= 25)
+							farmer_range += 1
 						var/item/misc/food/Wheat/I = locate() in usr
 						if(I)
-							I.stacked += rand(1,3)
+							I.stacked += rand(1,farmer_range) + farmer_yield
 							I.suffix = "x[I.stacked]"
 						else
 							usr.contents += new/item/misc/food/Wheat
 							var/item/misc/food/Wheat/J = locate() in usr
-							J.stacked += rand(0,2)
+							J.stacked += rand(0,(farmer_range)) + farmer_yield
 							J.suffix = "x[J.stacked]"
 						spawn(length)
 							if(!src) return

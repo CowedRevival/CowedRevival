@@ -741,14 +741,14 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 		peasants
 			craftsman
 				icon_state = "peasant_woodworker"
-				desc = "Craftsman can create things such as shields, helmets, etc! Do you want to be a woodcrafter?"
+				desc = "Craftsman have basic knowledge in smithing! Do you want to be a laborer?"
 				amount = -1
 				class_id = "peasant_craftsman"
 				Selected(mob/M)
 					M.chosen = "woodworker"
 					M.contents += new/item/armour/body/woodcrafter_cloak(M)
 
-					M.skills.carpenting = 55
+					M.skills.smithing = 25
 					M.skills.recycling = 35
 
 					return 2
@@ -759,8 +759,8 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 				class_id = "peasant_labourer"
 				Selected(mob/M)
 					M.chosen = "labourer"
-					M.skills.carpenting = 35
-					M.skills.mining = 55
+					M.skills.smithing = 10
+					M.skills.mining = 20
 					M.skills.recycling = 35
 					M.contents += new/item/armour/hat/pez_hat(M)
 					M.contents += new/item/armour/body/pez_cloths(M)
@@ -787,8 +787,7 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					M.contents += new/item/armour/hat/farmer_hat(M)
 					M.contents += new/item/armour/body/farmer_cloths(M)
 					M.contents += new/item/armour/body/gatherer_garb(M)
-					M.skills.gathering = 55
-					M.skills.fishing = 40
+					M.skills.farming = 55
 					spawn(10) //wait for teleport
 						for(var/i = 1 to 2)
 							var/animal/pig/A = new(M.loc)
@@ -804,7 +803,7 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 				class_id = "peasant_fisherman"
 				Selected(mob/M)
 					M.chosen = "fisherman"
-					M.skills.fishing = 55
+					M.skills.fishing = 60
 					M.contents += new/item/armour/hat/fisherman_hat(M)
 					M.contents += new/item/armour/body/pez_cloths(M)
 					M.contents += new/item/weapon/fishing_rod(M)
@@ -818,6 +817,7 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					M.chosen = "tailor"
 					M.contents += new/item/armour/body/tailor(M)
 					M.contents += new/item/misc/wool{stacked=8}
+					M.skills.tailoring = 50
 					return 2
 		special
 			zeth
@@ -865,9 +865,8 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					M.contents += new/item/armour/body/blacksmith_cloths(M)
 
 					M.contents += new/item/misc/gold{stacked=30}(M)
-					M.skills.carpenting = 75
 					M.skills.recycling = 55
-					M.skills.smithing = 50
+					M.skills.smithing = 75
 					return 2
 				New()
 					..()
@@ -939,9 +938,13 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					M.contents += new/item/armour/cloak/healer_cloths(M)
 					M.contents += new/item/armour/body/doctor(M)
 					M.contents += new/item/armour/hat/doctor_hat(M)
-					M.contents += new/item/misc/books/Healer(M)
+					//M.contents += new/item/misc/books/Healer(M)
 					M.contents += new/item/armour/hat/pez_hat(M)
 					M.contents += new/item/armour/body/pez_cloths(M)
+					M.contents += new/item/misc/new_berries/glass_vial
+
+					M.skills.medicine = 100
+					M.skills.farming = 50
 
 					return 2
 				New()

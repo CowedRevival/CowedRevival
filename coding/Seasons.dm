@@ -8,6 +8,7 @@ game
 	TimeCheck()
 		..()
 		var/season_change = 0
+
 		if(Month == 3 && Day == 1 && Hour == 0)//Autumn
 			current_season_state = "autumn "
 			season_change = 1
@@ -21,8 +22,6 @@ game
 			season_change = 1
 
 		if(season_change == 1) //Season Change Code
-			for(var/obj/spawner/I in world)
-				I.Respawn()
 
 			for(var/obj/tree/I in world)
 				I.icon_state = current_season_state + I.icon_state_base
@@ -64,6 +63,8 @@ game
 		if(Hour == 0)
 			for(var/obj/tree/apple_tree/I in world)
 				if(prob(20)) I.DropApples()
+			for(var/obj/spawner/I in world)
+				if(prob(50)) I.Respawn()
 
 obj
 	tree

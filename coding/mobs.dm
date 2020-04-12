@@ -5,14 +5,15 @@ mob_effects
 		alcohol = 0
 mob_skills
 	var
-		carpenting = 0
-		hunting = 35
-		gathering = 35
-		fishing = 35
-		mining = 35
+		hunting = 0
+		farming = 0
+		fishing = 0
+		mining = 0
 		recycling = 0
 		looting = 35
 		smithing = 0
+		tailoring = 0
+		medicine = 0
 
 mob
 	anchored = 0
@@ -556,14 +557,13 @@ mob
 			if(skills)
 				stat("")
 				stat("<b>Skills</b>")
-				stat("Carpenting", "[skills.carpenting]/100")
-				//stat("Hunting", "[skills.hunting]/85")
-				stat("Gathering", "[skills.gathering]/100")
+				stat("Hunting", "[skills.hunting]/100")
+				stat("Gathering", "[skills.farming]/100")
 				stat("Fishing", "[skills.fishing]/100")
 				stat("Mining", "[skills.mining]/100")
-				//stat("Recycling", "[skills.recycling]/85")
-				stat("Looting", "[skills.looting]/100")
 				stat("Smithing", "[skills.smithing]/100")
+				stat("Medicine", "[skills.medicine]/100")
+				stat("Tailoring", "[skills.tailoring]/100")
 			stat("")
 			stat("<b>Game Information</b>")
 			stat("Mode", gametype)
@@ -635,23 +635,45 @@ mob
 		usr.movable=1
 		sleep(40)
 		usr.movable=0
+		var/hunter_yield = 0
+		var/hunter_range = 3
+		if(M.skills.hunting == 100)
+			hunter_yield += 1
+			hunter_range +=1
+		if(M.skills.hunting == 75)
+			hunter_range +=1
+		if(M.skills.hunting == 50)
+			hunter_yield += 1
+			hunter_range +=1
+		if(M.skills.hunting == 25)
+			hunter_range +=1
+		if(M.skills.hunting == 10)
+			hunter_range +=1
+
 		if(key)
 			var/item/misc/food/Strange_Meat/MT = new(loc)
-			MT.stacked = rand(1,3)
+			MT.stacked = rand(1,hunter_range) + hunter_yield
 			var/item/misc/bones/bone/B = new(loc)
-			B.stacked = rand(1,3)
+			B.stacked = rand(1,hunter_range) + hunter_yield
 			var/item/misc/bones/skull/S = new(loc)
 			S.name = "[M.name]'s Skull"
 		else if(istype(src, /mob/Frogman))
 			var/item/misc/food/Frog_Meat/meat = new(loc)
-			meat.stacked = rand(1,3)
+			meat.stacked = rand(1,hunter_range) + hunter_yield
 			var/item/misc/bones/bone/bone = new(loc)
-			bone.stacked = rand(1,3)
+			bone.stacked = rand(1,hunter_range) + hunter_yield
+		else if(istype(src, /animal/wolf))
+			var/item/misc/food/Meat/meat = new(loc)
+			meat.stacked = rand(1,hunter_range) + hunter_yield
+			var/item/misc/bones/bone/bone = new(loc)
+			bone.stacked = rand(1,hunter_range) + hunter_yield
+			var/item/misc/hide/hide = new(loc)
+			hide.stacked = rand(1,hunter_range) + hunter_yield
 		else
 			var/item/misc/food/Meat/meat = new(loc)
-			meat.stacked = rand(1,3)
+			meat.stacked = rand(1,hunter_range) + hunter_yield
 			var/item/misc/bones/bone/bone = new(loc)
-			bone.stacked = rand(1,3)
+			bone.stacked = rand(1,hunter_range) + hunter_yield
 		for(var/item/I in src)
 			I.loc = loc
 		del(src)
@@ -1196,10 +1218,6 @@ mob
 			corpse = 1
 			for(var/item/misc/waterstone/O in world)
 				if(O.active && O.lastTouched == src) O.toggle()
-
-			if(istype(M, /animal))
-				var/animal/animal = M
-				animal.add_contents()
 
 			if(istype(M, /mob/Shroom))
 				if(prob(30)) M.contents += new/item/armour/body/mushroom_suit

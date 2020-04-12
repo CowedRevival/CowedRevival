@@ -77,9 +77,6 @@ world
 
 		berries = Make_Berry_Book()
 
-		for(var/obj/spawner/I in world)
-			I.Respawn()
-
 
 /*		var/bbeff = pick(effects)
 		bbeffect=bbeff

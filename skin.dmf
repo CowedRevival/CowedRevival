@@ -891,40 +891,6 @@ window "admin/viewscreen"
 		highlight-color = #000000
 		is-list = true
 
-window "carpentry_pane"
-	elem "carpentry_pane"
-		type = MAIN
-		pos = 281,0
-		size = 320x288
-		anchor1 = none
-		anchor2 = none
-		background-color = #ded5b6
-		border = sunken
-		saved-params = "pos;size;is-minimized;is-maximized"
-		title = "Carpentry"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
-		is-pane = true
-	elem "carpentry_grid"
-		type = GRID
-		pos = 0,0
-		size = 320x288
-		anchor1 = none
-		anchor2 = none
-		font-family = "Papyrus"
-		text-color = #6d4012
-		background-color = #ded5b6
-		border = sunken
-		drop-zone = false
-		saved-params = ""
-		cells = 1x1
-		current-cell = 1,1
-		show-lines = none
-		highlight-color = #000000
-
 window "character_creation"
 	elem "character_creation"
 		type = MAIN
@@ -1527,11 +1493,44 @@ window "chat"
 		tabs = "outputwindow/both,outputwindow/ic,outputwindow/ooc"
 		current-tab = "outputwindow/both"
 
+window "construction_pane"
+	elem "construction_pane"
+		type = MAIN
+		pos = 281,0
+		size = 480x288
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Construction"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "construction_grid"
+		type = GRID
+		pos = 0,0
+		size = 480x288
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		text-color = #6d4012
+		background-color = #ded5b6
+		border = sunken
+		drop-zone = false
+		saved-params = ""
+		cells = 1x1
+		current-cell = 1,1
+		show-lines = none
+		highlight-color = #000000
+
 window "crafting_window"
 	elem "crafting_window"
 		type = MAIN
 		pos = 281,0
-		size = 320x340
+		size = 480x340
 		anchor1 = none
 		anchor2 = none
 		background-color = #ded5b6
@@ -1542,7 +1541,7 @@ window "crafting_window"
 	elem "lbl_requirement"
 		type = LABEL
 		pos = 0,320
-		size = 320x20
+		size = 480x20
 		anchor1 = none
 		anchor2 = none
 		font-family = "Papyrus"
@@ -1556,7 +1555,7 @@ window "crafting_window"
 	elem "label20"
 		type = LABEL
 		pos = 0,0
-		size = 320x32
+		size = 480x32
 		anchor1 = none
 		anchor2 = none
 		font-size = 14
@@ -1564,18 +1563,18 @@ window "crafting_window"
 		text-color = #6d4012
 		background-color = #ded5b6
 		saved-params = ""
-		text = "Crafting"
+		text = "Building/Crafting"
 	elem "crafting_tabs"
 		type = TAB
 		pos = 0,32
-		size = 320x288
+		size = 480x288
 		anchor1 = none
 		anchor2 = none
 		text-color = #6d4012
 		background-color = #cdbf8f
 		saved-params = ""
-		tabs = "carpentry_pane, jewelsmithing_window, cooking_window, masonary_window"
-		current-tab = "carpentry_pane"
+		tabs = "items_pane, equipment_pane, construction_pane"
+		current-tab = "items_pane"
 
 window "default"
 	elem "default"
@@ -1704,10 +1703,44 @@ window "default/map"
 		saved-params = ""
 		icon-size = 32
 
+window "equipment_pane"
+	elem "equipment_pane"
+		type = MAIN
+		pos = 281,0
+		size = 480x288
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		border = sunken
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Equipment"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "equipment_grid"
+		type = GRID
+		pos = 0,0
+		size = 480x288
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		text-color = #6d4012
+		background-color = #ded5b6
+		border = sunken
+		drop-zone = false
+		saved-params = ""
+		cells = 1x1
+		current-cell = 1,1
+		show-lines = none
+		highlight-color = #000000
+
 window "family"
 	elem "family"
 		type = MAIN
-		pos = 316,49
+		pos = 281,0
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
@@ -1722,6 +1755,7 @@ window "family"
 		size = 76x28
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "is-checked"
 		text = "Shop"
 		command = ""
@@ -1731,6 +1765,7 @@ window "family"
 		size = 76x28
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "is-checked"
 		text = "Private Forum"
 		command = ""
@@ -1740,6 +1775,7 @@ window "family"
 		size = 76x28
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "is-checked"
 		text = "Ranks"
 		command = ""
@@ -1749,6 +1785,7 @@ window "family"
 		size = 76x28
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "is-checked"
 		text = "Members"
 		command = ""
@@ -1758,6 +1795,7 @@ window "family"
 		size = 76x28
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "is-checked"
 		text = "General"
 		command = ""
@@ -1767,6 +1805,7 @@ window "family"
 		size = 624x424
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = none
 		saved-params = ""
 
 window "info"
@@ -1863,6 +1902,39 @@ window "boat_control"
 		text = ""
 		command = ""
 		is-flat = true
+
+window "items_pane"
+	elem "items_pane"
+		type = MAIN
+		pos = 281,0
+		size = 480x288
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Items"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "items_grid"
+		type = GRID
+		pos = 0,0
+		size = 480x288
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		text-color = #6d4012
+		background-color = #ded5b6
+		border = sunken
+		drop-zone = false
+		saved-params = ""
+		cells = 1x1
+		current-cell = 1,1
+		show-lines = none
+		highlight-color = #000000
 
 window "outputwindow/both"
 	elem "outputwindow/both"

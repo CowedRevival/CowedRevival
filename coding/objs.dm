@@ -725,9 +725,8 @@ obj
 
 						if(M && M.current_action == src && loc && wood > 0)
 							var
-								amount = wood >= 2 && M.skills && M.skills.gathering >= 35 && prob(M.skills.gathering) ? 2 : 1
+								amount = 1
 								item/misc/wood/I = locate() in M
-							if(prob(1) && M.skills && M.skills.gathering >= 35 && M.skills.gathering < 100) M.skills.gathering++
 							if(I) I.stacked += amount
 							else
 								I = new(M)
@@ -749,9 +748,8 @@ obj
 
 						if(M && M.current_action == src && loc && wood > 0)
 							var
-								amount = wood >= 2 && M.skills && M.skills.gathering >= 35 && prob(M.skills.gathering) ? 2 : 1
+								amount = 1
 								item/misc/tree_root/I = locate() in M
-							if(prob(1) && M.skills && M.skills.gathering >= 35 && M.skills.gathering < 100) M.skills.gathering++
 							if(I)
 								I.stacked += amount
 								I.suffix = "x[I.stacked]"
@@ -853,9 +851,8 @@ obj
 
 						if(M && M.current_action == src && loc && wood > 0)
 							var
-								amount = wood >= 2 && M.skills && M.skills.gathering >= 35 && prob(M.skills.gathering) ? 2 : 1
+								amount = 1
 								item/misc/wood/I = locate() in M
-							if(prob(1) && M.skills && M.skills.gathering >= 35 && M.skills.gathering < 100) M.skills.gathering++
 							if(I) I.stacked += amount
 							else
 								I = new(M)
@@ -877,9 +874,8 @@ obj
 
 						if(M && M.current_action == src && loc && wood > 0)
 							var
-								amount = wood >= 2 && M.skills && M.skills.gathering >= 35 && prob(M.skills.gathering) ? 2 : 1
+								amount = 1
 								item/misc/tree_root/I = locate() in M
-							if(prob(1) && M.skills && M.skills.gathering >= 35 && M.skills.gathering < 100) M.skills.gathering++
 							if(I)
 								I.stacked += amount
 								I.suffix = "x[I.stacked]"
@@ -918,9 +914,8 @@ obj
 
 					if(M.current_action == src && loc && wood > 0)
 						var
-							amount = wood >= 2 && M.skills && M.skills.gathering >= 35 && prob(M.skills.gathering) ? 2 : 1
+							amount = 1
 							item/misc/wood/I = locate() in M
-						if(prob(1) && M.skills && M.skills.gathering >= 35 && M.skills.gathering < 100) M.skills.gathering++
 						if(I) I.stacked += amount
 						else
 							I = new(M)

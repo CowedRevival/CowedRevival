@@ -89,7 +89,7 @@ item/armour
 			name = "Peasant garments"
 		woodcrafter_cloak
 			icon_state = "woodcrafter"
-			name = "Woodcrafter cloak"
+			name = "Craftsman cloak"
 			suffix = ""
 		wood_torso
 			armour = 1

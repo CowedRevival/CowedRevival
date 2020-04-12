@@ -2,6 +2,11 @@ obj/anvil
 	icon = 'icons/Anvil.dmi'
 	anchored = 0
 	density = 1
+	verb/toggle_anchor()
+		set src in view(1)
+		if(anchored) anchored = 0
+		else anchored = 1
+
 	attack_hand(mob/M)
 		if(M.shackled || M.movable || M.restrained() || M.icon_state == "ghost") return
 		var/list/L = new/list()

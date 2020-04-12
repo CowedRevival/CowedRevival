@@ -497,8 +497,7 @@ turf
 							M.contents += new/item/misc/food/Shark
 						else
 							if(prob(99)) M << "\blue You fail to catch anything!"
-							else if((M.skills && M.skills.gathering > 35 && prob(M.skills.gathering)) || M.mage || prob(50))
-								if(prob(1) && M.skills && M.skills.gathering >= 35 && M.skills.gathering < 100) M.skills.gathering++
+							else if(M.mage || prob(25))
 								M << "\blue You find a water stone!"
 								M.contents += new/item/misc/waterstone //indeed.
 							else

@@ -96,8 +96,8 @@ item/misc
 		verb
 			create_toga()
 				set category = "wool"
-				if(usr.chosen != "tailor")
-					usr << "<tt>You can't use this; you must be a tailor!</tt>"
+				if(usr.skills.tailoring < 25)
+					usr << "<tt>You must have 25 tailoring skill!</tt>"
 					return
 				if(stacked <= 5)
 					usr << "<tt>You need more wool!</tt>"
@@ -111,10 +111,11 @@ item/misc
 				usr.show_message("<tt>You create a toga!</tt>")
 				stacked -= 5
 				if(stacked <= 0) Move(null, forced = 1)
+				if(usr.skills.tailoring < 100) usr.skills.tailoring++
 			create_wedding_gown()
 				set category = "wool"
-				if(usr.chosen != "tailor")
-					usr << "<tt>You can't use this; you must be a tailor!</tt>"
+				if(usr.skills.tailoring < 75)
+					usr << "<tt>You must have 75 tailoring skill!</tt>"
 					return
 				if(stacked <= 10)
 					usr << "<tt>You need more wool!</tt>"
@@ -123,10 +124,11 @@ item/misc
 				usr.show_message("<tt>You create a wedding gown!</tt>")
 				stacked -= 10
 				if(stacked <= 0) Move(null, forced = 1)
+				if(usr.skills.tailoring < 100) usr.skills.tailoring++
 			create_herald_clothes()
 				set category = "wool"
-				if(usr.chosen != "tailor")
-					usr << "<tt>You can't use this; you must be a tailor!</tt>"
+				if(usr.skills.tailoring < 50)
+					usr << "<tt>You must have 50 tailoring skill!</tt>"
 					return
 				if(stacked <= 10)
 					usr << "<tt>You need more wool!</tt>"
@@ -135,11 +137,9 @@ item/misc
 				usr.show_message("<tt>You create a set of herald clothes!</tt>")
 				stacked -= 10
 				if(stacked <= 0) Move(null, forced = 1)
+				if(usr.skills.tailoring < 100) usr.skills.tailoring++
 			create_shirt()
 				set category = "wool"
-				if(usr.chosen != "tailor")
-					usr << "<tt>You can't use this; you must be a tailor!</tt>"
-					return
 				if(stacked <= 5)
 					usr << "<tt>You need more wool!</tt>"
 					return
@@ -151,6 +151,7 @@ item/misc
 				usr.show_message("<tt>You create a shirt!</tt>")
 				stacked -= 5
 				if(stacked <= 0) Move(null, forced = 1)
+				if(usr.skills.tailoring < 100) usr.skills.tailoring++
 	seeds
 		icon='icons/Supplies.dmi'
 		icon_state="seeds"
@@ -631,7 +632,7 @@ item/misc
 		icon = 'icons/wood.dmi'
 		icon_state = "4"
 		stacked = 1
-		verb
+		/*verb
 			build_stone_wall()
 				set category = "build"
 				if(!build(usr, 0, /turf/stone/stone_wall, /obj/stone/stone_wall)) return
@@ -676,12 +677,12 @@ item/misc
 			build_gravestone()
 				set category = "build"
 				if(!build(usr, 0, /obj/gravestone, not_on_floor=0)) return
-				if(--stacked <= 0) Move(null, forced = 1)
+				if(--stacked <= 0) Move(null, forced = 1)*/
 	wood
 		icon = 'icons/wood.dmi'
 		icon_state = "1"
 		stacked = 1
-		verb
+		/*verb
 			create_paper()
 				set category = "build"
 				new/item/misc/paper(usr)
@@ -883,7 +884,7 @@ item/misc
 					else
 						return
 				if(--stacked <= 0) Move(null, forced = 1)
-				suffix = "x[stacked]"
+				suffix = "x[stacked]"*/
 /*	berrys
 		icon = 'icons/Bushs.dmi'
 		stacked = 1
@@ -998,12 +999,6 @@ item/misc
 				if(--stacked <= 0) Move(null, forced = 1)
 				else suffix = "x[stacked]"
 			else return ..()
-		verb/Make_Anvil()
-			set name = "make anvil"
-			if(!(src in usr.contents)) return ..()
-			new/obj/anvil(usr.loc)
-			if(--stacked <= 0) Move(null, forced = 1)
-			else suffix = "x[stacked]"
 
 	iron_ingot
 		name = "Iron Ingot"
@@ -1184,14 +1179,6 @@ item/misc
 		icon='icons/ores_and_veins.dmi'
 		icon_state="molten glass"
 		stacked = 1
-
-		verb/Make_Vial()
-			set name = "make vial"
-			if(!(src in usr.contents)) return ..()
-			usr.contents += new/item/misc/new_berries/glass_vial()
-			if(--stacked <= 0) Move(null, forced = 1)
-			else suffix = "x[stacked]"
-
 
 //
 	key_mold
@@ -2394,6 +2381,20 @@ item/misc
 			eat()
 				if(usr.CheckGhost() || usr.corpse) return
 				consume(usr)
+				if(usr.skills.medicine < 100) usr.skills.medicine++
+
+			examine()
+				var/possible_type = ""
+				if(prob(usr.skills.medicine)) possible_type = Effects.name
+				else
+					if(prob(16)) possible_type = "Poison"
+					else if(prob(16)) possible_type = "Sleep"
+					else if(prob(16)) possible_type = "Caffeine"
+					else if(prob(16)) possible_type = "Hunger"
+					else if(prob(16)) possible_type = "Alcohol"
+					else possible_type = "Food"
+				usr << "\blue This berry could have the effect of [possible_type]!"
+
 		proc
 			consume(mob/M)
 				hearers(M) << "\blue [M.name] eats the berry."
@@ -2450,6 +2451,17 @@ item/misc
 					icon_state = "glass_vial"
 					verbs -= /item/misc/new_berries/glass_vial/verb/mix_into
 					verbs -= /item/misc/new_berries/glass_vial/verb/drink
+			examine()
+				var/possible_type = ""
+				if(prob(usr.skills.medicine)) possible_type = Effects.name
+				else
+					if(prob(16)) possible_type = "Poison"
+					else if(prob(16)) possible_type = "Sleep"
+					else if(prob(16)) possible_type = "Caffeine"
+					else if(prob(16)) possible_type = "Hunger"
+					else if(prob(16)) possible_type = "Alcohol"
+					else possible_type = "Food"
+				usr << "\blue This vial could have the effect of [possible_type]!"
 
 			consume(mob/M)
 				hearers(M) << "\blue [M.name] drinks the vial."

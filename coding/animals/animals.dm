@@ -120,7 +120,10 @@ animal
 					if(HP <= 0) return
 					if(!enemy)
 						var/smallest_dist = 999
-						for(var/mob/I in view())
+						var/view_distance = 10
+						if(istype(src, /animal/wolf) && Hour >= 20 || istype(src, /animal/wolf) && Hour <= 4)
+							view_distance = 40
+						for(var/mob/I in view(view_distance))
 							var/dist = get_dist(src, I)
 							if(dist < smallest_dist && !istype(I, src) && !istype(I, /mob/observer) && I.HP > 0)
 								smallest_dist = dist
@@ -177,12 +180,6 @@ animal
 			if(ActionLock("moving", _speed)) return _speed
 			step_away(src, M, 20)
 			return _speed
-		add_contents() //called upon death to add the contents
-			if(age >= 18)
-				contents = newlist(/item/misc/food/Meat)
-				if(prob(75)) contents += new/item/misc/hide
-			else
-				contents = newlist(/item/misc/hide, /item/misc/food/Meat, /item/misc/food/Meat)
 		/*AI() spawn
 			var/i = 0
 			while(HP > 0)
@@ -328,9 +325,6 @@ animal
 				last_hurt = "poison"
 				checkdead(src)
 
-		if(SLEEP <= 0) toggle_sleep(1) //immediate sleep caused by spells/hunger.
-		if(!issleeping && !(life_time % 480) && --SLEEP <= 0) toggle_sleep(1)
-
 		if(stunned > 0) stunned--
 		if(weakened > 0) weakened--
 
@@ -402,7 +396,6 @@ animal
 		HP = 120
 		MHP = 120
 		there_can_be_only_one = 1
-		add_contents() return
 	pig
 		icon = 'icons/Pig.dmi'
 		smell = 60

@@ -1,32 +1,105 @@
 mob/startingverb/verb
 	Construct()
+		set name = "Build/Craft"
 		create_crafting()
 		winset(src,"crafting_window","is-visible=true")
 
 
 mob/proc/create_crafting()
 
-	carpentry_button_list = new()
-	carpentry_button_list += new/button/carpentry/wood_armor()
-	carpentry_button_list += new/button/carpentry/wood_helmet()
-	carpentry_button_list += new/button/carpentry/wood_sword()
-	carpentry_button_list += new/button/carpentry/wood_shield()
-	carpentry_button_list += new/button/carpentry/wood_club()
-	carpentry_button_list += new/button/carpentry/hunting_spear()
-	carpentry_button_list += new/button/carpentry/primitive_halberd()
+	//Items
+	item_button_list = new()
+	item_button_list += new/button/item/rope()
+	item_button_list += new/button/item/wood_bucket()
+	item_button_list += new/button/item/paper()
+	item_button_list += new/button/item/wood_shutter()
+	item_button_list += new/button/item/rope_bridge()
+	item_button_list += new/button/construction/trap_door()
+	item_button_list += new/button/item/glass_vial()
 
-	var/grid_size = round(carpentry_button_list.len / 2) + 1
-	winset(src, "carpentry_pane.carpentry_grid", "cells=0x0")
-	winset(src, "carpentry_pane.carpentry_grid", "cells=2x[grid_size]")
+	//Equipment
+	equipment_button_list = new()
+	equipment_button_list += new/button/item/wood_armor()
+	equipment_button_list += new/button/item/wood_helmet()
+	equipment_button_list += new/button/item/wood_sword()
+	equipment_button_list += new/button/item/wood_shield()
+	equipment_button_list += new/button/item/wood_club()
+	equipment_button_list += new/button/item/hunting_spear()
+	equipment_button_list += new/button/item/primitive_halberd()
+
+	//Building
+	building_button_list = new()
+	building_button_list += new/button/construction/fire()
+
+	building_button_list += new/button/construction/wood_wall()
+	building_button_list += new/button/construction/false_wood_wall()
+	building_button_list += new/button/construction/wood_window()
+	building_button_list += new/button/construction/wood_door()
+	building_button_list += new/button/construction/wood_floor()
+	building_button_list += new/button/construction/stone_wall()
+	building_button_list += new/button/construction/stone_false_wall()
+	building_button_list += new/button/construction/stone_window()
+	building_button_list += new/button/construction/stone_door()
+	building_button_list += new/button/construction/stone_floor()
+
+	building_button_list += new/button/construction/chest()
+	building_button_list += new/button/construction/cupboard()
+	building_button_list += new/button/construction/bed()
+
+	building_button_list += new/button/construction/wood_table()
+	building_button_list += new/button/construction/wood_chair()
+
+	building_button_list += new/button/construction/fence()
+	building_button_list += new/button/construction/gate()
+
+
+	building_button_list += new/button/construction/stone_stairs()
+	building_button_list += new/button/construction/sign()
+	building_button_list += new/button/construction/gravestone()
+
+	building_button_list += new/button/construction/anvil()
+
+	var/grid_size = round(item_button_list.len / 2) + 1
+	winset(src, "items_pane.items_grid", "cells=0x0")
+	winset(src, "items_pane.items_grid", "cells=3x[grid_size]")
+
+	grid_size = round(equipment_button_list.len / 2) + 1
+	winset(src, "equipment_pane.equipment_grid", "cells=0x0")
+	winset(src, "equipment_pane.equipment_grid", "cells=3x[grid_size]")
+
+	grid_size = round(building_button_list.len / 2) + 1
+	winset(src, "construction_pane.construction_grid", "cells=0x0")
+	winset(src, "construction_pane.construction_grid", "cells=3x[grid_size]")
 
 	var/grid_x = 1
 	var/grid_y = 1
-	for(var/button/I in carpentry_button_list)
-		src << output(I,"carpentry_pane.carpentry_grid:[grid_x], [grid_y]")
-		grid_x++
-		if(grid_x > 2)
-			grid_x = 1
-			grid_y++
+	for(var/button/I in item_button_list)
+		if(I.Requirements(usr))
+			src << output(I,"items_pane.items_grid:[grid_x], [grid_y]")
+			grid_x++
+			if(grid_x > 3)
+				grid_x = 1
+				grid_y++
+
+	grid_x = 1
+	grid_y = 1
+	for(var/button/I in equipment_button_list)
+		if(I.Requirements(usr))
+			src << output(I,"equipment_pane.equipment_grid:[grid_x], [grid_y]")
+			grid_x++
+			if(grid_x > 3)
+				grid_x = 1
+				grid_y++
+
+	grid_x = 1
+	grid_y = 1
+	for(var/button/I in building_button_list)
+		if(I.Requirements(usr))
+			src << output(I,"construction_pane.construction_grid:[grid_x], [grid_y]")
+			grid_x++
+			if(grid_x > 3)
+				grid_x = 1
+				grid_y++
 
 	/*src << output(new/button/carpentry/wood_armor,"carpentry_grid:1,1")
 	src << output(new/button/carpentry/wood_armor,"carpentry_grid:2,1")
@@ -34,7 +107,9 @@ mob/proc/create_crafting()
 	src << output(new/button/carpentry/wood_armor,"carpentry_grid:2,2")
 	src << output(new/button/carpentry/wood_armor,"carpentry_grid:1,3")*/
 
-mob/var/list/carpentry_button_list
+mob/var/list/item_button_list
+mob/var/list/equipment_button_list
+mob/var/list/building_button_list
 
 /*mob/proc/CheckCraft(item/A, item/B, reversed = 0)
 	if((!A || !B) || (A == B && A.stacked <= 1)) return
