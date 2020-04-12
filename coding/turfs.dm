@@ -475,8 +475,37 @@ turf
 										T.icon = 'icons/Turfs.dmi'
 										T.icon_state = "water"
 		attack_hand(mob/M)
-			if(M.inHand(/item/weapon/fishing_rod))
+			if(M.inHand(/item/weapon/fishing_rod) && get_dist(src,M) <= 1 && !M.movable)
+				var/item_get = "nothing"
+				M.movable = 1
 				M << "<small>You cast a line.</small>"
+				spawn(20)
+					if(prob(10))
+						var/item/I = new/item/misc/food/Goldfish(M.loc)
+						item_get = "a [I.name]"
+					else if(M.skills.fishing > 10 && prob(10))
+						var/item/I = new/item/misc/food/Bass(M.loc)
+						item_get = "a [I.name]"
+					else if(M.skills.fishing > 25 && prob(10))
+						var/item/I = new/item/misc/food/Tuna(M.loc)
+						item_get = "a [I.name]"
+					else if(M.skills.fishing > 50 && prob(10))
+						var/item/I = new/item/misc/food/Shark(M.loc)
+						item_get = "a [I.name]"
+					else
+						if(prob(95))
+							item_get = "nothing"
+						else
+							new/mob/Frogman(M.loc)
+							item_get = "a <font color=\"#00CC00\">frog man</small>"
+
+					M << "\blue You catch [item_get]\blue!"
+					if(item_get == "a <font color=\"#00CC00\">frog man</small>")
+						hearers(M) << "[M.name] dragged up [item_get]!"
+
+					if(M.skills.fishing < 100) M.skills.fishing += 1
+					M.movable = 0
+				/*M << "<small>You cast a line.</small>"
 				M.movable = 1
 				spawn(20)
 					if(!M) return
@@ -545,7 +574,7 @@ turf
 							M.contents += new/item/misc/food/Tuna
 						if(26 to 28)
 							M << "\blue You catch a <font color=\"#00CC00\">frog man</small>!"
-							new/mob/Frogman(M.loc)
+							new/mob/Frogman(M.loc)*/
 		bridgewater
 			density = 0
 			New()

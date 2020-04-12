@@ -662,6 +662,7 @@ mob
 			meat.stacked = rand(1,hunter_range) + hunter_yield
 			var/item/misc/bones/bone/bone = new(loc)
 			bone.stacked = rand(1,hunter_range) + hunter_yield
+			if(prob(25)) new/item/misc/orbs/Frog_Orb(loc)
 		else if(istype(src, /animal/wolf))
 			var/item/misc/food/Meat/meat = new(loc)
 			meat.stacked = rand(1,hunter_range) + hunter_yield
