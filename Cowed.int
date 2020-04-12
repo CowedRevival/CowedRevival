@@ -1,12 +1,12 @@
 // BEGIN_INTERNALS
 /*
 MAP_ZOOM: 1.000
-LAST_COMPILE_TIME: 1586729807
+LAST_COMPILE_TIME: 1586730456
 DIR: code coding coding\admin coding\admin\modules coding\animals coding\items coding\mobs coding\mobs\AI coding\new_admin coding\new_admin\panel coding\objs coding\objs\families coding\snippets coding\spells coding\tardis icons lib lib\Test lib\Test\demo maps 
 AUTO_FILE_DIR: ON
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 512.1488
-WINDOW: icons\recolor_1.dmi;icons\r_items.dmi;coding\mobs.dm;coding\classes.dm;coding\items\armour.dm;coding\items\misc.dm;coding\berry_effects.dm;coding\objs\vein.dm;coding\items\weapons.dm;coding\boats.dm;code\Crafting.dm;coding\turfs.dm;icons\items.dmi;Cowed.dme;maps\cowmalot.dmm
-FILE: maps\cowmalot.dmm
+WINDOW: icons\recolor_1.dmi;icons\r_items.dmi;coding\mobs.dm;coding\classes.dm;coding\items\armour.dm;coding\items\misc.dm;coding\berry_effects.dm;coding\objs\vein.dm;coding\items\weapons.dm;coding\boats.dm;code\Crafting.dm;coding\turfs.dm;icons\items.dmi;maps\cowmalot.dmm;icons\crops.dmi;coding\crops.dm
+FILE: coding\mobs.dm
 */
 // END_INTERNALS

@@ -3,6 +3,8 @@ obj
 		icon='icons/crops.dmi'
 		var/length = 1000
 		var/player_planted = 0
+
+		DblClick()
 		corn
 			icon_state="crop_growth_1"
 			anchored = 1
@@ -46,6 +48,7 @@ obj
 						spawn(length)
 							if(!src) return
 							icon_state = "corn_growth_3"
+						if(usr.skills.farming < 100) usr.skills.farming++
 					..()
 		watermelon
 			icon_state="crop_growth_1"
@@ -90,6 +93,7 @@ obj
 						spawn(length)
 							if(!src) return
 							icon_state = "wm_growth_3"
+						if(usr.skills.farming < 100) usr.skills.farming++
 					..()
 		carrot
 			icon_state="crop_growth_1"
@@ -130,7 +134,9 @@ obj
 							var/item/misc/food/Carrot/J = locate() in usr
 							J.stacked += rand(0,(farmer_range - 1)) + farmer_yield
 							J.suffix = "x[J.stacked]"
+						if(usr.skills.farming < 100) usr.skills.farming++
 						del src
+
 					..()
 		hemp
 			icon_state="crop_growth_1"
@@ -160,6 +166,7 @@ obj
 							var/item/misc/Hemp/J = locate() in usr
 							J.stacked += rand(0,1)
 							J.suffix = "x[J.stacked]"
+						if(usr.skills.farming < 100) usr.skills.farming++
 						del src
 					..()
 		potato
@@ -201,6 +208,7 @@ obj
 							var/item/misc/food/Potato/J = locate() in usr
 							J.stacked += rand(0,(farmer_range - 1)) + farmer_yield
 							J.suffix = "x[J.stacked]"
+						if(usr.skills.farming < 100) usr.skills.farming++
 						del src
 					..()
 		tomato
@@ -246,6 +254,7 @@ obj
 						spawn(length)
 							if(!src) return
 							icon_state = "tomato_growth_3"
+						if(usr.skills.farming < 100) usr.skills.farming++
 					..()
 		wheat
 			icon_state="crop_growth_1"
@@ -290,4 +299,5 @@ obj
 						spawn(length)
 							if(!src) return
 							icon_state = "wheat_growth_3"
+						if(usr.skills.farming < 100) usr.skills.farming++
 					..()

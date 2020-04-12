@@ -558,7 +558,7 @@ mob
 				stat("")
 				stat("<b>Skills</b>")
 				stat("Hunting", "[skills.hunting]/100")
-				stat("Gathering", "[skills.farming]/100")
+				stat("Farming", "[skills.farming]/100")
 				stat("Fishing", "[skills.fishing]/100")
 				stat("Mining", "[skills.mining]/100")
 				stat("Smithing", "[skills.smithing]/100")
