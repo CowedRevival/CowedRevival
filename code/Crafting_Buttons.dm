@@ -49,7 +49,7 @@ button //Button object
 					del(I)
 		if(type_of_object == ITEM)
 			M.contents += new object_to_make
-		else if(type_of_object == OBJECT)
+		else if(type_of_object == TURF)
 			build(M, 0, object_to_make, object_to_build)
 		else
 			new object_to_make(M.loc)
@@ -502,7 +502,7 @@ button //Button object
 			object_name = "wood floor"
 			type_of_object = TURF
 			object_to_make = /turf/wooden/wood_floor
-			object_to_build = /turf/wooden/wood_floor
+			object_to_build = /obj/wooden/wood_floor
 			New()
 				requirements_list = new()
 				requirements_list += /item/misc/wood
@@ -687,7 +687,7 @@ button //Button object
 			object_to_build = /obj/stone/stone_door
 			New()
 				requirements_list = new()
-				requirements_list += /item/misc/wood
+				requirements_list += /item/misc/stone
 			Invoke(var/mob/M)
 				for(var/J in requirements_list)
 					var/item/misc/I = locate(J) in M.contents

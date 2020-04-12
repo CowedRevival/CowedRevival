@@ -355,7 +355,6 @@ turf
 		wood_floor
 			buildinghealth = 2
 			icon_state = "floor"
-			New()
 
 		rope_bridge
 			buildinghealth=5

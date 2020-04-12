@@ -37,6 +37,11 @@ area
 		darkness3
 		darkness4
 		sky
+
+		New()
+			..()
+			world << "FUG U"
+
 	radiation
 		name = " "
 		sd_lighting = 1
