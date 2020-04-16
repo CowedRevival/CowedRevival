@@ -79,6 +79,7 @@
 #include "coding\atoms.dm"
 #include "coding\berry_effects.dm"
 #include "coding\boats.dm"
+#include "coding\Cave_Generation.dm"
 #include "coding\changelog.dm"
 #include "coding\character_handling.dm"
 #include "coding\classes.dm"

@@ -1220,7 +1220,7 @@ mob
 			for(var/item/misc/waterstone/O in world)
 				if(O.active && O.lastTouched == src) O.toggle()
 
-			if(istype(M, /mob/Shroom))
+			if(istype(M, /mob/Shroom_Monster/Shroom))
 				if(prob(30)) M.contents += new/item/armour/body/mushroom_suit
 				if(prob(40)) M.contents += new/item/armour/hat/mushroom_cap
 				//spawn(300) del M

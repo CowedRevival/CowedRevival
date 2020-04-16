@@ -1,5 +1,5 @@
 proc
-	arctan(x)
+	arctanX(x)
 		var/y=arcsin(x/sqrt(1+x*x))
 		if(x>=0) return y
 		return -y

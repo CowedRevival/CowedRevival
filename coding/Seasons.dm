@@ -24,7 +24,8 @@ game
 		if(season_change == 1) //Season Change Code
 
 			for(var/obj/tree/I in world)
-				I.icon_state = current_season_state + I.icon_state_base
+				if(!istype(I, /obj/tree/mushroom))
+					I.icon_state = current_season_state + I.icon_state_base
 
 			for(var/turf/grass/I in world)
 				if(istype(I,/turf/grass))

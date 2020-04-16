@@ -110,15 +110,30 @@ mob/proc/msntr()
 				hud_main.UpdateHUD(M)
 				M.checkdead(M)
 				break
-mob/Shroom
-	icon='icons/shroom.dmi'
-	icon_state="alive"
-	HP=100
-	defence=2
-	isMonster=1
-	New()
-		..()
-		src.Shroom()
+mob/Shroom_Monster/
+	Shroom
+		icon='icons/shroom.dmi'
+		icon_state="alive"
+		HP=100
+		defence=2
+		isMonster=1
+		New()
+			..()
+			src.Shroom()
+
+
+	Shroomling
+		icon='icons/shroomling.dmi'
+		icon_state="alive"
+		HP=50
+		defence=2
+		isMonster=1
+		New()
+			..()
+			src.Shroom()
+			spawn(1500)
+				new/mob/Shroom_Monster/Shroom
+				del(src)
 mob/Demon
 	icon='icons/Demon.dmi'
 	icon_state="alive"

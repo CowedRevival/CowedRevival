@@ -798,6 +798,65 @@ obj
 						Move(null, forced = 1)
 
 					M.medal_Report("woodcutter")*/
+		mushroom
+			towercap
+				icon = 'icons/mushroom_objects.dmi'
+				icon_state = "false_shroom_1"
+				name = "towercap"
+				ActionLoop(mob/M)
+					if(M.inHand(/item/weapon/axe))
+						while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/axe))
+							icon_state = "cut [icon_state_base]"
+							sleep(10)
+							icon_state = "[icon_state_base]"
+
+							if(M && M.current_action == src && loc && wood > 0)
+								var
+									amount = 1
+									item/misc/wood/I = locate() in M
+								if(I) I.stacked += amount
+								else
+									I = new(M)
+									I.stacked += (amount - 1)
+									I.suffix = "x[I.stacked]"
+								wood -= amount
+								if(wood <= 0)
+									new/item/misc/seeds/Tree_Seeds(loc)
+									Move(null, forced = 1)
+
+								M.medal_Report("woodcutter")
+							else break
+							sleep(10)
+					else
+						while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/pickaxe))
+							icon_state = "cut [icon_state_base]"
+							sleep(25)
+							icon_state = "[icon_state_base]"
+
+							if(M && M.current_action == src && loc && wood > 0)
+								var
+									amount = 1
+									item/misc/tree_root/I = locate() in M
+								if(I)
+									I.stacked += amount
+									I.suffix = "x[I.stacked]"
+									I.suffix = "x[I.stacked]"
+								else
+									I = new(M)
+									I.stacked += (amount + 1)
+									I.suffix = "x[I.stacked]"
+									I.suffix = "x[I.stacked]"
+								wood -= (amount / 2)
+								if(wood <= 0)
+									//maybe seeds in future?
+									if(prob(5))
+										new/mob/Shroom_Monster/Shroomling(loc)
+									Move(null, forced = 1)
+								M.medal_Report("woodcutter")
+							else break
+							sleep(10)
+					if(M.current_action == src) M.AbortAction() //abort the action if we ran out of wood
+
 		apple_tree
 			icon = 'icons/crops.dmi'
 			icon_state = "apple_tree_1"

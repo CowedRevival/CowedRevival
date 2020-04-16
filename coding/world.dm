@@ -77,6 +77,9 @@ world
 
 		berries = Make_Berry_Book()
 
+		for(var/turf/Cave_Start/I in world)
+			I.Generate()
+
 
 /*		var/bbeff = pick(effects)
 		bbeffect=bbeff
