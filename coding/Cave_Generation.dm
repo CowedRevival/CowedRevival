@@ -23,46 +23,7 @@ turf/Cave_Start
 				else
 					map_array[i].map_array[j] = 0
 
-		for(var/i = 1 to 4)
-			DoSimulation()
-
-		var/temp_location_x = locate(tag).x
-		var/temp_location_y = locate(tag).y
-		var/temp_location_z = locate(tag).z
-
-		for(var/i = 1 to cave_width)
-			for(var/j = 1 to cave_height)
-				var/position_x = temp_location_x + (i-1)
-				var/position_y = temp_location_y + (j-1)
-				if(map_array[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/dirtwall))
-					new/turf/path(locate(position_x, position_y, temp_location_z))
-					if(prob(5))
-						var/typechosen = rand(1,100)
-						switch(typechosen)
-							if(1 to 20)
-								new/obj/vein/Copper_Vein(locate(position_x, position_y, temp_location_z))
-							if(21 to 40)
-								new/obj/vein/Tin_Vein(locate(position_x, position_y, temp_location_z))
-							if(41 to 55)
-								new/obj/vein/Tungsten_Vein(locate(position_x, position_y, temp_location_z))
-							if(56 to 68)
-								new/obj/vein/Iron_Vein(locate(position_x, position_y, temp_location_z))
-							if(69 to 78)
-								new/obj/vein/Silver_Vein(locate(position_x, position_y, temp_location_z))
-							if(79 to 87)
-								new/obj/vein/Palladium_Vein(locate(position_x, position_y, temp_location_z))
-							if(88 to 94)
-								new/obj/vein/Gold_Vein(locate(position_x, position_y, temp_location_z))
-							if(95 to 99)
-								new/obj/vein/Mithril_Vein(locate(position_x, position_y, temp_location_z))
-							if(100)
-								new/obj/vein/Magicite_Vein(locate(position_x, position_y, temp_location_z))
-					else if(prob(2))
-						var/obj/tree/mushroom/towercap/temp = new(locate(position_x, position_y, temp_location_z))
-						temp.icon_state = "false_shroom_[rand(1,3)]"
-					else if(prob(1) && prob(10))
-						new/mob/Shroom_Monster/Shroom(locate(position_x, position_y, temp_location_z))
-		new/turf/underground/dirtwall(locate(temp_location_x, temp_location_y, temp_location_z))
+		DoSimulation()
 
 	proc/CountAliveNeighbours(var/x, var/y)
 		var/count = 0
@@ -95,9 +56,83 @@ turf/Cave_Start
 					else
 						new_map[i].map_array[j] = 0
 
+		var/temp_location_x = locate(tag).x
+		var/temp_location_y = locate(tag).y
+		var/temp_location_z = locate(tag).z
+
 		for(var/i = 1 to cave_width)
 			for(var/j = 1 to cave_height)
-				map_array[i].map_array[j] = new_map[i].map_array[j]
+				var/position_x = temp_location_x + (i-1)
+				var/position_y = temp_location_y + (j-1)
+				if(new_map[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/dirtwall))
+					new/turf/path(locate(position_x, position_y, temp_location_z))
+					if(prob(5))
+						var/typechosen = rand(1,100)
+						switch(typechosen)
+							if(1 to 20)
+								new/obj/vein/Copper_Vein(locate(position_x, position_y, temp_location_z))
+							if(21 to 40)
+								new/obj/vein/Tin_Vein(locate(position_x, position_y, temp_location_z))
+							if(41 to 55)
+								new/obj/vein/Tungsten_Vein(locate(position_x, position_y, temp_location_z))
+							if(56 to 68)
+								new/obj/vein/Iron_Vein(locate(position_x, position_y, temp_location_z))
+							if(69 to 78)
+								new/obj/vein/Silver_Vein(locate(position_x, position_y, temp_location_z))
+							if(79 to 87)
+								new/obj/vein/Palladium_Vein(locate(position_x, position_y, temp_location_z))
+							if(88 to 94)
+								new/obj/vein/Gold_Vein(locate(position_x, position_y, temp_location_z))
+							if(95 to 99)
+								new/obj/vein/Mithril_Vein(locate(position_x, position_y, temp_location_z))
+							if(100)
+								new/obj/vein/Magicite_Vein(locate(position_x, position_y, temp_location_z))
+					else if(prob(2))
+						var/obj/tree/mushroom/towercap/temp = new(locate(position_x, position_y, temp_location_z))
+						temp.icon_state = "false_shroom_[rand(1,3)]"
+					else if(prob(1) && prob(10))
+						new/mob/Shroom_Monster/Shroom(locate(position_x, position_y, temp_location_z))
+				else if(new_map[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/deep_dirtwall))
+					if(prob(1) && prob(5))
+						new/turf/hard_floor/cracked_hard_floor(locate(position_x, position_y, temp_location_z))
+					else
+						new/turf/hard_floor(locate(position_x, position_y, temp_location_z))
+					if(prob(5))
+						var/typechosen = rand(1,100)
+						switch(typechosen)
+							if(1 to 20)
+								new/obj/vein/Copper_Vein(locate(position_x, position_y, temp_location_z))
+							if(21 to 40)
+								new/obj/vein/Tin_Vein(locate(position_x, position_y, temp_location_z))
+							if(41 to 55)
+								new/obj/vein/Tungsten_Vein(locate(position_x, position_y, temp_location_z))
+							if(56 to 68)
+								new/obj/vein/Iron_Vein(locate(position_x, position_y, temp_location_z))
+							if(69 to 78)
+								new/obj/vein/Silver_Vein(locate(position_x, position_y, temp_location_z))
+							if(79 to 87)
+								new/obj/vein/Palladium_Vein(locate(position_x, position_y, temp_location_z))
+							if(88 to 94)
+								new/obj/vein/Gold_Vein(locate(position_x, position_y, temp_location_z))
+							if(95 to 99)
+								new/obj/vein/Mithril_Vein(locate(position_x, position_y, temp_location_z))
+							if(100)
+								new/obj/vein/Magicite_Vein(locate(position_x, position_y, temp_location_z))
+					else if(prob(3))
+						var/obj/tree/mushroom/towercap/temp = new(locate(position_x, position_y, temp_location_z))
+						temp.icon_state = "false_shroom_[rand(1,3)]"
+					else if(prob(1) && prob(10))
+						new/mob/Shroom_Monster/Shroom(locate(position_x, position_y, temp_location_z))
+				else if(new_map[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/chaos_stone))
+					new/turf/chaos_brick(locate(position_x, position_y, temp_location_z))
+					if(prob(1) && prob(10))
+						new/obj/vein/Adamantite_Vein(locate(position_x, position_y, temp_location_z))
+					else if(prob(1) && prob(10))
+						new/obj/vein/Magicite_Vein(locate(position_x, position_y, temp_location_z))
+					else if(prob(1) && prob(10))
+						new/mob/Demon(locate(position_x, position_y, temp_location_z))
+		new/turf/underground/dirtwall(locate(temp_location_x, temp_location_y, temp_location_z))
+
 
 
 
@@ -108,10 +143,3 @@ map_section
 		for(var/i = 1 to size)
 			map_array += 0
 
-mob/verb/TestCaves()
-	set background=1
-	for(var/turf/Cave_Start/I in world)
-		I.Generate()
-
-mob/verb/WhereAmI()
-	world << "I'm at: [loc.x], [loc.y], [loc.z]"

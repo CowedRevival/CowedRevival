@@ -8,6 +8,7 @@ world
 	mob = /mob/character_handling
 	turf = /turf/underground/dirtwall
 	area = /area/darkness/underground
+	loop_checks = 0 //Required for cave generation
 	New()
 		if(world.port) world.log = file("data/logs/world_log_" + time2text(world.realtime, "DD_MM_YY") + ".txt")
 		chat_log = file("data/logs/chat_log_" + time2text(world.realtime, "DD_MM_YY") + ".htm")
@@ -79,7 +80,6 @@ world
 
 		for(var/turf/Cave_Start/I in world)
 			I.Generate()
-
 
 /*		var/bbeff = pick(effects)
 		bbeffect=bbeff

@@ -383,14 +383,20 @@ item/weapon
 						sleep(40)
 						usr.movable=0
 						return
-					if(istype(usr.loc, /turf/path))
+					else if(istype(usr.loc, /turf/path))
 						new/turf/digging(usr.loc)
 						usr.movable=1
 						sleep(40)
 						usr.movable=0
 						return
-					if(istype(usr.loc, /turf/grass))
+					else if(istype(usr.loc, /turf/grass))
 						new/turf/digging(usr.loc)
+						usr.movable=1
+						sleep(40)
+						usr.movable=0
+						return
+					else if(istype(usr.loc, /turf/hard_floor/cracked_hard_floor))
+						new/turf/hard_floor/digging_hard_floor(usr.loc)
 						usr.movable=1
 						sleep(40)
 						usr.movable=0

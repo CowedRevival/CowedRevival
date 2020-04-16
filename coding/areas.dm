@@ -40,7 +40,6 @@ area
 
 		New()
 			..()
-			world << "FUG U"
 
 	radiation
 		name = " "

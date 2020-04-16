@@ -30,8 +30,8 @@ obj/holoarch
 					flick("create-door", hdoor)
 					if(door == 1)
 						spawn(25)
-							src.underlays += image(icon = 'icons/turfs.dmi', icon_state = "holofloor", pixel_x = 32, layer = OBJ_LAYER + 0.1)
-							src.underlays += image(icon = 'icons/turfs.dmi', icon_state = "holofloor", pixel_x = 64, layer = OBJ_LAYER + 0.1)
+							src.underlays += image(icon = 'icons/Turfs.dmi', icon_state = "holofloor", pixel_x = 32, layer = OBJ_LAYER + 0.1)
+							src.underlays += image(icon = 'icons/Turfs.dmi', icon_state = "holofloor", pixel_x = 64, layer = OBJ_LAYER + 0.1)
 							opendoor()
 				else
 					icon_state = ""

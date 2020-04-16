@@ -49,7 +49,7 @@
 // BEGIN_INCLUDE
 #include "spawner.dm"
 #include "skin.dmf"
-#include "themap.dmm"
+#include "a_themap.dmm"
 #include "Clothes\Weapons\Flag R.dm"
 #include "code\Admin.dm"
 #include "code\Animals.dm"

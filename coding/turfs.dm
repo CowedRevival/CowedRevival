@@ -124,11 +124,40 @@ turf
 						if((usr.inHand(/item/weapon/pickaxe) && prob(10)) || prob(5))
 							new/obj/vein(src)
 						new/turf/path(src)
+
+		deep_dirtwall
+			icon = 'icons/Turfs.dmi'
+			icon_state = "dirtwall"
+			density = 1
+			opacity = 1
+			attack_hand(mob/M)
+				if(usr.inHand(/item/weapon/shovel) || usr.inHand(/item/weapon/pickaxe))
+					if(ActionLock("digging", 10)) return //prevent the tile from being invoked twice
+					icon_state = "dirtwall2"
+					spawn(2)
+						if((usr.inHand(/item/weapon/pickaxe) && prob(12)) || prob(7))
+							new/obj/vein(src)
+						new/turf/hard_floor(src)
+
 		bedrock
 			icon = 'icons/Turfs.dmi'
 			icon_state = "bedrock"
 			density = 1
 			opacity = 1
+
+		chaos_stone
+			icon = 'icons/Turfs.dmi'
+			icon_state = "chaosstonewall"
+			density = 1
+			opacity = 1
+			attack_hand(mob/M)
+				if(usr.inHand(/item/weapon/shovel) || usr.inHand(/item/weapon/pickaxe))
+					if(ActionLock("digging", 10)) return //prevent the tile from being invoked twice
+					icon_state = "dirtwall2"
+					spawn(2)
+						if((usr.inHand(/item/weapon/pickaxe) && prob(1)) || prob(1))
+							new/obj/vein/Adamantite_Vein(src)
+						new/turf/chaos_brick(src)
 
 	Dragon_Statue
 		icon_state = "dragon statue"
@@ -222,6 +251,14 @@ turf
 					if(istype(T, /turf/underground/dirtwall))
 						new/turf/path(T)
 						new/obj/stairs(T)
+					else if(istype(T, /turf/underground/deep_dirtwall))
+						new/turf/hard_floor(T)
+						new/obj/stairs(T)
+					else if(istype(T, /turf/underground/chaos_stone))
+						new/turf/chaos_brick(T)
+						new/obj/stairs(T)
+					else if(istype(T, /turf/path) || istype(T, /turf/hard_floor) || istype(T, /turf/chaos_brick))
+						new/obj/stairs(T)
 					return
 				var/new_z = add_layer(O.kingdom, up = 0) //create a new underground layer
 				var/turf/T = locate(x, y, new_z)
@@ -266,6 +303,26 @@ turf
 				M.lastHole = src
 				spawn(100) if(M && M.lastHole == src) M.lastHole = null
 			M.Move(T, forced = 1)
+
+		hard_floor_hole
+			icon_state = "hard_floor_hole"
+
+	chaos_brick
+		icon_state = "chaos_brick"
+
+	hard_floor
+		icon_state = "hard_floor"
+
+		cracked_hard_floor
+			icon_state = "hard_floor_cracked"
+
+		digging_hard_floor
+			icon='icons/Turfs.dmi'
+			icon_state="hard_floor_cracked"
+			New()
+				..()
+				spawn(30) new/turf/hole/hard_floor_hole(src)
+
 	path
 		icon_state = "path"
 		attack_hand(mob/M)
@@ -710,6 +767,22 @@ turf
 							new/turf/hole(src)
 						return
 			..()
+		verb/Climb_Down()
+			set src in view(0)
+			var/mob/M = usr
+			var/map_object/O = MapObject(M.z)
+			if(!O) return
+			O = O.PrevLayer()
+			if(!O || O.z == 1) return
+
+			var/turf/T = locate(x, y, O.z)
+			if(!istype(T, /turf/stairs) && !istype(T, /turf/path) && !istype(T, /turf/underground/dirtwall) && !(locate(/obj/stairs, T)))
+				M << "<tt>This area is too hard to get through.</tt>"
+				return
+			if(istype(M))
+				M.lastHole = src
+				spawn(100) if(M && M.lastHole == src) M.lastHole = null
+			M.Move(T, forced = 1)
 		verb
 			Knock()
 				set src in oview(1)
