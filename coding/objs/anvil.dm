@@ -57,7 +57,7 @@ obj/anvil
 		var/choice = input(M, "Select an item to craft.", "Anvil :: Select Item") as null|anything in L
 		if(choice == null) return
 		if(dd_hasprefix(choice, "Gold ")) I = locate(/item/misc/gold_ingot, M)
-		else if(dd_hasprefix(choice, "Tungsten ")) I = locate(/item/misc/molten_tungsten, M)
+		else if(dd_hasprefix(choice, "Tungsten ")) I = locate(/item/misc/tungsten_ingot, M)
 		else if(dd_hasprefix(choice, "Tin ")) I = locate(/item/misc/tin_ingot, M)
 		else if(dd_hasprefix(choice, "Silver ")) I = locate(/item/misc/silver_ingot, M)
 		else if(dd_hasprefix(choice, "Palladium ")) I = locate(/item/misc/palladium_ingot, M)

@@ -1,12 +1,12 @@
 // BEGIN_INTERNALS
 /*
 MAP_ZOOM: 1.000
-LAST_COMPILE_TIME: 1587078594
+LAST_COMPILE_TIME: 1587176722
 DIR: code coding coding\admin coding\admin\modules coding\animals coding\items coding\mobs coding\mobs\AI coding\new_admin coding\new_admin\panel coding\objs coding\objs\families coding\snippets coding\spells coding\tardis icons lib lib\Test lib\Test\demo maps 
 AUTO_FILE_DIR: ON
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 513.1517
-WINDOW: icons\recolor_1.dmi;icons\r_items.dmi;coding\mobs.dm;coding\classes.dm;coding\items\armour.dm;coding\items\misc.dm;coding\berry_effects.dm;coding\objs\vein.dm;coding\items\weapons.dm;coding\boats.dm;code\Crafting.dm;coding\turfs.dm;icons\items.dmi;coding\world.dm;maps\cowmalot.dmm;code\Monsters.dm;coding\Cave_Generation.dm;coding\areas.dm
-FILE: maps\cowmalot.dmm
+WINDOW: icons\recolor_1.dmi;icons\r_items.dmi;coding\mobs.dm;coding\classes.dm;coding\items\armour.dm;coding\items\misc.dm;coding\berry_effects.dm;coding\objs\vein.dm;coding\items\weapons.dm;coding\boats.dm;code\Crafting.dm;coding\turfs.dm;icons\items.dmi;maps\cowmalot_d.dmm;coding\objs\anvil.dm;coding\animals\animals.dm;code\Monsters.dm;maps\cowmalot.dmm;coding\Cave_Generation.dm;icons\shroom.dmi;icons\shroomling.dmi;icons\Turfs.dmi;icons\weapons.dmi;icons\wood64x32.dmi;icons\Demon.dmi;coding\objs.dm;icons\mushroom_objects.dmi
+FILE: coding\animals\animals.dm
 */
 // END_INTERNALS
