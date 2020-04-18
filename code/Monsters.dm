@@ -121,15 +121,6 @@ mob/Shroom_Monster
 		isMonster=1
 		New()
 			..()
-			var/number_of_monsters = 0
-			for(var/mob/Shroom_Monster/I in world)
-				number_of_monsters += 1
-				if(number_of_monsters > 30)
-					if(prob(50))
-						del(src)
-						return
-					else
-						del(I)
 			src.Shroom()
 
 
@@ -154,15 +145,6 @@ mob/Demon
 	isMonster=1
 	New()
 		..()
-		var/number_of_monsters = 0
-		for(var/mob/Demon/I in world)
-			number_of_monsters += 1
-			if(number_of_monsters > 25)
-				if(prob(50))
-					del(src)
-					return
-				else
-					del(I)
 		src.Demon()
 
 mob/proc/Demon()

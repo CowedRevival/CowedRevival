@@ -41,15 +41,6 @@ animal
 	New(loc, disperse = 0)
 		. = ..()
 		verbs -= /mob/verb/loot
-		var/number_of_animals = 0
-		for(var/animal/I in world)
-			number_of_animals += 1
-			if(number_of_animals > 30)
-				if(prob(50))
-					del(src)
-					return
-				else
-					del(I)
 		if(map_loaded) there_can_be_only_one = TRUE
 		spawn(25)
 			//if(!worldz || (undergroundz != src.z && worldz != src.z && skyz != src.z)) return

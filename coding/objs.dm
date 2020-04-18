@@ -799,10 +799,14 @@ obj
 
 					M.medal_Report("woodcutter")*/
 		mushroom
+			icon = 'icons/mushroom_objects.dmi'
+			icon_state = "false_shroom_1"
 			towercap
-				icon = 'icons/mushroom_objects.dmi'
-				icon_state = "false_shroom_1"
 				name = "towercap"
+				New()
+					..()
+					icon_state = "false_shroom_[rand(1,3)]"
+					icon_state_base = icon_state
 				ActionLoop(mob/M)
 					if(M.inHand(/item/weapon/axe))
 						while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/axe))

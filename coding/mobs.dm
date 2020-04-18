@@ -1247,7 +1247,7 @@ mob
 				corpse.base_speed = 1
 				initial_net_worth = src.initial_net_worth
 				spawn(rand(4000,5000))
-					if(M)
+					if(M && M.HP <= 0)
 						M.icon = 'Skeleton.dmi'
 						tag = "Skeleton"
 						return
