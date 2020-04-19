@@ -11,6 +11,8 @@ proc
 			if(10) return "southwest"
 	send_message(targets, msg, flag = 1|2)
 		if(!msg) return
+		var/mob/I = targets
+		if(I && I.client && I.client.font_size) msg = "<font size=[I.client.font_size]>[msg]</font>"
 		msg = censorText(msg)
 		targets << msg
 		if(flag & 1)

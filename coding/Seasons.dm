@@ -80,9 +80,3 @@ obj
 				icon_state = "tree_1"
 				icon_state_base = icon_state
 			..()
-
-admin/verb/next_month()
-	set category="Admin"
-	Month = 2
-	Day = 3
-	Hour = 23

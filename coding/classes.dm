@@ -105,7 +105,7 @@ The Belius is the religion of this kingdom, and all peasants must uphold it or b
 				name = "Royalty"
 				desc = {"The Royals are in charge of the kingdom and are at the highest positions in the castle."}
 				children = newlist(
-					/character_handling/class/bovinia/king, /character_handling/class/bovinia/archduke
+					/character_handling/class/bovinia/king
 				)
 				class_id = "bovinia_royalty"
 			royal_guard
@@ -124,20 +124,19 @@ the village all the way to protecting the King."}
 	shape and performs duties for the royals."}
 				icon_state = "librarian"
 				children = newlist(
-					/character_handling/class/bovinia/cook, /character_handling/class/bovinia/keysmith,
-					/character_handling/class/bovinia/librarian, /character_handling/class/bovinia/jester
+					/character_handling/class/bovinia/cook, /character_handling/class/bovinia/treasurer
 				)
 				class_id = "bovinia_rstaff"
-			religion
+			/*religion
 				name = "The Belius Church"
 				desc = {"The Belius Church consists of a bishop in charge of the place and several priests."}
 				icon_state = "priest"
 				children = newlist(
-					/character_handling/class/religion/bishop, /character_handling/class/religion/priest,
+					/character_handling/class/religion/priest
 				)
 				_x = 73
 				_y = 120
-				class_id = "bovinia_religion"
+				class_id = "bovinia_religion"*/
 			peasants
 				name = "Peasants"
 				desc = {"Peasants are the people who grow up and live outside the castle. They have to fend for themselves,
@@ -154,9 +153,9 @@ the village all the way to protecting the King."}
 				desc = {"A couple of classics are listed here for your enjoyment."}
 				icon_state = "zeth"
 				children = newlist(
-					/character_handling/class/special/zeth, /character_handling/class/special/mage,
-					/character_handling/class/special/healer, /character_handling/class/special/blacksmith,
-					/character_handling/class/special/necromancer
+					/character_handling/class/special/priest, /character_handling/class/special/zeth,
+					/character_handling/class/special/mage, /character_handling/class/special/alchemist,
+					/character_handling/class/special/blacksmith, /character_handling/class/special/necromancer
 				)
 				class_id = "bovinia_special"
 		/*cowmalot
@@ -316,10 +315,9 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					M.contents += new/item/misc/key/Royal_Guard_Key(M)
 					M.contents += new/item/misc/key/Cell_Door_Key(M)
 					M.contents += new/item/misc/key/Royal_Room_Key(M)
-					M.contents += new/item/misc/key/Archduke_Key(M)
+					M.contents += new/item/misc/key/Treasurer_Key(M)
 					M.contents += new/item/misc/key/Jailhouse_Key(M)
 					M.contents += new/item/misc/key/Jailer_Key(M)
-					M.contents += new/item/misc/key/Keysmith_Key(M)
 					M.contents += new/item/misc/key/BCM_Key(M)
 					M.contents += new/item/weapon/excowlibur(M)
 
@@ -334,35 +332,28 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 				AmountUpdate(var/x as num)
 					if(king_amount != -1)
 						king_amount--
-			archduke
-				icon_state = "bovinia_archduke"
+			treasurer
+				icon_state = "librarian"
 				desc = "The Archduke is the personal advisor of the king and directly below in the king in authority. They are wise people who tend to value knowledge, though some vow to use that knowledge to try to steal the throne..."
 				amount = 1
 				rp_points = -6
 				class_id = "bovinia_royalty_archduke"
-				spawn_tag = "duke spawn"
+				spawn_tag = "librarian spawn"
 				_x = 82
 				_y = 172
 				Selected(mob/M)
-					M.chosen = "archduke"
+					M.chosen = "treasurer"
 
-					M.contents += new/item/armour/hat/archduke_hat(M)
-					M.contents += new/item/armour/body/archduke_robe(M)
-					M.contents += new/item/weapon/archduke_staff(M)
+					M.contents += new/item/misc/key/BCM_Key(M)
+					M.contents += new/item/misc/key/Treasurer_Key(M)
+					M.contents += new/item/armour/face/librarian_glasses(M)
+					M.contents += new/item/armour/body/librarian_clothes(M)
 					M.contents += new/item/misc/book(M)
 					M.contents += new/item/misc/paper(M)
 					M.contents += new/item/misc/paper(M)
 					M.contents += new/item/misc/paper(M)
-					M.contents += new/item/misc/key/Guard_Key(M)
-					M.contents += new/item/misc/key/Royal_Guard_Key(M)
-					M.contents += new/item/misc/key/Cell_Door_Key(M)
-					M.contents += new/item/misc/key/Royal_Room_Key(M)
-					M.contents += new/item/misc/key/BCM_Key(M)
-					M.contents += new/item/misc/key/Archduke_Key(M)
-					M.contents += new/item/misc/key/Jailhouse_Key(M)
-					M.contents += new/item/misc/key/Jailer_Key(M)
-					M.contents += new/item/misc/key/Keysmith_Key(M)
-					return 1
+					return 2
+
 				New()
 					..()
 					amount = duke_amount
@@ -389,7 +380,7 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					M.contents += new/item/misc/key/Royal_Room_Key(M)
 					M.contents += new/item/misc/key/Jailhouse_Key(M)
 					M.contents += new/item/misc/key/Jailer_Key(M)
-					M.contents += new/item/misc/key/Keysmith_Key(M)
+					M.contents += new/item/misc/key/Royal_Archer_Key(M)
 
 					M.contents += new/item/misc/gold{stacked=20}(M)
 					return 1
@@ -419,7 +410,6 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					M.contents += new/item/misc/key/Jailhouse_Key(M)
 					M.contents += new/item/misc/key/Jailer_Key(M)
 					M.contents += new/item/misc/key/Cell_Door_Key(M)
-					M.contents += new/item/misc/key/Keysmith_Key(M)
 
 					M.contents += new/item/misc/gold{stacked=20}(M)
 					return 2
@@ -484,7 +474,7 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 				AmountUpdate(var/x as num)
 					if(jailer_amount != -1)
 						jailer_amount--
-			librarian
+			/*librarian
 				icon_state = "librarian"
 				desc = "The librarian keeps the books and makes sure that history is properly recorded. They have an uncanny ability for determing the exact time that has passed on the sand clocks used to keep time. Would you like to become the librarian?"
 				amount = 1
@@ -510,7 +500,7 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					amount = librarian_amount
 				AmountUpdate(var/x as num)
 					if(librarian_amount != -1)
-						librarian_amount--
+						librarian_amount--*/
 			keysmith
 				icon_state = "keysmith"
 				desc = "The Keysmith is the officially sanctioned locksmith of a kingdom. They start off with enough molten gold to produce several keys and have access to the castle key molds. Would you like to become the Keysmith?"
@@ -876,22 +866,30 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 				AmountUpdate(var/x as num)
 					if(smith_amount != -1)
 						smith_amount--
-			/*pirate
-				icon_state = "pirate"
-				desc = "Play your part as a dread pirate. Would you like to pick this class?"
-				amount = 1
-				rp_points = 3
-				Selected(mob/M)
-					M.chosen = "pirate"
-					M.loc = locate(194, 62, worldz)
 
-					M.contents += new/item/armour/face/eyepatch(M)
-					M.contents += new/item/armour/body/pirate_garb(M)
-					M.contents += new/item/armour/hat/pirate_hat(M)
-					M.contents += new/item/weapon/cutlass(M)
-					M.skills.carpenting = 35
-					M.skills.recycling = 55
-					return 1*/
+			priest
+				icon_state = "priest"
+				desc = "The Priest makes sure that all villages understand one thing clearly: although there may be a king to rule over them, religion is also very important. The Priest is often seen doing ceremonies of all sorts. As the Priest, you wield the ability to be able to resurrect the recently deceased. Would you like to become the Priest?"
+				amount = 1
+				class_id = "special_priest"
+				spawn_tag = "priest spawn"
+				Selected(mob/M)
+					M.chosen = "priest"
+
+					M.contents += new/item/armour/hat/priest_hat(M)
+					M.contents += new/item/armour/body/priest_cloths(M)
+					M.contents += new/item/misc/books/Holy(M)
+					//HOLDER
+
+					return 2
+				New()
+					..()
+					amount = priest_amount
+				AmountGet()
+					amount = priest_amount
+				AmountUpdate(var/x as num)
+					if(priest_amount != -1)
+						priest_amount--
 
 			necromancer
 				icon_state = "necro"
@@ -923,7 +921,7 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 				AmountUpdate(var/x as num)
 					if(necro_amount != -1)
 						necro_amount--
-			healer
+			alchemist
 				icon_state = "healer"
 				desc = "Play your part as a healer that has recently set up a home in the peasant village of Bovinia. Would you like to pick this class?"
 				amount = 1
@@ -981,7 +979,7 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					if(mage_amount != -1)
 						mage_amount--
 		religion
-			bishop
+			/*bishop
 				icon_state = "bishop"
 				desc = "The Bishop is in charge of the church of Bovinia. He works with his priests to spread the word of Belius to others."
 				amount = 1
@@ -1003,8 +1001,8 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					amount = bishop_amount
 				AmountUpdate(var/x as num)
 					if(bishop_amount != -1)
-						bishop_amount--
-			priest
+						bishop_amount--*/
+			/*priest
 				icon_state = "priest"
 				desc = "The Priest makes sure that all villages understand one thing clearly: although there may be a king to rule over them, religion is also very important. The Priest is often seen doing ceremonies of all sorts. As the Priest, you wield the ability to be able to resurrect the recently deceased. Would you like to become the Priest?"
 				amount = 2
@@ -1015,10 +1013,10 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 
 					M.contents += new/item/armour/hat/priest_hat(M)
 					M.contents += new/item/armour/body/priest_cloths(M)
-					//M.contents += new/item/misc/books/Holy(M)
-					M.learn_spell(/spell/heal, 1)
+					M.contents += new/item/misc/books/Holy(M)
+					//HOLDER
 
-					return 1
+					return 2
 				New()
 					..()
 					amount = priest_amount
@@ -1026,7 +1024,8 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					amount = priest_amount
 				AmountUpdate(var/x as num)
 					if(priest_amount != -1)
-						priest_amount--
+						priest_amount--*/
+
 
 		/*family
 			icon_state = "peasant"

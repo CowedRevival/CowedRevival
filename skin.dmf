@@ -1500,7 +1500,6 @@ window "construction_pane"
 		size = 480x288
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Construction"
 		titlebar = false
@@ -1755,7 +1754,6 @@ window "family"
 		size = 76x28
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "Shop"
 		command = ""
@@ -1765,7 +1763,6 @@ window "family"
 		size = 76x28
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "Private Forum"
 		command = ""
@@ -1775,7 +1772,6 @@ window "family"
 		size = 76x28
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "Ranks"
 		command = ""
@@ -1785,7 +1781,6 @@ window "family"
 		size = 76x28
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "Members"
 		command = ""
@@ -1795,7 +1790,6 @@ window "family"
 		size = 76x28
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "General"
 		command = ""
@@ -1805,7 +1799,6 @@ window "family"
 		size = 624x424
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		saved-params = ""
 
 window "info"
@@ -1910,7 +1903,6 @@ window "items_pane"
 		size = 480x288
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Items"
 		titlebar = false
@@ -1943,6 +1935,7 @@ window "outputwindow/both"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Both"
 		titlebar = false
@@ -1951,6 +1944,7 @@ window "outputwindow/both"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 654x494
 	elem "output"
 		type = OUTPUT
 		pos = 0,0
@@ -1958,14 +1952,13 @@ window "outputwindow/both"
 		anchor1 = 0,0
 		anchor2 = 100,100
 		font-family = "Papyrus,Minion Pro"
-		font-size = 10
 		background-color = #ded5b6
 		is-default = true
 		border = line
 		saved-params = "max-lines"
 		link-color = #6d4012
 		visited-color = #a96436
-		style = "tt, .medal { font-family: \"Minion Pro\"; }\n.medal { color: #00CC00; }\n.medaltitle { font-style: bold; }"
+		style = "tt, .medal { font-family: \"Minion Pro\"; }\n.medal { color: #00CC00; }\n.medaltitle { font-style: bold; }"
 		enable-http-images = true
 		max-lines = 0
 

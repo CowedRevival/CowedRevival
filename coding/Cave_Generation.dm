@@ -59,7 +59,7 @@ turf/Cave_Start
 		var/temp_location_x = locate(tag).x
 		var/temp_location_y = locate(tag).y
 		var/temp_location_z = locate(tag).z
-
+		var/monster_count = 0
 		for(var/i = 1 to cave_width)
 			for(var/j = 1 to cave_height)
 				var/position_x = temp_location_x + (i-1)
@@ -90,8 +90,9 @@ turf/Cave_Start
 					else if(prob(2))
 						var/obj/tree/mushroom/towercap/temp = new(locate(position_x, position_y, temp_location_z))
 						temp.icon_state = "false_shroom_[rand(1,3)]"
-					else if(prob(1) && prob(10))
-						new/mob/Shroom_Monster/Shroom(locate(position_x, position_y, temp_location_z))
+					else if(prob(1) && prob(10) && monster_count < 30)
+						new/mob/Shroom_Monster/Shroomling(locate(position_x, position_y, temp_location_z))
+						monster_count++
 				else if(new_map[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/deep_dirtwall))
 					if(prob(1) && prob(5))
 						new/turf/hard_floor/cracked_hard_floor(locate(position_x, position_y, temp_location_z))
@@ -121,16 +122,18 @@ turf/Cave_Start
 					else if(prob(3))
 						var/obj/tree/mushroom/towercap/temp = new(locate(position_x, position_y, temp_location_z))
 						temp.icon_state = "false_shroom_[rand(1,3)]"
-					else if(prob(1) && prob(10))
-						new/mob/Shroom_Monster/Shroom(locate(position_x, position_y, temp_location_z))
+					else if(prob(1) && prob(10) && monster_count < 50)
+						new/mob/Shroom_Monster/Shroomling(locate(position_x, position_y, temp_location_z))
+						monster_count++
 				else if(new_map[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/chaos_stone))
 					new/turf/chaos_brick(locate(position_x, position_y, temp_location_z))
-					if(prob(1) && prob(10))
+					if(prob(1) && prob(2))
 						new/obj/vein/Adamantite_Vein(locate(position_x, position_y, temp_location_z))
-					else if(prob(1) && prob(10))
+					else if(prob(2))
 						new/obj/vein/Magicite_Vein(locate(position_x, position_y, temp_location_z))
-					else if(prob(1) && prob(10))
+					else if(prob(1) && prob(10) && monster_count < 50)
 						new/mob/Demon(locate(position_x, position_y, temp_location_z))
+						monster_count++
 		new/turf/underground/dirtwall(locate(temp_location_x, temp_location_y, temp_location_z))
 
 

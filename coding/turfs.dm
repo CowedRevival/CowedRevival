@@ -120,6 +120,7 @@ turf
 				if(usr.inHand(/item/weapon/shovel) || usr.inHand(/item/weapon/pickaxe))
 					if(ActionLock("digging", 10)) return //prevent the tile from being invoked twice
 					icon_state = "dirtwall2"
+					M.Play_Sound_Local(pick('sounds/dig_1.ogg', 'sounds/dig_2.ogg', 'sounds/dig_3.ogg'))
 					spawn(2)
 						if((usr.inHand(/item/weapon/pickaxe) && prob(10)) || prob(5))
 							new/obj/vein(src)
@@ -134,6 +135,7 @@ turf
 				if(usr.inHand(/item/weapon/shovel) || usr.inHand(/item/weapon/pickaxe))
 					if(ActionLock("digging", 10)) return //prevent the tile from being invoked twice
 					icon_state = "dirtwall2"
+					M.Play_Sound_Local(pick('sounds/dig_1.ogg', 'sounds/dig_2.ogg', 'sounds/dig_3.ogg'))
 					spawn(2)
 						if((usr.inHand(/item/weapon/pickaxe) && prob(12)) || prob(7))
 							new/obj/vein(src)
@@ -154,9 +156,11 @@ turf
 				if(usr.inHand(/item/weapon/shovel) || usr.inHand(/item/weapon/pickaxe))
 					if(ActionLock("digging", 10)) return //prevent the tile from being invoked twice
 					icon_state = "dirtwall2"
+					M.Play_Sound_Local(pick('sounds/dig_1.ogg', 'sounds/dig_2.ogg', 'sounds/dig_3.ogg'))
 					spawn(2)
-						if((usr.inHand(/item/weapon/pickaxe) && prob(1)) || prob(1))
-							new/obj/vein/Adamantite_Vein(src)
+						if(usr.inHand(/item/weapon/pickaxe))
+							if(prob(1) && prob(1)) new/obj/vein/Adamantite_Vein(src)
+							else if(prob(2)) new/obj/vein/Magicite_Vein(src)
 						new/turf/chaos_brick(src)
 
 	Dragon_Statue
@@ -248,22 +252,21 @@ turf
 				var/map_object/B = O.PrevLayer()
 				if(B) //already exists; just build stairs
 					var/turf/T = locate(x, y, B.z)
+					var/obj/stairs/S
+					for(var/obj/stairs/I in T.contents)
+						S = I
 					if(istype(T, /turf/underground/dirtwall))
 						new/turf/path(T)
-						new/obj/stairs(T)
+						if(!S) new/obj/stairs(T)
 					else if(istype(T, /turf/underground/deep_dirtwall))
 						new/turf/hard_floor(T)
-						new/obj/stairs(T)
+						if(!S) new/obj/stairs(T)
 					else if(istype(T, /turf/underground/chaos_stone))
 						new/turf/chaos_brick(T)
-						new/obj/stairs(T)
+						if(!S) new/obj/stairs(T)
 					else if(istype(T, /turf/path) || istype(T, /turf/hard_floor) || istype(T, /turf/chaos_brick))
-						new/obj/stairs(T)
-					return
-				var/new_z = add_layer(O.kingdom, up = 0) //create a new underground layer
-				var/turf/T = locate(x, y, new_z)
-				new/turf/path(T)
-				new/obj/stairs(T)
+						if(!S) new/obj/stairs(T)
+				return
 		Entered(atom/movable/A)
 			var/map_object/O = MapObject(A.z)
 			if(!O) return
@@ -484,7 +487,7 @@ turf
 			return ..()
 		river_water
 			name = "river water"
-			verb/Drink(var/mob/usr)
+			verb/Drink()
 				set src in view(1)
 				if(usr.corpse) return
 				hearers(src) << "<small>[usr.name] sips water from the river.</small>"
@@ -548,6 +551,9 @@ turf
 						item_get = "a [I.name]"
 					else if(M.skills.fishing > 50 && prob(10))
 						var/item/I = new/item/misc/food/Shark(M.loc)
+						item_get = "a [I.name]"
+					else if(prob(1))
+						var/item/I = new/item/misc/waterstone(M.loc)
 						item_get = "a [I.name]"
 					else
 						if(prob(95))
@@ -721,11 +727,21 @@ turf
 				var/map_object/B = O.PrevLayer()
 				if(B) //already exists; just build stairs
 					var/turf/T = locate(x, y, B.z)
-					if(istype(T, /turf/underground/dirtwall)) new/turf/stairs(T)
-					return
-				var/new_z = add_layer(O.kingdom, up = 0) //create a new underground layer
-				var/turf/T = locate(x, y, new_z)
-				new/turf/stairs(T)
+					var/obj/stairs/S
+					for(var/obj/stairs/I in T.contents)
+						S = I
+					if(istype(T, /turf/underground/dirtwall))
+						new/turf/path(T)
+						if(!S) new/obj/stairs(T)
+					else if(istype(T, /turf/underground/deep_dirtwall))
+						new/turf/hard_floor(T)
+						if(!S) new/obj/stairs(T)
+					else if(istype(T, /turf/underground/chaos_stone))
+						new/turf/chaos_brick(T)
+						if(!S) new/obj/stairs(T)
+					else if(istype(T, /turf/path) || istype(T, /turf/hard_floor) || istype(T, /turf/chaos_brick))
+						if(!S) new/obj/stairs(T)
+				return
 		Entered(atom/movable/A)
 			if(icon_state == "trapdoor open")
 				var/map_object/O = MapObject(A.z)
@@ -765,6 +781,14 @@ turf
 						if(buildinghealth <= 0)
 							hearers(usr) <<"[usr] cuts the [src] down"
 							new/turf/hole(src)
+							var/z = src.z
+							src.Destroy()
+							if(MapLayer(z) <= 0 && MapLayer(z) > -2)
+								new/turf/hole(locate(src.x,src.y,src.z))
+							else if(MapLayer(z) == -2)
+								new/turf/hole/hard_floor_hole(locate(src.x,src.y,src.z))
+							else
+								new/turf/underground/deep_dirtwall(locate(src.x,src.y,src.z))
 						return
 			..()
 		verb/Climb_Down()

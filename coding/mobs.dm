@@ -483,7 +483,6 @@ mob
 
 		if(shackled && !chosen) del src
 	Move(turf/newloc, newdir, forced = 0)
-		if(current_action) AbortAction()
 
 		if(state=="hidden")
 			src.dir = newdir
@@ -539,6 +538,7 @@ mob
 		if(src.loc != old_loc && whopull)
 			var/atom/movable/O = whopull
 			O.Move(old_loc)
+		if(current_action && get_dist(src, current_action) > 1) AbortAction()
 	MouseDrop(obj/chest/O)
 		if(istype(O) && O.icon_state == "chest open" && (usr in range(1, O)) && (src in range(1, usr)) && HP > 0)
 			for(var/mob/N in hearers(src))
@@ -1409,3 +1409,11 @@ mob
 			if(!newloc) newloc = get_step(src, newdir)
 			if(newloc) loc = newloc
 			if(newdir) dir = newdir
+
+mob/proc/Play_Sound_Local(var/sound_to_play)
+	play_sound(src, hearers(src), sound(sound_to_play))
+
+client/var
+	font_size = 2
+mob/verb/font_size(var/I as num)
+	usr.client.font_size = I

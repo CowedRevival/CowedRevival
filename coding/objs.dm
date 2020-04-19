@@ -322,15 +322,8 @@ obj
 					var/map_object/O = MapObject(z)
 					if(O.map_layer < 0) return
 					var/map_object/B = O.NextLayer()
+					world << "[B.loc.z]"
 					if(B) return //layer already exists
-					var/new_z = add_layer(O.kingdom) //create the new layer
-
-					var/turf/T = locate(x, y, new_z)
-					if(!T) return
-					if(istype(T, /turf/sky) || T.type == world.turf)
-						new/area/darkness/sky(T)
-						T = new/turf/sky/hole(T)
-					if(T) T.update_sky()
 		Bumped(mob/M)
 			var/turf/loc = src.loc
 			if(!istype(M) || !istype(loc) || !loc.empty(src)) return
@@ -343,11 +336,11 @@ obj
 				O = O.NextLayer()
 				if(!O) return
 				var/turf/T = locate(x, y, O.z)
-
 				if(istype(T, /turf/path) || istype(T, /turf/grass) || istype(T, /turf/sand))
 					if(istype(T, /turf/sand))
 						new/turf/hole{icon_state = "hole_s"}(T)
-					else new/turf/hole(T)
+					else
+						new/turf/hole(T)
 				else if(istype(T, /turf/trapdoor))
 					var/turf/trapdoor/P = T
 					if(P.icon_state == "trapdoor closed")
@@ -720,13 +713,14 @@ obj
 				if(M.inHand(/item/weapon/axe))
 					while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/axe))
 						icon_state = "[current_season_state]cut [icon_state_base]"
+						M.Play_Sound_Local(pick('sounds/axe_1.ogg', 'sounds/axe_2.ogg', 'sounds/axe_3.ogg', 'sounds/axe_4.ogg', 'sounds/axe_5.ogg', 'sounds/axe_6.ogg', 'sounds/axe_7.ogg'))
 						sleep(10)
 						icon_state = "[current_season_state][icon_state_base]"
 
 						if(M && M.current_action == src && loc && wood > 0)
 							var
 								amount = 1
-								item/misc/wood/I = locate() in M
+								item/misc/wood/wood_log/I = locate() in M
 							if(I) I.stacked += amount
 							else
 								I = new(M)
@@ -743,6 +737,7 @@ obj
 				else
 					while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/pickaxe))
 						icon_state = "[current_season_state]cut [icon_state_base]"
+						M.Play_Sound_Local(pick('sounds/axe_1.ogg', 'sounds/axe_2.ogg', 'sounds/axe_3.ogg', 'sounds/axe_4.ogg', 'sounds/axe_5.ogg', 'sounds/axe_6.ogg', 'sounds/axe_7.ogg'))
 						sleep(25)
 						icon_state = "[current_season_state][icon_state_base]"
 
@@ -801,6 +796,7 @@ obj
 		mushroom
 			icon = 'icons/mushroom_objects.dmi'
 			icon_state = "false_shroom_1"
+
 			towercap
 				name = "towercap"
 				New()
@@ -811,13 +807,14 @@ obj
 					if(M.inHand(/item/weapon/axe))
 						while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/axe))
 							icon_state = "cut [icon_state_base]"
+							M.Play_Sound_Local(pick('sounds/axe_1.ogg', 'sounds/axe_2.ogg', 'sounds/axe_3.ogg', 'sounds/axe_4.ogg', 'sounds/axe_5.ogg', 'sounds/axe_6.ogg', 'sounds/axe_7.ogg'))
 							sleep(10)
 							icon_state = "[icon_state_base]"
 
 							if(M && M.current_action == src && loc && wood > 0)
 								var
 									amount = 1
-									item/misc/wood/I = locate() in M
+									item/misc/wood/towercap_log/I = locate() in M
 								if(I) I.stacked += amount
 								else
 									I = new(M)
@@ -825,34 +822,6 @@ obj
 									I.suffix = "x[I.stacked]"
 								wood -= amount
 								if(wood <= 0)
-									new/item/misc/seeds/Tree_Seeds(loc)
-									Move(null, forced = 1)
-
-								M.medal_Report("woodcutter")
-							else break
-							sleep(10)
-					else
-						while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/pickaxe))
-							icon_state = "cut [icon_state_base]"
-							sleep(25)
-							icon_state = "[icon_state_base]"
-
-							if(M && M.current_action == src && loc && wood > 0)
-								var
-									amount = 1
-									item/misc/tree_root/I = locate() in M
-								if(I)
-									I.stacked += amount
-									I.suffix = "x[I.stacked]"
-									I.suffix = "x[I.stacked]"
-								else
-									I = new(M)
-									I.stacked += (amount + 1)
-									I.suffix = "x[I.stacked]"
-									I.suffix = "x[I.stacked]"
-								wood -= (amount / 2)
-								if(wood <= 0)
-									//maybe seeds in future?
 									if(prob(5))
 										new/mob/Shroom_Monster/Shroomling(loc)
 									Move(null, forced = 1)
@@ -909,13 +878,14 @@ obj
 				if(M.inHand(/item/weapon/axe))
 					while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/axe))
 						icon_state = "[current_season_state]cut [icon_state_base]"
+						M.Play_Sound_Local(pick('sounds/axe_1.ogg', 'sounds/axe_2.ogg', 'sounds/axe_3.ogg', 'sounds/axe_4.ogg', 'sounds/axe_5.ogg', 'sounds/axe_6.ogg', 'sounds/axe_7.ogg'))
 						sleep(10)
 						icon_state = "[current_season_state][icon_state_base]"
 
 						if(M && M.current_action == src && loc && wood > 0)
 							var
 								amount = 1
-								item/misc/wood/I = locate() in M
+								item/misc/wood/wood_log/I = locate() in M
 							if(I) I.stacked += amount
 							else
 								I = new(M)
@@ -932,6 +902,7 @@ obj
 				else
 					while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/pickaxe))
 						icon_state = "[current_season_state]cut [icon_state_base]"
+						M.Play_Sound_Local(pick('sounds/axe_1.ogg', 'sounds/axe_2.ogg', 'sounds/axe_3.ogg', 'sounds/axe_4.ogg', 'sounds/axe_5.ogg', 'sounds/axe_6.ogg', 'sounds/axe_7.ogg'))
 						sleep(25)
 						icon_state = "[current_season_state][icon_state_base]"
 
@@ -972,13 +943,14 @@ obj
 			ActionLoop(mob/M)
 				while(M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/axe))
 					icon_state = "[current_season_state]cut palm tree"
+					M.Play_Sound_Local(pick('sounds/axe_1.ogg', 'sounds/axe_2.ogg', 'sounds/axe_3.ogg', 'sounds/axe_4.ogg', 'sounds/axe_5.ogg', 'sounds/axe_6.ogg', 'sounds/axe_7.ogg'))
 					sleep(10)
 					icon_state = "[current_season_state]palm tree"
 
 					if(M.current_action == src && loc && wood > 0)
 						var
 							amount = 1
-							item/misc/wood/I = locate() in M
+							item/misc/wood/wood_log/I = locate() in M
 						if(I) I.stacked += amount
 						else
 							I = new(M)

@@ -2,6 +2,7 @@ mob
 	var/isMonster=0
 	var/OLDICON
 	var/infection=0
+	var/as_mob_update_speed = 30
 mob/Zombie
 	icon='icons/Zombie.dmi'
 	icon_state="alive"
@@ -113,15 +114,34 @@ mob/proc/msntr()
 mob/Shroom_Monster
 	icon='icons/shroom.dmi'
 	icon_state="alive"
+	var/age = 0
 	Shroom
 		icon='icons/shroom.dmi'
 		icon_state="alive"
 		HP=100
 		defence=2
 		isMonster=1
+		age = 2
 		New()
 			..()
+			tag = "shroom"
 			src.Shroom()
+			Shroom_Life_Cycle()
+
+	Shroom_Brute
+		icon='icons/shroom_brute.dmi'
+		icon_state="alive"
+		HP=200
+		defence = 2
+		strength = 4
+		speed = 100
+		as_mob_update_speed = 15
+		New()
+			..()
+			tag = "shroom_brute"
+			name = "Shroom Brute [Monster_Name_Generator()]"
+			src.Shroom()
+			Shroom_Life_Cycle()
 
 
 	Shroomling
@@ -130,12 +150,12 @@ mob/Shroom_Monster
 		HP=50
 		defence=2
 		isMonster=1
+		age = 0
 		New()
 			..()
+			tag = "shroomling"
 			src.Shroom()
-			spawn(1500)
-				new/mob/Shroom_Monster/Shroom
-				del(src)
+			Shroom_Life_Cycle()
 mob/Demon
 	icon='icons/Demon.dmi'
 	icon_state="alive"
@@ -173,18 +193,19 @@ mob/proc/Demon()
 
 mob/proc/Shroom()
 	if(HP <= 0) return
-	spawn(30)
+	spawn(as_mob_update_speed)
 		Shroom()
+	sleep(world.tick_lag)
 	var/mob/m
 	for(var/mob/M in oview(10))
-		if(!istype(M,/mob/observer) && M.name!="Shroom"&&M.isMonster==0)
+		if(!istype(M,/mob/observer) && !istype(M,/mob/Shroom_Monster) && M.isMonster==0)
 			m=M
 	if(m&&src.legshackled==0)
 		step_towards(src,m)
 	else if(src.legshackled==0)
 		step_rand(src)
 	for(var/mob/M in oview(1))
-		if(M.name!="Shroom"&&!findtext(M.name,"corpse"))
+		if(!istype(M,/mob/Shroom_Monster) && !findtext(M.name,"corpse"))
 			if(src.shackled==0&&M.isMonster==0)
 				for(var/mob/N in ohearers(src))
 					N.show_message("[src] attacks [M].")
@@ -193,3 +214,37 @@ mob/proc/Shroom()
 				hud_main.UpdateHUD(M)
 				M.checkdead(M)
 				break
+
+mob/Shroom_Monster/proc/Shroom_Life_Cycle()
+	if(HP <= 0) return
+	spawn(1000)
+		Shroom_Life_Cycle()
+		age += 1
+		HP += 25
+	if(age > 2 && tag == "shroomling")
+		if(prob(80))
+			for(var/mob/N in ohearers(src))
+				N.show_message("[src] grows into a Shroom!")
+			name = "Shroom"
+			icon = 'icons/shroom.dmi'
+			tag = "shroom"
+			HP = 100
+			defence = 2
+		if(prob(20))
+			for(var/mob/N in ohearers(src))
+				N.show_message("[src] grows into a Shroom Brute, dear god!")
+			name = "Shroom Brute [Monster_Name_Generator()]"
+			icon = 'icons/shroom_brute.dmi'
+			tag = "shroom_brute"
+			HP = 200
+			defence = 2
+			strength = 4
+			speed = 100
+			as_mob_update_speed = 15
+
+mob/proc/Monster_Name_Generator()
+	var/monster_name = pick("Val", "Varn", "Gorg", "Kar", "Marn", "Morsh", "Zorg", "Zarlg", "Ki", "Glu", "Glox")
+	monster_name += pick("kur", "jorg", "ban", "zar", "zol", "man", "harl", "arg", "zak", "lorg", "barn", "glax")
+	if(prob(50)) monster_name += pick("carn", "zarn", "orio", "ow", "kal", "sal", "sol", "vol", "tor", "zorg", "tan")
+	if(prob(20)) monster_name += pick(" The 1st", " The 2nd", " The 3rd", " The [rand(1,100)]th", " The World's Bane", " The Man Eater" , " The Apocalypse", " The Timid")
+	return monster_name

@@ -90,8 +90,12 @@ turf
 							hearers(usr) <<"[usr] cuts the [src] down"
 							var/z = src.z
 							src.Destroy()
-							if(MapLayer(z) <= 0)
+							if(MapLayer(z) <= 0 && MapLayer(z) > -2)
 								new/turf/path(locate(src.x,src.y,src.z))
+							else if(MapLayer(z) == -2)
+								new/turf/hard_floor(locate(src.x,src.y,src.z))
+							else if(MapLayer(z) == -3)
+								new/turf/chaos_brick(locate(src.x,src.y,src.z))
 							else
 								new/turf/sky(locate(src.x,src.y,src.z))
 			..()
@@ -254,8 +258,12 @@ turf
 							hearers(usr) <<"[usr] smashs the [src] down"
 							var/z = src.z
 							src.Destroy()
-							if(MapLayer(z) <= 0)
+							if(MapLayer(z) <= 0 && MapLayer(z) > -2)
 								new/turf/path(locate(src.x,src.y,src.z))
+							else if(MapLayer(z) == -2)
+								new/turf/hard_floor(locate(src.x,src.y,src.z))
+							else if(MapLayer(z) == -3)
+								new/turf/chaos_brick(locate(src.x,src.y,src.z))
 							else
 								new/turf/sky(locate(src.x,src.y,src.z))
 			..()
@@ -372,8 +380,12 @@ turf
 								hearers(usr) <<"[usr] smashs the [src] down"
 								var/z = src.z
 								src.Destroy()
-								if(MapLayer(z) <= 0)
-									new/turf/water(locate(src.x,src.y,src.z))
+								if(MapLayer(z) <= 0 && MapLayer(z) > -2)
+									new/turf/path(locate(src.x,src.y,src.z))
+								else if(MapLayer(z) == -2)
+									new/turf/hard_floor(locate(src.x,src.y,src.z))
+								else if(MapLayer(z) == -3)
+									new/turf/chaos_brick(locate(src.x,src.y,src.z))
 								else
 									new/turf/sky(locate(src.x,src.y,src.z))
 
@@ -401,8 +413,12 @@ turf
 							hearers(usr) <<"[usr] smashs the [src] down"
 							var/z = src.z
 							src.Destroy()
-							if(MapLayer(z) <= 0)
+							if(MapLayer(z) <= 0 && MapLayer(z) > -2)
 								new/turf/path(locate(src.x,src.y,src.z))
+							else if(MapLayer(z) == -2)
+								new/turf/hard_floor(locate(src.x,src.y,src.z))
+							else if(MapLayer(z) == -3)
+								new/turf/chaos_brick(locate(src.x,src.y,src.z))
 							else
 								new/turf/sky(locate(src.x,src.y,src.z))
 			..()

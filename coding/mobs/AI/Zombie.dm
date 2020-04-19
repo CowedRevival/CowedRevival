@@ -71,4 +71,7 @@ mob/AI/Zombie
 						idle=FALSE
 						break
 			if(prob(1))
-				hearers()<<"<b>[name]</b> growns..."
+				if(prob(2))
+					hearers()<<"<b>[name]</b> growns..."
+				else
+					hearers()<<"<b>[name]</b> groans..."

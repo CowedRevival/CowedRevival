@@ -135,7 +135,7 @@ turf/water
 				size = input(usr, "What is the size of the boat you'd like to make?", "Build Boat :: Boat Size", 1) as num|null
 			if(size == null) return
 			size = round(size)
-			if(size > 10) size = 10
+			if(size > 5) size = 5
 			if(size <= 0) size = 1
 
 			var

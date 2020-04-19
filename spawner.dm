@@ -9,11 +9,16 @@ obj/spawner
 		max_no_of_spawns = 3
 		range = 3
 
+	New()
+		..()
+		tag = "[rand(1,99999)][rand(1,99999)]"
+
 	proc/Respawn()
 
 	animal
 		var/animal/animal_type
 		Respawn()
+			var/obj/spawner = locate(tag)
 			if(!spawned_children) spawned_children = new()
 			for(var/animal/I in spawned_children)
 				if(I.icon_state == "dead")
@@ -21,9 +26,9 @@ obj/spawner
 			if(spawned_children.len < max_no_of_spawns)
 				var/number_of_spawns = max_no_of_spawns - spawned_children.len
 				for(var/i = 1 to number_of_spawns)
-					var/x = loc.x + rand(-range, range)
-					var/y = loc.y + rand(-range, range)
-					var/z = loc.z
+					var/x = spawner.loc.x + rand(-range, range)
+					var/y = spawner.loc.y + rand(-range, range)
+					var/z = spawner.loc.z
 					spawned_children += new animal_type(locate(x,y,z))
 
 		Goat_Spawner

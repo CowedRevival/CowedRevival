@@ -12,6 +12,7 @@ map_object
 	New()
 		. = ..()
 		icon = null
+		tag = name
 	Del() return //can't delete this type of object
 	proc
 		NextLayer()

@@ -551,9 +551,9 @@ item/misc
 							usr.show_message("\t <tt>[M.name]</tt> [M.icon == 'icons/Skeleton.dmi' ? "the skeleton" : (M.icon == 'icons/Zombie.dmi' ? "the zombie" : "the human")]")
 		Healer
 			icon_state="alchemy"
-		Holy
-			name="Holy Book"
-			icon_state="holy"
+		True_Holy
+			name="The True Holy Book"
+			icon_state="true_holy"
 			verb
 				Heal(mob/M in view())
 					if(M == usr)
@@ -582,6 +582,32 @@ item/misc
 					for(var/mob/N in ohearers(usr))
 						N.show_message("[usr] starts to chant words out of a book.")
 					M.revive()
+		Holy
+			name="Holy Book"
+			icon_state="holy"
+			verb
+				Heal(mob/M in view())
+					if(M == usr)
+						for(var/mob/N in ohearers(usr))
+							N.show_message("<font color=blue>[usr] points his finger at himself.")
+						usr.show_message("<font color=blue>You point your finger at yourself.")
+						M.HP+=15
+						if(M.HP >= 100)
+							M.HP = 100
+						usr.SLEEP-=5
+						hud_main.UpdateHUD(M)
+						hud_main.UpdateHUD(usr)
+						return
+					else
+						for(var/mob/N in ohearers(usr))
+							N.show_message("<font color=blue>[usr] points his finger at [M].")
+						usr.show_message("<font color=blue>You point your finger at [M].")
+						M.HP+=15
+						if(M.HP >= 100)
+							M.HP = 100
+						usr.SLEEP -= 5
+						hud_main.UpdateHUD(M)
+						hud_main.UpdateHUD(usr)
 	window_shutters
 		icon='icons/Supplies.dmi'
 		icon_state="window shutters"
@@ -681,7 +707,15 @@ item/misc
 	wood
 		icon = 'icons/wood.dmi'
 		icon_state = "1"
-		stacked = 1
+		wood_log
+			icon = 'icons/wood.dmi'
+			icon_state = "1"
+			stacked = 1
+
+		towercap_log
+			icon = 'icons/mushroom_objects.dmi'
+			icon_state = "towercap_log"
+			stacked = 1
 		/*verb
 			create_paper()
 				set category = "build"
@@ -1118,7 +1152,7 @@ item/misc
 	magicite_ingot
 		name = "Magicite Ingot"
 		icon='icons/ores_and_veins.dmi'
-		icon_state="Mithril Ingot"
+		icon_state="Magicite Ingot"
 		stacked = 1
 //
 	molten_adamantite
@@ -1451,8 +1485,8 @@ item/misc
 		Necromancer
 			name = "Necromancer's Key"
 			keyid = "necromancer"
-		Archduke_Key
-			name = "Archduke's Key"
+		Treasurer_Key
+			name = "Tresurer's Key"
 			keyid = "bov_archduke"
 			cowmalot
 				keyid = "cow_archduke"
