@@ -172,8 +172,8 @@ obj
 							K.stacked += rand(1,2)
 							K.suffix = "x[I.stacked]"
 						else
-							usr.contents += new/item/misc/Hemp
-							var/item/misc/Hemp/J = locate() in usr
+							usr.contents += new/item/misc/seeds/Hemp_Seeds/
+							var/item/misc/seeds/Hemp_Seeds/J = locate() in usr
 							J.stacked += rand(0,1)
 							J.suffix = "x[J.stacked]"
 						if(usr.skills.farming < 100) usr.skills.farming++

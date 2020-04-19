@@ -1000,6 +1000,8 @@ mob
 			if(!(life_time % 240))
 				HUNGER -= 1
 				THIRST -= 1
+				if(THIRST >= 100) THIRST = MTHIRST
+				if(HUNGER >= 100) HUNGER = MHUNGER
 				UpdateHUD = 1
 				if(HUNGER <= 1)
 					show_message("You are so hungry you bite yourself and keep chewing on yourself!")
@@ -1009,6 +1011,7 @@ mob
 					UpdateHUD = 1
 					checkdead(src)
 				if(THIRST <= 1)
+					if(prob(50)) show_message("You are so thirsty that it hurts to live!")
 					src.HP -= 5
 					src.last_hurt = "thirst"
 					UpdateHUD = 1

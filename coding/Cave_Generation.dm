@@ -88,8 +88,7 @@ turf/Cave_Start
 							if(100)
 								new/obj/vein/Magicite_Vein(locate(position_x, position_y, temp_location_z))
 					else if(prob(2))
-						var/obj/tree/mushroom/towercap/temp = new(locate(position_x, position_y, temp_location_z))
-						temp.icon_state = "false_shroom_[rand(1,3)]"
+						new/obj/tree/mushroom/towercap(locate(position_x, position_y, temp_location_z))
 					else if(prob(1) && prob(10) && monster_count < 30)
 						new/mob/Shroom_Monster/Shroomling(locate(position_x, position_y, temp_location_z))
 						monster_count++
@@ -120,8 +119,7 @@ turf/Cave_Start
 							if(100)
 								new/obj/vein/Magicite_Vein(locate(position_x, position_y, temp_location_z))
 					else if(prob(3))
-						var/obj/tree/mushroom/towercap/temp = new(locate(position_x, position_y, temp_location_z))
-						temp.icon_state = "false_shroom_[rand(1,3)]"
+						new/obj/tree/mushroom/towercap(locate(position_x, position_y, temp_location_z))
 					else if(prob(1) && prob(10) && monster_count < 50)
 						new/mob/Shroom_Monster/Shroomling(locate(position_x, position_y, temp_location_z))
 						monster_count++

@@ -46,7 +46,7 @@ game
 			if(prob(50))
 				world << "<b>The moon has a strange glint tonight...</b>"
 				for(var/mob/M in world)
-					if(M.tag == "Skeleton")
+					if(M.tag == "Skeleton" && M.HP <= 0)
 						M.MHP = 250
 						M.HP = 250
 						M.MHUNGER = 99999

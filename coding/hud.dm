@@ -260,31 +260,6 @@ screen //screen object: goes in client.screen. heh.
 		reset_reboot_timer
 			icon_state = "rtimer0"
 			screen_loc = "8,17:16"
-			Click()
-				if(!game || game.reboot_timer > 3000) return
-				if(!game.reboot_votes) game.reboot_votes = new/list()
-				if(!(usr.ckey in game.reboot_votes))
-					game.reboot_votes += usr.ckey
-					send_message(world, "<tt>[usr.key] votes to reset the reboot timer.</tt>", 2)
-
-					var/players = 0
-					for(var/client/C) if(C.inactivity < 900) players++
-					if(!players || !game.reboot_votes || !game.reboot_votes.len)
-						hud_main.reboot_clock.icon_state = "rctimer-3"
-					else
-						var/perc = game.reboot_votes.len / (players / 100)
-						if(perc >= 75)
-							game.reboot_timer = initial(game.reboot_timer)
-							icon_state = "rctimer0"
-						else
-							if(perc <= 10) hud_main.reboot_clock.icon_state = "rctimer-3"
-							else if(perc <= 20) hud_main.reboot_clock.icon_state = "rctimer-2"
-							else if(perc <= 30) hud_main.reboot_clock.icon_state = "rctimer-1"
-							else if(perc <= 60) hud_main.reboot_clock.icon_state = "rctimer0"
-							else if(perc <= 70) hud_main.reboot_clock.icon_state = "rctimer1"
-							else if(perc <= 80) hud_main.reboot_clock.icon_state = "rctimer2"
-							else hud_main.reboot_clock.icon_state = "rctimer3"
-				icon_state = "rtimer2"
 	intent_selector
 		icon_state = "intSelector"
 	intent

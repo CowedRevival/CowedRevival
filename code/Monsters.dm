@@ -115,6 +115,10 @@ mob/Shroom_Monster
 	icon='icons/shroom.dmi'
 	icon_state="alive"
 	var/age = 0
+	var/MAXHP
+	New()
+		..()
+		MAXHP = HP
 	Shroom
 		icon='icons/shroom.dmi'
 		icon_state="alive"
@@ -135,7 +139,7 @@ mob/Shroom_Monster
 		defence = 2
 		strength = 4
 		speed = 100
-		as_mob_update_speed = 15
+		as_mob_update_speed = 20
 		New()
 			..()
 			tag = "shroom_brute"
@@ -221,6 +225,8 @@ mob/Shroom_Monster/proc/Shroom_Life_Cycle()
 		Shroom_Life_Cycle()
 		age += 1
 		HP += 25
+		if(HP > MAXHP)
+			HP = MAXHP
 	if(age > 2 && tag == "shroomling")
 		if(prob(80))
 			for(var/mob/N in ohearers(src))
@@ -240,11 +246,11 @@ mob/Shroom_Monster/proc/Shroom_Life_Cycle()
 			defence = 2
 			strength = 4
 			speed = 100
-			as_mob_update_speed = 15
+			as_mob_update_speed = 20
 
 mob/proc/Monster_Name_Generator()
 	var/monster_name = pick("Val", "Varn", "Gorg", "Kar", "Marn", "Morsh", "Zorg", "Zarlg", "Ki", "Glu", "Glox")
 	monster_name += pick("kur", "jorg", "ban", "zar", "zol", "man", "harl", "arg", "zak", "lorg", "barn", "glax")
 	if(prob(50)) monster_name += pick("carn", "zarn", "orio", "ow", "kal", "sal", "sol", "vol", "tor", "zorg", "tan")
-	if(prob(20)) monster_name += pick(" The 1st", " The 2nd", " The 3rd", " The [rand(1,100)]th", " The World's Bane", " The Man Eater" , " The Apocalypse", " The Timid")
+	if(prob(50)) monster_name += pick(" The 1st", " The 2nd", " The 3rd", " The [rand(1,100)]th", " The World's Bane", " The Man Eater" , " The Apocalypse", " The Timid")
 	return monster_name

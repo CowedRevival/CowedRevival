@@ -524,6 +524,14 @@ item/misc
 						else
 							if(verbose) M.show_message("<tt>You are now bound by the Necromancer, and are brainwashed to obey him.</tt>")
 							if(M.icon == 'icons/Cow.dmi') M.icon = 'icons/Zombie.dmi'
+							M.speed = 20
+							M.HUNGER = 9999
+							M.THIRST = 9999
+							M.SLEEP = 9999
+							M.MHUNGER = 9999
+							M.MTHIRST = 9999
+							M.MSLEEP = 9999
+							M.verbs -= /mob/verb/say
 							//else if(C.icon == 'icons/Zombie.dmi') C.icon = 'icons/Skeleton.dmi'
 						return 1
 				kill(mob/M)

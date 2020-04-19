@@ -1,9 +1,12 @@
+var/reboot_vote_on = 0
+var/reboot_votes
+var/voted_players
+
 var/game/game = new
 game
 	var
 		list
 			kingdoms
-			reboot_votes
 		started = 0
 		reboot_timer = 42000
 		reboot_timer_critical
@@ -27,6 +30,7 @@ game
 						for(var/mob/M in world)
 							if(M.hud_btnResetRebootTimer && M.hud_btnResetRebootTimer.icon_state != "rtimer2")
 								M.hud_btnResetRebootTimer.icon_state = "rtimer1"
+
 				else
 					if(reboot_timer_critical)
 						reboot_timer_critical = 0
@@ -42,7 +46,7 @@ game
 						O.icon = src.reboot_timer < 600 ? 'icons/screen_numbers_r.dmi' : 'icons/screen_numbers.dmi'
 						O.icon_state = "[copytext(num2text(round(reboot_timer),100),O.pposition,O.pposition+1)]"
 
-				if(src.reboot_timer <= 0)
+				/*if(src.reboot_timer <= 0)
 					src.reboot_timer = initial(src.reboot_timer)
 					var/players = 0
 					for(var/client/C) if(C.inactivity <= 900 || (C.ckey in reboot_votes)) players++
@@ -54,7 +58,27 @@ game
 						admin.reboot()
 					else
 						world << "<b>Resetting reboot timer because [perc]% out of [players] active players voted to cancel."
-					src.reboot_votes = null
+					src.reboot_votes = null*/
+
+				if(src.reboot_timer <= 300 && !reboot_vote_on)
+					reboot_vote_on = 1
+					reboot_votes = 0
+					for(var/mob/M in world)
+						if(M.client)
+							var/reboot_vote = input(M, "Reboot server?")in list("Yes","No")
+							voted_players++
+							if(reboot_vote == "Yes")
+								reboot_votes++
+
+				if(src.reboot_timer <= 0)
+					var/percentage_votes = (reboot_votes / voted_players) * 100
+					if(percentage_votes >= 50 || voted_players == 0)
+						world << "<b>Rebooting server as [percentage_votes]% out of [voted_players] wanted to reboot."
+						admin.reboot()
+					else
+						world << "<b>Resetting reboot timer because [percentage_votes]% out of [voted_players] voting players did not want to reboot."
+					src.reboot_timer = 42000
+					reboot_vote_on = 0
 
 				life_time += 10
 				for(var/mob/M in world) M.Life()
