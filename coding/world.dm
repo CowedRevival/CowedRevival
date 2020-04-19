@@ -34,7 +34,6 @@ world
 			do
 				for(C)
 					if(C.inactivity >= 190) continue
-					//if(C.ckey == "androiddata") continue
 					break
 				sleep(100)
 			while(!C)
@@ -78,8 +77,8 @@ world
 
 		berries = Make_Berry_Book()
 
-		for(var/turf/Cave_Start/I in world)
-			I.Generate()
+		/*for(var/turf/Cave_Start/I in world)
+			I.Generate()*/
 
 /*		var/bbeff = pick(effects)
 		bbeffect=bbeff

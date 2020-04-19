@@ -1,12 +1,12 @@
 // BEGIN_INTERNALS
 /*
 MAP_ZOOM: 1.000
-LAST_COMPILE_TIME: 1587271923
-DIR: code coding coding\admin coding\admin\modules coding\animals coding\items coding\mobs coding\mobs\AI coding\new_admin coding\new_admin\panel coding\objs coding\objs\families coding\snippets coding\spells coding\tardis icons lib lib\Test lib\Test\demo 
+LAST_COMPILE_TIME: 1587299467
+DIR: code coding coding\admin coding\admin\modules coding\animals coding\items coding\mobs coding\mobs\AI coding\new_admin coding\new_admin\panel coding\objs coding\objs\families coding\snippets coding\spells coding\tardis icons lib lib\Test lib\Test\demo maps 
 AUTO_FILE_DIR: ON
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 513.1517
-WINDOW: coding\spells\building.dm;coding\admin.dm;coding\dta_admin.dm;coding\game.dm;coding\mobs.dm;coding\objs\vein.dm;coding\hud.dm;coding\items\misc.dm;icons\wood.dmi;icons\mushroom_objects.dmi;coding\boats.dm;code\Monsters.dm;icons\shroom.dmi;coding\changelog.dm;coding\Cave_Generation.dm;coding\procs.dm;coding\Seasons.dm;coding\crops.dm;coding\spells\necromancer.dm;code\Crafting_Buttons.dm;coding\classes.dm;coding\new_admin\admin_panel.dm;coding\new_admin\global.dm;coding\world.dm;coding\admin\modules\game.dm;coding\items\armour.dm;Cowed.dme
-FILE: code\Monsters.dm
+WINDOW: coding\spells\building.dm;coding\admin.dm;coding\dta_admin.dm;coding\game.dm;coding\mobs.dm;coding\objs\vein.dm;coding\hud.dm;coding\items\misc.dm;icons\wood.dmi;icons\mushroom_objects.dmi;coding\boats.dm;code\Monsters.dm;icons\shroom.dmi;coding\Seasons.dm;coding\world.dm;maps\cowmalot.dmm;lib\Test\Test.dm
+FILE: lib\Test\Test.dm
 */
 // END_INTERNALS

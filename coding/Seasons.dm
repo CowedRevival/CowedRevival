@@ -80,3 +80,10 @@ obj
 				icon_state = "tree_1"
 				icon_state_base = icon_state
 			..()
+
+
+mob/verb/Change_Month()
+	set category = "Admin"
+	Month += 1
+	Day = 3
+	Hour = 23

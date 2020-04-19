@@ -63,16 +63,20 @@ game
 				if(src.reboot_timer <= 300 && !reboot_vote_on)
 					reboot_vote_on = 1
 					reboot_votes = 0
+					voted_players = 0
 					for(var/mob/M in world)
 						if(M.client)
-							var/reboot_vote = input(M, "Reboot server?")in list("Yes","No")
-							voted_players++
-							if(reboot_vote == "Yes")
-								reboot_votes++
+							spawn()
+								var/reboot_vote = input(M, "Reboot server?")in list("Yes","No")
+								voted_players++
+								if(reboot_vote == "Yes")
+									reboot_votes++
 
 				if(src.reboot_timer <= 0)
-					var/percentage_votes = (reboot_votes / voted_players) * 100
-					if(percentage_votes >= 50 || voted_players == 0)
+					var/percentage_votes = 0
+					if(voted_players >= 1) percentage_votes = (reboot_votes / voted_players) * 100
+					else percentage_votes = -1
+					if(percentage_votes >= 50 || percentage_votes == -1)
 						world << "<b>Rebooting server as [percentage_votes]% out of [voted_players] wanted to reboot."
 						admin.reboot()
 					else
