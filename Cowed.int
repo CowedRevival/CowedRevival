@@ -6,7 +6,7 @@ DIR: code coding coding\admin coding\admin\modules coding\animals coding\items c
 AUTO_FILE_DIR: ON
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 513.1517
-WINDOW: code\Monsters.dm;icons\shroom.dmi;coding\turfs.dm;code\Crafting_Buttons.dm;code\Crafting.dm;maps\cowmalot.dmm;coding\animals\animals.dm;coding\world.dm;coding\new_admin\global.dm
-FILE: coding\world.dm
+WINDOW: code\Monsters.dm;icons\shroom.dmi;coding\turfs.dm;code\Crafting_Buttons.dm;code\Crafting.dm;maps\cowmalot.dmm;coding\animals\animals.dm;coding\world.dm;coding\new_admin\global.dm;coding\objs\vein.dm
+FILE: coding\objs\vein.dm
 */
 // END_INTERNALS

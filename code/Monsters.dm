@@ -165,7 +165,7 @@ mob/Shroom_Monster
 		HP=200
 		defence = 2
 		strength = 8
-		speed = 100
+		speed = 40
 		as_mob_update_speed = 20
 		New()
 			..()
@@ -287,7 +287,7 @@ mob/Shroom_Monster/proc/Shroom_Life_Cycle()
 			HP = 200
 			defence = 2
 			strength = 8
-			speed = 100
+			speed = 40
 
 mob/proc/Monster_Name_Generator()
 	var/monster_name = pick("Val", "Varn", "Gorg", "Kar", "Marn", "Morsh", "Zorg", "Zarlg", "Ki", "Glu", "Glox")
