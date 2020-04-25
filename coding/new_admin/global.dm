@@ -33,6 +33,8 @@ global_admin
 		if(!admins) admins = new/list()
 		for(var/X in developers)
 			admins[X] = new/admin(dta_ckey2key(X), "Developer")
+		for(var/X in moderators)
+			admins[X] = new/admin(dta_ckey2key(X), "Moderator")
 
 		if(!admin_log) admin_log = new/list()
 

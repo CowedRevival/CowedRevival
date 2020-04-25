@@ -47,12 +47,14 @@ item/weapon
 		icon = 'icons/items.dmi'
 		icon_state = "torch"
 		luminosity = 6
+		armour = 3
 		getting()
 			src.sd_SetLuminosity(0)
 		dropped()
 			src.sd_SetLuminosity(6)
 	axe
 		icon_state = "axe"
+		attackpow=4
 	bow
 		icon_state = "bow"
 	revolver
@@ -168,82 +170,83 @@ item/weapon
 	hoe
 		icon_state = "hoe"
 	sledgehammer
-		attackpow=2
+		attackpow=4
 		icon_state = "sledgehammer"
 	pickaxe
 		icon_state = "pickaxe"
+		attackpow=4
 	knife
 		icon_state = "knife"
 	shears
 		icon_state = "shears"
 	excowlibur
-		attackpow=15
+		attackpow=35
 		name="Excowlibur"
 		icon_state = "excowlibur"
 		two_handed = TRUE
 	katana
-		attackpow=6
+		attackpow=15
 		name="Katana"
 		icon_state = "katana"
 	gold_sword
-		attackpow=4
+		attackpow=17
 		icon_state = "gold_sword"
 		name = "Gold Sword"
 	gold_shield
 		icon_state = "gold_shield"
 		name = "Gold Shield"
-		armour = 2
+		armour = 15
 	iron_sword
-		attackpow=2
+		attackpow=15
 		icon_state = "iron_sword"
 		name = "Iron Sword"
 	tin_sword
-		attackpow=1.5
+		attackpow=10
 		icon_state = "tin_sword"
 		name = "Tin Sword"
 	copper_sword
-		attackpow=1.75
+		attackpow=7
 		icon_state = "copper_sword"
 		name = "Copper Sword"
 	tungsten_sword
-		attackpow=1.9
+		attackpow=13
 		icon_state = "tungsten_sword"
 		name = "Tungsten Sword"
 	silver_sword
-		attackpow=2.5
+		attackpow=20
 		icon_state = "silver_sword"
 		name = "Silver Sword"
 	palladium_sword
-		attackpow=3
+		attackpow=19
 		icon_state = "palladium_sword"
 		name = "Palladium Sword"
 	mithril_sword
-		attackpow=5
+		attackpow=21
 		icon_state = "mithril_sword"
 		name = "Mithril Sword"
 	magicite_sword
-		attackpow=10
+		attackpow=30
 		icon_state = "magicite_sword"
 		name = "Magicite Sword"
 		two_handed = TRUE
 	adamantite_sword
-		attackpow=20
+		attackpow=35
 		icon_state = "adamantite_sword"
 		name = "Adamantite Blood Blade"
 		two_handed = TRUE
 	cutlass
-		attackpow=2
+		attackpow=11
 		icon_state = "cutlass"
 	iron_shield
 		icon_state = "iron_shield"
-		armour = 1
+		armour = 11
 		name = "Iron Shield"
 	iron_club
-		attackpow=2
+		attackpow=11
 		icon_state = "iron_club"
 	grandius
 		name="Grandius"
-		attackpow=8
+		attackpow=36
 		icon_state = "grandius"
 		two_handed = TRUE
 	red_tinted_sword
@@ -255,27 +258,27 @@ item/weapon
 	watchman_shield
 		icon_state = "watchman_shield"
 	tin_shield
-		armour = 0.25
+		armour = 8
 		icon_state = "tin_shield"
 		name = "Tin Shield"
 	copper_shield
-		armour = 0.5
+		armour = 10
 		icon_state = "copper_shield"
 		name = "Copper Shield"
 	tungsten_shield
-		armour = 0.75
+		armour = 12
 		icon_state = "tungsten_shield"
 		name = "Tungsten Shield"
 	silver_shield
-		armour = 1.25
+		armour = 13
 		icon_state = "silver_shield"
 		name = "Silver Shield"
 	palladium_shield
-		armour = 1.75
+		armour = 17
 		icon_state = "palladium_shield"
 		name = "Palladium Shield"
 	mithril_shield
-		armour = 2.25
+		armour = 16
 		icon_state = "mithril_shield"
 		name = "Mithril Shield"
 	staff
@@ -355,19 +358,20 @@ item/weapon
 						else z = 2
 					target = locate(usr.x, usr.y, z)
 	hunting_spear
-		attackpow=2
+		attackpow=10
 		icon_state = "hunting_spear"
 		two_handed = TRUE
 	watchman_club
 		attackpow=1
 		icon_state = "watchman_club"
 	wood_sword
-		attackpow=1
+		attackpow=5
 		icon_state = "wood_sword"
 	wood_shield
 		icon_state = "wood_shield"
+		armour = 5
 	wood_club
-		attackpow=1
+		attackpow=5
 		icon_state = "wood_club"
 	//rod
 	//	icon_state = "rod"
@@ -407,11 +411,11 @@ item/weapon
 					usr.show_message("You need to be holding a shovel to do that!")
 	spear
 		icon_state = "spear"
-		attackpow=4
+		attackpow=10
 		two_handed = TRUE
 	halberd
 		icon_state = "halberd"
-		attackpow=5
+		attackpow=10
 		two_handed = TRUE
 		name = "primitive halberd"
 	whip

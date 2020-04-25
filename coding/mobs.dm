@@ -95,6 +95,8 @@ mob
 
 		berry_effects/Effects = new
 
+		attack_speed = 10
+
 	proc
 		RemoveClassImages()
 			for(var/character_handling/container/O in game.kingdoms)
@@ -662,7 +664,7 @@ mob
 			meat.stacked = rand(1,hunter_range) + hunter_yield
 			var/item/misc/bones/bone/bone = new(loc)
 			bone.stacked = rand(1,hunter_range) + hunter_yield
-			if(prob(25)) new/item/misc/orbs/Frog_Orb(loc)
+			if(prob(10)) new/item/misc/orbs/Frog_Orb(loc)
 		else if(istype(src, /animal/wolf))
 			var/item/misc/food/Meat/meat = new(loc)
 			meat.stacked = rand(1,hunter_range) + hunter_yield
@@ -670,6 +672,10 @@ mob
 			bone.stacked = rand(1,hunter_range) + hunter_yield
 			var/item/misc/hide/hide = new(loc)
 			hide.stacked = rand(1,hunter_range) + hunter_yield
+		else if(istype(src, /mob/Shroom_Monster))
+			var/item/misc/food/Meat/meat = new(loc)
+			meat.stacked = rand(1,hunter_range) + hunter_yield
+			if(prob(10)) new/item/armour/hat/mushroom_cap(loc)
 		else
 			var/item/misc/food/Meat/meat = new(loc)
 			meat.stacked = rand(1,hunter_range) + hunter_yield
@@ -890,6 +896,8 @@ mob
 				overlays += I
 				strength += rhand.attackpow
 				defence += rhand.armour
+			if((rhand && rhand.armour < 3) && (lhand && lhand.armour < 3))
+				strength *= 0.75
 
 			if(legshackled)
 				if(icon_state == "ghost-incorporeal")
@@ -920,6 +928,7 @@ mob
 					Icon.Turn(90)
 					I.icon = Icon
 				src.overlays += I
+			if(defence > 90) defence = 90
 	/*	berry_effect(state)
 			var/effect
 			switch(state)
@@ -1089,7 +1098,7 @@ mob
 			if(client && UpdateHUD) hud_main.UpdateHUD(src)
 		attack(mob/M)
 			if(issleeping || restrained() || istype(M, /mob/eavesdropper)) return
-			if(src.ActionLock("attacking", 5)) return
+			if(src.ActionLock("attacking", 20 - attack_speed )) return
 			if(get_dist(src, M) > 1) return //can't attack when outside of range!
 			src.AbortAction()
 			switch(attackmode)
@@ -1131,7 +1140,7 @@ mob
 							src.show_message("<tt>You have tamed the [M.name].</tt>")
 							return
 
-					var/restdmg = (state == "ghost" || state == "ghost-i") ? 0 : ((src.strength - M.defence) * 3)
+					var/restdmg = (state == "ghost" || state == "ghost-i") ? 0 : (strength * ((100 - defence)/100))
 					if(state == "skeleton") restdmg /= 1.5
 					if(restdmg <= 0) restdmg = 1
 					if(restdmg > 0)
@@ -1413,10 +1422,5 @@ mob
 			if(newloc) loc = newloc
 			if(newdir) dir = newdir
 
-mob/proc/Play_Sound_Local(var/sound_to_play)
+atom/proc/Play_Sound_Local(var/sound_to_play)
 	play_sound(src, hearers(src), sound(sound_to_play))
-
-client/var
-	font_size = 2
-mob/verb/font_size(var/I as num)
-	usr.client.font_size = I

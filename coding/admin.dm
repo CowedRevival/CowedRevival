@@ -563,23 +563,17 @@ var/list/delayed_sounds
 		if(usr.client && C == usr.client) return
 		if(C.admin) return
 		. = 0 //1 = promoted
-		if(C.ckey in tadmins)
-			. = 1
-			tadmins -= C.ckey
 		if(!admins) admins = new/list()
 		admins += C.ckey
 		C.CheckAdmin()
 		world << "\blue [C.key] has been [. ? "promoted to a permanent administrator" : "granted administrative status"] by [usr.key]."
 		world.log << "\[ADMIN - [time2text(world.realtime)]\] [usr.key] [. ? "promoted" : "granted"] [C.key] administrative status."
-	remove_admin(client/C in GetAdmins(0, all_admins=1) - GetTRAdmins() - usr.client)
+	remove_admin(client/C in GetAdmins(0, all_admins=1) - usr.client)
 		set category = "SAdmin"
 		if(usr.client && C == usr.client) return
-		if(C.ckey in admins)
+		if(C.ckey in moderators)
 			admins -= C.ckey
 			if(!admins.len) admins = null
-		else if(C.ckey in tadmins)
-			tadmins -= C.ckey
-			if(!tadmins.len) tadmins = null
 		C.CheckAdmin()
 		world << "\blue [C.key]'s administrative status has been revoked by [usr.key]."
 		world.log << "\[ADMIN - [time2text(world.realtime)]\] [usr.key] revoked [C.key]'s administrative status."
@@ -601,10 +595,10 @@ var/list/delayed_sounds
 		C.CheckAdmin()
 		world << "\blue [C.key] has been [. ? "promoted to super administrator" : "granted super administrative status"] by [usr.key]."
 		world.log << "\[ADMIN - [time2text(world.realtime)]\] [usr.key] [. ? "promoted" : "granted"] [C.key] super administrative status."
-	remove_sadmin(client/C in GetSAdmins(0, all_admins=1) - usr.client)
+	remove_sadmin(client/C in usr.client)
 		set category = "SAdmin"
 		if(usr.client && C == usr.client) return
-		if((C.ckey in sadmins) && !(C.ckey in orig_sadmins))
+		if((C.ckey in sadmins))
 			sadmins -= C.ckey
 			if(!sadmins.len) sadmins = null
 			if(!tradmins) tradmins = new/list()
@@ -612,7 +606,7 @@ var/list/delayed_sounds
 			C.CheckAdmin()
 			world << "\blue [C.key] has been demoted to a trusted administrator by [usr.key]."
 			world.log << "\[ADMIN - [time2text(world.realtime)]\] [usr.key] demoted [C.key] from super admin to trusted admin."
-	add_tadmin(client/C in GetClients(0) + GetAdmins(0, all_admins=1) - GetTRAdmins(all_admins=1))
+	add_tadmin(client/C in GetClients(0) + GetAdmins(0, all_admins=1))
 		set category = "SAdmin"
 		if(usr.client && C == usr.client) return
 		. = 0 //1 = promoted
@@ -627,7 +621,7 @@ var/list/delayed_sounds
 		C.CheckAdmin()
 		world << "\blue [C.key] has been [. ? "promoted to trusted administrator" : "granted trusted administrative status"] by [usr.key]."
 		world.log << "\[ADMIN - [time2text(world.realtime)]\] [usr.key] [. ? "promoted" : "granted"] [C.key] trusted administrative status."
-	remove_tadmin(client/C in GetTRAdmins(all_admins=1))
+	remove_tadmin(client/C in tadmins)
 		set category = "SAdmin"
 		if(usr.client && C == usr.client) return
 		if((C.ckey in tradmins))

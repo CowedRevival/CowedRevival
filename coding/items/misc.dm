@@ -981,6 +981,14 @@ item/misc
 		icon_state="gold"
 		icon='icons/Supplies.dmi'
 		stacked = 1
+	Raw_Clay
+		icon_state="Raw Clay"
+		icon='icons/ores_and_veins.dmi'
+		stacked = 1
+		verb/Create_New_Key_Mold()
+			usr.contents += new/item/misc/key_mold
+			if(--stacked <= 0) Move(null, forced = 1)
+
 //
 	molten_copper
 		icon_state = "molten copper"
@@ -1013,13 +1021,6 @@ item/misc
 		icon='icons/Supplies.dmi'
 		icon_state = "copper_coin"
 		stacked = 1
-	molten_stone
-		icon_state="molten stone"
-		icon='icons/Supplies.dmi'
-		stacked = 1
-		verb/Create_New_Key_Mold()
-			usr.contents += new/item/misc/key_mold
-			if(--stacked <= 0) Move(null, forced = 1)
 	molten_iron
 		icon='icons/ores_and_veins.dmi'
 		icon_state="molten iron"
@@ -1639,7 +1640,7 @@ item/misc
 		Mashed_Potatos
 		Corn
 			icon_state="corn"
-			HungerAdd=10
+			HungerAdd=5
 			FoodType="Vege"
 			SeedType=/item/misc/seeds/Corn_Seeds
 			herbivore_friendly = 1
@@ -1651,14 +1652,14 @@ item/misc
 			herbivore_friendly = 1
 		Tomato
 			icon_state="tomato"
-			HungerAdd=7
+			HungerAdd=5
 			ThirstAdd=5
 			FoodType="Vege"
 			SeedType=/item/misc/seeds/Tomato_Seeds
 			herbivore_friendly = 1
 		Carrot
 			icon_state="carrot"
-			HungerAdd=10
+			HungerAdd=5
 			FoodType="Vege"
 			SeedType=/item/misc/seeds/Carrot_Seeds
 			herbivore_friendly = 1
@@ -1671,7 +1672,7 @@ item/misc
 			herbivore_friendly = 1
 		Watermelon
 			icon_state="watermelon"
-			HungerAdd=20
+			HungerAdd=15
 			ThirstAdd=15
 			FoodType="Vege"
 			SeedType=/item/misc/seeds/Watermelon_Seeds
@@ -1688,13 +1689,17 @@ item/misc
 			icon_state="frog meat"
 			HungerAdd=15
 			FoodType="Meat"
+		Cooked_Morsel
+			icon_state="cooked morsel"
+			HungerAdd=25
+			FoodType="none"
 		Cooked_Meat
 			icon_state="cooked meat"
-			HungerAdd=25
+			HungerAdd=45
 			FoodType="none"
 		Cooked_Strange_Meat
 			icon_state="cooked strange_meat"
-			HungerAdd=100
+			HungerAdd=60
 			FoodType="none"
 		Goldfish
 			icon_state="goldfish"
@@ -1730,31 +1735,31 @@ item/misc
 			FoodType="Meat"
 		Cooked_Goldfish
 			icon_state="cooked goldfish"
-			HungerAdd=5
+			HungerAdd=10
 			FoodType="none"
 		Cooked_Bass
 			icon_state="cooked bass"
-			HungerAdd=12
+			HungerAdd=20
 			FoodType="none"
 		Cooked_Shark
 			icon_state="cooked shark"
-			HungerAdd=20
+			HungerAdd=40
 			FoodType="none"
 		Cooked_Puffer_Fish
 			icon_state="cooked puffer"
-			HungerAdd=2
+			HungerAdd=30
 			FoodType="none"
 		Cooked_Koi
 			icon_state="cooked koi"
-			HungerAdd=8
+			HungerAdd=10
 			FoodType="none"
 		Cooked_Carp
 			icon_state="cooked carp"
-			HungerAdd=5
+			HungerAdd=30
 			FoodType="none"
 		Cooked_Swordfish
 			icon_state="cooked sword"
-			HungerAdd=12
+			HungerAdd=40
 			FoodType="none"
 		Cooked_Tuna
 			icon_state="cooked tuna"
@@ -1762,7 +1767,7 @@ item/misc
 			FoodType="none"
 		Cooked_Frog_Meat
 			icon_state="cooked frog meat"
-			HungerAdd=30
+			HungerAdd=50
 			FoodType="none"
 		Wheat
 			icon_state="wheat"
@@ -1782,21 +1787,52 @@ item/misc
 				..()
 		Dough
 			icon_state="dough"
-			HungerAdd=6
+			HungerAdd=5
 			FoodType="none"
 		Cake
 			icon_state="cake"
-			HungerAdd=25
+			HungerAdd=80
 			FoodType="none"
 		Pie
 			icon_state="pie"
-			HungerAdd=25
-			ThirstAdd=2
+			HungerAdd=20
 			FoodType="none"
 		Scone
 			icon_state="scone"
-			HungerAdd=8
+			HungerAdd=10
 			FoodType="none"
+
+		Burnt_Something
+			icon_state = "burnt_something"
+			HungerAdd=2
+			FoodType = "none"
+
+		Bowl
+			stacked = -1
+			eat()
+				..()
+				usr.contents += new/item/misc/wood_bowl
+			Vegetable_Stew
+				icon_state="salad_bowl"
+				HungerAdd=50
+				ThirstAdd=25
+				FoodType="none"
+			Meat_Stew
+				icon_state="meat_bowl"
+				HungerAdd=50
+				ThirstAdd=25
+				FoodType="none"
+			Hearty_Stew
+				icon_state="salad_meat_bowl"
+				HungerAdd=70
+				ThirstAdd=50
+				FoodType="none"
+			Unknown_Stew
+				icon_state="stew_bowl"
+				HungerAdd=35
+				ThirstAdd=20
+				FoodType="none"
+
 	Potato_Skin
 	Heavy_Stone
 		icon='icons/Supplies.dmi'
@@ -2000,10 +2036,6 @@ item/misc
 			Make_Book()
 				set src in usr.contents
 				if(usr.restrained() || usr.shackled) return
-				if(usr.chosen != "librarian")
-					usr.show_message("<tt>You cannot do this; only librarians know how to do this!</tt>")
-					return
-				. = 0
 				for(var/item/misc/paper/P in usr.contents)
 					if(P.content) continue
 					.++
@@ -2019,10 +2051,6 @@ item/misc
 			Make_Spellbook()
 				set src in usr.contents
 				if(usr.restrained() || usr.shackled) return
-				if(usr.chosen != "librarian")
-					usr.show_message("<tt>You cannot do this; only librarians know how to do this!</tt>")
-					return
-				. = 0
 				for(var/item/misc/paper/P in usr.contents)
 					if(P.content) continue
 					.++
@@ -2549,3 +2577,6 @@ item/misc
 				amount--
 				update_icon()
 				return 1
+	wood_bowl
+		icon = 'icons/Supplies.dmi'
+		icon_state = "bowl"

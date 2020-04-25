@@ -120,7 +120,7 @@ turf
 				if(usr.inHand(/item/weapon/shovel) || usr.inHand(/item/weapon/pickaxe))
 					if(ActionLock("digging", 10)) return //prevent the tile from being invoked twice
 					icon_state = "dirtwall2"
-					M.Play_Sound_Local(pick('sounds/dig_1.ogg', 'sounds/dig_2.ogg', 'sounds/dig_3.ogg'))
+					M.Play_Sound_Local(pick('sounds/sfx/dig_1.ogg', 'sounds/sfx/dig_2.ogg', 'sounds/sfx/dig_3.ogg'))
 					spawn(2)
 						if((usr.inHand(/item/weapon/pickaxe) && prob(10)) || prob(5))
 							new/obj/vein(src)
@@ -135,7 +135,7 @@ turf
 				if(usr.inHand(/item/weapon/shovel) || usr.inHand(/item/weapon/pickaxe))
 					if(ActionLock("digging", 10)) return //prevent the tile from being invoked twice
 					icon_state = "dirtwall2"
-					M.Play_Sound_Local(pick('sounds/dig_1.ogg', 'sounds/dig_2.ogg', 'sounds/dig_3.ogg'))
+					M.Play_Sound_Local(pick('sounds/sfx/dig_1.ogg', 'sounds/sfx/dig_2.ogg', 'sounds/sfx/dig_3.ogg'))
 					spawn(2)
 						if((usr.inHand(/item/weapon/pickaxe) && prob(12)) || prob(7))
 							new/obj/vein(src)
@@ -156,7 +156,7 @@ turf
 				if(usr.inHand(/item/weapon/shovel) || usr.inHand(/item/weapon/pickaxe))
 					if(ActionLock("digging", 10)) return //prevent the tile from being invoked twice
 					icon_state = "dirtwall2"
-					M.Play_Sound_Local(pick('sounds/dig_1.ogg', 'sounds/dig_2.ogg', 'sounds/dig_3.ogg'))
+					M.Play_Sound_Local(pick('sounds/sfx/dig_1.ogg', 'sounds/sfx/dig_2.ogg', 'sounds/sfx/dig_3.ogg'))
 					spawn(2)
 						if(usr.inHand(/item/weapon/pickaxe))
 							if(prob(1) && prob(1)) new/obj/vein/Adamantite_Vein(src)
@@ -429,10 +429,15 @@ turf
 		New()
 			. = ..()
 			if(prob(15))
-				new/obj/tree(src)
+				if(prob(5))
+					var/obj/tree/apple_tree/I = new(src)
+					I.icon_state = "[current_season_state]apple_tree_2"
+					I.icon_state_base = "[current_season_state]apple_tree_2"
+				else
+					new/obj/tree(src)
 			else if(prob(1))
 				new/obj/bush(src)
-			else if(prob(5))
+			else if(prob(2))
 				if(prob(10))
 					var/obj/crop/wheat/I = new(src)
 					I.icon_state = "wheat_growth_3"
@@ -454,10 +459,6 @@ turf
 				else if(prob(5))
 					var/obj/crop/watermelon/I = new(src)
 					I.icon_state = "wm_growth_3"
-				else if(prob(5))
-					var/obj/tree/apple_tree/I = new(src)
-					I.icon_state = "[current_season_state]apple_tree_2"
-					I.icon_state_base = "[current_season_state]apple_tree_2"
 			else if(prob(2))
 				switch(rand(1,3))
 					if(1) new/obj/Flower/Red_Flower(src)
@@ -565,8 +566,42 @@ turf
 					M << "\blue You catch [item_get]\blue!"
 					if(item_get == "a <font color=\"#00CC00\">frog man</small>")
 						hearers(M) << "[M.name] dragged up [item_get]!"
+					if(M.skills.fishing < 100 && prob(100-(M.skills.fishing * 0.75)))
+						M.skills.fishing += 1
+					M.movable = 0
 
-					if(M.skills.fishing < 100) M.skills.fishing += 1
+			else if(M.inHand(/item/weapon/spear) && get_dist(src,M) <= 1 && !M.movable)
+				var/item_get = "nothing"
+				M.movable = 1
+				M << "<small>You ready your spear!</small>"
+				spawn(20)
+					if(prob(10))
+						var/item/I = new/item/misc/food/Goldfish(M.loc)
+						item_get = "a [I.name]"
+					else if(M.skills.fishing > 10 && prob(10))
+						var/item/I = new/item/misc/food/Bass(M.loc)
+						item_get = "a [I.name]"
+					else if(M.skills.fishing > 25 && prob(10))
+						var/item/I = new/item/misc/food/Tuna(M.loc)
+						item_get = "a [I.name]"
+					else if(M.skills.fishing > 50 && prob(10))
+						var/item/I = new/item/misc/food/Shark(M.loc)
+						item_get = "a [I.name]"
+					else if(prob(1))
+						var/item/I = new/item/misc/waterstone(M.loc)
+						item_get = "a [I.name]"
+					else
+						if(prob(80))
+							item_get = "nothing"
+						else
+							new/mob/Frogman(M.loc)
+							item_get = "a <font color=\"#00CC00\">frog man</small>"
+
+					M << "\blue You catch [item_get]\blue!"
+					if(item_get == "a <font color=\"#00CC00\">frog man</small>")
+						hearers(M) << "[M.name] dragged up [item_get]!"
+					if(M.skills.fishing < 100 && prob(100-(M.skills.fishing * 0.75)))
+						M.skills.fishing += 1
 					M.movable = 0
 				/*M << "<small>You cast a line.</small>"
 				M.movable = 1

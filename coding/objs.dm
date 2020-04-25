@@ -322,7 +322,6 @@ obj
 					var/map_object/O = MapObject(z)
 					if(O.map_layer < 0) return
 					var/map_object/B = O.NextLayer()
-					world << "[B.loc.z]"
 					if(B) return //layer already exists
 		Bumped(mob/M)
 			var/turf/loc = src.loc
@@ -420,14 +419,8 @@ obj
 	fire
 		icon_state = "fire"
 		anchored = 1
-		luminosity = 7
-		var/global/list/allowed_types = list(
-			/item/misc/wood, /item/misc/stone, /item/misc/ores/gold_ore, /item/misc/gold,
-			/item/misc/ores/iron_ore, /item/misc/food, /item/misc/ores/copper_ore, /item/misc/copper_coin,
-			/item/misc/molten_copper, /item/misc/ores/tin_ore, /item/misc/ores/tungsten_ore, /item/misc/ores/palladium_ore,
-			/item/misc/ores/silver_ore, /item/misc/ores/mithril_ore, /item/misc/ores/magicite_ore, /item/misc/ores/adamantite_ore,
-			/item/misc/sand_clump
-		)
+		luminosity = 5
+		var/global/list/allowed_types = list(/item/misc/food, /item/misc/wood)
 		MouseDropped(item/misc/I, src_location, over_location, control, params)
 			if(!(usr in range(1, src)) || !(I in usr.contents)) return
 
@@ -436,7 +429,7 @@ obj
 				if(istype(I, type)) break
 			if(!type) return
 
-			if(!istype(I, /item/misc/food/Dough) && I.stacked && I.stacked > 1)
+			if(I.stacked && I.stacked > 1)
 				var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Fire :: Specify Amount") as null|num
 				if(amount == null || !(usr in range(1, src)) || !(I in usr.contents)) return
 				if(amount <= 0) amount = 1
@@ -450,140 +443,27 @@ obj
 
 			if(I.stacked <= 0) I.Move(null, forced = 1)
 			return 1
+
+		proc/StackAddItems(var/type, var/no_of_items)
+			if(!no_of_items) no_of_items = 1
+			var/item/J = locate(type) in usr
+			if(J)
+				J.stacked += no_of_items
+				J.suffix = "x[J.stacked]"
+			else
+				usr.contents += new type
+				var/item/K = locate(type) in usr
+				K.stacked += no_of_items - 1
+				K.suffix = "x[K.stacked]"
+
 		proc/ProcessItem(item/misc/I)
-			var
-				cooked = 0
-			//misc.
-			if(istype(I, /item/misc/key_mold) || istype(I, /item/misc/key)) del I
-			else if(istype(I, /item/misc/wood))
+			if(istype(I, /item/misc/wood))
 				usr.contents += new/item/weapon/torch
-			else if(istype(I, /item/misc/stone))
-				var/item/misc/molten_stone/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/molten_stone
-			else if(istype(I, /item/misc/ores/gold_ore))
-				var/item/misc/gold/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/gold
-			else if(istype(I, /item/misc/gold))
-				var/item/misc/molten_gold/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/molten_gold
-			else if(istype(I, /item/misc/ores/iron_ore))
-				var/item/misc/molten_iron/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/molten_iron
-			else if(istype(I, /item/misc/ores/tin_ore))
-				var/item/misc/molten_tin/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/molten_tin
-			else if(istype(I, /item/misc/sand_clump))
-				var/item/misc/molten_glass/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/molten_glass
-			else if(istype(I, /item/misc/ores/tungsten_ore))
-				var/item/misc/molten_tungsten/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/molten_tungsten
-			else if(istype(I, /item/misc/ores/silver_ore))
-				var/item/misc/molten_silver/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/molten_silver
-			else if(istype(I, /item/misc/ores/palladium_ore))
-				var/item/misc/molten_palladium/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/molten_palladium
-			else if(istype(I, /item/misc/ores/mithril_ore))
-				var/item/misc/molten_mithril/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/molten_mithril
-			else if(istype(I, /item/misc/ores/adamantite_ore))
-				var/item/misc/molten_adamantite/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/molten_adamantite
-			else if(istype(I, /item/misc/ores/magicite_ore))
-				var/item/misc/molten_magicite/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/molten_magicite
-			else if(istype(I, /item/misc/ores/copper_ore))
-				usr.contents += new/item/misc/copper_coin
-			else if(istype(I, /item/misc/copper_coin))
-				var/item/misc/molten_copper/J = locate() in usr
-				if(J)
-					J.stacked += 1
-					J.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/molten_copper
+			else if(istype(I, /item/misc/food/Meat) || istype(I, /item/misc/food/Frog_Meat) || istype(I, /item/misc/food/Strange_Meat))
+				StackAddItems(/item/misc/food/Cooked_Morsel, 1)
+			else
+				StackAddItems(/item/misc/food/Burnt_Something, 1)
 
-			//cooking
-			else if(istype(I, /item/misc/food/Meat))
-				usr.contents += new/item/misc/food/Cooked_Meat
-				cooked = 1
-			else if(istype(I, /item/misc/food/Frog_Meat))
-				usr.contents += new/item/misc/food/Cooked_Frog_Meat
-				cooked = 1
-			else if(istype(I, /item/misc/food/Goldfish))
-				usr.contents += new/item/misc/food/Cooked_Goldfish
-				cooked = 1
-			else if(istype(I, /item/misc/food/Shark))
-				usr.contents += new/item/misc/food/Cooked_Shark
-				cooked = 1
-			else if(istype(I, /item/misc/food/Bass))
-				usr.contents += new/item/misc/food/Cooked_Bass
-				cooked = 1
-			else if(istype(I, /item/misc/food/Puffer_Fish))
-				usr.contents += new/item/misc/food/Cooked_Puffer_Fish
-				cooked = 1
-			else if(istype(I, /item/misc/food/Carp))
-				usr.contents += new/item/misc/food/Cooked_Carp
-				cooked = 1
-			else if(istype(I, /item/misc/food/Koi))
-				usr.contents += new/item/misc/food/Cooked_Koi
-				cooked = 1
-			else if(istype(I, /item/misc/food/Tuna))
-				usr.contents += new/item/misc/food/Cooked_Tuna
-				cooked = 1
-			else if(istype(I, /item/misc/food/Swordfish))
-				usr.contents += new/item/misc/food/Cooked_Swordfish
-				cooked = 1
-			else if(istype(I, /item/misc/food/Dough))
-				I.stacked++
-				var
-					list/L = list("Cake", "Pie", "Scone")
-					choice = input(usr, "What kind of pastry would you like to make?", "[name] :: Pastry") as null|anything in L
-				if(choice == null || !(usr in range(1, src)) || !(I in usr.contents)) return
-				switch(choice)
-					if("Cake") usr.contents += new/item/misc/food/Cake
-					if("Pie") usr.contents += new/item/misc/food/Pie
-					if("Scone") usr.contents += new/item/misc/food/Scone{stacked=3}
-				I.stacked--
-				cooked = 1
-
-			if(cooked)
-				usr.medal_Report("chef")
 		attack_hand(mob/M)
 			if(M.inHand(/item/weapon/shovel))
 				for(var/mob/N in ohearers(M))
@@ -706,14 +586,14 @@ obj
 		var
 			wood = 10
 		New()
-			wood = rand(8, 32)
+			wood = rand(4, 16)
 			return ..()
 		proc
 			ActionLoop(mob/M)
 				if(M.inHand(/item/weapon/axe))
 					while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/axe))
 						icon_state = "[current_season_state]cut [icon_state_base]"
-						M.Play_Sound_Local(pick('sounds/axe_1.ogg', 'sounds/axe_2.ogg', 'sounds/axe_3.ogg', 'sounds/axe_4.ogg', 'sounds/axe_5.ogg', 'sounds/axe_6.ogg', 'sounds/axe_7.ogg'))
+						M.Play_Sound_Local(pick('sounds/sfx/axe_1.ogg', 'sounds/sfx/axe_2.ogg', 'sounds/sfx/axe_3.ogg', 'sounds/sfx/axe_4.ogg', 'sounds/sfx/axe_5.ogg', 'sounds/sfx/axe_6.ogg', 'sounds/sfx/axe_7.ogg'))
 						sleep(10)
 						icon_state = "[current_season_state][icon_state_base]"
 
@@ -737,7 +617,7 @@ obj
 				else
 					while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/pickaxe))
 						icon_state = "[current_season_state]cut [icon_state_base]"
-						M.Play_Sound_Local(pick('sounds/axe_1.ogg', 'sounds/axe_2.ogg', 'sounds/axe_3.ogg', 'sounds/axe_4.ogg', 'sounds/axe_5.ogg', 'sounds/axe_6.ogg', 'sounds/axe_7.ogg'))
+						M.Play_Sound_Local(pick('sounds/sfx/axe_1.ogg', 'sounds/sfx/axe_2.ogg', 'sounds/sfx/axe_3.ogg', 'sounds/sfx/axe_4.ogg', 'sounds/sfx/axe_5.ogg', 'sounds/sfx/axe_6.ogg', 'sounds/sfx/axe_7.ogg'))
 						sleep(25)
 						icon_state = "[current_season_state][icon_state_base]"
 
@@ -807,7 +687,7 @@ obj
 					if(M.inHand(/item/weapon/axe))
 						while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/axe))
 							icon_state = "cut [icon_state_base]"
-							M.Play_Sound_Local(pick('sounds/axe_1.ogg', 'sounds/axe_2.ogg', 'sounds/axe_3.ogg', 'sounds/axe_4.ogg', 'sounds/axe_5.ogg', 'sounds/axe_6.ogg', 'sounds/axe_7.ogg'))
+							M.Play_Sound_Local(pick('sounds/sfx/axe_1.ogg', 'sounds/sfx/axe_2.ogg', 'sounds/sfx/axe_3.ogg', 'sounds/sfx/axe_4.ogg', 'sounds/sfx/axe_5.ogg', 'sounds/sfx/axe_6.ogg', 'sounds/sfx/axe_7.ogg'))
 							sleep(10)
 							icon_state = "[icon_state_base]"
 
@@ -878,7 +758,7 @@ obj
 				if(M.inHand(/item/weapon/axe))
 					while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/axe))
 						icon_state = "[current_season_state]cut [icon_state_base]"
-						M.Play_Sound_Local(pick('sounds/axe_1.ogg', 'sounds/axe_2.ogg', 'sounds/axe_3.ogg', 'sounds/axe_4.ogg', 'sounds/axe_5.ogg', 'sounds/axe_6.ogg', 'sounds/axe_7.ogg'))
+						M.Play_Sound_Local(pick('sounds/sfx/axe_1.ogg', 'sounds/sfx/axe_2.ogg', 'sounds/sfx/axe_3.ogg', 'sounds/sfx/axe_4.ogg', 'sounds/sfx/axe_5.ogg', 'sounds/sfx/axe_6.ogg', 'sounds/sfx/axe_7.ogg'))
 						sleep(10)
 						icon_state = "[current_season_state][icon_state_base]"
 
@@ -902,7 +782,7 @@ obj
 				else
 					while(M && M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/pickaxe))
 						icon_state = "[current_season_state]cut [icon_state_base]"
-						M.Play_Sound_Local(pick('sounds/axe_1.ogg', 'sounds/axe_2.ogg', 'sounds/axe_3.ogg', 'sounds/axe_4.ogg', 'sounds/axe_5.ogg', 'sounds/axe_6.ogg', 'sounds/axe_7.ogg'))
+						M.Play_Sound_Local(pick('sounds/sfx/axe_1.ogg', 'sounds/sfx/axe_2.ogg', 'sounds/sfx/axe_3.ogg', 'sounds/sfx/axe_4.ogg', 'sounds/sfx/axe_5.ogg', 'sounds/sfx/axe_6.ogg', 'sounds/sfx/axe_7.ogg'))
 						sleep(25)
 						icon_state = "[current_season_state][icon_state_base]"
 
@@ -943,7 +823,7 @@ obj
 			ActionLoop(mob/M)
 				while(M.current_action == src && loc && wood > 0 && M.inHand(/item/weapon/axe))
 					icon_state = "[current_season_state]cut palm tree"
-					M.Play_Sound_Local(pick('sounds/axe_1.ogg', 'sounds/axe_2.ogg', 'sounds/axe_3.ogg', 'sounds/axe_4.ogg', 'sounds/axe_5.ogg', 'sounds/axe_6.ogg', 'sounds/axe_7.ogg'))
+					M.Play_Sound_Local(pick('sounds/sfx/axe_1.ogg', 'sounds/sfx/axe_2.ogg', 'sounds/sfx/axe_3.ogg', 'sounds/sfx/axe_4.ogg', 'sounds/sfx/axe_5.ogg', 'sounds/sfx/axe_6.ogg', 'sounds/sfx/axe_7.ogg'))
 					sleep(10)
 					icon_state = "[current_season_state]palm tree"
 
@@ -1043,3 +923,487 @@ obj
 		luminosity = 6
 		anchored = 1
 		mouse_opacity = 0
+
+obj/oven
+	icon = 'icons/clay_objects.dmi'
+	icon_state = "Oven"
+	name = "Test_Oven"
+	var
+		fuel = 0
+		lit = 0
+		full = 0
+		ready = 0
+		amount = 0
+	icon_state = "Oven"
+	var/icon_state_base = "Oven"
+	anchored = 1
+	density = 1
+	luminosity = 0
+	var/list/allowed_types
+	var/cooking
+	var/buildinghealth = 5
+
+	DblClick()
+		if(usr.shackled==1) return
+		if(get_dist(src,usr) <= 1)
+			if(buildinghealth >= 1)
+				if(usr.inHand(/item/weapon/sledgehammer))
+					if(buildinghealth >= 1)
+						hearers(usr) <<"[usr] hits the [src] with his Sledgehammer"
+						buildinghealth-=1
+					if(buildinghealth == 0)
+						hearers(usr) <<"[usr] smashs the [src] down"
+						del src
+					return
+		if(full && !ready)
+			usr << "It's not ready yet!"
+		else if(full && ready)
+			StackAddItems(cooking, amount)
+			amount = 0
+			full = 0
+			ready = 0
+			if(fuel)
+				icon_state = "[icon_state_base]_Lit"
+			else
+				icon_state = "[icon_state_base]"
+		else if(fuel > 0 && !lit)
+			lit = 1
+			Update_Fuel_Status()
+			sd_SetLuminosity(5)
+		else
+			lit = 0
+			sd_SetLuminosity(0)
+			icon_state = icon_state_base
+
+
+	proc/Update_Fuel_Status()
+		if(fuel > 0 && lit && full)
+			fuel--
+			icon_state = "[icon_state_base]_Lit_Full"
+			spawn(250)
+				Update_Fuel_Status()
+		else if(fuel > 0 && lit)
+			fuel--
+			icon_state = "[icon_state_base]_Lit"
+			spawn(250)
+				Update_Fuel_Status()
+		else
+			lit = 0
+			sd_SetLuminosity(0)
+			icon_state = icon_state_base
+
+	MouseDropped(item/misc/I, src_location, over_location, control, params)
+		if(!(usr in range(1, src)) || !(I in usr.contents)) return
+		if(istype(I, /item/misc/wood))
+			if(I.stacked && I.stacked > 1)
+				var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Fire :: Specify Amount") as null|num
+				if(amount == null || !(usr in range(1, src)) || !(I in usr.contents)) return
+				if(amount <= 0) amount = 1
+				if(amount > I.stacked) amount = I.stacked
+				fuel += amount
+				I.stacked -= amount
+			else
+				I.stacked--
+				fuel++
+			I.suffix = "x[I.stacked]"
+			if(I.stacked <= 0) I.Move(null, forced = 1)
+			return 1
+
+	proc/StackAddItems(var/type, var/no_of_items)
+		if(!no_of_items) no_of_items = 1
+		var/item/J = locate(type) in usr
+		if(J)
+			J.stacked += no_of_items
+			J.suffix = "x[J.stacked]"
+		else
+			usr.contents += new type
+			var/item/K = locate(type) in usr
+			K.stacked += no_of_items - 1
+			K.suffix = "x[K.stacked]"
+
+
+	proc/Cooking_Process()
+		full = 1
+		icon_state = "[icon_state_base]_Lit_Full"
+		sleep(200)
+		ready = 1
+		Play_Sound_Local(pick('sounds/sfx/cooking1.ogg', 'sounds/sfx/cooking2.ogg', 'sounds/sfx/cooking3.ogg', 'sounds/sfx/cooking4.ogg'))
+
+	oven
+		name = "clay oven"
+		allowed_types = list(/item/misc/food)
+
+		MouseDropped(item/misc/I, src_location, over_location, control, params)
+			if(!(usr in range(1, src)) || !(I in usr.contents)) return
+			if(full)
+				usr << "It's already full!"
+			else if(istype(I, /item/misc/wood))
+				if(I.stacked && I.stacked > 1)
+					var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Cook :: Specify Amount") as null|num
+					if(amount == null || !(usr in range(1, src)) || !(I in usr.contents)) return
+					if(amount <= 0) amount = 1
+					if(amount > I.stacked) amount = I.stacked
+					fuel += amount
+					I.stacked -= amount
+				else
+					I.stacked--
+					fuel++
+				I.suffix = "x[I.stacked]"
+				if(I.stacked <= 0) I.Move(null, forced = 1)
+				return 1
+			else
+				if(!lit) return
+				var/type
+				for(type in allowed_types)
+					if(istype(I, type)) break
+				if(!type) return
+
+				if(!istype(I, /item/misc/food/Dough) && I.stacked && I.stacked > 1)
+					hearers(usr) << "<small>[usr.name] places something in the oven!</small>"
+					var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Oven :: Specify Amount") as null|num
+					if(amount == null || !(usr in range(1, src)) || !(I in usr.contents)) return
+					if(amount <= 0) amount = 1
+					if(amount > I.stacked) amount = I.stacked
+					for(var/i = 1 to amount)
+						ProcessItem(I)
+					I.stacked -= amount
+				else
+					ProcessItem(I)
+					I.stacked--
+				if(I.stacked <= 0) I.Move(null, forced = 1)
+				return 1
+
+		proc/ProcessItem(item/misc/I)
+			if(istype(I, /item/misc/food/Meat))
+				cooking = /item/misc/food/Cooked_Meat
+				amount = 1
+			else if(istype(I, /item/misc/food/Strange_Meat))
+				cooking = /item/misc/food/Cooked_Strange_Meat
+				amount = 1
+			else if(istype(I, /item/misc/food/Frog_Meat))
+				cooking = /item/misc/food/Cooked_Frog_Meat
+				amount = 1
+			else if(istype(I, /item/misc/food/Goldfish))
+				cooking = /item/misc/food/Cooked_Goldfish
+				amount = 1
+			else if(istype(I, /item/misc/food/Shark))
+				cooking = /item/misc/food/Cooked_Shark
+				amount = 1
+			else if(istype(I, /item/misc/food/Bass))
+				cooking = /item/misc/food/Cooked_Bass
+				amount = 1
+			else if(istype(I, /item/misc/food/Puffer_Fish))
+				cooking = /item/misc/food/Cooked_Puffer_Fish
+				amount = 1
+			else if(istype(I, /item/misc/food/Carp))
+				cooking = /item/misc/food/Cooked_Carp
+				amount = 1
+			else if(istype(I, /item/misc/food/Koi))
+				cooking = /item/misc/food/Cooked_Koi
+				amount = 1
+			else if(istype(I, /item/misc/food/Tuna))
+				cooking = /item/misc/food/Cooked_Tuna
+				amount = 1
+			else if(istype(I, /item/misc/food/Swordfish))
+				cooking = /item/misc/food/Cooked_Swordfish
+				amount = 1
+			else if(istype(I, /item/misc/food/Dough))
+				I.stacked++
+				var
+					list/L = list("Cake (x1)", "Pie Slices (x4)", "Scones (x8)")
+					choice = input(usr, "What kind of pastry would you like to make?", "[name] :: Pastry") as null|anything in L
+				if(choice == null || !(usr in range(1, src)) || !(I in usr.contents)) return
+				switch(choice)
+					if("Cake (x1)")
+						cooking = /item/misc/food/Cake
+						amount = 1
+					if("Pie Slices (x4)")
+						cooking = /item/misc/food/Pie
+						amount = 4
+					if("Scones (x8)")
+						cooking = /item/misc/food/Scone
+						amount = 8
+				I.stacked--
+			else
+				cooking = /item/misc/food/Burnt_Something
+				amount = 1
+			Play_Sound_Local(pick('sounds/sfx/cooking1.ogg', 'sounds/sfx/cooking2.ogg', 'sounds/sfx/cooking3.ogg', 'sounds/sfx/cooking4.ogg'))
+			Cooking_Process()
+
+
+	furnace
+		name = "clay furnace"
+		icon_state = "Furnace"
+		icon_state_base = "Furnace"
+		allowed_types = list(/item/misc/ores)
+
+		MouseDropped(item/misc/I, src_location, over_location, control, params)
+			if(!(usr in range(1, src)) || !(I in usr.contents)) return
+			if(full)
+				usr << "It's already full!"
+			if(istype(I, /item/misc/wood))
+				if(I.stacked && I.stacked > 1)
+					var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Smelt :: Specify Amount") as null|num
+					if(amount == null || !(usr in range(1, src)) || !(I in usr.contents)) return
+					if(amount <= 0) amount = 1
+					if(amount > I.stacked) amount = I.stacked
+					fuel += amount
+					I.stacked -= amount
+				else
+					I.stacked--
+					fuel++
+				I.suffix = "x[I.stacked]"
+				if(I.stacked <= 0) I.Move(null, forced = 1)
+				return 1
+			else
+				if(!lit) return
+				var/type
+				for(type in allowed_types)
+					if(istype(I, type)) break
+				if(!type) return
+
+				if(!istype(I, /item/misc/food/Dough) && I.stacked && I.stacked > 1)
+					var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Oven :: Specify Amount") as null|num
+					if(amount == null || !(usr in range(1, src)) || !(I in usr.contents)) return
+					if(amount <= 0) amount = 1
+					if(amount > I.stacked) amount = I.stacked
+					for(var/i = 1 to amount)
+						ProcessItem(I)
+					I.stacked -= amount
+				else
+					ProcessItem(I)
+					I.stacked--
+
+				if(I.stacked <= 0) I.Move(null, forced = 1)
+				return 1
+
+		proc/ProcessItem(item/misc/I)
+			if(istype(I, /item/misc/ores/adamantite_ore))
+				cooking = /item/misc/molten_adamantite
+				amount = 1
+			else if(istype(I, /item/misc/ores/copper_ore))
+				cooking = /item/misc/molten_copper
+				amount = 1
+			else if(istype(I, /item/misc/ores/gold_ore))
+				cooking = /item/misc/molten_gold
+				amount = 1
+			else if(istype(I, /item/misc/ores/iron_ore))
+				cooking = /item/misc/molten_iron
+				amount = 1
+			else if(istype(I, /item/misc/ores/magicite_ore))
+				cooking = /item/misc/molten_magicite
+				amount = 1
+			else if(istype(I, /item/misc/ores/mithril_ore))
+				cooking = /item/misc/molten_mithril
+				amount = 1
+			else if(istype(I, /item/misc/ores/palladium_ore))
+				cooking = /item/misc/molten_palladium
+				amount = 1
+			else if(istype(I, /item/misc/ores/silver_ore))
+				cooking = /item/misc/molten_silver
+				amount = 1
+			else if(istype(I, /item/misc/ores/tin_ore))
+				cooking = /item/misc/molten_tin
+				amount = 1
+			else if(istype(I, /item/misc/ores/tungsten_ore))
+				cooking = /item/misc/molten_tungsten
+				amount = 1
+			else
+				cooking = /item/misc/food/Burnt_Something
+				amount = 1
+			Play_Sound_Local(pick('sounds/sfx/cooking1.ogg', 'sounds/sfx/cooking2.ogg', 'sounds/sfx/cooking3.ogg', 'sounds/sfx/cooking4.ogg'))
+			Cooking_Process()
+
+
+obj/mill
+	icon = 'icons/clay_objects.dmi'
+	icon_state = "Grind_Stone"
+	name = "Clay Mill"
+	var/icon_state_base = "Grind_Stone"
+	anchored = 1
+	density = 1
+	luminosity = 0
+	var/wheat_amount = 0
+	var/progress = 0
+	var/buildinghealth = 5
+
+	DblClick()
+		if(usr.shackled==1) return
+		if(get_dist(src,usr) <= 1)
+			if(buildinghealth >= 1)
+				if(usr.inHand(/item/weapon/sledgehammer))
+					if(buildinghealth >= 1)
+						hearers(usr) <<"[usr] hits the [src] with his Sledgehammer"
+						buildinghealth-=1
+					if(buildinghealth == 0)
+						hearers(usr) <<"[usr] smashs the [src] down"
+						del src
+					return
+		if(wheat_amount && progress)
+			if(!usr.current_action)
+				usr.SetAction(src)
+		else if(wheat_amount && !progress)
+			var/item/J = locate(/item/misc/food/Flour) in usr
+			if(J)
+				J.stacked += wheat_amount
+				J.suffix = "x[J.stacked]"
+			else
+				usr.contents += new/item/misc/food/Flour
+				var/item/K = locate(/item/misc/food/Flour) in usr
+				K.stacked += wheat_amount - 1
+				K.suffix = "x[K.stacked]"
+			icon_state = icon_state_base
+			wheat_amount = 0
+		else
+			usr << "It needs something to grind!"
+	MouseDropped(item/misc/I, src_location, over_location, control, params)
+		if(!(usr in range(1, src)) || !(I in usr.contents)) return
+		if(wheat_amount && !progress)
+			usr << "Please retrieve your flour first!"
+			return
+		else if(istype(I, /item/misc/food/Wheat))
+			if(I.stacked && I.stacked > 1)
+				var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Grind :: Specify Amount") as null|num
+				if(amount == null || !(usr in range(1, src)) || !(I in usr.contents)) return
+				if(amount <= 0) amount = 1
+				if(amount > I.stacked) amount = I.stacked
+				wheat_amount += amount
+				progress += amount
+				I.stacked -= amount
+			else
+				I.stacked--
+				wheat_amount++
+				progress++
+			icon_state = "[icon_state_base]_Wheat"
+			I.suffix = "x[I.stacked]"
+			if(I.stacked <= 0) I.Move(null, forced = 1)
+			return 1
+	proc/ActionLoop(mob/M)
+		while(M && M.current_action == src && loc && progress > 0)
+			icon_state = "[icon_state_base]_Wheat_Full_Grind"
+			M.Play_Sound_Local(pick('sounds/sfx/grindstone.ogg'))
+			sleep(20)
+			icon_state = "[icon_state_base]_Wheat"
+			if(M && M.current_action == src && loc && progress > 0)
+				progress--
+			else break
+			if(!progress)
+				icon_state = "[icon_state_base]_Flour"
+				M.AbortAction()
+
+obj/cauldron
+	icon = 'icons/cauldron.dmi'
+	icon_state = ""
+	name = "Cauldron"
+	anchored = 0
+	density = 1
+	var
+		units = 0
+		vege = 0
+		meat = 0
+		other = 0
+		cook_timer = 0
+		contains_water = 0
+
+	var/state = "empty"
+	var/list/allowed_types = list(/item/misc/food)
+
+	Move()
+		..()
+		for(var/obj/fire/I in loc.contents)
+			icon_state = "[state]_boil"
+			Update()
+
+	verb/toggle_anchor()
+		set src in view(1)
+		if(anchored) anchored = 0
+		else anchored = 1
+
+	proc/Update()
+		for(var/obj/fire/I in loc.contents)
+			icon_state = "[state]_boil"
+			if(state != "empty")
+				Play_Sound_Local(pick('sounds/sfx/bubbly1.ogg', 'sounds/sfx/bubbly2.ogg', 'sounds/sfx/bubbly3.ogg', 'sounds/sfx/bubbly4.ogg', 'sounds/sfx/bubbly5.ogg'))
+			if(cook_timer > 0)
+				cook_timer--
+				state = "soup_mix"
+			if(cook_timer <= 0)
+				if(units)
+					state = "soup_complete"
+				else if(contains_water)
+					state = "water"
+				else
+					state = "empty"
+			spawn(20)
+				Update()
+			return
+		icon_state = "[state]"
+
+	MouseDropped(item/misc/I, src_location, over_location, control, params)
+		if(!(usr in range(1, src)) || !(I in usr.contents)) return
+		if(istype(I, /item/misc/wood_bucket/water_bucket) && !contains_water)
+			usr.contents += new/item/misc/wood_bucket
+			if(I.stacked <= 0) I.Move(null, forced = 1)
+			contains_water = 1
+			state = "water"
+			State_Update()
+			return 1
+		else if(istype(I, /item/misc/wood_bowl) && state == "soup_complete")
+			if(vege && meat)
+				usr.contents += new/item/misc/food/Bowl/Hearty_Stew
+			else if(vege)
+				usr.contents += new/item/misc/food/Bowl/Vegetable_Stew
+			else if(meat)
+				usr.contents += new/item/misc/food/Bowl/Meat_Stew
+			else
+				usr.contents += new/item/misc/food/Bowl/Unknown_Stew
+			if(I.stacked <= 0) I.Move(null, forced = 1)
+			units--
+			if(units <= 0)
+				state = "empty"
+				State_Update()
+				contains_water = 0
+			return 1
+		else
+			if(cook_timer <= 0 && units)
+				usr << "Finish the rest of the stew first!"
+				return
+			var/type
+			for(type in allowed_types)
+				if(istype(I, type)) break
+			if(!type) return
+			if(!contains_water)
+				usr << "You need to fill the pot with water!"
+			if(I.stacked && I.stacked > 1)
+				hearers(usr) << "<small>[usr.name] adds something in the cauldron!</small>"
+				var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Cauldron :: Specify Amount") as null|num
+				if(amount == null || !(usr in range(1, src)) || !(I in usr.contents)) return
+				if(amount <= 0) amount = 1
+				if(amount > I.stacked) amount = I.stacked
+				for(var/i = 1 to amount)
+					ProcessItem(I)
+				I.stacked -= amount
+			else
+				ProcessItem(I)
+				I.stacked--
+			if(I.stacked <= 0) I.Move(null, forced = 1)
+			state = "soup_mix"
+			State_Update()
+			return 1
+
+	proc/ProcessItem(item/misc/I)
+		var/item/misc/food/J = I
+		if(J.FoodType == "Vege")
+			vege++
+		else if(J.FoodType == "Meat")
+			meat++
+		else
+			other++
+		units++
+		cook_timer = 20
+
+	proc/State_Update()
+		for(var/obj/fire/I in loc.contents)
+			icon_state = "[state]_boil"
+			return
+		icon_state = "[state]"

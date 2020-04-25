@@ -16,6 +16,10 @@ mob/proc/create_crafting()
 	item_button_list += new/button/item/rope_bridge()
 	item_button_list += new/button/construction/trap_door()
 	item_button_list += new/button/item/glass_vial()
+	item_button_list += new/button/item/bowl()
+	item_button_list += new/button/item/paint_brush()
+	item_button_list += new/button/item/painting()
+	item_button_list += new/button/item/waterstone_box()
 
 	//Equipment
 	equipment_button_list = new()
@@ -24,7 +28,7 @@ mob/proc/create_crafting()
 	equipment_button_list += new/button/item/wood_sword()
 	equipment_button_list += new/button/item/wood_shield()
 	equipment_button_list += new/button/item/wood_club()
-	equipment_button_list += new/button/item/hunting_spear()
+	equipment_button_list += new/button/item/spear()
 	equipment_button_list += new/button/item/primitive_halberd()
 
 	//Building
@@ -57,7 +61,10 @@ mob/proc/create_crafting()
 	building_button_list += new/button/construction/sign()
 	building_button_list += new/button/construction/gravestone()
 
-	building_button_list += new/button/construction/anvil()
+	building_button_list += new/button/construction/Clay_Oven()
+	building_button_list += new/button/construction/Clay_Furnace()
+	building_button_list += new/button/construction/Clay_Mill()
+	building_button_list += new/button/construction/Cauldron()
 
 	var/grid_size = round(item_button_list.len / 2) + 1
 	winset(src, "items_pane.items_grid", "cells=0x0")

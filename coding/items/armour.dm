@@ -92,7 +92,7 @@ item/armour
 			name = "Craftsman cloak"
 			suffix = ""
 		wood_torso
-			armour = 1
+			armour = 5
 			icon_state = "wood_plate"
 			name = "Wood torso"
 			suffix = ""
@@ -112,32 +112,32 @@ item/armour
 			icon_state = "chef_cloak"
 			suffix = ""
 		tin_plate
-			armour = 1.25
+			armour = 9
 			icon_state = "tin_plate"
 			name = "Tin plate"
 			suffix = ""
 		copper_plate
-			armour = 1.5
+			armour = 10
 			icon_state = "copper_plate"
 			name = "Copper plate"
 			suffix = ""
 		tungsten_plate
-			armour = 1.75
+			armour = 12
 			icon_state = "tungsten_plate"
 			suffix = ""
 			name = "Tungsten plate"
 		iron_plate
-			armour = 2
+			armour = 11
 			icon_state = "guard_plate"
 			suffix = ""
 			name = "Iron plate"
 		silver_plate
-			armour = 2.2
+			armour = 13
 			icon_state = "silver_plate"
 			suffix = ""
 			name = "Silver plate"
 		palladium_plate
-			armour = 2.4
+			armour = 17
 			icon_state = "palladium_plate"
 			suffix = ""
 			name = "Palladium plate"
@@ -152,27 +152,27 @@ item/armour
 			suffix = ""
 			name = "Noble Guard plate"
 		gold_guard_plate
-			armour = 2.5
+			armour = 15
 			icon_state = "rguard_plate"
 			suffix = ""
 			name = "Gold plate"
 		mithril_plate
-			armour = 2.75
+			armour = 16
 			icon_state = "mithril_plate"
 			suffix = ""
 			name = "Mithril plate"
 		magicite_plate
-			armour = 3.25
+			armour = 18
 			icon_state = "magicite_plate"
 			suffix = ""
 			name = "Magicite plate"
 		adamantite_plate
-			armour = 4
+			armour = 23
 			icon_state = "adamantite_plate"
 			suffix = ""
 			name = "Adamantite plate"
 		royal_armour
-			armour = 3
+			armour = 23
 			icon_state = "king_plate"
 			suffix = ""
 			name = "Royal Armour"
@@ -242,7 +242,7 @@ item/armour
 			name = "Theifs Cloths"
 			suffix = ""
 		iron_chainmail
-			armour = 2
+			armour = 11
 			icon_state = "guard_chainmail"
 			name = "Guard Chainmail"
 			suffix = ""
@@ -354,52 +354,52 @@ item/armour
 				icon_state = input("Icon state") as text|null
 				armour = (input("Armour") as num|null) || armour
 		iron_helm
-			armour = 1
+			armour = 6
 			icon_state = "guard_helm"
 			suffix = ""
 			name = "Iron Helm"
 			hide_hair = 1
 		tungsten_helm
-			armour = 0.75
+			armour = 8
 			icon_state = "tungsten_helm"
 			suffix = ""
 			name = "Tungsten Helm"
 			hide_hair = 1
 		tin_helm
-			armour = 0.25
+			armour = 4
 			icon_state = "tin_helm"
 			suffix = ""
 			name = "Tin Helm"
 		copper_helm
-			armour = 0.5
+			armour = 5
 			icon_state = "copper_helm"
 			suffix = ""
 			name = "Copper Helm"
 		silver_helm
-			armour = 1.25
+			armour = 10
 			icon_state = "silver_helm"
 			suffix = ""
 			name = "Silver Helm"
 			hide_hair = 1
 		palladium_helm
-			armour = 1.5
+			armour = 13
 			icon_state = "palladium_helm"
 			suffix = ""
 			name = "Palladium Helm"
 			hide_hair = 1
 		mithril_helm
-			armour = 2
+			armour = 12
 			icon_state = "mithril_helm"
 			suffix = ""
 			name = "Mithril Helm"
 			hide_hair = 1
 		magicite_helm
-			armour = 2.25
+			armour = 15
 			icon_state = "magicite_helm"
 			suffix = ""
 			name = "Magicite Helm"
 		adamantite_helm
-			armour = 3.0
+			armour = 19
 			icon_state = "adamantite_mask"
 			suffix = ""
 			name = "Adamantite Helm"
@@ -417,13 +417,13 @@ item/armour
 			name = "Noble Guard Helm"
 			hide_hair = 1
 		gold_guard_helm
-			armour = 1.75
+			armour = 10
 			icon_state = "rguard_helm"
 			suffix = ""
 			name = "Gold Guard Helm"
 			hide_hair = 1
 		royal_mask
-			armour = 2
+			armour = 19
 			icon_state = "king_mask"
 			suffix = ""
 			name = "Royal Mask"
@@ -522,42 +522,42 @@ item/armour
 			icon_state = "chef_hat"
 			suffix = ""
 		iron_helm_top
-			armour = 1
+			armour = 7
 			icon_state = "guard_helm_top"
 			name = "Iron Helm top"
 			suffix = ""
 		tungsten_helm_top
-			armour = 0.75
+			armour = 8
 			icon_state = "tungsten_helm_top"
 			name = "Tungsten Helm top"
 			suffix = ""
 		tin_helm_top
-			armour = 0.25
+			armour = 4
 			icon_state = "tin_helm_top"
 			name = "Tin Helm top"
 			suffix = ""
 		copper_helm_top
-			armour = 0.5
+			armour = 5
 			icon_state = "copper_helm_top"
 			name = "Copper Helm top"
 			suffix = ""
 		silver_helm_top
-			armour = 1.25
+			armour = 9
 			icon_state = "silver_helm_top"
 			name = "Silver Helm top"
 			suffix = ""
 		palladium_helm_top
-			armour = 1.5
+			armour = 13
 			icon_state = "palladium_helm_top"
 			name = "Palladium Helm top"
 			suffix = ""
 		mithril_helm_top
-			armour = 2.0
+			armour = 11
 			icon_state = "mithril_helm_top"
 			name = "Mithril Helm top"
 			suffix = ""
 		adamantite_helm_top
-			armour = 1.5
+			armour = 19
 			icon_state = "adamantite_crown"
 			name = "Adamantite Crown"
 			suffix = ""
@@ -572,12 +572,12 @@ item/armour
 			name = "Noble Guard Helm top"
 			suffix = ""
 		gold_guard_helm_top
-			armour = 1.75
+			armour = 10
 			icon_state = "rguard_helm_top"
 			name = "Gold Guard Helm top"
 			suffix = ""
 		Royal_crown
-			armour = 2
+			armour = 19
 			icon_state = "crown"
 			name = "Crown"
 			suffix = ""
@@ -622,6 +622,7 @@ item/armour
 		mushroom_cap
 			icon_state = "mushroom_cap"
 			name = "Mushroom cap"
+			armour = 12
 			suffix = ""
 		red_baseball_cap
 			icon_state = "rbaseball_cap"
@@ -632,7 +633,7 @@ item/armour
 			name = "top hat"
 			suffix = ""
 		wood_helmet
-			armour = 1.5
+			armour = 5
 			icon_state = "wood_helmet"
 			name = "Wood helmet"
 			suffix = ""

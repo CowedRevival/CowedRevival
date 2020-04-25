@@ -108,12 +108,12 @@ button //Button object
 				requirements_list = new()
 				requirements_list += /item/misc/wood
 
-		hunting_spear
+		spear
 			icon = 'icons/items.dmi'
-			icon_state = "hunting_spear"
+			icon_state = "spear"
 			object_name = "Hunting Spear"
 			type_of_object = ITEM
-			object_to_make = /item/weapon/hunting_spear
+			object_to_make = /item/weapon/spear
 			New()
 				requirements_list = new()
 				requirements_list += /item/misc/wood
@@ -139,6 +139,48 @@ button //Button object
 			New()
 				requirements_list = new()
 				requirements_list += /item/misc/wood
+
+		bowl
+			icon = 'icons/Supplies.dmi'
+			icon_state = "bowl"
+			object_name = "Bowl"
+			type_of_object = ITEM
+			object_to_make = /item/misc/wood_bowl
+			New()
+				requirements_list = new()
+				requirements_list += /item/misc/wood
+
+		waterstone_box
+			icon = 'icons/items.dmi'
+			icon_state = "waterstone_box"
+			object_name = "Waterstone Box"
+			type_of_object = ITEM
+			object_to_make = /item/misc/waterstone_box
+			New()
+				requirements_list = new()
+				requirements_list += /item/misc/wood
+
+		paint_brush
+			icon = 'icons/items.dmi'
+			icon_state = "paint_brush"
+			object_name = "Paint Brush"
+			type_of_object = ITEM
+			object_to_make = /item/misc/paint_brush
+			New()
+				requirements_list = new()
+				requirements_list += /item/misc/wood
+				requirements_list += /item/misc/wool
+
+		painting
+			icon = 'icons/items.dmi'
+			icon_state = "painting"
+			object_name = "Painting"
+			type_of_object = ITEM
+			object_to_make = /item/misc/wood_bowl
+			New()
+				requirements_list = new()
+				requirements_list += /item/misc/wood
+				requirements_list += /item/misc/hide
 
 		wood_bucket
 			icon = 'icons/Supplies.dmi'
@@ -720,3 +762,47 @@ button //Button object
 					newkeyname = input(M, "What do you want the door to be called?", "Name", "Door") as text
 					if(!newkeyname) return
 				M.create_crafting()
+
+		Clay_Oven
+			icon = 'icons/clay_objects.dmi'
+			icon_state = "Oven"
+			object_name = "Clay Oven"
+			type_of_object = OBJECT
+			object_to_make = /obj/oven/oven
+			object_to_build = /obj/oven/oven
+			New()
+				requirements_list = new()
+				requirements_list += /item/misc/Raw_Clay
+		Clay_Furnace
+			icon = 'icons/clay_objects.dmi'
+			icon_state = "Furnace"
+			object_name = "Clay Furnace"
+			type_of_object = OBJECT
+			object_to_make = /obj/oven/furnace
+			object_to_build = /obj/oven/furnace
+			New()
+				requirements_list = new()
+				requirements_list += /item/misc/Raw_Clay
+
+		Clay_Mill
+			icon = 'icons/clay_objects.dmi'
+			icon_state = "Grind_Stone"
+			object_name = "Clay Mill"
+			type_of_object = OBJECT
+			object_to_make = /obj/mill
+			object_to_build = /obj/mill
+			New()
+				requirements_list = new()
+				requirements_list += /item/misc/Raw_Clay
+
+		Cauldron
+			icon = 'icons/cauldron.dmi'
+			icon_state = ""
+			object_name = "Cauldron"
+			type_of_object = OBJECT
+			object_to_make = /obj/cauldron
+			object_to_build = /obj/cauldron
+			New()
+				requirements_list = new()
+				requirements_list += /item/misc/molten_iron
+				requirements_list += /item/misc/iron_ingot

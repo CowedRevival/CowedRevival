@@ -1,12 +1,12 @@
 // BEGIN_INTERNALS
 /*
 MAP_ZOOM: 1.000
-LAST_COMPILE_TIME: 1587299637
-DIR: code coding coding\admin coding\admin\modules coding\animals coding\items coding\mobs coding\mobs\AI coding\new_admin coding\new_admin\panel coding\objs coding\objs\families coding\snippets coding\spells coding\tardis icons lib lib\Test lib\Test\demo 
+LAST_COMPILE_TIME: 1587774973
+DIR: code coding coding\admin coding\admin\modules coding\animals coding\items coding\mobs coding\mobs\AI coding\new_admin coding\new_admin\panel coding\objs coding\objs\families coding\snippets coding\spells coding\tardis icons lib lib\Test lib\Test\demo maps 
 AUTO_FILE_DIR: ON
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 513.1517
-WINDOW: coding\spells\building.dm;coding\admin.dm;coding\dta_admin.dm;coding\game.dm;coding\mobs.dm;coding\objs\vein.dm;coding\hud.dm;coding\items\misc.dm;icons\wood.dmi;icons\mushroom_objects.dmi;coding\boats.dm;code\Monsters.dm;icons\shroom.dmi;lib\Test\Test.dm;coding\world.dm
-FILE: coding\world.dm
+WINDOW: code\Monsters.dm;icons\shroom.dmi;coding\turfs.dm;code\Crafting_Buttons.dm;code\Crafting.dm;maps\cowmalot.dmm;coding\animals\animals.dm;coding\world.dm;coding\new_admin\global.dm
+FILE: coding\new_admin\global.dm
 */
 // END_INTERNALS

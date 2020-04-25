@@ -33,6 +33,7 @@ animal
 		runAI = TRUE
 		mob/master
 		age
+		mood_timer = 0
 		tmp
 			there_can_be_only_one = 0
 			pregnant = 0 //oh dear
@@ -99,6 +100,12 @@ animal
 				if(!enemies) enemies = new/list()
 				if(!(attacker in enemies)) enemies += attacker
 				if(!enemy || target == src) enemy = attacker
+				if(natural_mood == MOOD_CURIOUS || natural_mood == MOOD_PEACEFUL)
+					mood = MOOD_SCARED
+					mood_timer = 200
+					base_speed = speed
+					speed *= 2
+					if(speed > 100) speed = 100
 
 		SeeDeath(mob/target)
 			if(target == enemy)
@@ -113,52 +120,77 @@ animal
 			if(mood == natural_mood && SLEEP <= 50 && prob(25)) mood = MOOD_CURIOUS //hmm... what is that?
 		AI()
 			if(HP > 0 && !corpse)
-				spawn((110 - speed))
+				spawn(world.tick_lag)
 					AI()
-			switch(mood)
-				if(MOOD_ANGRY)
-					if(HP <= 0) return
-					if(!enemy)
-						var/smallest_dist = 999
-						var/view_distance = 10
-						if(istype(src, /animal/wolf) && Hour >= 20 || istype(src, /animal/wolf) && Hour <= 4)
-							view_distance = 40
-						for(var/mob/I in view(view_distance))
-							var/dist = get_dist(src, I)
-							if(dist < smallest_dist && !istype(I, src) && !istype(I, /mob/observer) && I.HP > 0)
-								smallest_dist = dist
-								enemy = I
-					if(!issleeping && (stunned + weakened <= 0) && !corpse && enemy && (enemy in range(src)))
-						spawn(step_to(src, enemy, 1, 1))
-							if(src in oview(1, enemy))
-								src.attack(enemy)
-								HUNGER += 30
-								if(HUNGER > MHUNGER)
-									HUNGER = MHUNGER
-					else
-						Step(pick(NORTH, SOUTH, EAST, WEST))
-				if(MOOD_CURIOUS, MOOD_PEACEFUL)
-					if(HP <= 0) return
-					if(HUNGER < 90)
-						var/item/misc/food/food_desire
-						var/lowest_dist = 999
-						for(var/item/misc/food/I in view(6))
-							var/dist = get_dist(src, I)
-							if(dist < lowest_dist)
-								if(!(I.FoodType != "Vege" && animal_type == TYPE_HERBIVORE))
-									food_desire = I
-									lowest_dist = get_dist(src, I)
-						if(food_desire)
-							spawn(step_to(src, food_desire, 1, 1))
-							if(get_dist(src,food_desire) <= 1)
-								food_desire.consume(src)
-								HUNGER *= 2
-								if(HUNGER > MHUNGER)
-									HUNGER = MHUNGER
+			if(action_timer <= 0)
+				action_timer = 100 - speed
+				if(action_timer == 0)
+					action_timer = 5
+				switch(mood)
+					if(MOOD_ANGRY)
+						if(HP <= 0) return
+						if(!enemy)
+							var/smallest_dist = 999
+							var/view_distance = 10
+							if(istype(src, /animal/wolf) && Hour >= 20 || istype(src, /animal/wolf) && Hour <= 4)
+								view_distance = 40
+							for(var/mob/I in view(view_distance))
+								var/dist = get_dist(src, I)
+								if(dist < smallest_dist && !istype(I, src) && !istype(I, /mob/observer) && I.HP > 0)
+									smallest_dist = dist
+									enemy = I
+						if(!issleeping && (stunned + weakened <= 0) && !corpse && enemy && (enemy in range(src)))
+							spawn(step_to(src, enemy, 1, 1))
+								if(src in oview(1, enemy))
+									src.attack(enemy)
+									HUNGER += 30
+									if(HUNGER > MHUNGER)
+										HUNGER = MHUNGER
 						else
 							Step(pick(NORTH, SOUTH, EAST, WEST))
-					else
-						Step(pick(NORTH, SOUTH, EAST, WEST))
+					if(MOOD_CURIOUS, MOOD_PEACEFUL)
+						if(HP <= 0) return
+						if(HUNGER < 90)
+							var/item/misc/food/food_desire
+							var/lowest_dist = 999
+							for(var/item/misc/food/I in view(6))
+								var/dist = get_dist(src, I)
+								if(dist < lowest_dist)
+									if(!(I.FoodType != "Vege" && animal_type == TYPE_HERBIVORE))
+										food_desire = I
+										lowest_dist = get_dist(src, I)
+							if(food_desire)
+								spawn(step_to(src, food_desire, 1, 1))
+								if(get_dist(src,food_desire) <= 1)
+									food_desire.consume(src)
+									HUNGER *= 4
+									if(HUNGER > MHUNGER)
+										HUNGER = MHUNGER
+							else
+								Step(pick(NORTH, SOUTH, EAST, WEST))
+						else
+							Step(pick(NORTH, SOUTH, EAST, WEST))
+					if(MOOD_SCARED)
+						mood_timer--
+						if(mood_timer <= 0)
+							mood = natural_mood
+							speed = base_speed
+						if(HP <= 0) return
+						if(!enemy)
+							var/smallest_dist = 999
+							var/view_distance = 10
+							for(var/mob/I in view(view_distance))
+								var/dist = get_dist(src, I)
+								if(dist < smallest_dist && !istype(I, src) && !istype(I, /mob/observer) && I.HP > 0)
+									smallest_dist = dist
+									enemy = I
+						if(!issleeping && (stunned + weakened <= 0) && !corpse && enemy && (enemy in range(src)))
+							spawn(world.tick_lag)
+								Step_Away(enemy)
+						else
+							Step(pick(NORTH, SOUTH, EAST, WEST))
+			else
+				action_timer--
 		Step(dir)
 			if(HP <= 0 || corpse) return 100
 			if(_c_speed != speed)
@@ -364,6 +396,7 @@ animal
 		slowness = 10
 		smell = 30
 		strength = 3
+		speed = 40
 		HP = 40
 		MHP = 40
 		natural_mood = MOOD_CURIOUS
@@ -371,7 +404,7 @@ animal
 	sheep
 		icon = 'icons/Sheep.dmi'
 		var/wool = 15
-		speed = 5
+		speed = 40
 		natural_mood = MOOD_CURIOUS
 		mood = MOOD_CURIOUS
 		attack_hand(mob/M)
@@ -393,6 +426,7 @@ animal
 		smell = 20
 		strength = 1
 		defence = 5
+		speed = 5
 		HP = 120
 		MHP = 120
 		there_can_be_only_one = 1
@@ -401,28 +435,39 @@ animal
 		smell = 60
 		strength = 2
 		defence = 2
+		speed = 40
 		natural_mood = MOOD_CURIOUS
 		mood = MOOD_CURIOUS
 		animal_type = TYPE_OMNIVORE
 	bear
 		icon = 'icons/Bear.dmi'
 		smell = 90
-		strength = 9
+		strength = 6
 		defence = 6
 		HP = 160
 		MHP = 160
 		animal_type = TYPE_CARNIVORE
-		speed = 67
+		speed = 40
 		there_can_be_only_one = 1
 
 	wolf
 		icon = 'icons/Wolf.dmi'
 		smell = 90
-		strength = 2
+		strength = 5
 		defence = 1
 		HP = 60
 		MHP = 60
 		animal_type = TYPE_CARNIVORE
-		speed = 100
+		speed = 80
 		natural_mood = MOOD_ANGRY
 		mood = MOOD_ANGRY
+
+		New()
+			..()
+			if(prob(2))
+				name = "Maneater"
+				HP = 120
+				MHP = 120
+				strength = 7
+				speed = 85
+				icon = 'icons/Dire_Wolf.dmi'

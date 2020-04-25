@@ -1,4 +1,4 @@
-#define GAME_VERSION "9.4"
+#define GAME_VERSION "9.5"
 
 #define MD5_KEY "8raSub9zutuhesU3upHUzafRenekaBapHew52QUcRunUyuc3gestuWEReF3cET8U"
 
@@ -38,6 +38,7 @@
 #define FILE_DIR "sounds/chronojohn"
 #define FILE_DIR "sounds/computer"
 #define FILE_DIR "sounds/music"
+#define FILE_DIR "sounds/sfx"
 #define FILE_DIR "sounds/spells"
 #define FILE_DIR "sounds/tardis"
 // END_FILE_DIR
@@ -47,7 +48,6 @@
 // END_PREFERENCES
 
 // BEGIN_INCLUDE
-#include "spawner.dm"
 #include "skin.dmf"
 #include "a_themap.dmm"
 #include "Clothes\Weapons\Flag R.dm"
@@ -71,6 +71,7 @@
 #include "code\Monsters.dm"
 #include "code\rc5.dm"
 #include "code\Shackle.dm"
+#include "code\spawner.dm"
 #include "code\Talking.dm"
 #include "code\Turfs.dm"
 #include "code\Verbs.dm"

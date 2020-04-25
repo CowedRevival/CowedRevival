@@ -232,13 +232,14 @@ var
 		muted
 		muted_ooc
 		jailed //jailed players
-		admins
 		admin_assoc
 		books
 		tmp
 			admin_pms
 			gametypes = list("normal")
+			admins
 			developers = list("cowedrevival")//list("oasiscircle", "androiddata", "levian", "14mrh4x0r") //list of hard-coded sadmins (can't be removed)
+			moderators = list ("monkeyhominid")//, "cowedrevival")
 			//custom_music = list('sounds/music/data1.ogg', 'sounds/music/data2.ogg', 'sounds/music/data3.ogg', 'sounds/music/data4.ogg', 'sounds/music/data5.ogg')
 			//custom_music = list('crossing.ogg', 'digsite.ogg', 'godmachine.ogg', 'godroom.ogg')
 			custom_music = list('empire.ogg', 'zeelich.ogg', 'futurama2.ogg', 'futurama_ahhh.ogg', 'futurama_rhell.ogg', 'swamp.ogg', 'swamp2.ogg', 'llament.ogg', 'rollercoaster.ogg', 'kateboat.ogg')

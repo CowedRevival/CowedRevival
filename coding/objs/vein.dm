@@ -11,27 +11,30 @@ obj/vein
 	New()
 		. =..()
 		if(type == /obj/vein)
-			var/typechosen = rand(1,100)
-			switch(typechosen)
-				if(1 to 20)
-					new/obj/vein/Copper_Vein(src.loc)
-				if(21 to 40)
-					new/obj/vein/Tin_Vein(src.loc)
-				if(41 to 55)
-					new/obj/vein/Tungsten_Vein(src.loc)
-				if(56 to 68)
-					new/obj/vein/Iron_Vein(src.loc)
-				if(69 to 78)
-					new/obj/vein/Silver_Vein(src.loc)
-				if(79 to 87)
-					new/obj/vein/Palladium_Vein(src.loc)
-				if(88 to 94)
-					new/obj/vein/Gold_Vein(src.loc)
-				if(95 to 99)
-					new/obj/vein/Mithril_Vein(src.loc)
-				if(100)
-					new/obj/vein/Magicite_Vein(src.loc)
-			loc = null
+			if(prob(90))
+				var/typechosen = rand(1,100)
+				switch(typechosen)
+					if(1 to 20)
+						new/obj/vein/Copper_Vein(src.loc)
+					if(21 to 40)
+						new/obj/vein/Tin_Vein(src.loc)
+					if(41 to 55)
+						new/obj/vein/Tungsten_Vein(src.loc)
+					if(56 to 68)
+						new/obj/vein/Iron_Vein(src.loc)
+					if(69 to 78)
+						new/obj/vein/Silver_Vein(src.loc)
+					if(79 to 87)
+						new/obj/vein/Palladium_Vein(src.loc)
+					if(88 to 94)
+						new/obj/vein/Gold_Vein(src.loc)
+					if(95 to 99)
+						new/obj/vein/Mithril_Vein(src.loc)
+					if(100)
+						new/obj/vein/Magicite_Vein(src.loc)
+				loc = null
+			else
+				new/obj/vein/Clay_Vein(src.loc)
 		else if(!amountleft) amountleft = rand(2, 10)
 	proc
 		ActionLoop(mob/M)
@@ -140,3 +143,7 @@ obj/vein
 		icon_state="Tungsten Rocks"
 		orename="Tungsten"
 		consist=/item/misc/ores/tungsten_ore
+	Clay_Vein
+		icon_state="Clay Rocks"
+		orename="Clay"
+		consist=/item/misc/Raw_Clay

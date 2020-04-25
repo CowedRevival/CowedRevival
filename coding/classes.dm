@@ -114,8 +114,7 @@ The Belius is the religion of this kingdom, and all peasants must uphold it or b
 the village all the way to protecting the King."}
 				icon_state = "bovinia_rguard"
 				children = newlist(
-					/character_handling/class/bovinia/royal_guard, /character_handling/class/bovinia/royal_archer,
-					/character_handling/class/bovinia/guard
+					/character_handling/class/bovinia/royal_guard, /character_handling/class/bovinia/guard, /character_handling/class/bovinia/jailer,
 				)
 				class_id = "bovinia_rguard"
 			royal_staff

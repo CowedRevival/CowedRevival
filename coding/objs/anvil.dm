@@ -16,7 +16,7 @@ obj/anvil
 			L += list("Tin Sword", "Tin Helm", "Tin Helm Top", "Tin Plate", "Tin Shield")
 
 		I = locate(/item/misc/copper_ingot) in M.contents
-		if(I && M.skills.smithing >= 10)
+		if(I && M.skills.smithing >= 0)
 			L += list("Copper Plate", "Copper Helm", "Copper Helm Top", "Copper Sword", "Copper Shield")
 
 		I = locate(/item/misc/tungsten_ingot) in M.contents
@@ -24,7 +24,7 @@ obj/anvil
 			L += list("Tungsten Sword", "Tungsten Helm", "Tungsten Helm Top", "Tungsten Plate", "Tungsten Shield")
 
 		I = locate(/item/misc/iron_ingot) in M.contents
-		if(I && M.skills.smithing >= 30)
+		if(I && M.skills.smithing >= 20)
 			L += list("Iron Sword", "Shackles", "Leg Shackles", "Iron Helm", "Iron Helm Top", "Iron Plate", "Iron Shield")
 
 		I = locate(/item/misc/silver_ingot) in M.contents
@@ -32,23 +32,23 @@ obj/anvil
 			L += list("Silver Sword", "Silver Helm", "Silver Helm Top", "Silver Plate", "Silver Shield")
 
 		I = locate(/item/misc/palladium_ingot) in M.contents
-		if(I && M.skills.smithing >= 50)
+		if(I && M.skills.smithing >= 60)
 			L += list("Palladium Sword", "Palladium Helm", "Palladium Helm Top", "Palladium Plate", "Palladium Shield")
 
 		I = locate(/item/misc/gold_ingot) in M.contents
-		if(I && M.skills.smithing >= 60)
+		if(I && M.skills.smithing >= 40)
 			L += list("Gold Sword", "Gold Helm", "Gold Helm Top", "Gold Plate", "Gold Shield")
 
 		I = locate(/item/misc/mithril_ingot) in M.contents
-		if(I && M.skills.smithing >= 70)
+		if(I && M.skills.smithing >= 60)
 			L += list("Mithril Sword", "Mithril Helm", "Mithril Helm Top", "Mithril Plate", "Mithril Shield")
 
 		I = locate(/item/misc/magicite_ingot) in M.contents
-		if(I && M.skills.smithing >= 85)
+		if(I && M.skills.smithing >= 80)
 			L += list("Magicite Sword", "Magicite Helm", "Magicite Plate")
 
 		I = locate(/item/misc/adamantite_ingot) in M.contents
-		if(I && M.skills.smithing >= 95)
+		if(I && M.skills.smithing >= 90)
 			L += list("Adamantite Sword", "Adamantite Helm", "Adamantite Helm Top", "Adamantite Plate")
 
 		if(!L || !L.len)
@@ -137,7 +137,7 @@ obj/anvil
 					if("Gold Helm Top") M.contents += new/item/armour/hat/gold_guard_helm_top
 					if("Gold Plate") M.contents += new/item/armour/body/gold_guard_plate
 
-				if(M.skills.smithing < 100)
+				if(M.skills.smithing < 100 && prob(100-(M.skills.smithing * 0.75)))
 					M.skills.smithing += 1
 			else
 				for(var/mob/N in hearers(M))

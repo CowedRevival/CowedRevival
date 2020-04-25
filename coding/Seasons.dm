@@ -82,8 +82,7 @@ obj
 			..()
 
 
-mob/verb/Change_Month()
+admin/verb/Change_Month()
 	set category = "Admin"
-	Month += 1
 	Day = 3
 	Hour = 23
