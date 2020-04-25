@@ -100,12 +100,12 @@ animal
 				if(!enemies) enemies = new/list()
 				if(!(attacker in enemies)) enemies += attacker
 				if(!enemy || target == src) enemy = attacker
-				if(natural_mood == MOOD_CURIOUS || natural_mood == MOOD_PEACEFUL)
+				if(mood == MOOD_CURIOUS || mood == MOOD_PEACEFUL)
 					mood = MOOD_SCARED
 					mood_timer = 200
 					base_speed = speed
-					speed *= 2
-					if(speed > 100) speed = 100
+					speed *= 2.5
+					if(speed > 90) speed = 90
 
 		SeeDeath(mob/target)
 			if(target == enemy)
@@ -129,7 +129,7 @@ animal
 				switch(mood)
 					if(MOOD_ANGRY)
 						if(HP <= 0) return
-						if(!enemy)
+						if(!enemy || enemy && get_dist(src, enemy) > 15)
 							var/smallest_dist = 999
 							var/view_distance = 10
 							if(istype(src, /animal/wolf) && Hour >= 20 || istype(src, /animal/wolf) && Hour <= 4)

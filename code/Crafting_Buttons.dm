@@ -176,7 +176,7 @@ button //Button object
 			icon_state = "painting"
 			object_name = "Painting"
 			type_of_object = ITEM
-			object_to_make = /item/misc/wood_bowl
+			object_to_make = /item/misc/painting
 			New()
 				requirements_list = new()
 				requirements_list += /item/misc/wood

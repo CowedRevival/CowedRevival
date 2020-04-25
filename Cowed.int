@@ -1,12 +1,12 @@
 // BEGIN_INTERNALS
 /*
 MAP_ZOOM: 1.000
-LAST_COMPILE_TIME: 1587780267
+LAST_COMPILE_TIME: 1587856616
 DIR: code coding coding\admin coding\admin\modules coding\animals coding\items coding\mobs coding\mobs\AI coding\new_admin coding\new_admin\panel coding\objs coding\objs\families coding\snippets coding\spells coding\tardis icons lib lib\Test lib\Test\demo maps 
 AUTO_FILE_DIR: ON
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 513.1517
-WINDOW: code\Monsters.dm;icons\shroom.dmi;coding\turfs.dm;code\Crafting_Buttons.dm;code\Crafting.dm;maps\cowmalot.dmm;coding\world.dm
+WINDOW: code\Monsters.dm;icons\shroom.dmi;coding\turfs.dm;maps\cowmalot.dmm;coding\world.dm;coding\objs\vein.dm;code\Bushs_Berrys.dm;code\spawner.dm;icons\Frogman.dmi;icons\Cow.dmi;icons\recolor_1.dmi;icons\mob.dmi;coding\condition_spawn_objects.dm;icons\misc_textures.dmi;coding\Seasons.dm;Void Wall.dmi;a_themap.dmm;coding\game.dm;coding\mobs.dm
 FILE: coding\world.dm
 */
 // END_INTERNALS

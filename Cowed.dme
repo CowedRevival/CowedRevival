@@ -86,6 +86,7 @@
 #include "coding\classes.dm"
 #include "coding\client.dm"
 #include "coding\computer.dm"
+#include "coding\condition_spawn_objects.dm"
 #include "coding\crops.dm"
 #include "coding\dta_player.dm"
 #include "coding\family.dm"

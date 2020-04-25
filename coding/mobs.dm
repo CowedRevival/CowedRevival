@@ -1140,7 +1140,7 @@ mob
 							src.show_message("<tt>You have tamed the [M.name].</tt>")
 							return
 
-					var/restdmg = (state == "ghost" || state == "ghost-i") ? 0 : (strength * ((100 - defence)/100))
+					var/restdmg = (state == "ghost" || state == "ghost-i") ? 0 : (strength * ((100 - M.defence)/100))
 					if(state == "skeleton") restdmg /= 1.5
 					if(restdmg <= 0) restdmg = 1
 					if(restdmg > 0)
@@ -1184,7 +1184,7 @@ mob
 						N.show_message("\red <b>[src.name] attacks [M.name] non-deadly!</b>")
 					chat_log << "<font color=\"red\">[time2text(world.realtime, "DD.MM.YY hh:mm:ss")]&gt; [src.name] attacks [M.name] non-deadly!</font><br />"
 
-					var/restdmg = (state == "ghost" || state == "ghost-i") ? 0 : (src.strength - M.defence) * 3
+					var/restdmg = (state == "ghost" || state == "ghost-i") ? 0 : (strength * ((100 - M.defence)/100))
 					if(state == "skeleton") restdmg /= 1.5
 					if(restdmg <= 0) restdmg = 1
 					if(restdmg > 0)

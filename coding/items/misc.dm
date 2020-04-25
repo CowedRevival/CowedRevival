@@ -2580,3 +2580,4 @@ item/misc
 	wood_bowl
 		icon = 'icons/Supplies.dmi'
 		icon_state = "bowl"
+		stacked = 1

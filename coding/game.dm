@@ -98,7 +98,7 @@ game
 			set background=1
 			if(Hour >= 24)
 				Hour = 0
-				world << "<b>The wolves howel at midnight.</b>"
+				world << "<b>The wolves howl at midnight.</b>"
 			if(!Hour) Day++
 			if(Day > 3)
 				Month++

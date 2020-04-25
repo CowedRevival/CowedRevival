@@ -1057,19 +1057,9 @@ obj/oven
 				for(type in allowed_types)
 					if(istype(I, type)) break
 				if(!type) return
-
-				if(!istype(I, /item/misc/food/Dough) && I.stacked && I.stacked > 1)
-					hearers(usr) << "<small>[usr.name] places something in the oven!</small>"
-					var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Oven :: Specify Amount") as null|num
-					if(amount == null || !(usr in range(1, src)) || !(I in usr.contents)) return
-					if(amount <= 0) amount = 1
-					if(amount > I.stacked) amount = I.stacked
-					for(var/i = 1 to amount)
-						ProcessItem(I)
-					I.stacked -= amount
-				else
-					ProcessItem(I)
-					I.stacked--
+				hearers(usr) << "<small>[usr.name] places something in the oven!</small>"
+				spawn() ProcessItem(I)
+				I.stacked--
 				if(I.stacked <= 0) I.Move(null, forced = 1)
 				return 1
 
@@ -1135,7 +1125,7 @@ obj/oven
 		name = "clay furnace"
 		icon_state = "Furnace"
 		icon_state_base = "Furnace"
-		allowed_types = list(/item/misc/ores)
+		allowed_types = list(/item/misc/ores, /item/misc/sand_clump)
 
 		MouseDropped(item/misc/I, src_location, over_location, control, params)
 			if(!(usr in range(1, src)) || !(I in usr.contents)) return
@@ -1161,19 +1151,8 @@ obj/oven
 				for(type in allowed_types)
 					if(istype(I, type)) break
 				if(!type) return
-
-				if(!istype(I, /item/misc/food/Dough) && I.stacked && I.stacked > 1)
-					var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Oven :: Specify Amount") as null|num
-					if(amount == null || !(usr in range(1, src)) || !(I in usr.contents)) return
-					if(amount <= 0) amount = 1
-					if(amount > I.stacked) amount = I.stacked
-					for(var/i = 1 to amount)
-						ProcessItem(I)
-					I.stacked -= amount
-				else
-					ProcessItem(I)
-					I.stacked--
-
+				spawn() ProcessItem(I)
+				I.stacked--
 				if(I.stacked <= 0) I.Move(null, forced = 1)
 				return 1
 
@@ -1207,6 +1186,9 @@ obj/oven
 				amount = 1
 			else if(istype(I, /item/misc/ores/tungsten_ore))
 				cooking = /item/misc/molten_tungsten
+				amount = 1
+			else if(istype(I, /item/misc/sand_clump))
+				cooking = /item/misc/molten_glass
 				amount = 1
 			else
 				cooking = /item/misc/food/Burnt_Something
@@ -1323,7 +1305,7 @@ obj/cauldron
 		for(var/obj/fire/I in loc.contents)
 			icon_state = "[state]_boil"
 			if(state != "empty")
-				Play_Sound_Local(pick('sounds/sfx/bubbly1.ogg', 'sounds/sfx/bubbly2.ogg', 'sounds/sfx/bubbly3.ogg', 'sounds/sfx/bubbly4.ogg', 'sounds/sfx/bubbly5.ogg'))
+				if(prob(20))Play_Sound_Local(pick('sounds/sfx/bubbly1.ogg', 'sounds/sfx/bubbly2.ogg', 'sounds/sfx/bubbly3.ogg', 'sounds/sfx/bubbly4.ogg', 'sounds/sfx/bubbly5.ogg'))
 			if(cook_timer > 0)
 				cook_timer--
 				state = "soup_mix"
@@ -1374,18 +1356,9 @@ obj/cauldron
 			if(!type) return
 			if(!contains_water)
 				usr << "You need to fill the pot with water!"
-			if(I.stacked && I.stacked > 1)
-				hearers(usr) << "<small>[usr.name] adds something in the cauldron!</small>"
-				var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Cauldron :: Specify Amount") as null|num
-				if(amount == null || !(usr in range(1, src)) || !(I in usr.contents)) return
-				if(amount <= 0) amount = 1
-				if(amount > I.stacked) amount = I.stacked
-				for(var/i = 1 to amount)
-					ProcessItem(I)
-				I.stacked -= amount
-			else
-				ProcessItem(I)
-				I.stacked--
+			hearers(usr) << "<small>[usr.name] adds something in the cauldron!</small>"
+			spawn() ProcessItem(I)
+			I.stacked--
 			if(I.stacked <= 0) I.Move(null, forced = 1)
 			state = "soup_mix"
 			State_Update()

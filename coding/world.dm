@@ -1,3 +1,5 @@
+var/frog_nation_anger = 0
+
 world
 	fps = 40
 	name = "Cowed Revival"

@@ -59,13 +59,12 @@ obj/vein
 						M.show_message("<tt>You have found <b>[orename]</b>!</tt>")
 						var/no_of_ore = 1
 						if(M.skills.mining >= 50 && prob(M.skills.mining)) no_of_ore += 1
-						if(locate(consist) in usr)
-							locate(consist).stacked += no_of_ore
-							locate(consist).suffix = "x[locate(consist).stacked]"
+						var/item/misc/ores/I = locate(consist) in usr
+						if(I)
+							I.stacked += no_of_ore
+							I.suffix = "x[I.stacked]"
 						else
 							M.contents += new consist
-							locate(consist).stacked += no_of_ore
-							locate(consist).suffix = "x[locate(consist).stacked]"
 					if(prob(20) && M.skills.mining < 100) M.skills.mining++
 					M.movable = 0
 					if(amountleft <= 0) loc = null
