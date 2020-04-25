@@ -35,6 +35,7 @@ obj/vein
 				loc = null
 			else
 				new/obj/vein/Clay_Vein(src.loc)
+				loc = null
 		else if(!amountleft) amountleft = rand(2, 10)
 	proc
 		ActionLoop(mob/M)
@@ -63,7 +64,7 @@ obj/vein
 							locate(consist).suffix = "x[locate(consist).stacked]"
 						else
 							M.contents += new consist
-							locate(consist).stacked = no_of_ore
+							locate(consist).stacked += no_of_ore
 							locate(consist).suffix = "x[locate(consist).stacked]"
 					if(prob(20) && M.skills.mining < 100) M.skills.mining++
 					M.movable = 0
