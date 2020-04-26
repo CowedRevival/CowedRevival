@@ -139,7 +139,7 @@ animal
 								if(dist < smallest_dist && !istype(I, src) && !istype(I, /mob/observer) && I.HP > 0)
 									smallest_dist = dist
 									enemy = I
-						if(!issleeping && (stunned + weakened <= 0) && !corpse && enemy && (enemy in range(src)))
+						if(!issleeping && (stunned + weakened <= 0) && !corpse && enemy && (enemy in range(src)) && enemy.HP > 0)
 							spawn(step_to(src, enemy, 1, 1))
 								if(src in oview(1, enemy))
 									src.attack(enemy)
