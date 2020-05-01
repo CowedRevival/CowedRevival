@@ -10,7 +10,7 @@ mob/character_handling
 			selector_branch
 			selector_class
 		run_once = 0
-	kingdom = new/character_handling/container/bovinia
+	kingdom = new/character_handling/container/null
 	var
 		char_gen_gender = "m"
 		body_color = "white"
@@ -46,9 +46,18 @@ mob/character_handling
 		char_4 = new()
 		char_4.dir = 8
 		verbs -= /mob/verb/loot
+		if(gamemode)
+			if(gamemode == "Kingdom") kingdom = new/character_handling/container/bovinia
+			else kingdom = new/character_handling/container/peasants
 
 	proc
 		Display()
+			if(!gamemode)
+				winset(src, "child_1", "left=round_vote_pane")
+			else
+				winset(src, "child_1", "left=character_creation")
+				if(gamemode == "Kingdom") kingdom = new/character_handling/container/bovinia
+				else kingdom = new/character_handling/container/peasants
 			selector_kingdom.loc = kingdom
 			selector_branch.loc = branch
 			selector_class.loc = class
@@ -60,10 +69,8 @@ mob/character_handling
 				"character_handling.txtName.text" = src.name,
 				"character_handling.grdBranches.is-visible" = (kingdom ? "true" : "false"),
 				"character_handling.lblBranch.is-visible" = (kingdom ? "true" : "false"),
-				"character_handling.lblBranch1.is-visible" = (kingdom ? "true" : "false"),
 				"character_handling.grdClasses.is-visible" = (branch ? "true" : "false"),
 				"character_handling.lblClass.is-visible" = (branch ? "true" : "false"),
-				"character_handling.lblClass1.is-visible" = (branch ? "true" : "false"),
 				"character_handling.btnCreate.is-disabled" = (!kingdom || !branch || !class ? "true" : "false"),
 				"character_handling.btnSpectate.is-disabled" = (!kingdom ? "true" : "false"),
 				"character_handling.grdNames.cells" = "[P && P.recentNames ? "1x[P.recentNames.len]" : "0x0"]",
@@ -80,51 +87,34 @@ mob/character_handling
 				"character_creation.btn_hair_color_left.command" = "HairColorShift \"left\"",
 				"character_creation.btn_hair_color_right.command" = "HairColorShift \"right\"",
 				"character_creation.btn_beard_left.command" = "BeardShift \"left\"",
-				"character_creation.btn_beard_right.command" = "BeardShift \"right\""
+				"character_creation.btn_beard_right.command" = "BeardShift \"right\"",
+				"round_vote_pane.btn_peasant.command" = "RoundVote \"peasant\"",
+				"round_vote_pane.btn_kingdom.command" = "RoundVote \"kingdom\"",
+				"round_vote_pane.btn_random.command" = "RoundVote \"random\""
 			)
-
 			if(src.kingdom != src.old_kingdom)
 				L["character_handling.grdBranches.cells"] = "[kingdom ? kingdom.children.len : 0]"
-				L["character_handling.grdClasses.cells"] = "0"
-				branch = null
-				class = null
-				selector_branch.loc = null
-				selector_class.loc = null
 			if(src.branch != src.old_branch)
 				L["character_handling.grdClasses.cells"] = "[branch ? branch.children.len : 0]"
 				class = null
 				selector_class.loc = null
 			winset(src, null, list2params(L))
 
-			if(!kingdom && game.kingdoms.len)
+			if(kingdom)
 				var/i = 0
-				for(var/character_handling/container/kingdom in game.kingdoms)
-					client.images -= kingdom.bluex
-					if(!kingdom.CanSelect(src)) client.images += kingdom.bluex
-					src << output(kingdom, "character_handling.grdKingdoms:[++i]")
+				for(var/character_handling/container/branch in src.kingdom.children)
+					client.images -= branch.bluex
+					if(!branch.CanSelect(src)) client.images += branch.bluex
+					src << output(branch, "character_handling.grdBranches:[++i]")
 
-			if(src.kingdom != src.old_kingdom)
-				if(kingdom)
-					var/i = 0
-					for(var/character_handling/container/branch in src.kingdom.children)
-						client.images -= branch.bluex
-						if(!branch.CanSelect(src)) client.images += branch.bluex
-						src << output(branch, "character_handling.grdBranches:[++i]")
-
-			if(src.branch != src.old_branch)
-				if(branch)
-					var/i = 0
-					for(var/character_handling/class/C in src.branch.children)
-						if(C.img_amount)
-							client.images -= C.img_amount
-							client.images += C.img_amount
-
-						client.images -= C.redx
-						if(!C.amount) client.images += C.redx
-
-						client.images -= kingdom.bluex
-						if(!C.CanSelect(src)) client.images += C.bluex
-						src << output(C, "character_handling.grdClasses:[++i]")
+			if(branch)
+				var/i = 0
+				for(var/character_handling/class/C in branch.children)
+					client.images -= C.bluex
+					client.images -= C.redx
+					if(!C.CanSelect(src)) client.images += C.bluex
+					if(C.amount == 0) client.images += C.redx
+					src << output(C, "character_handling.grdClasses:[++i]")
 
 			src.old_kingdom = src.kingdom
 			src.old_branch = src.branch
@@ -138,26 +128,7 @@ mob/character_handling
 			src << output(char_2, "character_creation.char_grid:1,2]")
 			src << output(char_3, "character_creation.char_grid:1,3]")
 			src << output(char_4, "character_creation.char_grid:1,4]")
-		/*Kingdom2Text(kingdom)
-			switch(kingdom)
-				if("bovinia")
-					return "The Bovinia Kingdom is to the left of the map and has a strict hierachy and levels of control.\
-					You are not free to do what you please and everyone is expected to respect their church duty.\
-					The King is in charge and his or her word is final.\
-					However because the law is so strictly upheld executions are a dime a dozen in this kingdom."
-				if("cowmalot")
-					return "The Cowmalot Kingdom is a partially democratic kingdom after an uprising changed the law.\
-					Although the king/queen sits on the throne they act on behalf of the public and often hold votes on \
-					critical decisions. You are free to persue your own religion here however the law is not set in stone \
-					and you may be sued for pretty much any reason."
-				if("peasants")
-					return "As a peasant you are free to do whatever you please; build your own house, start mining for rocks \
-					or join a cult! You make your own story and set your own destiny. Just be sure to listen to the GM's though!"
-				if("family")
-					return "As a member of a family you have a special spawn location and some unique items. Don't get too \
-					excited though... this luxury will change."
-				else
-					return "Uh-oh! I was supposed to show a little description in this tooltip here, but nobody told me what to put here!"*/
+
 	Login()
 		if(!client) return
 		winset(src, "default/game.child", "left=character_handling")
@@ -294,6 +265,10 @@ mob/character_handling
 		UpdateCharGen()
 
 //Important
+	verb/RoundVote(var/I as text)
+		set hidden = 1
+		client.vote = I
+
 	proc/UpdateCharGen()
 		if(char_gen_gender == "f")
 			if(body_color == "white")
@@ -416,7 +391,9 @@ mob/character_handling
 				alert(src, "Sorry; this name has already been taken!")
 				return
 			if(!.)
-				var/mob/observer/N = new(locate(locate("peasant spawn").x, locate("peasant spawn").y, locate("peasant spawn").z))
+				var/mob/observer/N
+				if(gamemode == "Peasant") N = new(locate(locate("peasant mode spawn").x, locate("peasant mode spawn").y, locate("peasant mode spawn").z))
+				else N = new(locate(locate("peasant spawn").x, locate("peasant spawn").y, locate("peasant spawn").z))
 				N.name = src.name
 				N.gender = src.gender
 

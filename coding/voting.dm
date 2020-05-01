@@ -31,7 +31,7 @@ vote_system
 			REBOOT = 4
 	proc
 		Abort() flags |= 2
-		Query(vote, list/answers, timeout = 300)
+		Query(vote, list/answers, timeout = 600)
 			set background = 1
 			src.question = vote
 			src.answers = answers

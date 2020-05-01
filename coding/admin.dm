@@ -434,10 +434,6 @@ tadmin/verb
 		M.show_message("<i>You are now one of the Zeth.</i>")
 		M.MHP += 25
 		M.HP += 25
-	change_mode(var/mode in list("normal", "peasants", "kingdoms", "premade"))
-		set category = "TAdmin"
-		gametype = mode
-		world << "<b>The mode is now: [mode]</b>"
 	teleport(mob/M in world)
 		set category = "TAdmin"
 		for(var/mob/N in ohearers(usr))

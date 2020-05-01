@@ -60,10 +60,9 @@ game
 						M.UpdateClothing()
 						M.Zombie()
 
-
 		if(Hour == 0)
 			for(var/obj/tree/apple_tree/I in world)
-				if(prob(20)) I.DropApples()
+				if(prob(10)) I.DropApples()
 			for(var/obj/spawner/I in world)
 				if(prob(50)) I.Respawn()
 

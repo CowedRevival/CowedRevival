@@ -219,7 +219,7 @@ mob/Shroom_Monster
 		icon_state="alive"
 		HP=100
 		defence=2
-		strength = 5
+		strength = 8
 		isMonster=1
 		age = 2
 		New()
@@ -233,7 +233,7 @@ mob/Shroom_Monster
 		icon_state="alive"
 		HP=200
 		defence = 2
-		strength = 8
+		strength = 15
 		New()
 			..()
 			tag = "shroom_brute"
@@ -247,7 +247,7 @@ mob/Shroom_Monster
 		icon_state="alive"
 		HP=50
 		defence=2
-		strength = 2
+		strength = 4
 		isMonster=1
 		age = 0
 		New()
@@ -261,6 +261,7 @@ mob/Demon
 	name = "Hell Spawn"
 	HP=250
 	defence=2
+	strength = 20
 	isMonster=1
 	New()
 		..()
@@ -344,7 +345,7 @@ mob/Shroom_Monster/proc/Shroom_Life_Cycle()
 			HP = 100
 			defence = 2
 			strength = 5
-		if(prob(5))
+		if(prob(10))
 			for(var/mob/N in ohearers(src))
 				N.show_message("[src] grows into a Shroom Brute, dear god!")
 			name = "Shroom Brute [Monster_Name_Generator()]"

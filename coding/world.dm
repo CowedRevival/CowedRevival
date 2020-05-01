@@ -1,4 +1,8 @@
 var/frog_nation_anger = 0
+var/gamemode_map = ""
+var/gamemode
+
+client/var/vote
 
 world
 	fps = 40
@@ -18,53 +22,75 @@ world
 		admin = new/global_admin
 		update_status()
 		. = ..()
+
+		var/proceed = 0
+		while(proceed < 1)
+			sleep(10)
+			for(var/mob/M in world)
+				if(M.client)
+					if(M.client.vote == "peasant")
+						proceed++
+					else if(M.client.vote == "kingdom")
+						proceed++
+					else if(M.client.vote == "random")
+						proceed++
+		world << "You have 60 seconds to vote for this round's Gamemode!"
+		sleep(100)
+		world << "50 seconds remaining!!"
+		sleep(100)
+		world << "40 seconds remaining!!"
+		sleep(100)
+		world << "30 seconds remaining!!"
+		sleep(100)
+		world << "20 seconds remaining!!"
+		sleep(100)
+		world << "10 seconds remaining!!"
+		sleep(100)
+		var/peasant,kingdom,random
+
+		for(var/mob/M in world)
+			if(M.client)
+				if(M.client.vote == "peasant")
+					peasant++
+				else if(M.client.vote == "kingdom")
+					kingdom++
+				else
+					random++
+
+		if(peasant > kingdom && peasant > random)
+			gamemode = "Peasant"
+			world << "Gamemode - Peasant"
+		else if(kingdom > peasant && kingdom > random)
+			gamemode = "Kingdom"
+			world << "Gamemode - Kingdom"
+		else
+			world << "Gamemode - Random"
+			if(prob(50))
+				gamemode = "Kingdom"
+			else
+				gamemode = "Peasant"
+
+		for(var/mob/character_handling/M in world)
+			if(M.client)
+				spawn()
+					M.Display()
+
+		if(gamemode == "Peasant")
+			for(var/obj/Decay_Object/I in world)
+				I.Execute()
+
+		world << "Generating world, may take up to two minutes!"
+
+		sleep(10)
+
 		LoadCowed()
 
 		Month = 2
 		Day = rand(1, 3)
 		Hour = rand(8, 14)
-		if(1 || !world.port)
-			gametype = "normal" //testing
-			game.Start()
-		else
-		//	gametype = "normal" //event
-		//	game.Start()h
-		//	return
 
-			//game hasn't started yet; let's wait for players
-			var/client/C
-			do
-				for(C)
-					if(C.inactivity >= 190) continue
-					break
-				sleep(100)
-			while(!C)
-
-			//start a vote; 2 seconds afterward refresh all players' browser windows
-			/*spawn(20)
-				for(var/mob/character_handling/M in world)
-					if(M.chosen) M.Display2()*/
-			var/vote_data/result = vote_system.Query("Which mode would you like to play?", list("normal", "kingdoms", "peasants", "premade")) //after 20 seconds, start vote
-			if(gametype || result.aborted) //admin must've overridden the vote; abort
-				return
-
-			if(result.tie) //tie: pick one at random and go with it
-				var/list/tie_data = new/list()
-				for(var/i in result.tie_list) tie_data += gametypes[i]
-				send_message(world, "<b>Tie!</b> between [dd_list2text(tie_data, "; ")]...", 3)
-
-			//announce the game mode
-			send_message(world, "Result: <b>[uppertext(copytext(gametypes[result.winner], 1, 2))][copytext(gametypes[result.winner], 2)]</b>", 3)
-			/*if(result.winner == 3) //peasants -> premade
-				result.winner = 4
-				send_message(world, "<b>Game mode changed to \"premade\"!</b>")*/
-
-			//set the game mode and start the game off
-			gametype = gametypes[result.winner]
-			game.Start()
-
-			//refresh the browser screen for all players (again)
-			//for(var/mob/character_handling/M in world) if(M.chosen) M.Display2()
+		gametype = "normal" //testing
+		game.Start()
 
 		spawn(10)
 			map_loaded = 1

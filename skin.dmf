@@ -908,6 +908,8 @@ window "character_creation"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 438x206
+		inner-size = 424x192
 	elem "label13"
 		type = LABEL
 		pos = 0,4
@@ -1268,6 +1270,8 @@ window "character_handling"
 		can-resize = false
 		is-pane = true
 		can-scroll = both
+		outer-size = 630x754
+		inner-size = 616x740
 	elem "label19"
 		type = LABEL
 		pos = 96,216
@@ -1324,6 +1328,7 @@ window "character_handling"
 		size = 424x192
 		anchor1 = 50,0
 		anchor2 = 50,0
+		background-color = none
 		border = line
 		saved-params = "splitter"
 		left = "character_creation"
@@ -1935,7 +1940,6 @@ window "outputwindow/both"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Both"
 		titlebar = false
@@ -1944,7 +1948,6 @@ window "outputwindow/both"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 654x494
 	elem "output"
 		type = OUTPUT
 		pos = 0,0
@@ -2297,6 +2300,86 @@ window "paint_window"
 		border = sunken
 		right-click = true
 		saved-params = "icon-size"
+
+window "round_vote_pane"
+	elem "round_vote_pane"
+		type = MAIN
+		pos = 281,0
+		size = 424x192
+		anchor1 = none
+		anchor2 = none
+		background-color = #ded5b6
+		saved-params = ""
+		title = "Round Vote"
+		statusbar = false
+		is-pane = true
+		outer-size = 440x231
+		inner-size = 424x192
+	elem "label25"
+		type = LABEL
+		pos = 40,48
+		size = 336x104
+		anchor1 = none
+		anchor2 = none
+		background-color = #cdbf8f
+		border = sunken
+		saved-params = ""
+		text = ""
+	elem "btn_random"
+		type = BUTTON
+		pos = 168,96
+		size = 80x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "Random"
+		command = ""
+	elem "btn_peasant"
+		type = BUTTON
+		pos = 264,96
+		size = 80x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "Peasant"
+		command = ""
+	elem "label13"
+		type = LABEL
+		pos = 72,72
+		size = 272x20
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #cdbf8f
+		saved-params = ""
+		text = "Round Vote"
+	elem "btn_kingdom"
+		type = BUTTON
+		pos = 72,96
+		size = 80x24
+		anchor1 = none
+		anchor2 = none
+		font-family = "Papyrus"
+		font-size = 10
+		font-style = "bold"
+		text-color = #6d4012
+		background-color = #ded5b6
+		saved-params = "is-checked"
+		text = "Kingdom"
+		command = ""
 
 window "sign"
 	elem "sign"

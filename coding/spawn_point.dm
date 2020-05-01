@@ -5,8 +5,12 @@ obj
 			icon_state = "peasant_labourer"
 			invisibility = 101
 
-			New()
-				tag = "peasant spawn"
+			kingdom
+				New()
+					tag = "peasant spawn"
+			peasant
+				New()
+					tag = "peasant mode spawn"
 
 		king
 			icon = 'icons/Classes.dmi'

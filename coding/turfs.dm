@@ -159,7 +159,7 @@ turf
 					M.Play_Sound_Local(pick('sounds/sfx/dig_1.ogg', 'sounds/sfx/dig_2.ogg', 'sounds/sfx/dig_3.ogg'))
 					spawn(2)
 						if(usr.inHand(/item/weapon/pickaxe))
-							if(prob(1) && prob(1)) new/obj/vein/Adamantite_Vein(src)
+							if(prob(1) && prob(50)) new/obj/vein/Adamantite_Vein(src)
 							else if(prob(2)) new/obj/vein/Magicite_Vein(src)
 						new/turf/chaos_brick(src)
 

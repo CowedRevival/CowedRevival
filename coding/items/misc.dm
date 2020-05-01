@@ -1617,7 +1617,8 @@ item/misc
 					M.HP -= round(HungerAdd / 2)
 				else
 					M.HP += round(HungerAdd / 2)
-				if(M.HUNGER>100) M.HUNGER=100
+				if(M.HUNGER>M.MHUNGER) M.HUNGER=M.MHUNGER
+				if(M.THIRST>M.MTHIRST) M.THIRST=M.MTHIRST
 				if(M.HP>100) M.HP=100
 				for(var/mob/N in ohearers(M))
 					N.show_message("\blue [M.name] eats the [name].")
@@ -1665,8 +1666,8 @@ item/misc
 			herbivore_friendly = 1
 		Apple
 			icon_state="apple"
-			HungerAdd=15
-			ThirstAdd=5
+			HungerAdd=5
+			ThirstAdd=2
 			FoodType="Vege"
 			SeedType=/item/misc/seeds/Apple_Seeds
 			herbivore_friendly = 1
@@ -1814,23 +1815,23 @@ item/misc
 				usr.contents += new/item/misc/wood_bowl
 			Vegetable_Stew
 				icon_state="salad_bowl"
-				HungerAdd=50
+				HungerAdd=40
 				ThirstAdd=25
 				FoodType="none"
 			Meat_Stew
 				icon_state="meat_bowl"
-				HungerAdd=50
+				HungerAdd=40
 				ThirstAdd=25
 				FoodType="none"
 			Hearty_Stew
 				icon_state="salad_meat_bowl"
-				HungerAdd=70
+				HungerAdd=60
 				ThirstAdd=50
 				FoodType="none"
 			Unknown_Stew
 				icon_state="stew_bowl"
-				HungerAdd=35
-				ThirstAdd=20
+				HungerAdd=30
+				ThirstAdd=15
 				FoodType="none"
 
 	Potato_Skin

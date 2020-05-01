@@ -98,6 +98,7 @@
 #include "coding\mobs.dm"
 #include "coding\objs.dm"
 #include "coding\paint.dm"
+#include "coding\Peasant_Decay_Objects.dm"
 #include "coding\procs.dm"
 #include "coding\projectiles.dm"
 #include "coding\Seasons.dm"

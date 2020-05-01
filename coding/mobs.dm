@@ -723,9 +723,6 @@ mob
 				src.overlays = list()
 				return
 
-			if(beard)
-				var/image/I = image(icon = 'icons/Beard.dmi', icon_state = beard)
-				overlays += I
 			if(hair && !mequipped)
 				var/draw_hair = 1
 				if(fequipped)
@@ -821,6 +818,9 @@ mob
 				I.pixel_y = cequipped.overlay_pixel_y
 				overlays += I
 				defence += cequipped.armour
+			if(beard && !fequipped)
+				var/image/I = image(icon = 'icons/Beard.dmi', icon_state = beard)
+				overlays += I
 			if(hair && !mequipped)
 				var/draw_hair = 1
 				if(fequipped)

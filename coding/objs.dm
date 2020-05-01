@@ -1339,6 +1339,7 @@ obj/cauldron
 				usr.contents += new/item/misc/food/Bowl/Meat_Stew
 			else
 				usr.contents += new/item/misc/food/Bowl/Unknown_Stew
+			I.stacked--
 			if(I.stacked <= 0) I.Move(null, forced = 1)
 			units--
 			if(units <= 0)

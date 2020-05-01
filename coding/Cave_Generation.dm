@@ -8,6 +8,7 @@ turf/Cave_Start
 	var/birthLimit = 4
 	var/deathLimit = 3
 	var/list/map_array
+	var/list/new_map
 	proc/Generate()
 		tag = name
 		map_array = new()
@@ -22,40 +23,7 @@ turf/Cave_Start
 					map_array[i].map_array[j] = 1
 				else
 					map_array[i].map_array[j] = 0
-
 		DoSimulation()
-
-	proc/CountAliveNeighbours(var/x, var/y)
-		var/count = 0
-		for(var/i = -1 to 1)
-			for(var/j = -1 to 1)
-				var/n_x = x + i
-				var/n_y = y + j
-				if(!(i == 0 && j == 0) && (n_x > 0 && n_y > 0))
-					if(n_x < 0 || n_y < 0 || n_x >= cave_width || n_y >= cave_height)
-						count += 1
-					else if(map_array[n_x].map_array[n_y] == 1)
-						count += 1
-		return count
-
-	proc/DoSimulation()
-		var/list/new_map = new()
-		for(var/i = 1 to cave_width)
-			new_map += new/map_section(cave_height)
-		for(var/i = 1 to cave_width)
-			for(var/j = 1 to cave_height)
-				var/nbs = CountAliveNeighbours(i,j)
-				if(map_array[i].map_array[j] == 1)
-					if(nbs < deathLimit)
-						new_map[i].map_array[j] = 0
-					else
-						new_map[i].map_array[j] = 1
-				else
-					if(nbs > birthLimit)
-						new_map[i].map_array[j] = 1
-					else
-						new_map[i].map_array[j] = 0
-
 		var/temp_location_x = locate(tag).x
 		var/temp_location_y = locate(tag).y
 		var/temp_location_z = locate(tag).z
@@ -70,7 +38,7 @@ turf/Cave_Start
 						new/obj/vein(locate(position_x, position_y, temp_location_z))
 					else if(prob(2))
 						new/obj/tree/mushroom/towercap(locate(position_x, position_y, temp_location_z))
-					else if(prob(1) && prob(10) && monster_count < 30)
+					else if(prob(1) && prob(10) && monster_count < 50)
 						new/mob/Shroom_Monster/Shroomling(locate(position_x, position_y, temp_location_z))
 						monster_count++
 				else if(new_map[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/deep_dirtwall))
@@ -106,7 +74,7 @@ turf/Cave_Start
 						monster_count++
 				else if(new_map[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/chaos_stone))
 					new/turf/chaos_brick(locate(position_x, position_y, temp_location_z))
-					if(prob(1) && prob(2))
+					if(prob(1) && prob(50))
 						new/obj/vein/Adamantite_Vein(locate(position_x, position_y, temp_location_z))
 					else if(prob(2))
 						new/obj/vein/Magicite_Vein(locate(position_x, position_y, temp_location_z))
@@ -114,6 +82,38 @@ turf/Cave_Start
 						new/mob/Demon(locate(position_x, position_y, temp_location_z))
 						monster_count++
 		new/turf/underground/dirtwall(locate(temp_location_x, temp_location_y, temp_location_z))
+
+	proc/CountAliveNeighbours(var/x, var/y)
+		var/count = 0
+		for(var/i = -1 to 1)
+			for(var/j = -1 to 1)
+				var/n_x = x + i
+				var/n_y = y + j
+				if(!(i == 0 && j == 0) && (n_x > 0 && n_y > 0))
+					if(n_x < 0 || n_y < 0 || n_x >= cave_width || n_y >= cave_height)
+						count += 1
+					else if(map_array[n_x].map_array[n_y] == 1)
+						count += 1
+		return count
+
+	proc/DoSimulation()
+		new_map = new()
+		for(var/i = 1 to cave_width)
+			new_map += new/map_section(cave_height)
+		for(var/i = 1 to cave_width)
+			for(var/j = 1 to cave_height)
+				var/nbs = CountAliveNeighbours(i,j)
+				if(map_array[i].map_array[j] == 1)
+					if(nbs < deathLimit)
+						new_map[i].map_array[j] = 0
+					else
+						new_map[i].map_array[j] = 1
+				else
+					if(nbs > birthLimit)
+						new_map[i].map_array[j] = 1
+					else
+						new_map[i].map_array[j] = 0
+
 
 
 

@@ -1,15 +1,15 @@
 var/king_amount = 1
 var/duke_amount = 1
-var/rguard_amount = 3
-var/rarcher_amount = 3
+var/rguard_amount = 2
+var/rarcher_amount = 2
 var/key_smith_amount = 1
 var/librarian_amount = 1
 var/jailer_amount = 1
 var/jester_amount = 1
 var/chef_amount = 1
-var/guard_amount = 6
+var/guard_amount = 5
 var/bishop_amount = 1
-var/priest_amount = 2
+var/priest_amount = 1
 var/zeth_amount = 1
 var/mage_amount = 1
 var/necro_amount = 1
@@ -157,6 +157,26 @@ the village all the way to protecting the King."}
 					/character_handling/class/special/blacksmith, /character_handling/class/special/necromancer
 				)
 				class_id = "bovinia_special"
+		peasants
+			name = "Peasant"
+			icon_state = "peasant_labourer"
+			desc = {"Peasant"}
+			class_id = "bovinia"
+			peasants
+				name = "Peasants"
+				desc = {"Peasants are the people who grow up and live outside the castle. They have to fend for themselves,
+			enjoying protection from the King while in his town."}
+				icon_state = "peasant_labourer"
+				children = newlist(
+					/character_handling/class/peasants/labourer, /character_handling/class/peasants/craftsman,
+					/character_handling/class/peasants/hunter, /character_handling/class/peasants/farmer,
+					/character_handling/class/peasants/fisherman, /character_handling/class/peasants/tailor
+				)
+				class_id = "bovinia_peasant"
+
+		null
+			invisibility = 101
+			icon_state = "blank"
 		/*cowmalot
 			name = "Cowmalot"
 			icon_state = "cowmalot_king"
@@ -176,6 +196,7 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 				img_amount
 		New()
 			. = ..()
+			AmountGet()
 			if(amount != -1)
 				img_amount = image(loc = src)
 				UpdateAmount()
@@ -211,12 +232,15 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 			if(!istype(P)) return
 			if(src.class_id && P.class_id_ban && (src.class_id in P.class_id_ban))
 				alert(M, "You have been banned from choosing this class.")
+				spawn M.Display()
 				return
 			if(!isnull(rp_points) && rp_points > P.score_rppoints)
 				alert(M, "You are not allowed to pick this class. You need at least [rp_points] RP Points.")
+				spawn M.Display()
 				return
 			if(amount == 0)
 				alert(M, "This class has already been taken.", "Class Selection")
+				spawn M.Display()
 				return
 			M.class = src
 			spawn M.Display()
@@ -283,10 +307,15 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					N.UpdateClothing()
 
 					if(!(M.name in names)) names += M.name
+					if(gamemode == "Peasant" && spawn_tag == "peasant spawn") spawn_tag = "peasant mode spawn"
 					var/turf/spawn_point = locate(spawn_tag)
 					N.Move(locate(spawn_point.x, spawn_point.y, spawn_point.z), forced = 1)
 					N.client = M.client
 					AmountUpdate(-1)
+					AmountGet()
+					if(amount != -1)
+						img_amount = image(loc = src)
+						UpdateAmount()
 
 			Selected(mob/M) return null
 
@@ -423,7 +452,7 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 			guard
 				icon_state = "bovinia_guard"
 				desc = "Guards patrol the kingdom and make sure that the village is safe. They are often seen guarding the bridge between the village and the castle. Would you like to become a guard?"
-				amount = 8
+				amount = 5
 				rp_points = -8
 				spawn_tag = "guard spawn"
 				class_id = "bovinia_rguard_guard"
@@ -573,160 +602,6 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 				AmountUpdate(var/x as num)
 					if(chef_amount != -1)
 						chef_amount--
-		/*cowmalot
-			kingdom = "cowmalot"
-			modes = list("kingdoms")
-			nking
-				icon_state = "nking"
-				desc = "The King/Queen rules the land and is considered the one with the highest status. However, you must not seem too weak or you may be impeached. Would you like to become the King?"
-				amount = 1
-				rp_points = 1
-				Selected(mob/M)
-					M.chosen = "king"
-					M.loc = locate(176, 178, worldz)
-
-					M.contents += new/item/armour/hat/noble_crown(M)
-					M.contents += new/item/armour/face/noble_mask(M)
-					M.contents += new/item/armour/body/noble_armour(M)
-					M.contents += new/item/weapon/grandius(M)
-
-					M.contents += new/item/misc/key/Watchman_Key(M)
-					M.contents += new/item/misc/key/Noble_Guard_Key(M)
-					M.contents += new/item/misc/key/Dungeon_Door_Key(M)
-					M.contents += new/item/misc/key/Cowmalot_Royal_Room_Key(M)
-					M.contents += new/item/misc/key/Archduke_Key/cowmalot(M)
-
-					M.contents += new/item/misc/gold{stacked=50}
-					M.score_Add("royalblood")
-					return 1
-			narchduke
-				icon_state = "narchduke"
-				desc = "The Archduke is the personal advisor of the king and directly below in the king in authority. They are wise people who tend to value knowledge, though some vow to use that knowledge to try to steal the throne..."
-				amount = 1
-				rp_points = -6
-				Selected(mob/M)
-					M.chosen = "archduke"
-					M.loc = locate(186, 148, worldz)
-
-					M.contents += new/item/armour/hat/narchduke_hat(M)
-					M.contents += new/item/armour/body/narchduke_robe(M)
-					M.contents += new/item/weapon/archduke_staff(M)
-					M.contents += new/item/misc/book(M)
-					M.contents += new/item/misc/paper(M)
-					M.contents += new/item/misc/paper(M)
-					M.contents += new/item/misc/paper(M)
-					M.contents += new/item/misc/key/Watchman_Key(M)
-					M.contents += new/item/misc/key/Noble_Guard_Key(M)
-					M.contents += new/item/misc/key/Dungeon_Door_Key(M)
-					M.contents += new/item/misc/key/Cowmalot_Royal_Room_Key(M)
-					M.contents += new/item/misc/key/Archduke_Key(M)
-
-					M.contents += new/item/misc/gold{stacked=35}(M)
-					return 1
-			noble_guard
-				icon_state = "nobleguard"
-				desc = "Noble Guards are the personal escorts of the King/Queen and orders come directly from that person. They have the authority to boss any of the royal staff around in the name of the King/Queen but must give their lives if the (s)he were in danger. Would you like to become a Noble Guard?"
-				amount = 2
-				rp_points = -7
-				Selected(mob/M)
-					M.chosen = "royalguard"
-					M.loc = locate(185, 169, worldz)
-
-					M.contents += new/item/misc/key/Watchman_Key(M)
-					M.contents += new/item/misc/key/Noble_Guard_Key(M)
-					M.contents += new/item/misc/key/Dungeon_Door_Key(M)
-					M.contents += new/item/misc/key/Cowmalot_Royal_Room_Key(M)
-
-					M.contents += M.startingtools
-					M.contents += new/item/misc/gold{stacked=20}
-					return 1
-			noble_archer
-				icon_state = "noble_archer"
-				desc = "The Noble Archer is an extension to the Noble Guard but does not protect the King. Instead, the Noble Archer and Guards are on an equal basis in terms of power. Archers get a bow which makes them quite deadly especially from far away. Would you like to become a Noble Archer?"
-				amount = 2
-				rp_points = -7
-				Selected(mob/M)
-					M.chosen = "archer"
-					M.loc = locate(190, 174, worldz)
-
-					M.contents += new/item/misc/key/Noble_Archer_Key(M)
-					M.contents += new/item/misc/key/Dungeon_Door_Key(M)
-
-					M.contents += M.startingtools
-					M.contents += new/item/misc/gold{stacked=20}(M)
-					return 1
-			watchman
-				icon_state = "watchman"
-				desc = "Watchmen patrol the kingdom and make sure that the village is safe. They are often seen guarding the bridge between the village and the castle. Would you like to become a watchman?"
-				amount = 4
-				rp_points = -8
-				Selected(mob/M)
-					M.chosen = "guard"
-					M.loc = locate(166, 134, worldz)
-
-					M.contents += new/item/misc/key/Watchman_Key(M)
-					M.contents += new/item/misc/key/Dungeon_Door_Key(M)
-
-					M.contents += M.startingtools
-					M.contents += new/item/misc/gold{stacked=5}
-					return 1
-			njailer
-				icon_state = "njailer"
-				desc = "It is the job of the Jailer to make sure that prisoners remain in their cells. The Jailer also sees to torturing and (public) executions. In addition they have minor guard duties. Would you like to be the Jailer?"
-				amount = 1
-				rp_points = -8
-				Selected(mob/M)
-					M.chosen = "jailer"
-					M.loc = locate(165, 151, worldz)
-
-					M.contents += new/item/misc/key/Dungeon_Door_Key(M)
-					M.contents += new/item/armour/face/nJailer_mask(M)
-					M.contents += new/item/armour/body/watchman_chainmail(M)
-
-					M.contents += M.startingtools
-					M.contents += new/item/misc/gold{stacked=20}(M)
-					return 1
-			njester
-				icon_state = "njester"
-				desc = "The court jester has only one job: entertain the king. However he or she sees fit to doing that job is their own business, but the one thing to keep in mind is that you don't want to make the king mad at you. Would you like to become the jester?"
-				amount = 1
-				rp_points = -12
-				Selected(mob/M)
-					M.chosen = "jester"
-					M.loc = locate(185, 177, worldz)
-
-					M.contents += new/item/armour/hat/njester_hat(M)
-					M.contents += new/item/armour/body/njester_cloths(M)
-					M.contents += M.startingtools
-					return 1
-			ncook
-				icon_state = "cook"
-				desc = "The cook is among the castle staff and has a very important job: to keep the staff and especially the king well-fed. The cook starts off with some food and their job is to get more so they can stuff the king. The cook is one of the kings' most trusted as food is easily poisoned... Would you like to become the Cook?"
-				amount = 1
-				rp_points = -12
-				Selected(mob/M)
-					M.chosen = "cook"
-					M.loc = locate(158, 173, worldz)
-
-					M.contents += new/item/armour/hat/chef_hat(M)
-					M.contents += new/item/armour/body/cloak(M)
-					M.contents += new/item/misc/key/Chef_Key(M)
-					M.contents += M.startingtools
-					return 1
-			/*red_mage
-				icon_state = "redmage"
-				desc = "Play your part as a rare powerful wizard. Would you like to pick this class?"
-				amount = 1
-				rp_points = -15
-				Selected(mob/M)
-					M.chosen = "mage"
-					M.loc = locate(196, 123, worldz)
-					M.contents += new/item/misc/spellbook/Empty_Spellbook
-
-					M.contents += M.startingtools
-					M.make_wizard("Red")
-					return 1*/
-		*/
 		peasants
 			craftsman
 				icon_state = "peasant_woodworker"

@@ -163,9 +163,12 @@ animal
 								spawn(step_to(src, food_desire, 1, 1))
 								if(get_dist(src,food_desire) <= 1)
 									food_desire.consume(src)
-									HUNGER *= 4
+									HUNGER *= 100
 									if(HUNGER > MHUNGER)
 										HUNGER = MHUNGER
+									THIRST *= 100
+									if(THIRST > MTHIRST)
+										THIRST = MTHIRST
 							else
 								Step(pick(NORTH, SOUTH, EAST, WEST))
 						else
@@ -471,3 +474,11 @@ animal
 				strength = 7
 				speed = 85
 				icon = 'icons/Dire_Wolf.dmi'
+
+		Maneater
+			name = "Maneater"
+			HP = 120
+			MHP = 120
+			strength = 7
+			speed = 85
+			icon = 'icons/Dire_Wolf.dmi'
