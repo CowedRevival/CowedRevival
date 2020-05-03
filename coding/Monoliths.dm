@@ -49,7 +49,7 @@ obj/monolith
 			charge = 0
 		else
 			hearers(M) << "<small>[M.name] begins to study the Monolith!</small>"
-			sleep(50)
+			sleep(60 - (M.skills.research/2))
 			if(M && M.current_action == src && loc)
 				if(prob((M.skills.research/2) + 5) && !(M.name in access_list))
 					M << "<font color=\"red\"><big>You now understand the true power of the monolith!"
@@ -245,22 +245,18 @@ obj/monolith
 
 	Random_Monolith
 		New()
-			if(prob(90))
-				if(prob(50)) new/obj/monolith/Hunger_Empty_Monolith(src.loc)
-				else new/obj/monolith/Hunger_Fill_Monolith(src.loc)
-			else if(prob(40))
-				if(prob(33)) new/obj/monolith/Swap_Monolith(src.loc)
-				else if(prob(33)) new/obj/monolith/Death_Monolith(src.loc)
-				else if(prob(33)) new/obj/monolith/Ressurection_Monolith(src.loc)
-				else if(prob(1)) new/obj/monolith/Meat_Cube_Monolith(src.loc)
-				else new/obj/monolith/Hunger_Fill_Monolith(src.loc)
-			else
-				if(prob(33)) new/obj/monolith/Zap_Monolith(src.loc)
-				else if(prob(33)) new/obj/monolith/Ice_Monolith(src.loc)
-				else if(prob(33)) new/obj/monolith/Fire_Monolith(src.loc)
-				else if(prob(33)) new/obj/monolith/Eclipse_Monolith(src.loc)
-				else if(prob(33)) new/obj/monolith/Portal_Monolith(src.loc)
-				else new/obj/monolith/Necromantic_Monolith(src.loc)
+			if(prob(10)) new/obj/monolith/Hunger_Empty_Monolith(src.loc)
+			else if(prob(10)) new/obj/monolith/Hunger_Fill_Monolith(src.loc)
+			else if(prob(10)) new/obj/monolith/Necromantic_Monolith(src.loc)
+			else if(prob(10)) new/obj/monolith/Death_Monolith(src.loc)
+			else if(prob(10)) new/obj/monolith/Ressurection_Monolith(src.loc)
+			else if(prob(10)) new/obj/monolith/Meat_Cube_Monolith(src.loc)
+			else if(prob(5)) new/obj/monolith/Zap_Monolith(src.loc)
+			else if(prob(5)) new/obj/monolith/Ice_Monolith(src.loc)
+			else if(prob(5)) new/obj/monolith/Fire_Monolith(src.loc)
+			else if(prob(5)) new/obj/monolith/Eclipse_Monolith(src.loc)
+			else if(prob(5)) new/obj/monolith/Portal_Monolith(src.loc)
+			else new/obj/monolith/Swap_Monolith(src.loc)
 			loc = null
 
 /*admin/verb/Posses(mob/M in world)

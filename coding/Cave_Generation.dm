@@ -41,7 +41,7 @@ turf/Cave_Start
 					else if(prob(1) && prob(10) && monster_count < 50)
 						new/mob/Shroom_Monster/Shroomling(locate(position_x, position_y, temp_location_z))
 						monster_count++
-					else if(prob(1))
+					else if(prob(1)&& prob(10))
 						new/obj/monolith/Random_Monolith(locate(position_x, position_y, temp_location_z))
 				else if(new_map[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/deep_dirtwall))
 					if(prob(1) && prob(5))
@@ -74,7 +74,7 @@ turf/Cave_Start
 					else if(prob(1) && prob(10) && monster_count < 50)
 						new/mob/Shroom_Monster/Shroomling(locate(position_x, position_y, temp_location_z))
 						monster_count++
-					else if(prob(1))
+					else if(prob(1)&& prob(10))
 						new/obj/monolith/Random_Monolith(locate(position_x, position_y, temp_location_z))
 				else if(new_map[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/chaos_stone))
 					new/turf/chaos_brick(locate(position_x, position_y, temp_location_z))
@@ -85,7 +85,7 @@ turf/Cave_Start
 					else if(prob(1) && monster_count < 50)
 						new/mob/Demon(locate(position_x, position_y, temp_location_z))
 						monster_count++
-					else if(prob(1))
+					else if(prob(1) && prob(10))
 						new/obj/monolith/Random_Monolith(locate(position_x, position_y, temp_location_z))
 		new/turf/underground/dirtwall(locate(temp_location_x, temp_location_y, temp_location_z))
 

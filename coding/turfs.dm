@@ -124,7 +124,7 @@ turf
 					spawn(2)
 						if((usr.inHand(/item/weapon/pickaxe) && prob(10)) || prob(5))
 							new/obj/vein(src)
-						else if((usr.inHand(/item/weapon/pickaxe) && prob(1)))
+						else if((usr.inHand(/item/weapon/pickaxe) && prob(1) && prob(10)))
 							new/obj/monolith/Random_Monolith(src)
 						new/turf/path(src)
 

@@ -843,6 +843,7 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 					M.make_wizard("Blue")
 					M.contents += new/item/armour/hat/pez_hat(M)
 					M.contents += new/item/armour/body/pez_cloths(M)
+					M.skills.research = 100
 					return 2
 				New()
 					..()
