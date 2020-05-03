@@ -56,7 +56,6 @@ mob/proc/create_crafting()
 	building_button_list += new/button/construction/fence()
 	building_button_list += new/button/construction/gate()
 
-
 	building_button_list += new/button/construction/stone_stairs()
 	building_button_list += new/button/construction/sign()
 	building_button_list += new/button/construction/gravestone()
@@ -65,6 +64,8 @@ mob/proc/create_crafting()
 	building_button_list += new/button/construction/Clay_Furnace()
 	building_button_list += new/button/construction/Clay_Mill()
 	building_button_list += new/button/construction/Cauldron()
+
+	building_button_list += new/button/construction/anvil()
 
 	var/grid_size = round(item_button_list.len / 2) + 1
 	winset(src, "items_pane.items_grid", "cells=0x0")

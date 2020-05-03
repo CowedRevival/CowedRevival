@@ -107,6 +107,7 @@ world
 
 		for(var/turf/Cave_Start/I in world)
 			I.Generate()
+		world << "Finished generating!"
 
 /*		var/bbeff = pick(effects)
 		bbeffect=bbeff

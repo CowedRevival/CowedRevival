@@ -96,6 +96,7 @@
 #include "coding\map_editor.dm"
 #include "coding\map_objects.dm"
 #include "coding\mobs.dm"
+#include "coding\Monoliths.dm"
 #include "coding\objs.dm"
 #include "coding\paint.dm"
 #include "coding\Peasant_Decay_Objects.dm"

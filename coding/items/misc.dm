@@ -396,8 +396,8 @@ item/misc
 							S.icon_state_base = "apple_tree_1"
 							S.density = 1
 							spawn(Length)
-								S.icon_state = "apple_tree_2"
-								S.icon_state_base = "apple_tree_2"
+								S.icon_state = "[current_season_state]apple_tree_2apple_tree_2"
+								S.icon_state_base = "[current_season_state]apple_tree_2apple_tree_2"
 					else
 						usr.show_message("<small>You cannot plant seeds here.")
 						return
@@ -531,7 +531,6 @@ item/misc
 							M.MHUNGER = 9999
 							M.MTHIRST = 9999
 							M.MSLEEP = 9999
-							M.verbs -= /mob/verb/say
 							//else if(C.icon == 'icons/Zombie.dmi') C.icon = 'icons/Skeleton.dmi'
 						return 1
 				kill(mob/M)

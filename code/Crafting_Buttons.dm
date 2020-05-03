@@ -761,6 +761,7 @@ button //Button object
 
 					newkeyname = input(M, "What do you want the door to be called?", "Name", "Door") as text
 					if(!newkeyname) return
+					D.name = "[newkeyname]"
 				M.create_crafting()
 
 		Clay_Oven

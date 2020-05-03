@@ -80,7 +80,7 @@ game
 						world << "<b>Rebooting server as [percentage_votes]% out of [voted_players] wanted to reboot."
 						admin.reboot()
 					else
-						world << "<b>Resetting reboot timer because [percentage_votes]% out of [voted_players] voting players did not want to reboot."
+						world << "<b>Resetting reboot timer as only [percentage_votes]% out of [voted_players] wanted to reboot."
 					src.reboot_timer = 42000
 					reboot_vote_on = 0
 

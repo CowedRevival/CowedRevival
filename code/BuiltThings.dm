@@ -763,3 +763,23 @@ turf
 			icon_state = "stone floor8"
 			density = 1
 			opacity = 1
+
+turf
+	void_stone
+		icon = 'icons/turfs.dmi'
+		icon_state = "odd_stone_brick_wall"
+		odd_stone_brick_wall
+			density = 1
+			opacity = 1
+		odd_stone_brick_window
+			icon_state = "odd_stone_brick_window"
+			density = 1
+			opacity = 0
+		void_stone_wall
+			icon_state = "void_stone"
+			density = 1
+			opacity = 1
+		void_stone_floor
+			icon_state = "void_floor"
+			density = 1
+			opacity = 0

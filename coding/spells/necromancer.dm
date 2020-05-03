@@ -129,5 +129,46 @@ spell_component/necromancer
 			return ..()
 		Requirements() return "Necromancer's Book in inventory."
 
+spell_component/proto_necromancer
+	reanimate
+		name = "Reanimate Corpse"
+		icon_state = "reanimate"
+		cooldown = 50
+		mana_cost = 30
+		activate(mob/M)
+			M.selectedSpellComponent = src
+			M.show_message("<tt>Click on a corpse to resurrect.</tt>")
+		invoke(mob/M, mob/T)
+
+			if(!istype(T) || T.HP > 0)
+				M.show_message("<tt>You did not select a  Spell aborted.</tt>")
+				return 1
+			var/name = T.name
+			if(reanimate_process(T))
+				M.show_message("<tt>You have reanimated [name]'s </tt>")
+			else
+				M.show_message("<tt>You were unable to reanimate [name]'s .. no soul could not be found.</tt>")
+
+		proc/reanimate_process(mob/M)
+			if(!istype(M) || !M.corpse) return
+			var/mob/C = M.corpse
+			if(!C)
+				usr.show_message("<tt>The soul has already left the corpse...</tt>")
+				return 0
+			else
+				M.revive()
+				M.show_message("<tt>You are a free zombie, feel free to kill anyone and everyone on sight!</tt>")
+				if(M.icon == 'icons/Cow.dmi') M.icon = 'icons/Zombie.dmi'
+				M.speed = 20
+				M.HUNGER = 9999
+				M.THIRST = 9999
+				M.SLEEP = 9999
+				M.MHUNGER = 9999
+				M.MTHIRST = 9999
+				M.MSLEEP = 9999
+				return 1
+
 spell/necromancer
 	components = newlist(/*/spell_component/necromancer/teleport,*/ /spell_component/necromancer/reanimate, /spell_component/necromancer/kill, /spell_component/necromancer/kill_remote, /spell_component/necromancer/unbind)
+spell/proto_necromancer
+	components = newlist(/spell_component/proto_necromancer/reanimate)

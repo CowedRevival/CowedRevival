@@ -14,6 +14,7 @@ mob_skills
 		smithing = 0
 		tailoring = 0
 		medicine = 0
+		research = 0
 
 mob
 	anchored = 0
@@ -96,6 +97,14 @@ mob
 		berry_effects/Effects = new
 
 		attack_speed = 10
+
+		//Monolith Things
+		death_mon_curse = 0
+
+		//Changes what is said if this has a value.
+		speech_change
+		//Prevents equipment
+		equip_deny
 
 	proc
 		RemoveClassImages()
@@ -208,6 +217,7 @@ mob
 				usr << "<tt>See a detailed list on the <a href=\"http://www.byond.com/games/Cowed/Cowed#standings\">Cowed hub</a>.</tt>"
 		say(msg as text)
 			set hidden = 1
+			if(speech_change) msg = speech_change
 			if(usr && usr.client && (usr.client.muted == 1 || usr.client.muted == 3))
 				send_message(usr, "You're muted!", 3)
 				return
@@ -566,6 +576,7 @@ mob
 				stat("Smithing", "[skills.smithing]/100")
 				stat("Medicine", "[skills.medicine]/100")
 				stat("Tailoring", "[skills.tailoring]/100")
+				stat("Research", "[skills.research]/100")
 			stat("")
 			stat("<b>Game Information</b>")
 			stat("Mode", gametype)
@@ -713,6 +724,14 @@ mob
 			msg = dd_replacetext(msg, "\n", "\\n")
 			return msg
 		UpdateClothing()
+			if(equip_deny)
+				if(lhand) lhand.unequip()
+				if(rhand) rhand.unequip()
+				if(hequipped) hequipped.unequip()
+				if(bequipped) bequipped.unequip()
+				if(cequipped) cequipped.unequip()
+				if(fequipped) fequipped.unequip()
+				if(mequipped) mequipped.unequip()
 			var/list/overlays = list()
 
 			defence = base_defence

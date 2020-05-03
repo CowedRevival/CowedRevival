@@ -12,6 +12,7 @@ animal
 		mood
 		natural_mood = MOOD_PEACEFUL
 		order
+		animal_speech = "Animal noises!"
 		const
 			ORDER_NONE = 0
 			ORDER_FOLLOW = 1
@@ -62,6 +63,19 @@ animal
 		if(!ActionLock("check", 300))
 			var/mob/check = locate() in range(20, src)
 			runAI = check ? TRUE : FALSE*/
+	UpdateClothing()
+		if(lhand) lhand.unequip()
+		if(rhand) rhand.unequip()
+		if(hequipped) hequipped.unequip()
+		if(bequipped) bequipped.unequip()
+		if(cequipped) cequipped.unequip()
+		if(fequipped) fequipped.unequip()
+		if(mequipped) mequipped.unequip()
+
+	say(msg as text)
+		msg = animal_speech
+		..()
+
 	proc
 		Populate()
 			if(!there_can_be_only_one)
@@ -122,7 +136,7 @@ animal
 			if(HP > 0 && !corpse)
 				spawn(world.tick_lag)
 					AI()
-			if(action_timer <= 0)
+			if(action_timer <= 0 && !client)
 				action_timer = 100 - speed
 				if(action_timer == 0)
 					action_timer = 5
@@ -404,12 +418,14 @@ animal
 		MHP = 40
 		natural_mood = MOOD_CURIOUS
 		mood = MOOD_CURIOUS
+		animal_speech = "Baaaaaa..."
 	sheep
 		icon = 'icons/Sheep.dmi'
 		var/wool = 15
 		speed = 40
 		natural_mood = MOOD_CURIOUS
 		mood = MOOD_CURIOUS
+		animal_speech = "Baaaaaa..."
 		attack_hand(mob/M)
 			if(wool > 0 && M.inHand(/item/weapon/shears))
 				new/item/misc/wool(M)
@@ -433,6 +449,7 @@ animal
 		HP = 120
 		MHP = 120
 		there_can_be_only_one = 1
+		animal_speech = "Blorp!"
 	pig
 		icon = 'icons/Pig.dmi'
 		smell = 60
@@ -442,6 +459,7 @@ animal
 		natural_mood = MOOD_CURIOUS
 		mood = MOOD_CURIOUS
 		animal_type = TYPE_OMNIVORE
+		animal_speech = "Oink!"
 	bear
 		icon = 'icons/Bear.dmi'
 		smell = 90
@@ -452,6 +470,7 @@ animal
 		animal_type = TYPE_CARNIVORE
 		speed = 40
 		there_can_be_only_one = 1
+		animal_speech = "Gurrrr!"
 
 	wolf
 		icon = 'icons/Wolf.dmi'
@@ -464,11 +483,13 @@ animal
 		speed = 80
 		natural_mood = MOOD_ANGRY
 		mood = MOOD_ANGRY
+		animal_speech = "Bark!"
 
 		New()
 			..()
 			if(prob(2))
 				name = "Maneater"
+				animal_speech = "Bark bark!"
 				HP = 120
 				MHP = 120
 				strength = 7
@@ -482,3 +503,4 @@ animal
 			strength = 7
 			speed = 85
 			icon = 'icons/Dire_Wolf.dmi'
+			animal_speech = "Bark bark!"

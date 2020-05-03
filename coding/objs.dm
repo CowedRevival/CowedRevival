@@ -586,7 +586,7 @@ obj
 		var
 			wood = 10
 		New()
-			wood = rand(4, 16)
+			wood = rand(6, 8)
 			return ..()
 		proc
 			ActionLoop(mob/M)
@@ -1037,6 +1037,7 @@ obj/oven
 			if(!(usr in range(1, src)) || !(I in usr.contents)) return
 			if(full)
 				usr << "It's already full!"
+				return
 			else if(istype(I, /item/misc/wood))
 				if(I.stacked && I.stacked > 1)
 					var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Cook :: Specify Amount") as null|num
@@ -1131,6 +1132,7 @@ obj/oven
 			if(!(usr in range(1, src)) || !(I in usr.contents)) return
 			if(full)
 				usr << "It's already full!"
+				return
 			if(istype(I, /item/misc/wood))
 				if(I.stacked && I.stacked > 1)
 					var/amount = input(usr, "Specify the amount you would like to use. \[1-[I.stacked]\]", "Smelt :: Specify Amount") as null|num
@@ -1281,6 +1283,7 @@ obj/cauldron
 	density = 1
 	var
 		units = 0
+		max_units = 10
 		vege = 0
 		meat = 0
 		other = 0
@@ -1351,12 +1354,16 @@ obj/cauldron
 			if(cook_timer <= 0 && units)
 				usr << "Finish the rest of the stew first!"
 				return
+			if(units  >= max_units)
+				usr << "The stew is already full, let it cook!"
+				return
 			var/type
 			for(type in allowed_types)
 				if(istype(I, type)) break
 			if(!type) return
 			if(!contains_water)
 				usr << "You need to fill the pot with water!"
+				return
 			hearers(usr) << "<small>[usr.name] adds something in the cauldron!</small>"
 			spawn() ProcessItem(I)
 			I.stacked--

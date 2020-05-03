@@ -129,14 +129,66 @@ mob/proc/Zombie()
 	else
 		action_timer--
 
+mob/proc/Damned_One()
+	usr=src
+	if(icon_state != "dead")
+		if(prob(1) && prob(10))
+			usr << "<font color=\"blue\"><small>You manage to wrestle back control, for now...</small>"
+			sleep(rand(300, 600))
+			usr << "<font color=\"red\"><small>You've lost control once more!!</small>"
+			Damned_One()
+		else
+			spawn(world.tick_lag)
+				Damned_One()
+	if (HP <= 0) return
+	if(action_timer <= 0)
+		action_timer = 100 - speed
+		if(action_timer == 0)
+			action_timer = 5
+		var/mob/m
+		for(var/mob/M in oview(10))
+			if(!istype(M,/mob/observer) && !istype(M,/mob/Zombie) && icon != 'icons/Skeleton.dmi' && M.HP > 0)
+				m=M
+		if(m&&src.legshackled==0)
+			if(get_dist(src,m) > 1) step_towards(src,m)
+		else if(src.legshackled==0)
+			step_rand(src)
+		for(var/turf/T in oview(1))
+			if(T.density == 1&&istype(T,/turf/wooden/))
+				for(var/mob/N in ohearers(src))
+					N.show_message("[src] attacks [T].")
+				var/turf/wooden/t=T
+				t.buildinghealth-=1
+				if(t.buildinghealth==0)
+					new/turf/path(locate(t.x,t.y,t.z))
+				break
+		for(var/mob/M in oview(1))
+			if(!istype(M,/mob/Zombie) && M.HP > 0&&!findtext(M.name,"corpse"))
+				if(src.shackled==0)
+					attackmode = "Attack"
+					attack(M)
+					M.last_hurt = "zombie"
+					if(prob(100-usr.HP)&&infection_mode)
+						M.infection+=1
+						if(M.infection==1)
+							world<<"<b>[M] has been infected!"
+					M.checkdead(M)
+					hud_main.UpdateHUD(M)
+					M.checkdead(M)
+					break
+	else
+		action_timer--
+
 mob/proc/Frog()
 	usr=src
 	if(HP <= 0)
+		for(var/mob/Frogman/Frogman_King in world)
+			return
 		frog_nation_anger += rand(1,3)
 		if(frog_nation_anger > 20 && prob(frog_nation_anger))
 			for(var/mob/Frogman/Frogman_King/K in world)
 				return
-			frog_nation_anger = -100
+			frog_nation_anger = -1000
 			var/nation_to_rise = pick("frog_nation_1", "frog_nation_2", "frog_nation_3")
 			world << "<font color=green><b>The croaks of revolution echo across the land!</b></font>"
 			for(var/obj/condition_spawn/frog_nation/I in world)
