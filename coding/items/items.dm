@@ -1,6 +1,7 @@
 item
 	parent_type = /obj
 	icon = 'icons/items.dmi'
+	var/to_drop = 1
 	var
 		armour = 1
 		attackpow=1
@@ -26,7 +27,9 @@ item
 			if(stacked > 1) name = initial(name)
 	MouseDrop(over_object,src_location,over_location)
 		suffix = "x[stacked]"
-		if(usr.CheckGhost() || usr.corpse || usr.HP <= 0) return
+		if(usr.CheckGhost() || usr.corpse || usr.HP <= 0 || !to_drop)
+			to_drop = 1
+			return
 		if(isturf(over_location) && get_dist(usr, over_location) <= 1)
 			if(usr.isEquipped(src))
 				usr.show_message("<tt>You can't drop the item while it's equipped!</tt>")

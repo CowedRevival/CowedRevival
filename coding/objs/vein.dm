@@ -26,10 +26,16 @@ obj/vein
 						new/obj/vein/Silver_Vein(src.loc)
 					if(79 to 87)
 						new/obj/vein/Palladium_Vein(src.loc)
-					if(88 to 94)
+					if(88 to 91)
 						new/obj/vein/Gold_Vein(src.loc)
-					if(95 to 99)
+					if(92 to 93)
 						new/obj/vein/Mithril_Vein(src.loc)
+					if(94 to 95)
+						new/obj/vein/Ruby_Vein(src.loc)
+					if(96 to 97)
+						new/obj/vein/Emerald_Vein(src.loc)
+					if(98 to 99)
+						new/obj/vein/Amethyst_Vein(src.loc)
 					if(100)
 						new/obj/vein/Magicite_Vein(src.loc)
 				loc = null
@@ -40,6 +46,8 @@ obj/vein
 	proc
 		ActionLoop(mob/M)
 			while(M && M.current_action == src && loc && amountleft > 0 && M.inHand(/item/weapon/pickaxe))
+				src.Play_Sound_Local(pick('sounds/sfx/mining1.ogg', 'sounds/sfx/mining2.ogg', 'sounds/sfx/mining3.ogg', 'sounds/sfx/mining4.ogg', 'sounds/sfx/mining5.ogg',
+				'sounds/sfx/mining6.ogg', 'sounds/sfx/mining8.ogg', 'sounds/sfx/mining9.ogg', 'sounds/sfx/mining10.ogg'))
 				for(var/mob/N in hearers(M))
 					N.show_message("<b>[M.name]</b> swings [M.gender == FEMALE ? "her" : "his"] pickaxe at the [src]...")
 				sleep(10)
@@ -147,3 +155,15 @@ obj/vein
 		icon_state="Clay Rocks"
 		orename="Clay"
 		consist=/item/misc/Raw_Clay
+	Ruby_Vein
+		icon_state="Ruby Rocks"
+		orename="Ruby"
+		consist=/item/misc/gem/ruby
+	Emerald_Vein
+		icon_state="Emerald Rocks"
+		orename="Emerald"
+		consist=/item/misc/gem/emerald
+	Amethyst_Vein
+		icon_state="Amethyst Rocks"
+		orename="Amethyst"
+		consist=/item/misc/gem/amethyst

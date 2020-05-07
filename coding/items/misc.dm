@@ -2581,3 +2581,44 @@ item/misc
 		icon = 'icons/Supplies.dmi'
 		icon_state = "bowl"
 		stacked = 1
+
+	gem
+		icon = 'icons/Gems.dmi'
+		icon_state = "emerald"
+		stacked = -1
+		var/drained = 0
+		emerald
+			icon_state = "emerald"
+		ruby
+			icon_state = "ruby"
+		amethyst
+			icon_state = "amethyst"
+
+	excavation_tool
+		icon = 'icons/Excavation_Tools.dmi'
+		stacked = -1
+		var/material = "iron"
+		hand_pick
+			icon_state = "iron_hand_pick"
+			iron_hand_pick
+				icon_state = "iron_hand_pick"
+				material = "iron"
+			magicite_hand_pick
+				icon_state = "magicite_hand_pick"
+				material = "magicite"
+		chisel
+			icon_state = "iron_chisel"
+			iron_chisel
+				icon_state = "iron_chisel"
+				material = "iron"
+			magicite_chisel
+				icon_state = "magicite_chisel"
+				material = "magicite"
+		brush
+			icon_state = "iron_brush"
+			iron_brush
+				icon_state = "iron_brush"
+				material = "iron"
+			magicite_brush
+				icon_state = "magicite_brush"
+				material = "magicite"

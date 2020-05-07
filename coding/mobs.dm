@@ -98,13 +98,20 @@ mob
 
 		attack_speed = 10
 
-		//Monolith Things
+		//curses
 		death_mon_curse = 0
+		meat_cube_curse = 0
 
 		//Changes what is said if this has a value.
 		speech_change
 		//Prevents equipment
-		equip_deny
+		equip_deny_head
+		equip_deny_mask
+		equip_deny_body
+		equip_deny_hood
+		equip_deny_cloak
+		equip_deny_left_hand
+		equip_deny_right_hand
 
 	proc
 		RemoveClassImages()
@@ -724,14 +731,14 @@ mob
 			msg = dd_replacetext(msg, "\n", "\\n")
 			return msg
 		UpdateClothing()
-			if(equip_deny)
-				if(lhand) lhand.unequip()
-				if(rhand) rhand.unequip()
-				if(hequipped) hequipped.unequip()
-				if(bequipped) bequipped.unequip()
-				if(cequipped) cequipped.unequip()
-				if(fequipped) fequipped.unequip()
-				if(mequipped) mequipped.unequip()
+			if(equip_deny_left_hand && lhand) src.lhand.unequip()
+			if(equip_deny_right_hand && rhand) src.rhand.unequip()
+			if(equip_deny_head && hequipped) src.hequipped.unequip()
+			if(equip_deny_body && bequipped) src.bequipped.unequip()
+			if(equip_deny_cloak && cequipped) src.cequipped.unequip()
+			if(equip_deny_mask && fequipped) src.fequipped.unequip()
+			if(equip_deny_hood && mequipped) src.mequipped.unequip()
+
 			var/list/overlays = list()
 
 			defence = base_defence
@@ -1277,9 +1284,10 @@ mob
 				corpse.speed = 1
 				corpse.base_speed = 1
 				initial_net_worth = src.initial_net_worth
+				tag = "Dead Player"
 				spawn(rand(4000,5000))
-					if(M && M.HP <= 0)
-						M.icon = 'Skeleton.dmi'
+					if(src && HP <= 0 && !meat_cube_curse)
+						icon = 'Skeleton.dmi'
 						tag = "Skeleton"
 						return
 

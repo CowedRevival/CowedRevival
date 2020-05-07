@@ -839,10 +839,12 @@ Because the law is not set in stone and depends on public opinion, you'll want t
 				Selected(mob/M)
 					M.chosen = "mage"
 					M.contents += new/item/misc/spellbook/Empty_Spellbook
-
 					M.make_wizard("Blue")
 					M.contents += new/item/armour/hat/pez_hat(M)
 					M.contents += new/item/armour/body/pez_cloths(M)
+					M.contents += new/item/misc/excavation_tool/hand_pick/magicite_hand_pick
+					M.contents += new/item/misc/excavation_tool/chisel/magicite_chisel
+					M.contents += new/item/misc/excavation_tool/brush/magicite_brush
 					M.skills.research = 100
 					return 2
 				New()

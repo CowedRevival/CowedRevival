@@ -125,7 +125,7 @@ turf
 						if((usr.inHand(/item/weapon/pickaxe) && prob(10)) || prob(5))
 							new/obj/vein(src)
 						else if((usr.inHand(/item/weapon/pickaxe) && prob(1) && prob(10)))
-							new/obj/monolith/Random_Monolith(src)
+							new/obj/boulder(src)
 						new/turf/path(src)
 
 		deep_dirtwall
@@ -142,7 +142,7 @@ turf
 						if((usr.inHand(/item/weapon/pickaxe) && prob(12)) || prob(7))
 							new/obj/vein(src)
 						else if((usr.inHand(/item/weapon/pickaxe) && prob(1)))
-							new/obj/monolith/Random_Monolith(src)
+							new/obj/boulder(src)
 						new/turf/hard_floor(src)
 
 		bedrock
@@ -166,7 +166,7 @@ turf
 							if(prob(1) && prob(50)) new/obj/vein/Adamantite_Vein(src)
 							else if(prob(2)) new/obj/vein/Magicite_Vein(src)
 						else if((usr.inHand(/item/weapon/pickaxe) && prob(1)))
-							new/obj/monolith/Random_Monolith(src)
+							new/obj/boulder(src)
 						new/turf/chaos_brick(src)
 
 	Dragon_Statue

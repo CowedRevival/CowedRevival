@@ -73,8 +73,7 @@ obj/spawner
 					var/x = spawner.loc.x + rand(-range, range)
 					var/y = spawner.loc.y + rand(-range, range)
 					var/z = spawner.loc.z
-					var/turf/g = locate(x, y, z)
-					if(istype(g, /turf/grass)) spawned_children += new mob_type(locate(x,y,z))
+					spawned_children += new mob_type(locate(x,y,z))
 
 		Zombie_Spawner
 			mob_type = /mob/Zombie

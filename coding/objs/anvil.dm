@@ -25,7 +25,7 @@ obj/anvil
 
 		I = locate(/item/misc/iron_ingot) in M.contents
 		if(I && M.skills.smithing >= 20)
-			L += list("Iron Sword", "Shackles", "Leg Shackles", "Iron Helm", "Iron Helm Top", "Iron Plate", "Iron Shield")
+			L += list("Iron Sword", "Shackles", "Leg Shackles", "Iron Helm", "Iron Helm Top", "Iron Plate", "Iron Shield", "Iron Hand Pick", "Iron Chisel", "Iron Brush")
 
 		I = locate(/item/misc/silver_ingot) in M.contents
 		if(I && M.skills.smithing >= 40)
@@ -45,7 +45,7 @@ obj/anvil
 
 		I = locate(/item/misc/magicite_ingot) in M.contents
 		if(I && M.skills.smithing >= 80)
-			L += list("Magicite Sword", "Magicite Helm", "Magicite Plate")
+			L += list("Magicite Sword", "Magicite Helm", "Magicite Plate", "Magicite Hand Pick", "Magicite Chisel", "Magicite Brush")
 
 		I = locate(/item/misc/adamantite_ingot) in M.contents
 		if(I && M.skills.smithing >= 90)
@@ -97,6 +97,9 @@ obj/anvil
 					if("Iron Plate") M.contents += new/item/armour/body/iron_plate
 					if("Iron Sword") M.contents += new/item/weapon/iron_sword
 					if("Iron Shield") M.contents += new/item/weapon/iron_shield
+					if("Iron Hand Pick") M.contents += new/item/misc/excavation_tool/hand_pick/iron_hand_pick
+					if("Iron Chisel") M.contents += new/item/misc/excavation_tool/chisel/iron_chisel
+					if("Iron Brush") M.contents += new/item/misc/excavation_tool/brush/iron_brush
 
 					if("Tungsten Plate") M.contents += new/item/armour/body/tungsten_plate
 					if("Tungsten Helm") M.contents += new/item/armour/face/tungsten_helm
@@ -125,6 +128,9 @@ obj/anvil
 					if("Magicite Plate") M.contents += new/item/armour/body/magicite_plate
 					if("Magicite Helm") M.contents += new/item/armour/face/magicite_helm
 					if("Magicite Sword") M.contents += new/item/weapon/magicite_sword
+					if("Magicite Hand Pick") M.contents += new/item/misc/excavation_tool/hand_pick/magicite_hand_pick
+					if("Magicite Chisel") M.contents += new/item/misc/excavation_tool/chisel/magicite_chisel
+					if("Magicite Brush") M.contents += new/item/misc/excavation_tool/brush/magicite_brush
 
 					if("Adamantite Plate") M.contents += new/item/armour/body/adamantite_plate
 					if("Adamantite Helm") M.contents += new/item/armour/face/adamantite_helm

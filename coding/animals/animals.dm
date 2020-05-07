@@ -58,11 +58,7 @@ animal
 				while(prob(5))
 
 			spawn AI()
-	/*Life()
-		. = ..()
-		if(!ActionLock("check", 300))
-			var/mob/check = locate() in range(20, src)
-			runAI = check ? TRUE : FALSE*/
+
 	UpdateClothing()
 		if(lhand) lhand.unequip()
 		if(rhand) rhand.unequip()
