@@ -34,7 +34,7 @@ world
 						proceed++
 					else if(M.client.vote == "random")
 						proceed++
-		world << "You have 60 seconds to vote for this round's Gamemode!"
+		/*world << "You have 60 seconds to vote for this round's Gamemode!"
 		sleep(100)
 		world << "50 seconds remaining!!"
 		sleep(100)
@@ -45,7 +45,7 @@ world
 		world << "20 seconds remaining!!"
 		sleep(100)
 		world << "10 seconds remaining!!"
-		sleep(100)
+		sleep(100)*/
 		var/peasant,kingdom,random
 
 		for(var/mob/M in world)

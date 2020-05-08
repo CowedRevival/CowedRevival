@@ -1,4 +1,4 @@
-#define GAME_VERSION "9.5"
+#define GAME_VERSION "9.6"
 
 #define MD5_KEY "8raSub9zutuhesU3upHUzafRenekaBapHew52QUcRunUyuc3gestuWEReF3cET8U"
 
@@ -103,6 +103,7 @@
 #include "coding\procs.dm"
 #include "coding\projectiles.dm"
 #include "coding\Seasons.dm"
+#include "coding\Smithing_Rework.dm"
 #include "coding\spawn_point.dm"
 #include "coding\spells.dm"
 #include "coding\turfs.dm"

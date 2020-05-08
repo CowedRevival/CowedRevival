@@ -11,43 +11,43 @@ obj/anvil
 		if(M.shackled || M.movable || M.restrained() || M.icon_state == "ghost") return
 		var/list/L = new/list()
 
-		var/item/misc/I = locate(/item/misc/tin_ingot) in M.contents
+		var/item/misc/I = locate(/item/misc/ingot/tin_ingot) in M.contents
 		if(I)
 			L += list("Tin Sword", "Tin Helm", "Tin Helm Top", "Tin Plate", "Tin Shield")
 
-		I = locate(/item/misc/copper_ingot) in M.contents
+		I = locate(/item/misc/ingot/copper_ingot) in M.contents
 		if(I && M.skills.smithing >= 0)
 			L += list("Copper Plate", "Copper Helm", "Copper Helm Top", "Copper Sword", "Copper Shield")
 
-		I = locate(/item/misc/tungsten_ingot) in M.contents
+		I = locate(/item/misc/ingot/tungsten_ingot) in M.contents
 		if(I && M.skills.smithing >= 20)
 			L += list("Tungsten Sword", "Tungsten Helm", "Tungsten Helm Top", "Tungsten Plate", "Tungsten Shield")
 
-		I = locate(/item/misc/iron_ingot) in M.contents
+		I = locate(/item/misc/ingot/iron_ingot) in M.contents
 		if(I && M.skills.smithing >= 20)
 			L += list("Iron Sword", "Shackles", "Leg Shackles", "Iron Helm", "Iron Helm Top", "Iron Plate", "Iron Shield", "Iron Hand Pick", "Iron Chisel", "Iron Brush")
 
-		I = locate(/item/misc/silver_ingot) in M.contents
+		I = locate(/item/misc/ingot/silver_ingot) in M.contents
 		if(I && M.skills.smithing >= 40)
 			L += list("Silver Sword", "Silver Helm", "Silver Helm Top", "Silver Plate", "Silver Shield")
 
-		I = locate(/item/misc/palladium_ingot) in M.contents
+		I = locate(/item/misc/ingot/palladium_ingot) in M.contents
 		if(I && M.skills.smithing >= 60)
 			L += list("Palladium Sword", "Palladium Helm", "Palladium Helm Top", "Palladium Plate", "Palladium Shield")
 
-		I = locate(/item/misc/gold_ingot) in M.contents
+		I = locate(/item/misc/ingot/gold_ingot) in M.contents
 		if(I && M.skills.smithing >= 40)
 			L += list("Gold Sword", "Gold Helm", "Gold Helm Top", "Gold Plate", "Gold Shield")
 
-		I = locate(/item/misc/mithril_ingot) in M.contents
+		I = locate(/item/misc/ingot/mithril_ingot) in M.contents
 		if(I && M.skills.smithing >= 60)
 			L += list("Mithril Sword", "Mithril Helm", "Mithril Helm Top", "Mithril Plate", "Mithril Shield")
 
-		I = locate(/item/misc/magicite_ingot) in M.contents
+		I = locate(/item/misc/ingot/magicite_ingot) in M.contents
 		if(I && M.skills.smithing >= 80)
 			L += list("Magicite Sword", "Magicite Helm", "Magicite Plate", "Magicite Hand Pick", "Magicite Chisel", "Magicite Brush")
 
-		I = locate(/item/misc/adamantite_ingot) in M.contents
+		I = locate(/item/misc/ingot/adamantite_ingot) in M.contents
 		if(I && M.skills.smithing >= 90)
 			L += list("Adamantite Sword", "Adamantite Helm", "Adamantite Helm Top", "Adamantite Plate")
 
@@ -56,16 +56,16 @@ obj/anvil
 			return
 		var/choice = input(M, "Select an item to craft.", "Anvil :: Select Item") as null|anything in L
 		if(choice == null) return
-		if(dd_hasprefix(choice, "Gold ")) I = locate(/item/misc/gold_ingot, M)
-		else if(dd_hasprefix(choice, "Tungsten ")) I = locate(/item/misc/tungsten_ingot, M)
-		else if(dd_hasprefix(choice, "Tin ")) I = locate(/item/misc/tin_ingot, M)
-		else if(dd_hasprefix(choice, "Silver ")) I = locate(/item/misc/silver_ingot, M)
-		else if(dd_hasprefix(choice, "Palladium ")) I = locate(/item/misc/palladium_ingot, M)
-		else if(dd_hasprefix(choice, "Mithril ")) I = locate(/item/misc/mithril_ingot, M)
-		else if(dd_hasprefix(choice, "Magicite ")) I = locate(/item/misc/magicite_ingot, M)
-		else if(dd_hasprefix(choice, "Adamantite ")) I = locate(/item/misc/adamantite_ingot, M)
-		else if(dd_hasprefix(choice, "Copper ")) I = locate(/item/misc/copper_ingot, M)
-		else I = locate(/item/misc/iron_ingot, M)
+		if(dd_hasprefix(choice, "Gold ")) I = locate(/item/misc/ingot/gold_ingot, M)
+		else if(dd_hasprefix(choice, "Tungsten ")) I = locate(/item/misc/ingot/tungsten_ingot, M)
+		else if(dd_hasprefix(choice, "Tin ")) I = locate(/item/misc/ingot/tin_ingot, M)
+		else if(dd_hasprefix(choice, "Silver ")) I = locate(/item/misc/ingot/silver_ingot, M)
+		else if(dd_hasprefix(choice, "Palladium ")) I = locate(/item/misc/ingot/palladium_ingot, M)
+		else if(dd_hasprefix(choice, "Mithril ")) I = locate(/item/misc/ingot/mithril_ingot, M)
+		else if(dd_hasprefix(choice, "Magicite ")) I = locate(/item/misc/ingot/magicite_ingot, M)
+		else if(dd_hasprefix(choice, "Adamantite ")) I = locate(/item/misc/ingot/adamantite_ingot, M)
+		else if(dd_hasprefix(choice, "Copper ")) I = locate(/item/misc/ingot/copper_ingot, M)
+		else I = locate(/item/misc/ingot/iron_ingot, M)
 		if(!I)
 			M.show_message("<tt>It seems you no longer have the ability to create that!</tt>")
 			return

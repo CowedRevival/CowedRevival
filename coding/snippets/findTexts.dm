@@ -1,4 +1,4 @@
-proc/findTexts(haystack, list/needles, start=1, end=length(haystack))
+proc/findtextExs(haystack, list/needles, start=1, end=length(haystack))
     while(start <= end)
         for(var/needle in needles)
             var/i

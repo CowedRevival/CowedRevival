@@ -113,6 +113,8 @@ mob
 		equip_deny_left_hand
 		equip_deny_right_hand
 
+		selected_crafting_button
+
 	proc
 		RemoveClassImages()
 			for(var/character_handling/container/O in game.kingdoms)

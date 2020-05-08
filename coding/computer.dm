@@ -150,19 +150,19 @@ computer
 					(inview ? hearers(M) : world) << sound('sounds/computer/command.ogg')
 					spawn(15)
 						//process commands
-						//if(findTexts(., abortStrings) && findTexts(., list("command", "commands", "request"))) return
+						//if(findtextExs(., abortStrings) && findtextExs(., list("command", "commands", "request"))) return
 						var/computer/command/command
 						main_loop:
 							for(command in commands)
 								if(command.allow_ranks && !(rank in command.allow_ranks)) continue
 								if(!command.canInvoke(M, msg, inview)) continue
-								for(var/L in command.strings) if(!findTexts(., L)) continue main_loop
+								for(var/L in command.strings) if(!findtextExs(., L)) continue main_loop
 								break
 						if(command)
 							if(command.command_function && localized && (M.z != 1 || !inview))
 								(inview ? hearers(M) : world) << sound('sounds/computer/access_denied.ogg')
 								return
-							if(findTexts(., abortStrings))
+							if(findtextExs(., abortStrings))
 								command.process_abort(M, ., inview)
 							else
 								command.process(M, ., inview)

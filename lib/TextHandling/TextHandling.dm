@@ -156,13 +156,13 @@ proc
 	/////////////////////
 	dd_hasprefix(text, prefix)
 		var/start = 1
-		var/end = lentext(prefix) + 1
+		var/end = length(prefix) + 1
 		return findtext(text, prefix, start, end)
 
 	dd_hasPrefix(text, prefix)
 		var/start = 1
-		var/end = lentext(prefix) + 1
-		return findText(text, prefix, start, end)
+		var/end = length(prefix) + 1
+		return findtextEx(text, prefix, start, end)
 
 
     /////////////////////
@@ -174,14 +174,14 @@ proc
 
 	dd_hasSuffix(text, suffix)
 		var/start = length(text) - length(suffix)
-		if (start) return findText(text, suffix, start)
+		if (start) return findtextEx(text, suffix, start)
 
 	/////////////////////////////
 	// Turning text into lists //
 	/////////////////////////////
 	dd_text2list(text, separator)
-		var/textlength      = lentext(text)
-		var/separatorlength = lentext(separator)
+		var/textlength      = length(text)
+		var/separatorlength = length(separator)
 		var/list/textList   = new /list()
 		var/searchPosition  = 1
 		var/findPosition    = 1
@@ -200,14 +200,14 @@ proc
 					return textList
 
 	dd_text2List(text, separator)
-		var/textlength      = lentext(text)
-		var/separatorlength = lentext(separator)
+		var/textlength      = length(text)
+		var/separatorlength = length(separator)
 		var/list/textList   = new /list()
 		var/searchPosition  = 1
 		var/findPosition    = 1
 		var/buggyText
 		while (1)															// Loop forever.
-			findPosition = findText(text, separator, searchPosition, 0)
+			findPosition = findtextEx(text, separator, searchPosition, 0)
 			buggyText = copytext(text, searchPosition, findPosition)		// Everything from searchPosition to findPosition goes into a list element.
 			textList += "[buggyText]"										// Working around weird problem where "text" != "text" after this copytext().
 

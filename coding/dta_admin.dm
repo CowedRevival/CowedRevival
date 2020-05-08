@@ -110,7 +110,7 @@ dta_admin/module
 					<body>"}
 				if (edit)
 					var/label = copytext(edit.name, 8)
-					label = copytext(label, 1, lentext(label))
+					label = copytext(label, 1, length(label))
 					. += {"
 						<a href="byond://?src=\ref[src];cmd=save;cancel=cancel">\[Back to books list]</a><hr />
 						<form action="byond://" method="post">

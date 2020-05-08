@@ -18,7 +18,7 @@ obj/Cannon
 					else
 						return
 				if("Grapeshot")
-					var/item/misc/molten_iron/S=locate() in usr
+					var/item/misc/molten/molten_iron/S=locate() in usr
 					if(S)
 						if(--S.stacked <= 0) del S
 						src.loadtype="grape"

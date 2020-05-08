@@ -9,6 +9,7 @@ turf/Cave_Start
 	var/deathLimit = 3
 	var/list/map_array
 	var/list/new_map
+	var/current_floor = 1
 	proc/Generate()
 		tag = name
 		map_array = new()
@@ -28,12 +29,13 @@ turf/Cave_Start
 		var/temp_location_y = locate(tag).y
 		var/temp_location_z = locate(tag).z
 		var/monster_count = 0
+		sleep(1)
 		for(var/i = 1 to cave_width)
 			for(var/j = 1 to cave_height)
 				var/position_x = temp_location_x + (i-1)
 				var/position_y = temp_location_y + (j-1)
-				if(new_map[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/dirtwall))
-					new/turf/path(locate(position_x, position_y, temp_location_z))
+				if(src.new_map[i].map_array[j] == 0 && current_floor == 1)
+					if(position_x != temp_location_x && position_y != temp_location_y) new/turf/path(locate(position_x, position_y, temp_location_z))
 					if(prob(5))
 						new/obj/vein(locate(position_x, position_y, temp_location_z))
 					else if(prob(2))
@@ -43,38 +45,13 @@ turf/Cave_Start
 						monster_count++
 					else if(prob(1)&& prob(10))
 						new/obj/boulder(locate(position_x, position_y, temp_location_z))
-				else if(new_map[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/deep_dirtwall))
+				else if(src.new_map[i].map_array[j] == 0 && current_floor == 2)
 					if(prob(1) && prob(5))
-						new/turf/hard_floor/cracked_hard_floor(locate(position_x, position_y, temp_location_z))
+						if(position_x != temp_location_x && position_y != temp_location_y) new/turf/hard_floor/cracked_hard_floor(locate(position_x, position_y, temp_location_z))
 					else
-						new/turf/hard_floor(locate(position_x, position_y, temp_location_z))
+						if(position_x != temp_location_x && position_y != temp_location_y) new/turf/hard_floor(locate(position_x, position_y, temp_location_z))
 					if(prob(5))
-						var/typechosen = rand(1,100)
-						switch(typechosen)
-							if(1 to 20)
-								new/obj/vein/Copper_Vein(src.loc)
-							if(21 to 40)
-								new/obj/vein/Tin_Vein(src.loc)
-							if(41 to 55)
-								new/obj/vein/Tungsten_Vein(src.loc)
-							if(56 to 68)
-								new/obj/vein/Iron_Vein(src.loc)
-							if(69 to 78)
-								new/obj/vein/Silver_Vein(src.loc)
-							if(79 to 87)
-								new/obj/vein/Palladium_Vein(src.loc)
-							if(88 to 91)
-								new/obj/vein/Gold_Vein(src.loc)
-							if(92 to 93)
-								new/obj/vein/Mithril_Vein(src.loc)
-							if(94 to 95)
-								new/obj/vein/Ruby_Vein(src.loc)
-							if(96 to 97)
-								new/obj/vein/Emerald_Vein(src.loc)
-							if(98 to 99)
-								new/obj/vein/Amethyst_Vein(src.loc)
-							if(100)
-								new/obj/vein/Magicite_Vein(src.loc)
+						new/obj/vein(locate(position_x, position_y, temp_location_z))
 					else if(prob(3))
 						new/obj/tree/mushroom/towercap(locate(position_x, position_y, temp_location_z))
 					else if(prob(1) && prob(10) && monster_count < 50)
@@ -82,8 +59,8 @@ turf/Cave_Start
 						monster_count++
 					else if(prob(1)&& prob(10))
 						new/obj/boulder(locate(position_x, position_y, temp_location_z))
-				else if(new_map[i].map_array[j] == 0 && istype(locate(position_x, position_y, temp_location_z), /turf/underground/chaos_stone))
-					new/turf/chaos_brick(locate(position_x, position_y, temp_location_z))
+				else if(src.new_map[i].map_array[j] == 0 && current_floor == 3)
+					if(position_x != temp_location_x && position_y != temp_location_y) new/turf/chaos_brick(locate(position_x, position_y, temp_location_z))
 					if(prob(1) && prob(50))
 						new/obj/vein/Adamantite_Vein(locate(position_x, position_y, temp_location_z))
 					else if(prob(2))
@@ -125,7 +102,6 @@ turf/Cave_Start
 						new_map[i].map_array[j] = 1
 					else
 						new_map[i].map_array[j] = 0
-
 
 
 

@@ -987,242 +987,11 @@ item/misc
 		verb/Create_New_Key_Mold()
 			usr.contents += new/item/misc/key_mold
 			if(--stacked <= 0) Move(null, forced = 1)
-
-//
-	molten_copper
-		icon_state = "molten copper"
-		icon='icons/ores_and_veins.dmi'
-		name = "Molten Copper"
-		stacked = 1
-		MouseDrop(obj/over_object,src_location,turf/over_turf,src_control,over_control,params)
-			if(!(src in usr.contents)) return ..()
-			if(istype(over_object,/item/misc/key_mold) && (over_object in usr.contents))
-				var/item/misc/key_mold/mold = over_object
-				new/item/misc/key{icon_state="key_copper"}(usr, mold.keyid)
-				if(--stacked <= 0) Move(null, forced = 1)
-			else if(istype(over_turf, /turf/water))
-				if(get_dist(src,over_turf)>1) return ..()
-				var/item/misc/copper_ingot/I = locate() in usr
-				if(I)
-					I.stacked += 1
-					I.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/copper_ingot
-				if(--stacked <= 0) Move(null, forced = 1)
-				else suffix = "x[stacked]"
-			else return ..()
-	copper_ingot
-		name = "Copper Ingot"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="Copper Ingot"
-		stacked = 1
-//
-	copper_coin
-		icon='icons/Supplies.dmi'
-		icon_state = "copper_coin"
-		stacked = 1
-	molten_iron
-		icon='icons/ores_and_veins.dmi'
-		icon_state="molten iron"
-		stacked = 1
-		verb
-			build_cannon()
-				if(stacked >= 10)
-					new/obj/Cannon(locate(usr.x,usr.y,usr.z))
-					stacked -= 10
-		MouseDrop(turf/over_turf, src_location,over_location,src_control,over_control,params)
-			if(!(src in usr.contents)) return ..()
-			if(istype(over_turf, /turf/water))
-				if(get_dist(src,over_turf)>1) return ..()
-				var/item/misc/iron_ingot/I = locate() in usr
-				if(I)
-					I.stacked += 1
-					I.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/iron_ingot
-				if(--stacked <= 0) Move(null, forced = 1)
-				else suffix = "x[stacked]"
-			else return ..()
-
-	iron_ingot
-		name = "Iron Ingot"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="Iron Ingot"
-		stacked = 1
-//
-	molten_tungsten
-		name = "Molten Tungsten"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="molten tungsten"
-		stacked = 1
-		MouseDrop(turf/over_turf, src_location,over_location,src_control,over_control,params)
-			if(!(src in usr.contents)) return ..()
-			if(istype(over_turf, /turf/water))
-				if(get_dist(src,over_turf)>1) return ..()
-				var/item/misc/tungsten_ingot/I = locate() in usr
-				if(I)
-					I.stacked += 1
-					I.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/tungsten_ingot
-				if(--stacked <= 0) Move(null, forced = 1)
-				else suffix = "x[stacked]"
-			else return ..()
-	tungsten_ingot
-		name = "Tungsten Ingot"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="Tungsten Ingot"
-		stacked = 1
-//
-	molten_silver
-		name = "Molten Silver"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="molten silver"
-		stacked = 1
-		MouseDrop(turf/over_turf, src_location,over_location,src_control,over_control,params)
-			if(!(src in usr.contents)) return ..()
-			if(istype(over_turf, /turf/water))
-				if(get_dist(src,over_turf)>1) return ..()
-				var/item/misc/silver_ingot/I = locate() in usr
-				if(I)
-					I.stacked += 1
-					I.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/silver_ingot
-				if(--stacked <= 0) Move(null, forced = 1)
-				else suffix = "x[stacked]"
-			else return ..()
-	silver_ingot
-		name = "Silver Ingot"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="Silver Ingot"
-		stacked = 1
-//
-	molten_palladium
-		name = "Molten Palladium"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="molten palladium"
-		stacked = 1
-		MouseDrop(turf/over_turf, src_location,over_location,src_control,over_control,params)
-			if(!(src in usr.contents)) return ..()
-			if(istype(over_turf, /turf/water))
-				if(get_dist(src,over_turf)>1) return ..()
-				var/item/misc/palladium_ingot/I = locate() in usr
-				if(I)
-					I.stacked += 1
-					I.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/palladium_ingot
-				if(--stacked <= 0) Move(null, forced = 1)
-				else suffix = "x[stacked]"
-			else return ..()
-	palladium_ingot
-		name = "Palladium Ingot"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="Palladium Ingot"
-		stacked = 1
-//
-	molten_mithril
-		name = "Molten Mithril"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="molten mithril"
-		stacked = 1
-		MouseDrop(turf/over_turf, src_location,over_location,src_control,over_control,params)
-			if(!(src in usr.contents)) return ..()
-			if(istype(over_turf, /turf/water))
-				if(get_dist(src,over_turf)>1) return ..()
-				var/item/misc/mithril_ingot/I = locate() in usr
-				if(I)
-					I.stacked += 1
-					I.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/mithril_ingot
-				if(--stacked <= 0) Move(null, forced = 1)
-				else suffix = "x[stacked]"
-			else return ..()
-	mithril_ingot
-		name = "Mithril Ingot"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="Mithril Ingot"
-		stacked = 1
-//
-	molten_magicite
-		name = "Molten Magicite"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="molten magicite"
-		stacked = 1
-		MouseDrop(turf/over_turf, src_location,over_location,src_control,over_control,params)
-			if(!(src in usr.contents)) return ..()
-			if(istype(over_turf, /turf/water))
-				if(get_dist(src,over_turf)>1) return ..()
-				var/item/misc/magicite_ingot/I = locate() in usr
-				if(I)
-					I.stacked += 1
-					I.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/magicite_ingot
-				if(--stacked <= 0) Move(null, forced = 1)
-				else suffix = "x[stacked]"
-			else return ..()
-	magicite_ingot
-		name = "Magicite Ingot"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="Magicite Ingot"
-		stacked = 1
-//
-	molten_adamantite
-		name = "Molten Adamantite"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="molten adamantite"
-		stacked = 1
-		MouseDrop(turf/over_turf, src_location,over_location,src_control,over_control,params)
-			if(!(src in usr.contents)) return ..()
-			if(istype(over_turf, /turf/water))
-				if(get_dist(src,over_turf)>1) return ..()
-				var/item/misc/adamantite_ingot/I = locate() in usr
-				if(I)
-					I.stacked += 1
-					I.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/adamantite_ingot
-				if(--stacked <= 0) Move(null, forced = 1)
-				else suffix = "x[stacked]"
-			else return ..()
-	adamantite_ingot
-		name = "Adamantite Ingot"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="Adamantite Ingot"
-		stacked = 1
-//
-	molten_tin
-		name = "Molten Tin"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="molten tin"
-		stacked = 1
-
-		MouseDrop(turf/over_turf, src_location,over_location,src_control,over_control,params)
-			if(!(src in usr.contents)) return ..()
-			if(istype(over_turf, /turf/water))
-				if(get_dist(src,over_turf)>1) return ..()
-				var/item/misc/tin_ingot/I = locate() in usr
-				if(I)
-					I.stacked += 1
-					I.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/tin_ingot
-				if(--stacked <= 0) Move(null, forced = 1)
-				else suffix = "x[stacked]"
-			else return ..()
-	tin_ingot
-		name = "Tin Ingot"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="Tin Ingot"
-		stacked = 1
-
 	sand_clump
 		name = "Sand Clump"
 		icon='icons/ores_and_veins.dmi'
 		icon_state="sand clump"
 		stacked = 1
-
-	molten_glass
-		name = "Molten Glass"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="molten glass"
-		stacked = 1
-
-//
 	key_mold
 		name="key mold"
 		icon='icons/Supplies.dmi'
@@ -1233,34 +1002,10 @@ item/misc
 			if(!keyid) keyid = currentkeynumber++
 		verb
 			label(t as text) name = "key mold[t ? "- '[t]'":]"
-//
-	molten_gold
-		icon='icons/ores_and_veins.dmi'
-		icon_state="molten gold"
-		name = "Molten Gold"
+	copper_coin
+		icon='icons/Supplies.dmi'
+		icon_state = "copper_coin"
 		stacked = 1
-		MouseDrop(obj/over_object,src_location,over_turf,src_control,over_control,params)
-			if(!(src in usr.contents)) return ..()
-			if(istype(over_object,/item/misc/key_mold) && (over_object in usr.contents))
-				var/item/misc/key_mold/mold = over_object
-				new/item/misc/key(usr, mold.keyid)
-				if(--stacked <= 0) Move(null, forced = 1)
-			if(istype(over_turf, /turf/water))
-				if(get_dist(src,over_turf)>1) return ..()
-				var/item/misc/gold_ingot/I = locate() in usr
-				if(I)
-					I.stacked += 1
-					I.suffix = "x[I.stacked]"
-				else usr.contents += new/item/misc/gold_ingot
-				if(--stacked <= 0) Move(null, forced = 1)
-				else suffix = "x[stacked]"
-			else return ..()
-	gold_ingot
-		name = "Gold Ingot"
-		icon='icons/ores_and_veins.dmi'
-		icon_state="Gold Ingot"
-		stacked = 1
-//
 	tardis_key
 		name = "key"
 		icon = 'icons/items.dmi'
@@ -2250,7 +1995,7 @@ item/misc
 			name = "quiver"
 			New()
 				. = ..()
-				contents = newlist(/item/misc/arrows/wooden{stacked=20})
+				contents = newlist(/item/misc/arrows/wooden)
 				CountArrows()
 	waterstone
 		icon = 'icons/items.dmi'

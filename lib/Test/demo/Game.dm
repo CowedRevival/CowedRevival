@@ -11,7 +11,7 @@ proc/isValidName(name)
 	 *	To force a test failure, the code lines are commented out.
 	 *	To make the tests succeed, uncomment the lines.
 	 */
-//	if (findText(name, " "))
+//	if (findtextEx(name, " "))
 //		return 0
 	return 1
 

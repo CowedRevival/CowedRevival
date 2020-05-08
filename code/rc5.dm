@@ -89,7 +89,7 @@ proc/num2hex(d as num, digits=0)
 		d = round(d / 16)
 	while (d)
 	if (digits && isnum(digits))
-		var/len = lentext(result)
+		var/len = length(result)
 		for (var/i = digits; i > len; i--)
 			result = "0[result]"
 	return result
@@ -97,14 +97,14 @@ proc/num2hex(d as num, digits=0)
 proc/hex2num(h)
 	if (findtext(h, "0x", 1, 3))
 		h = copytext(h, 3)
-	var/l = lentext(h)
+	var/l = length(h)
 	var/sixteen = 1
 	var/result = 0
 	var/digit = 0
 	while (l)
 		var/c = copytext(h, l)
 		h = copytext(h, 1, l)
-		l = lentext(h)
+		l = length(h)
 		switch (c)
 			if ("A", "a") digit = 10
 			if ("B", "b") digit = 11
@@ -123,11 +123,11 @@ proc/hex2num(h)
 proc/text2list(t)
 	var/list/txtlist = new
 	var/added = 0
-	while (lentext(t) % 4)
+	while (length(t) % 4)
 		t += " "
 		added += 1
 	if (istext(t))
-		var/l = lentext(t) / 2
+		var/l = length(t) / 2
 		for (var/i = 0; i < l; i++)
 			var/off1 = (2 * i) + 1
 			var/off2 = off1 + 1
@@ -146,7 +146,7 @@ proc/list2text(list/l)
 		var/result = ascii2text((l[i] >> 8) & 255) + ascii2text(l[i] & 255) + ascii2text((l[i+1] >> 8) & 255) + ascii2text(l[i+1] & 255)
 		txt = "[result][txt]"
 	if (added)
-		txt = copytext(txt, 1, lentext(txt) + 1 - added)
+		txt = copytext(txt, 1, length(txt) + 1 - added)
 	return txt
 
 proc/list2hex(list/l)
@@ -157,7 +157,7 @@ proc/list2hex(list/l)
 
 proc/hex2list(hex)
 	var/list/l[0]
-	var/len = round(lentext(hex) / 4)
+	var/len = round(length(hex) / 4)
 	for (var/i = 0; i < len; i++)
 		var/off = i*4
 		var/hnum = copytext(hex, off+1, off+5)
@@ -243,7 +243,7 @@ crypto/rc5
 		return x >> (y & (src.w - 1)) | (x << (src.w - (y & (src.w - 1))))
 
 	proc/Init(key)
-		var/lt = lentext(key)
+		var/lt = length(key)
 		if (!lt)
 			return 0
 

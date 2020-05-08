@@ -221,7 +221,7 @@ button //Button object
 			object_to_make = /item/misc/new_berries/glass_vial
 			New()
 				requirements_list = new()
-				requirements_list += /item/misc/molten_glass
+				requirements_list += /item/misc/molten/molten_glass
 
 		rope
 			icon = 'icons/Supplies.dmi'
@@ -706,8 +706,8 @@ button //Button object
 			object_to_build = /obj/anvil
 			New()
 				requirements_list = new()
-				requirements_list += /item/misc/iron_ingot
-				requirements_list += /item/misc/molten_iron
+				requirements_list += /item/misc/ingot/iron_ingot
+				requirements_list += /item/misc/molten/molten_iron
 
 		gravestone
 			icon = 'icons/turfs.dmi'
@@ -805,5 +805,5 @@ button //Button object
 			object_to_build = /obj/cauldron
 			New()
 				requirements_list = new()
-				requirements_list += /item/misc/molten_iron
-				requirements_list += /item/misc/iron_ingot
+				requirements_list += /item/misc/molten/molten_iron
+				requirements_list += /item/misc/ingot/iron_ingot

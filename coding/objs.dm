@@ -1160,37 +1160,37 @@ obj/oven
 
 		proc/ProcessItem(item/misc/I)
 			if(istype(I, /item/misc/ores/adamantite_ore))
-				cooking = /item/misc/molten_adamantite
+				cooking = /item/misc/molten/molten_adamantite
 				amount = 1
 			else if(istype(I, /item/misc/ores/copper_ore))
-				cooking = /item/misc/molten_copper
+				cooking = /item/misc/molten/molten_copper
 				amount = 1
 			else if(istype(I, /item/misc/ores/gold_ore))
-				cooking = /item/misc/molten_gold
+				cooking = /item/misc/molten/molten_gold
 				amount = 1
 			else if(istype(I, /item/misc/ores/iron_ore))
-				cooking = /item/misc/molten_iron
+				cooking = /item/misc/molten/molten_iron
 				amount = 1
 			else if(istype(I, /item/misc/ores/magicite_ore))
-				cooking = /item/misc/molten_magicite
+				cooking = /item/misc/molten/molten_magicite
 				amount = 1
 			else if(istype(I, /item/misc/ores/mithril_ore))
-				cooking = /item/misc/molten_mithril
+				cooking = /item/misc/molten/molten_mithril
 				amount = 1
 			else if(istype(I, /item/misc/ores/palladium_ore))
-				cooking = /item/misc/molten_palladium
+				cooking = /item/misc/molten/molten_palladium
 				amount = 1
 			else if(istype(I, /item/misc/ores/silver_ore))
-				cooking = /item/misc/molten_silver
+				cooking = /item/misc/molten/molten_silver
 				amount = 1
 			else if(istype(I, /item/misc/ores/tin_ore))
-				cooking = /item/misc/molten_tin
+				cooking = /item/misc/molten/molten_tin
 				amount = 1
 			else if(istype(I, /item/misc/ores/tungsten_ore))
-				cooking = /item/misc/molten_tungsten
+				cooking = /item/misc/molten/molten_tungsten
 				amount = 1
 			else if(istype(I, /item/misc/sand_clump))
-				cooking = /item/misc/molten_glass
+				cooking = /item/misc/molten/molten_glass
 				amount = 1
 			else
 				cooking = /item/misc/food/Burnt_Something

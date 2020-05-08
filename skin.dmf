@@ -908,8 +908,6 @@ window "character_creation"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-		outer-size = 438x206
-		inner-size = 424x192
 	elem "label13"
 		type = LABEL
 		pos = 0,4
@@ -1270,8 +1268,6 @@ window "character_handling"
 		can-resize = false
 		is-pane = true
 		can-scroll = both
-		outer-size = 630x754
-		inner-size = 616x740
 	elem "label19"
 		type = LABEL
 		pos = 96,216
@@ -1328,7 +1324,6 @@ window "character_handling"
 		size = 424x192
 		anchor1 = 50,0
 		anchor2 = 50,0
-		background-color = none
 		border = line
 		saved-params = "splitter"
 		left = "character_creation"
@@ -1539,9 +1534,13 @@ window "crafting_window"
 		anchor2 = none
 		background-color = #ded5b6
 		is-visible = false
-		saved-params = "pos;size;is-minimized;is-maximized"
+		saved-params = ""
 		title = "Crafting"
+		statusbar = false
 		can-resize = false
+		macro = "macro"
+		outer-size = 496x379
+		inner-size = 480x340
 	elem "lbl_requirement"
 		type = LABEL
 		pos = 0,320
@@ -1587,17 +1586,21 @@ window "default"
 		size = 800x600
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-default = true
 		saved-params = "pos;size;is-minimized;is-maximized"
 		icon = 'interface\\icon.png'
 		macro = "macro"
 		menu = "menu"
+		outer-size = 816x678
+		inner-size = 800x619
 	elem "child"
 		type = CHILD
 		pos = 0,0
 		size = 800x600
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		left = "default/game"
 		is-vert = false
@@ -2313,8 +2316,6 @@ window "round_vote_pane"
 		title = "Round Vote"
 		statusbar = false
 		is-pane = true
-		outer-size = 440x231
-		inner-size = 424x192
 	elem "label25"
 		type = LABEL
 		pos = 40,48
