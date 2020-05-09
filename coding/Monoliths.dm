@@ -234,6 +234,7 @@ obj/monolith
 		else
 			pass = new/obj/Monolith_Effects/Hunger_Empty
 			range = 0
+
 		pass.range = range
 		pass.source = src
 
@@ -477,10 +478,10 @@ obj/Monolith_Effects
 			else
 				monster_type = /mob/Frogman
 		Monolith_Action(var/mob/M)
-			var/x = loc.x + rand(-range, range)
-			var/y = loc.y + rand(-range, range)
-			var/z = loc.z
-			new monster_type(locate(x,y,z))
+			var/_x = source.loc.x + rand(-range, range)
+			var/_y = source.loc.y + rand(-range, range)
+			var/_z = source.loc.z
+			new monster_type(locate(_x,_y,_z))
 
 obj/boulder
 	icon = 'icons/Boulders.dmi'

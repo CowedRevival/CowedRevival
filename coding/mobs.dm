@@ -672,7 +672,7 @@ mob
 		if(M.skills.hunting == 10)
 			hunter_range +=1
 
-		if(key)
+		if(key && tag != "Dead Player")
 			var/item/misc/food/Strange_Meat/MT = new(loc)
 			MT.stacked = rand(1,hunter_range) + hunter_yield
 			var/item/misc/bones/bone/B = new(loc)
