@@ -374,10 +374,9 @@ button //Button object
 							I.suffix = "x[I.stacked]"
 						else
 							del(I)
-				var
-					newkeyname
-					list/keys = new/list()
-					obj/door/wood/D = build(M, 0, /obj/door/wood, /obj/door/wood, not_on_floor = 2)
+				var/newkeyname
+				var/list/keys = new/list()
+				var/obj/door/wood/D = build(M, 0, /obj/door/wood, /obj/door/wood, not_on_floor = 2)
 				for(var/item/misc/key/K in M.contents)
 					if(!K.keyid) continue
 					keys += K
@@ -744,10 +743,9 @@ button //Button object
 							I.suffix = "x[I.stacked]"
 						else
 							del(I)
-				var
-					newkeyname
-					list/keys = new/list()
-					obj/door/stone/D = build(M, 0, /obj/door/stone, /obj/door/stone, not_on_floor = 2)
+				var/newkeyname
+				var/list/keys = new/list()
+				var/obj/door/stone/D = build(M, 0, /obj/door/stone, /obj/door/stone, not_on_floor = 2)
 				for(var/item/misc/key/K in usr.contents)
 					if(!K.keyid) continue
 					keys += K

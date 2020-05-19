@@ -77,8 +77,8 @@ spell_component/enchant
 				M.show_message("<tt>The portal is already enchanted!</tt>")
 				return 1
 			O.enchant()
-		else if(istype(A, /obj/door/wood) || istype(A, /obj/door/stone) || istype(A, /obj/door/wood) || istype(A, /obj/door/stone))
-			var/obj/door/wood/T = A
+		else if(istype(A, /obj/door))
+			var/obj/door/T = A
 			if(T.enchanted == M)
 				T.enchanted = null
 			else if(T.enchanted)

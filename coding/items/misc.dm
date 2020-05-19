@@ -1100,66 +1100,20 @@ item/misc
 				else
 					usr.show_message("That is the wrong key for that chest")
 				return
-			if(istype(over_object,/obj/door/stone))
-				var/obj/door/stone/C=over_object
-				if(src.keyid== C.keyslot)
-					if(C.locked)
-						C.locked=0
-						usr.show_message("Unlocked [C]")
+
+			if(istype(over_object,/obj/door))
+				var/obj/door/D = over_object
+				if(D.keyslot == src.keyid)
+					if(D.locked)
+						D.locked=0
+						usr.show_message("Unlocked [D]")
 					else
-						C.locked=1
-						usr.show_message("Locked [C]")
+						D.locked=1
+						usr.show_message("Locked [D]")
 				else
 					usr.show_message("That is the wrong key for that door")
 				return
-			if(istype(over_object,/obj/door/stone))
-				var/obj/door/stone/C=over_object
-				if(src.keyid== C.keyslot)
-					if(C.locked)
-						C.locked=0
-						usr.show_message("Unlocked [C]")
-					else
-						C.locked=1
-						usr.show_message("Locked [C]")
-				else
-					usr.show_message("That is the wrong key for that door")
-				return
-			if(istype(over_object,/turf/trapdoor))
-				var/turf/trapdoor/C=over_object
-				if(src.keyid== C.keyslot)
-					if(C.locked)
-						C.locked=0
-						usr.show_message("Unlocked [C]")
-					else
-						C.locked=1
-						usr.show_message("Locked [C]")
-				else
-					usr.show_message("That is the wrong key for that trap door")
-				return
-			if(istype(over_object,/obj/door/wood))
-				var/obj/door/wood/C=over_object
-				if(src.keyid== C.keyslot)
-					if(C.locked)
-						C.locked=0
-						usr.show_message("Unlocked [C]")
-					else
-						C.locked=1
-						usr.show_message("Locked [C]")
-				else
-					usr.show_message("That is the wrong key for that door")
-				return
-			if(istype(over_object,/obj/door/wood))
-				var/obj/door/wood/C=over_object
-				if(src.keyid== C.keyslot)
-					if(C.locked)
-						C.locked=0
-						usr.show_message("Unlocked [C]")
-					else
-						C.locked=1
-						usr.show_message("Locked [C]")
-				else
-					usr.show_message("That is the wrong key for that door")
-				return
+
 			if(istype(over_object, /obj/family/edison/grandfather_clock))
 				var/obj/family/edison/grandfather_clock/C = over_object
 				if(src.keyid == C.keyslot)
