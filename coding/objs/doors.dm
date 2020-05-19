@@ -17,10 +17,9 @@
 		..()
 		new/turf/wooden/wood_floor(src.loc)
 
-	Bump(var/mob/M as mob)
-		world << M.name
-		open(M)
+	Bumped(var/mob/M)
 		..()
+		open(M)
 
 	verb/Knock()
 		set src in oview(1)
