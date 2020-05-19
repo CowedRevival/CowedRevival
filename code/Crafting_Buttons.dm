@@ -355,8 +355,8 @@ button //Button object
 			icon_state = "closed"
 			object_name = "wood door"
 			type_of_object = TURF
-			object_to_make = /turf/wooden/wood_door
-			object_to_build = /obj/wooden/wood_door
+			object_to_make = /obj/door/wood
+			object_to_build = /obj/door/wood
 			New()
 				requirements_list = new()
 				requirements_list += /item/misc/wood
@@ -377,7 +377,7 @@ button //Button object
 				var
 					newkeyname
 					list/keys = new/list()
-					turf/wooden/wood_door/D = build(M, 0, /turf/wooden/wood_door, /obj/wooden/wood_door, not_on_floor = 2)
+					obj/door/wood/D = build(M, 0, /obj/door/wood, /obj/door/wood, not_on_floor = 2)
 				for(var/item/misc/key/K in M.contents)
 					if(!K.keyid) continue
 					keys += K
@@ -725,8 +725,8 @@ button //Button object
 			icon_state = "closed2"
 			object_name = "stone_door"
 			type_of_object = TURF
-			object_to_make = /turf/stone/stone_door
-			object_to_build = /obj/stone/stone_door
+			object_to_make = /obj/door/stone
+			object_to_build = /obj/door/stone
 			New()
 				requirements_list = new()
 				requirements_list += /item/misc/stone
@@ -747,7 +747,7 @@ button //Button object
 				var
 					newkeyname
 					list/keys = new/list()
-					turf/stone/stone_door/D = build(M, 0, /turf/stone/stone_door, /obj/stone/stone_door, not_on_floor = 2)
+					obj/door/stone/D = build(M, 0, /obj/door/stone, /obj/door/stone, not_on_floor = 2)
 				for(var/item/misc/key/K in usr.contents)
 					if(!K.keyid) continue
 					keys += K

@@ -136,6 +136,7 @@
 #include "coding\new_admin\panel\statistics.dm"
 #include "coding\objs\anvil.dm"
 #include "coding\objs\chronojohn.dm"
+#include "coding\objs\doors.dm"
 #include "coding\objs\drawbridge.dm"
 #include "coding\objs\gate.dm"
 #include "coding\objs\holoarch.dm"

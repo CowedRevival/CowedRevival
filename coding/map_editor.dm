@@ -65,14 +65,14 @@ map_editor
 			turfs += null
 			turfs += new/map_editor_obj/wooden
 			var/i = 4
-			for(var/X in typesof(/turf/wooden) - typesof(/turf/wooden/wood_door) + /turf/wooden/wood_door - /turf/wooden)
+			for(var/X in typesof(/turf/wooden) - typesof(/obj/door/wood) + /obj/door/wood - /turf/wooden)
 				if(--i <= 0) i = 5
 				turfs += new/map_editor_obj/turf(X)
 			if(i != 5) for(var/x = 1 to i) turfs += null
 
 			turfs += new/map_editor_obj/stone
 			i = 4
-			for(var/X in typesof(/turf/stone) - typesof(/turf/stone/stone_door) + /turf/stone/stone_door)
+			for(var/X in typesof(/turf/stone) - typesof(/obj/door/stone) + /obj/door/stone)
 				if(--i <= 0) i = 5
 				turfs += new/map_editor_obj/turf(X)
 			if(i != 5) for(var/x = 1 to i) turfs += null
@@ -270,8 +270,8 @@ map_editor
 					if(action == ACTION_DELETE_ALL) new/turf/grass(T)
 					else
 						skip = list(
-							/turf/stone/stone_wall, /turf/stone/stone_windowed_wall, /turf/stone/stone_door, /turf/stone/stone_floor,
-							/turf/wooden/wood_wall, /turf/wooden/wood_windowed_wall, /turf/wooden/wood_door, /turf/wooden/wood_floor,
+							/turf/stone/stone_wall, /turf/stone/stone_windowed_wall, /obj/door/stone, /turf/stone/stone_floor,
+							/turf/wooden/wood_wall, /turf/wooden/wood_windowed_wall, /obj/door/wood, /turf/wooden/wood_floor,
 							/turf/grass, /turf/digging, /turf/underground/dirtwall
 						)
 						var/type

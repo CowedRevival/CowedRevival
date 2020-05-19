@@ -691,7 +691,7 @@ item/misc
 				var
 					newkeyname
 					list/keys = new/list()
-					turf/stone/stone_door/D = build(usr, 0, /turf/stone/stone_door, /obj/stone/stone_door, not_on_floor = 2)
+					obj/door/stone/D = build(usr, 0, /obj/door/stone, /obj/door/stone, not_on_floor = 2)
 				for(var/item/misc/key/K in usr.contents)
 					if(!K.keyid) continue
 					keys += K
@@ -769,7 +769,7 @@ item/misc
 				var
 					newkeyname
 					list/keys = new/list()
-					turf/wooden/wood_door/D = build(usr, 0, /turf/wooden/wood_door, /obj/wooden/wood_door, not_on_floor = 2)
+					obj/door/wood/D = build(usr, 0, /obj/door/wood, /obj/door/wood, not_on_floor = 2)
 				for(var/item/misc/key/K in usr.contents)
 					if(!K.keyid) continue
 					keys += K
@@ -1100,8 +1100,8 @@ item/misc
 				else
 					usr.show_message("That is the wrong key for that chest")
 				return
-			if(istype(over_object,/turf/stone/stone_door))
-				var/turf/stone/stone_door/C=over_object
+			if(istype(over_object,/obj/door/stone))
+				var/obj/door/stone/C=over_object
 				if(src.keyid== C.keyslot)
 					if(C.locked)
 						C.locked=0
@@ -1112,8 +1112,8 @@ item/misc
 				else
 					usr.show_message("That is the wrong key for that door")
 				return
-			if(istype(over_object,/obj/stone/stone_door))
-				var/obj/stone/stone_door/C=over_object
+			if(istype(over_object,/obj/door/stone))
+				var/obj/door/stone/C=over_object
 				if(src.keyid== C.keyslot)
 					if(C.locked)
 						C.locked=0
@@ -1136,8 +1136,8 @@ item/misc
 				else
 					usr.show_message("That is the wrong key for that trap door")
 				return
-			if(istype(over_object,/turf/wooden/wood_door))
-				var/turf/wooden/wood_door/C=over_object
+			if(istype(over_object,/obj/door/wood))
+				var/obj/door/wood/C=over_object
 				if(src.keyid== C.keyslot)
 					if(C.locked)
 						C.locked=0
@@ -1148,8 +1148,8 @@ item/misc
 				else
 					usr.show_message("That is the wrong key for that door")
 				return
-			if(istype(over_object,/obj/wooden/wood_door))
-				var/obj/wooden/wood_door/C=over_object
+			if(istype(over_object,/obj/door/wood))
+				var/obj/door/wood/C=over_object
 				if(src.keyid== C.keyslot)
 					if(C.locked)
 						C.locked=0

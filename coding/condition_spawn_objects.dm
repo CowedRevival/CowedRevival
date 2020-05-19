@@ -29,7 +29,7 @@ obj/condition_spawn
 
 		//Doors
 		stone_door
-			create_turf = /turf/stone/stone_door
+			create_turf = /obj/door/stone
 
 		//Floors
 		wood_floor
