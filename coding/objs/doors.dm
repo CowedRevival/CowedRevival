@@ -13,10 +13,6 @@
 	opacity = 1
 	anchored = 1
 
-	New()
-		..()
-		new/turf/wooden/wood_floor(src.loc)
-
 	Bumped(var/mob/M)
 		..()
 		open(M)
