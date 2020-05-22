@@ -89,27 +89,18 @@ turf/Cave_Start
 		new_map = new()
 		for(var/i = 1 to cave_width)
 			new_map += new/map_section(cave_height)
-		for(var/i = 1 to cave_width)
 			for(var/j = 1 to cave_height)
 				var/nbs = CountAliveNeighbours(i,j)
 				if(map_array[i].map_array[j] == 1)
-					if(nbs < deathLimit)
-						new_map[i].map_array[j] = 0
-					else
+					if(nbs >= deathLimit)
 						new_map[i].map_array[j] = 1
 				else
 					if(nbs > birthLimit)
 						new_map[i].map_array[j] = 1
-					else
-						new_map[i].map_array[j] = 0
-
-
 
 
 map_section
 	var/list/map_array
 	New(var/size = 1)
-		map_array = new()
-		for(var/i = 1 to size)
-			map_array += 0
+		map_array = new/list(size)
 
