@@ -7,6 +7,12 @@ atom
 		hear(atom/A, data)
 		MouseDropped(src_object, src_location, over_location, src_control, over_control, params)
 		objExit(atom/movable/A) return 1
+	
+	//Actions for when the current atom is an argument for another atom's Bump call.
+	//Arg: A - atom that bumps this atom
+	proc/Bumped(atom/A)
+		return
+
 	New()
 		. = ..()
 		if (usr) cause = usr.key
@@ -128,3 +134,7 @@ atom
 					if(loc) loc.Entered(src, oldloc)
 					if(area2 && area1 != area2 && !isarea(loc))
 						area2.Entered(src, oldloc)
+
+		Bump(atom/A)
+			A.Bumped(src)
+			..()

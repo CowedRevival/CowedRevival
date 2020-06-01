@@ -42,9 +42,9 @@ item/misc/sonic_screwdriver
 					return
 		if((usr in range(1, over_object)))
 			//primary use: opening/closing doors
-			if(istype(over_object, /obj/chest) || istype(over_object, /turf/stone/stone_door) || \
-			   istype(over_object, /turf/wooden/wood_door) || istype(over_object, /obj/stone/stone_door) || \
-			   istype(over_object, /obj/wooden/wood_door) || istype(over_object, /turf/trapdoor) || \
+			if(istype(over_object, /obj/chest) || istype(over_object, /obj/door/stone) || \
+			   istype(over_object, /obj/door/wood) || istype(over_object, /obj/door/stone) || \
+			   istype(over_object, /obj/door/wood) || istype(over_object, /turf/trapdoor) || \
 			   istype(over_object, /obj/family/edison/grandfather_clock) || istype(over_object, /obj/tardis/single_door))
 				hearers(usr) << sound('sounds/tardis/sonicscrewdriver2.ogg')
 				toggle_lock(usr, over_object)

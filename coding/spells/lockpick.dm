@@ -11,8 +11,8 @@ spell_component/lockpick
 	activate(mob/M)
 		M.selectedSpellComponent = src
 		M << "<tt>Click on a door to unlock it.</tt>"
-	invoke(mob/M, turf/wooden/wood_door/T)
-		if(!istype(T) && !istype(T, /turf/stone/stone_door) && !istype(T, /obj/wooden/wood_door) && !istype(T, /obj/stone/stone_door))
+	invoke(mob/M, obj/door/T)
+		if(!istype(T))
 			M << "<tt>You did not select a door. Spell aborted.</tt>"
 			return 1
 		if(T.enchanted && T.enchanted != M)

@@ -25,12 +25,6 @@ mob
 				return 1
 
 
-atom/proc/Bumped(atom/movable/M)
-
-atom/movable/Bump(atom/A)
-	A.Bumped(src)
-	..()
-
 mob
 	var
 		concentration = 100

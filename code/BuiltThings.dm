@@ -301,65 +301,6 @@ turf
 				. = ..()
 				if(!(src in range(1, usr))) return
 				usr.show_message("<tt>You push the wall but nothing happens!</tt>")
-		wood_door
-			var
-				keyslot
-				locked=0
-				gold = 1
-				mob/enchanted
-			verb
-				Knock()
-					set src in oview(1)
-					if(!(src in oview(1, usr)) || usr.restrained() || usr.CheckGhost()) return
-					if(!ActionLock("knock", 5))
-						hearers(src) << "\icon[src] *knock* *knock*"
-
-			Inn_Door
-				keyslot="inn"
-				locked=1
-				Inn_Door1
-					keyslot="inn1"
-				Inn_Door2
-					keyslot="inn2"
-				Inn_Door3
-					keyslot="inn3"
-				Inn_Door4
-					keyslot="inn4"
-				Inn_Door5
-					keyslot="inn5"
-				Inn_Door6
-					keyslot="inn6"
-				Inn_Door7
-					keyslot="inn7"
-				Inn_Door8
-					keyslot="inn8"
-				Inn_Door9
-					keyslot="inn9"
-				Inn_Door10
-					keyslot="inn10"
-				Inn_Door11
-					keyslot="inn11"
-				Inn_Door12
-					keyslot="inn12"
-				Inn_Door13
-					keyslot="inn13"
-				Inn_Door14
-					keyslot="inn14"
-			icon_state = "closed"
-			density=1
-			opacity=1
-			attack_hand(mob/M)
-				if(locked == 1)
-					M.show_message("It's locked!")
-					return
-				if(icon_state == "open")
-					icon_state = "closed"
-					sd_SetOpacity(1)
-					density=1
-				else
-					icon_state = "open"
-					density=0
-					sd_SetOpacity(0)
 		wood_floor
 			buildinghealth = 2
 			icon_state = "floor"
@@ -450,102 +391,7 @@ turf
 		stone_floor
 			buildinghealth = 2
 			icon_state = "stone floor8"
-		stone_door
-			var
-				keyslot
-				locked=0
-				gold = 1
-				mob/enchanted
-			Guard_Door
-				keyslot=1
-				locked=1
-			Royal_Guard_Door
-				keyslot=2
-				locked=1
-			Royal_Archer_Door
-				keyslot=3
-				locked=1
-			Cook_Door
-				keyslot=4
-				locked=1
-			Cell_Door
-				keyslot=5
-				locked=0
-			Royal_Room_Door
-				keyslot=6
-				locked=0
-			Watchman_Door
-				keyslot=7
-				locked=1
-			Noble_Guard_Door
-				keyslot=8
-				locked=1
-			Noble_Archer_Door
-				keyslot=9
-				locked=1
-			Chef_Door
-				keyslot=10
-				locked=1
-			Dungeon_Door
-				keyslot = "cow_jailer"
-				locked=0
-			Royal_Door
-				keyslot=12
-				locked=0
-			Inn_Door
-				locked=1
-				Inn_Door1
-					keyslot="inn1"
-				Inn_Door2
-					keyslot="inn2"
-				Inn_Door3
-					keyslot="inn3"
-				Inn_Door4
-					keyslot="inn4"
-				Inn_Door5
-					keyslot="inn5"
-				Inn_Door6
-					keyslot="inn6"
-				Inn_Door7
-					keyslot="inn7"
-				Inn_Door8
-					keyslot="inn8"
-				Inn_Door9
-					keyslot="inn9"
-				Inn_Door10
-					keyslot="inn10"
-				Inn_Door11
-					keyslot="inn11"
-				Inn_Door12
-					keyslot="inn12"
-				Inn_Door13
-					keyslot="inn13"
-				Inn_Door14
-					keyslot="inn14"
-			Necromancer
-				keyslot = "necromancer"
 
-			icon_state = "closed"
-			density=1
-			opacity=1
-			attack_hand(mob/M)
-				if(locked == 1)
-					M.show_message("It's locked!")
-					return
-				if(icon_state == "open")
-					icon_state = "closed"
-					sd_SetOpacity(1)
-					density=1
-				else
-					icon_state = "open"
-					density=0
-					sd_SetOpacity(0)
-			verb
-				Knock()
-					set src in oview(1)
-					if(!(src in oview(1, usr)) || usr.CheckGhost()) return
-					if(!ActionLock("knock", 5))
-						hearers(src) << "\icon[src] *knock* *knock*"
 		stone_window_wall
 			icon_state = "none"
 			density = 1
@@ -635,33 +481,6 @@ obj
 			icon_state = "wall"
 			density = 1
 			opacity=1
-		wood_door
-			var
-				keyslot
-				locked=0
-				gold = 1
-				mob/enchanted
-			icon_state = "closed"
-			density = 1
-			opacity=1
-			attack_hand(mob/M)
-				if(locked == 1)
-					M.show_message("It's locked!")
-					return
-				if(icon_state == "open")
-					icon_state = "closed"
-					sd_SetOpacity(1)
-					density=1
-				else
-					icon_state = "open"
-					density=0
-					sd_SetOpacity(0)
-			verb
-				Knock()
-					set src in oview(1)
-					if(!(src in oview(1, usr)) || usr.CheckGhost()) return
-					if(!ActionLock("knock", 5))
-						hearers(src) << "\icon[src] *knock* *knock*"
 		wood_floor
 			buildinghealth = 2
 			icon_state = "floor"
@@ -708,34 +527,6 @@ obj
 		stone_floor
 			buildinghealth = 2
 			icon_state = "stone floor8"
-		stone_door
-			var
-				keyslot
-				locked=0
-				gold = 1
-				mob/enchanted
-
-			icon_state = "closed"
-			density=1
-			opacity=1
-			attack_hand(mob/M)
-				if(locked == 1)
-					M.show_message("It's locked!")
-					return
-				if(icon_state == "open")
-					icon_state = "closed"
-					sd_SetOpacity(1)
-					density=1
-				else
-					icon_state = "open"
-					density=0
-					sd_SetOpacity(0)
-			verb
-				Knock()
-					set src in oview(1)
-					if(!(src in oview(1, usr)) || usr.CheckGhost()) return
-					if(!ActionLock("knock", 5))
-						hearers(src) << "\icon[src] *knock* *knock*"
 		stone_window_wall
 			icon_state = "none"
 			density = 1
