@@ -104,6 +104,9 @@ item/misc
 					return
 				var/i = input(usr, "Which style? \[1-5\]", "Create Toga :: Specify Style", 1) as null|num
 				if(i == null) return
+				if(stacked <= 5)
+					usr << "<tt>It seems you no longer have the ability to create that!</tt>"
+					return
 				if(i <= 0) i = 1
 				if(i > 5) i = 5
 				var/item/armour/body/toga/I = new(usr)
@@ -145,6 +148,9 @@ item/misc
 					return
 				var/i = input(usr, "Which color?", "Create Shirt :: Specify Color", 1) as null|anything in list("blue", "red", "green")
 				if(i == null) return
+				if(stacked <= 5)
+					usr << "<tt>It seems you no longer have the ability to create that!</tt>"
+					return
 				var/item/armour/body/shirts/I = new(usr)
 				I.icon_state = "shirt-[i]"
 				I.name = "[uppertext(copytext(i, 1, 2))][copytext(i, 2)] Shirt"
